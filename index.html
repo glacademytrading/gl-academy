@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GL Academy | Modelo de Negociação</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <button class="btn-back" id="btnBack" onclick="prevStep()">&#10094; Voltar</button>
+    
+    <div class="container">
+        <!-- PASSO 1: HERO -->
+        <div class="step active" id="step1">
+            <h1 class="hero-title">
+                <span class="gold-text-alt">GL Model</span> é o modelo de negociação que a comunidade de traders precisava!
+            </h1>
+            <div class="video-placeholder">
+                <!-- Espaço para acoplar vídeo de boas vindas -->
+                <div class="video-overlay">
+                    <span>Vídeo de Boas-Vindas</span>
+                </div>
+            </div>
+            <button class="btn-main" onclick="nextStep()">Ganhe uma call 1x1 &#10142;</button>
+        </div>
+
+        <!-- PASSO 2: DADOS PESSOAIS -->
+        <div class="step" id="step2">
+            <h2 class="step-title">Falta pouco para o seu agendamento!</h2>
+            <div class="input-group">
+                <label>Qual seu nome?</label>
+                <input type="text" id="name" placeholder="Seu nome completo">
+            </div>
+            <div class="input-group">
+                <label>Qual é o seu melhor e-mail?</label>
+                <input type="email" id="email" placeholder="seu@email.com">
+            </div>
+            <div class="input-group">
+                <label>Qual é o seu WhatsApp?</label>
+                <input type="tel" id="whatsapp" placeholder="(11) 99999-9999">
+            </div>
+            <button class="btn-main" onclick="validateStep2()">Continuar</button>
+        </div>
+
+        <!-- PASSO 3: DECISÃO -->
+        <div class="step" id="step3">
+            <h2 class="step-title">
+                Você está pronto para conhecer o modelo de trading e investimentos da <span class="gold-text-alt">GL Academy</span>?
+            </h2>
+            <div class="btn-group">
+                <button class="btn-option" onclick="window.location.href='https://glacademytrading.com/'">Sim, quero o operacional da GL agora!</button>
+                <button class="btn-option" onclick="nextStep()">Sim, quero falar com equipe GL Academy!</button>
+                <button class="btn-option" onclick="window.location.href='https://wa.me/5511974080711'">Sou uma empresa e quero agendar uma reunião b2b.</button>
+            </div>
+        </div>
+
+        <!-- PASSO 4: EXPERIÊNCIA -->
+        <div class="step" id="step4">
+            <h2 class="step-title">Quanto tempo você opera no mercado?</h2>
+            <div class="btn-group">
+                <button class="btn-option" onclick="selectOption('experience', 'Menos de 6 meses')">Menos de 6 meses</button>
+                <button class="btn-option" onclick="selectOption('experience', '6 meses a 1 ano')">6 meses a 1 ano</button>
+                <button class="btn-option" onclick="selectOption('experience', '1 a 3 anos')">1 a 3 anos</button>
+                <button class="btn-option" onclick="selectOption('experience', 'Mais de 3 anos')">Mais de 3 anos</button>
+            </div>
+        </div>
+
+        <!-- PASSO 5: DESAFIO -->
+        <div class="step" id="step5">
+            <h2 class="step-title">Qual é o seu maior desafio como trader?</h2>
+            <div class="btn-group">
+                <button class="btn-option" onclick="selectOption('challenge', 'Falta de estratégia')">Falta de estratégia</button>
+                <button class="btn-option" onclick="selectOption('challenge', 'Gestão de risco')">Gestão de risco</button>
+                <button class="btn-option" onclick="selectOption('challenge', 'Psicologia/Emoção')">Psicologia/Emoção</button>
+                <button class="btn-option" onclick="selectOption('challenge', 'Consistência nos resultados')">Consistência nos resultados</button>
+            </div>
+        </div>
+
+        <!-- PASSO 6: CAPITAL -->
+        <div class="step" id="step6">
+            <h2 class="step-title">Qual seu capital disponível para investir?</h2>
+            <div class="btn-group">
+                <button class="btn-option" onclick="selectOption('capital', 'Menos de R$ 3.000')">menos de R$ 3.000</button>
+                <button class="btn-option" onclick="selectOption('capital', 'R$ 3.000-R$ 5.000')">R$ 3.000-R$ 5.000</button>
+                <button class="btn-option" onclick="selectOption('capital', 'R$ 5.000-R$ 20.000')">R$ 5.000-R$ 20.000</button>
+                <button class="btn-option" onclick="selectOption('capital', 'Acima de R$ 50.000')">Acima de R$ 50.000</button>
+            </div>
+        </div>
+
+        <!-- PASSO 7: OBJETIVO -->
+        <div class="step" id="step7">
+            <h2 class="step-title">Você busca renda extra ou substituir sua renda?</h2>
+            <div class="btn-group">
+                <button class="btn-option" onclick="selectOption('goal', 'Renda extra')">Renda extra</button>
+                <button class="btn-option" onclick="selectOption('goal', 'Renda principal')">Renda principal</button>
+                <button class="btn-option" onclick="selectOption('goal', 'Já vivo de trading')">Já vivo de trading</button>
+                <button class="btn-option" onclick="selectOption('goal', 'Quero viver de trading')">Quero viver de trading</button>
+            </div>
+        </div>
+
+        <!-- PASSO 8: CALENDÁRIO -->
+        <div class="step" id="step8">
+            <div class="calendar-card">
+                <div class="step-pill">PASSO 8/9</div>
+                <h2 class="calendar-main-title">AGENDE SUA CALL 1:1</h2>
+                <p class="calendar-subtitle">Selecione o melhor dia e horário para sua chamada estratégica</p>
+                
+                <div id="calendar-container">
+                    <div class="calendar-header">
+                        <button onclick="changeMonth(-1)">&#10094;</button>
+                        <span id="currentMonth">Mês Ano</span>
+                        <button onclick="changeMonth(1)">&#10095;</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Gerado por JS -->
+                    </div>
+                </div>
+
+                <div id="time-slots" class="time-slots hidden">
+                    <p class="slots-title">Selecione o horário:</p>
+                    <div class="slots-grid" id="slotsGrid">
+                        <!-- Gerado por JS -->
+                    </div>
+                </div>
+
+                <button class="btn-confirm-booking hidden" id="confirmAgendamento" onclick="finishBooking()">
+                    CONFIRMAR AGENDAMENTO &#10142;
+                </button>
+                
+                <div class="calendar-footer">
+                    Duração: 30 minutos | 100% Gratuito
+                </div>
+            </div>
+        </div>
+
+        <!-- PASSO 9: SUCESSO -->
+        <div class="step" id="step9">
+            <h2 class="step-title">Agendamento confirmado!</h2>
+            <p class="step-desc">Estamos ansiosos para falar com você!</p>
+            <div class="video-placeholder small-video">
+                <!-- Espaço para vídeo curto -->
+                <div class="video-overlay">
+                    <span>Vídeo de Boas-Vindas</span>
+                </div>
+            </div>
+            
+            <div class="btn-group final-ctas">
+                <button class="btn-community" onclick="window.location.href='https://chat.whatsapp.com/D3fnBVdXQbXED466vSUtQX'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+                    Entrar na nossa comunidade
+                </button>
+                
+                <div class="calendar-buttons">
+                    <a href="#" id="appleCalendarBtn" class="btn-calendar">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">
+                        Salvar call na minha agenda Apple
+                    </a>
+                    <a href="#" id="googleCalendarBtn" target="_blank" class="btn-calendar">
+                        <span class="btn-emoji">🗪</span>
+                        Salvar call na minha agenda Google
+                    </a>
+                </div>
+
+                <button class="btn-secondary" onclick="window.location.href='https://glacademytrading.com/'">
+                    Convidar um amigo para conhecer a GL Academy
+                </button>
+            </div>
+        </div>
+
+        <!-- LOGO RODAPÉ -->
+        <footer class="footer-logo">
+            <img src="logo-gl.png" alt="GL Academy Logo">
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
