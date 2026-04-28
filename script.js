@@ -11,7 +11,6 @@ function showStep(step) {
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     document.getElementById(`step${step}`).classList.add('active');
     
-    // Controle do botão Voltar
     const btnBack = document.getElementById('btnBack');
     if (step > 1 && step < totalSteps) {
         btnBack.style.display = 'block';
@@ -37,31 +36,61 @@ function prevStep() {
     }
 }
 
-// --- WHATSAPP MASK ---
 const whatsappInput = document.getElementById('whatsapp');
 whatsappInput.addEventListener('input', (e) => {
     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
     e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
 });
 
-// FUNÇÃO DE NOTIFICAÇÃO (ENVIO DE DADOS)
+// ENVIO REAL DE LEADS POR E-MAIL (FORMSUBMIT)
 function notifyLead(status = "Parcial") {
-    console.log(`--- NOTIFICAÇÃO DE LEAD (${status.toUpperCase()}) ---`);
-    console.log(`Destinatário E-mail: glacademytrading@glacademytrading.com`);
-    console.log(`Destinatário WhatsApp: 11 93322-6422`);
-    console.log("DADOS COLETADOS:", leadData);
-    
-    // Aqui você integraria com um Webhook ou API real
-    // Exemplo: fetch('https://seu-endpoint.com', { method: 'POST', body: JSON.stringify(leadData) });
+    fetch("https://formsubmit.co/ajax/glacademytrading@glacademytrading.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            _subject: `NOVO LEAD GL ACADEMY - ${leadData.name || 'Contato Inicial'} (${status})`,
+            Nome: leadData.name,
+            Email: leadData.email,
+            WhatsApp: leadData.whatsapp,
+            Experiencia: leadData.experience || 'Não preenchido',
+            Desafio: leadData.challenge || 'Não preenchido',
+            Capital: leadData.capital || 'Não preenchido',
+            ObjetivoRenda: leadData.income_goal || 'Não preenchido',
+            DataAgendamento: leadData.appointment_date || 'Não agendado',
+            HoraAgendamento: leadData.appointment_time || 'Não agendado',
+            StatusDoLead: status
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Lead enviado!', data))
+    .catch(error => console.error('Erro:', error));
 }
 
 function validateStep2() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const wa = document.getElementById('whatsapp').value;
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const wa = document.getElementById('whatsapp').value.trim();
 
-    if (!name || !email || !wa) {
-        alert('Por favor, preencha todos os campos.');
+    // 1. Validação de Nome 
+    if (name.length < 3) {
+        alert('Por favor, insira o seu nome completo.');
+        return;
+    }
+
+    // 2. Validação Estrita de E-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Por favor, insira um e-mail válido (exemplo@email.com).');
+        return;
+    }
+
+    // 3. Validação Estrita de WhatsApp (DDD + 9 dígitos ou 8 dígitos)
+    const rawWa = wa.replace(/\D/g, ''); 
+    if (rawWa.length < 10 || rawWa.length > 11) {
+        alert('Por favor, insira um número de WhatsApp válido com DDD (ex: 11 99999-9999).');
         return;
     }
 
@@ -69,7 +98,7 @@ function validateStep2() {
     leadData.email = email;
     leadData.whatsapp = wa;
     
-    // CAPTURA IMEDIATA: Envia os dados logo no passo 2
+    // ENVIAR IMEDIATAMENTE (Passo 2 concluído)
     notifyLead("Inicial/Contato");
     
     nextStep();
@@ -77,14 +106,10 @@ function validateStep2() {
 
 function selectOption(key, value) {
     leadData[key] = value;
-    
-    // Atualiza o lead a cada resposta para garantir persistência
     notifyLead("Atualização/Qualificação");
-    
     nextStep();
 }
 
-// --- CALENDAR LOGIC ---
 let selectedDate = null;
 let selectedTime = null;
 let currentMonthDate = new Date();
@@ -178,16 +203,14 @@ function finishBooking() {
     leadData.appointment_date = selectedDate.toLocaleDateString();
     leadData.appointment_time = selectedTime;
     
-    // NOTIFICAÇÃO FINAL: Agendamento Concluído
     notifyLead("Concluído/Agendado");
-    
     setupCalendarButtons();
     nextStep();
 }
 
 function setupCalendarButtons() {
     const eventName = "Call 1x1 - GL Academy";
-    const description = `Olá ${leadData.name}, esta é a sua call estratégica agendada. Desafio: ${leadData.challenge}. Capital: ${leadData.capital}.`;
+    const description = `Olá ${leadData.name}, esta é a sua call estratégica agendada.`;
     const location = "Link do Meet enviado por WhatsApp";
     
     const startUTC = formatUTC(selectedDate, selectedTime);
@@ -196,8 +219,7 @@ function setupCalendarButtons() {
     endDate.setHours(parseInt(h), parseInt(m) + 30, 0);
     const endUTC = endDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 
-    const googleLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${startUTC}/${endUTC}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
-    document.getElementById('googleCalendarBtn').href = googleLink;
+    document.getElementById('googleCalendarBtn').href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${startUTC}/${endUTC}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
 
     const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:${startUTC}\nDTEND:${endUTC}\nSUMMARY:${eventName}\nDESCRIPTION:${description}\nLOCATION:${location}\nEND:VEVENT\nEND:VCALENDAR`;
     const appleBtn = document.getElementById('appleCalendarBtn');
