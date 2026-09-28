@@ -24,6 +24,34 @@ body {
     overflow-x: hidden;
 }
 
+/* --- FUNDO EM VÍDEO --- */
+.bg-video-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: #05070d url('assets/bg-poster.jpg') center / cover no-repeat;
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Escurece o centro (onde fica o conteúdo) para manter a leitura */
+.bg-video-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at center, rgba(8, 8, 12, 0.72) 0%, rgba(8, 8, 12, 0.55) 45%, rgba(5, 5, 8, 0.8) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-video { display: none; }
+}
+
 .progress-bar-container {
     width: 100%;
     height: 4px;

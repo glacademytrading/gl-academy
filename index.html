@@ -8,6 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- FUNDO EM VÍDEO (loop) -->
+    <div class="bg-video-wrap" aria-hidden="true">
+        <video class="bg-video" id="bgVideo" autoplay muted loop playsinline preload="auto" poster="assets/bg-poster.jpg">
+            <source src="assets/bg-loop.mp4" type="video/mp4">
+            <!-- Fallback: vídeo original gerado no Higgsfield (Seedance 2.5) -->
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_39DmkekHgr8q6UfGgeMFIzfzuuy/hf_20260928_143400_0bdeebcc-3fc6-4919-b1c4-87834ec73af5.mp4" type="video/mp4">
+        </video>
+        <div class="bg-video-overlay"></div>
+    </div>
+
     <div class="progress-bar-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
