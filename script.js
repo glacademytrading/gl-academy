@@ -2,24 +2,6 @@ let currentStep = 1;
 const totalSteps = 9;
 const leadData = {};
 
-// LINKS DE PAGAMENTO DOS PRODUTOS (Mercado Pago)
-// Para trocar um link, altere só aqui.
-const PRODUCT_LINKS = {
-    pacote_completo: 'https://mpago.li/2StKduA', // Mentoria em app + operacional completo
-    mentoria_app: 'https://mpago.li/2SiEPEb',    // Mentoria 1:1 + app, 8x sem juros
-    app_gl_model: 'https://mpago.li/2UaFU2G',    // App GL Model Academy, R$ 977
-    call_2h: 'https://mpago.li/2YXF8jU'          // Call de 2h com Giovane Lázaro
-};
-
-const PRODUCT_NAMES = {
-    pacote_completo: 'Pacote Completo GL',
-    mentoria_app: 'Mentoria 1:1 + App',
-    app_gl_model: 'App GL Model Academy',
-    call_2h: 'Call de 2h com Giovane Lázaro'
-};
-
-let productsReturnStep = 1;
-
 function updateProgress() {
     const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
     document.getElementById('progressBar').style.width = pct + '%';
@@ -48,28 +30,10 @@ function nextStep() {
 }
 
 function prevStep() {
-    if (document.getElementById('stepProdutos').classList.contains('active')) {
-        showStep(productsReturnStep);
-        return;
-    }
     if (currentStep > 1) {
         currentStep--;
         showStep(currentStep);
     }
-}
-
-function showProducts() {
-    productsReturnStep = currentStep;
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    document.getElementById('stepProdutos').classList.add('active');
-    document.getElementById('btnBack').style.display = 'block';
-    window.scrollTo(0, 0);
-}
-
-function openProduct(key) {
-    leadData.product_interest = PRODUCT_NAMES[key];
-    if (leadData.email) notifyLead("Clique em Produto");
-    window.open(PRODUCT_LINKS[key], '_blank');
 }
 
 const whatsappInput = document.getElementById('whatsapp');
@@ -97,7 +61,6 @@ function notifyLead(status = "Parcial") {
             ObjetivoRenda: leadData.income_goal || 'Não preenchido',
             DataAgendamento: leadData.appointment_date || 'Não agendado',
             HoraAgendamento: leadData.appointment_time || 'Não agendado',
-            ProdutoDeInteresse: leadData.product_interest || 'Nenhum',
             StatusDoLead: status
         })
     })
