@@ -55,7 +55,36 @@
             <div class="btn-group">
                 <button class="btn-option" onclick="window.location.href='https://glacademytrading.com/'">Sim, quero o operacional da GL agora!</button>
                 <button class="btn-option" onclick="nextStep()">Sim, quero falar com equipe GL Academy!</button>
+                <button class="btn-option" onclick="showProducts()">Quero investir agora na mentoria ou no pacote completo.</button>
                 <button class="btn-option" onclick="window.location.href='https://wa.me/5511974080711'">Sou uma empresa e quero agendar uma reunião b2b.</button>
+            </div>
+        </div>
+
+        <!-- PRODUTOS (fora da sequência do quiz) -->
+        <div class="step" id="stepProdutos">
+            <h2 class="step-title">Escolha como quer evoluir com a <span class="gold-text-alt">GL Academy</span></h2>
+            <div class="product-list">
+                <div class="product-card featured">
+                    <span class="product-tag">Mais completo</span>
+                    <h3>Pacote Completo GL</h3>
+                    <p>Mentoria em app + operacional completo da GL.</p>
+                    <button class="btn-main" onclick="openProduct('pacote_completo')">Quero o pacote completo</button>
+                </div>
+                <div class="product-card">
+                    <h3>Mentoria 1:1 + App</h3>
+                    <p>Mentoria individual com acesso ao app. Em até 8x sem juros no Mercado Pago.</p>
+                    <button class="btn-main" onclick="openProduct('mentoria_app')">Quero a mentoria 1:1</button>
+                </div>
+                <div class="product-card">
+                    <h3>App GL Model Academy</h3>
+                    <p class="product-price">R$ 977</p>
+                    <button class="btn-main" onclick="openProduct('app_gl_model')">Quero o app</button>
+                </div>
+                <div class="product-card">
+                    <h3>Call de 2h com Giovane Lázaro</h3>
+                    <p>Uma sessão estratégica de 2 horas, direto com o Giovane.</p>
+                    <button class="btn-main" onclick="openProduct('call_2h')">Agendar minha call de 2h</button>
+                </div>
             </div>
         </div>
 
@@ -165,6 +194,10 @@
                         Salvar call na minha agenda Google
                     </a>
                 </div>
+
+                <button class="btn-secondary" onclick="showProducts()">
+                    Conhecer a mentoria e o pacote completo
+                </button>
 
                 <button class="btn-secondary" onclick="window.location.href='https://glacademytrading.com/'">
                     Convidar um amigo para conhecer a GL Academy
