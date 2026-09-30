@@ -21,3 +21,14 @@
 ## Operacionais (tecnologias/scripts)
 
 _A enviar._
+
+## Pendências para arrumar no final
+
+1. **Testar cada link.** Não consegui abrir os links daqui. Conferir em cada um se abre, se o nome e o preço estão certos e, na mentoria 1:1 em reais, se aparece 8x sem juros.
+2. **Nome do pacote completo em dólar.** Ele foi descrito primeiro como "operacional completo". Conferir se no Stripe o produto aparece como pacote completo (mentoria + operacional).
+3. **Mentoria aplicativo em trilha.** Só tem link em dólar. Definir se é o mesmo produto que o App GL Model Academy (R$ 977) e, se for, usar o mesmo nome nos dois.
+4. **Faltam links:** o App GL Model Academy em dólar e a mentoria aplicativo em trilha em reais, se forem produtos diferentes.
+5. **Preços.** Só o App GL Model Academy tem preço anotado. Faltam os preços dos outros produtos, em reais e em dólar.
+6. **Call de 2h.** Os links são de pagamento. Definir como o cliente escolhe o dia e o horário depois de pagar.
+7. **Botão do site.** "Sim, quero o operacional da GL agora!" leva para glacademytrading.com, não para um link de pagamento.
+8. **Operacionais.** Links ainda não enviados.
