@@ -15,7 +15,7 @@
 |---|---|
 | Mentoria 1:1 + app | https://buy.stripe.com/5kQeVd4tZ6DG0fi3Jl7ok03 |
 | Mentoria aplicativo em trilha | https://buy.stripe.com/5kQ7sL8KfbY04vyfs37ok0k |
-| Operacional completo | https://buy.stripe.com/aFa5kD1hN9PS3ru6Vx7ok05 |
+| Pacote completo GL (mentoria + operacional completo) | https://buy.stripe.com/aFa5kD1hN9PS3ru6Vx7ok05 |
 | Call de 2h com Giovane Lázaro | https://buy.stripe.com/bJe5kDaSn8LO7HK93F7ok0g |
 
 ## Operacionais (tecnologias/scripts)
