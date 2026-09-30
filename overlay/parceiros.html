@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>GL Academy | Overlay de Parceiros</title>
+<!--
+  Overlay para live (OBS / Streamlabs) — Fonte de Navegador, 1920x1080.
+  Fundo transparente. Edite apenas o bloco CONFIG abaixo.
+  Logos: salve em overlay/logos/ (PNG com fundo transparente, quadrado).
+  Sem logo, o card mostra as iniciais do parceiro.
+  Parâmetros de URL opcionais: ?cta=0 (esconde o card da GL) ?spot=0 (desliga o destaque rotativo)
+-->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #d4af37;
+    --gold-dark: #93763C;
+    --bg: rgba(13, 13, 13, 0.88);
+    --card: rgba(26, 26, 26, 0.92);
+    --line: #2a2215;
+    --text: #ffffff;
+    --muted: #888888;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; background: transparent; overflow: hidden; font-family: 'Inter', sans-serif; color: var(--text); }
+
+  /* Barra superior de parceiros */
+  .bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 96px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, var(--bg), rgba(13,13,13,0.75));
+    border-bottom: 1px solid var(--line);
+  }
+  .row { display: flex; align-items: center; gap: 14px; transform-origin: center; white-space: nowrap; }
+  .partner { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 12px; transition: background .5s, box-shadow .5s, transform .5s; }
+  .partner.spot { background: rgba(212,175,55,0.08); box-shadow: 0 0 0 1px var(--gold-dark), 0 0 24px rgba(212,175,55,0.25); transform: scale(1.03); }
+  .logo { width: 44px; height: 44px; border-radius: 10px; object-fit: contain; }
+  .initials {
+    width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
+    background: linear-gradient(135deg, #221a0f, #111111); border: 1px solid var(--gold-dark);
+    font-family: 'Playfair Display', serif; font-size: 17px; color: var(--gold);
+  }
+  .name { font-size: 17px; font-weight: 600; margin-bottom: 6px; white-space: nowrap; }
+  .deal { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+  .code { display: flex; border: 1px solid var(--gold-dark); border-radius: 6px; overflow: hidden; font-weight: 700; letter-spacing: .5px; }
+  .code span:first-child { padding: 2px 7px; color: var(--gold); }
+  .code span:last-child { padding: 2px 8px; background: var(--gold); color: #0d0d0d; }
+  .off { font-weight: 700; color: var(--text); white-space: nowrap; }
+
+  /* Card de CTA da GL Academy (canto inferior direito) */
+  .cta {
+    position: absolute; right: 32px; bottom: 28px; display: flex; align-items: center; gap: 16px;
+    padding: 14px 22px 14px 14px; background: var(--card); border: 1px solid var(--gold-dark); border-radius: 14px;
+  }
+  .cta img { width: 56px; height: 56px; object-fit: contain; }
+  .cta .t1 { font-size: 18px; font-weight: 600; }
+  .cta .t2 { font-size: 18px; color: var(--gold); text-decoration: underline; text-underline-offset: 4px; }
+</style>
+</head>
+<body>
+  <div class="bar"><div class="row" id="bar"></div></div>
+
+  <div class="cta" id="cta">
+    <img src="../logo-gl.png" alt="GL Academy">
+    <div>
+      <div class="t1" id="ctaTitle"></div>
+      <div class="t2" id="ctaLink"></div>
+    </div>
+  </div>
+
+<script>
+  /* ================= CONFIG ================= */
+  const CONFIG = {
+    // Até 6 parceiros cabem bem na barra. Troque "SEUCODIGO" pelo código aprovado em cada programa.
+    partners: [
+      { name: "NinjaTrader",         code: "SEUCODIGO", offer: "OFERTA EXCLUSIVA", logo: "logos/ninjatrader.png" },
+      { name: "Apex Trader Funding", code: "SEUCODIGO", offer: "XX% OFF",          logo: "logos/apex.png" },
+      { name: "Topstep",             code: "SEUCODIGO", offer: "XX% OFF",          logo: "logos/topstep.png" },
+      { name: "Tradeify",            code: "SEUCODIGO", offer: "XX% OFF",          logo: "logos/tradeify.png" },
+      { name: "My Funded Futures",   code: "SEUCODIGO", offer: "XX% OFF",          logo: "logos/mff.png" },
+      { name: "Bookmap",             code: "SEUCODIGO", offer: "XX% OFF",          logo: "logos/bookmap.png" },
+    ],
+    cta: { title: "Conheça o GL Model — call 1:1 grátis", link: "SEU-LINK-AQUI" },
+    spotlightSeconds: 6, // tempo de destaque de cada parceiro
+  };
+  /* ========================================== */
+
+  const params = new URLSearchParams(location.search);
+  const bar = document.getElementById('bar');
+
+  const initials = (name) => name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+  CONFIG.partners.forEach(p => {
+    const el = document.createElement('div');
+    el.className = 'partner';
+    el.innerHTML = `
+      <div class="initials">${initials(p.name)}</div>
+      <div>
+        <div class="name">${p.name}</div>
+        <div class="deal">
+          <div class="code"><span>CODE:</span><span>${p.code}</span></div>
+          <div class="off">${p.offer}</div>
+        </div>
+      </div>`;
+    if (p.logo) {
+      const img = new Image();
+      img.className = 'logo';
+      img.alt = p.name;
+      img.onload = () => { el.querySelector('.initials').replaceWith(img); fit(); };
+      img.src = p.logo;
+    }
+    bar.appendChild(el);
+  });
+
+  // Encolhe a barra automaticamente se os parceiros não couberem na largura da tela
+  const fit = () => {
+    const max = window.innerWidth - 32;
+    const w = bar.scrollWidth;
+    bar.style.transform = w > max ? `scale(${max / w})` : '';
+  };
+  fit();
+  bar.querySelectorAll('img').forEach(img => img.addEventListener('load', fit));
+
+  document.getElementById('ctaTitle').textContent = CONFIG.cta.title;
+  document.getElementById('ctaLink').textContent = CONFIG.cta.link;
+  if (params.get('cta') === '0') document.getElementById('cta').style.display = 'none';
+
+  if (params.get('spot') !== '0') {
+    const cards = bar.querySelectorAll('.partner');
+    let i = 0;
+    const spot = () => {
+      cards.forEach(c => c.classList.remove('spot'));
+      cards[i % cards.length].classList.add('spot');
+      i++;
+    };
+    spot();
+    setInterval(spot, CONFIG.spotlightSeconds * 1000);
+  }
+</script>
+</body>
+</html>
