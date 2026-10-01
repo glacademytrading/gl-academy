@@ -279,6 +279,8 @@ COMO DEIXAR TUDO ORGANIZADO (uma vez só)
 
 O QUE O ORGANIZADOR FAZ
 - Traz as pastas deste pacote para "Marketing de trading", mesmo que o ZIP tenha sido extraído em Downloads.
+  Se houver outro pacote extraído dentro da pasta (por exemplo, "GL Academy - Marketing (Claude)"), ele também é organizado,
+  inclusive o que vocês colocaram dentro dele. Vale sempre a versão mais nova dos textos.
 - Leva o que já estava lá para o lugar certo:
     comerciais, Depoimentos, Depoimentos de assinantes atuais, Fotos para postar (Giovane), imagens para usar,
     Vídeos para usar no Youtube e Vinhetas -> 06 - Materiais da equipe
@@ -287,8 +289,10 @@ O QUE O ORGANIZADOR FAZ
     Aurora e o tutorial da Higgsfield -> 08 - Ferramentas e tutoriais
     o que não tiver lugar certo -> 99 - Para revisar
 - Copia o ZIP de vídeos do Codex (GL_ACADEMY_VIDEOS_RODADA_2026-09-30.zip, da pasta do site novo, em Documentos) para "04 - Feito pelo Codex" e extrai os vídeos lá. O original fica onde está.
-- Não apaga nada. Se já existir um arquivo com o mesmo nome, o que chega ganha " (2)"; se for idêntico, fica onde estava.
-- Deixa nesta pasta três relatórios: Inventário, Arquivos repetidos e o Registro do que foi feito.
+- Confere as pastas da equipe: o que é cópia idêntica ou versão anterior de um vídeo do Claude ou do Codex vai para
+  "99 - Para revisar"; o que só existe nas pastas de vocês fica onde está.
+- Não apaga nada. Se já existir um arquivo com o mesmo nome, o que chega ganha " (2)"; se for idêntico, não é duplicado.
+- Deixa nesta pasta quatro relatórios: Inventário, Conferência das pastas da equipe, Arquivos repetidos e o Registro do que foi feito.
 - Pode rodar de novo quando quiser: o que já está no lugar não muda.
 
 ANTES DE ORGANIZAR
@@ -404,22 +408,20 @@ linhas_site = []
 for tr in re.findall(r'<tr><td.*?</tr>', mapa, re.S):
     c = [texto(x) for x in re.findall(r'<td[^>]*>(.*?)</td>', tr, re.S)]
     linhas_site.append(f'{c[0]} > {c[1]}: {c[2]} ({c[3]})')
-codigo = texto(re.search(r'<pre class="prompt" id="site-code">(.*?)</pre>', mapa, re.S).group(1))
+prompt_site = re.search(r'```text\n(.*?)```', ler(os.path.join(MKT, 'site', 'prompt-codex-videos-do-site.md')), re.S).group(1).strip() + '\n'
 add_texto(f"{V}/{PASTAS_V['site'][0]}/LEIA-ME - onde usar e código do site.txt", f'''KIT DO SITE
-Loops leves para as páginas do site, sem som, cada um com a capa (JPG) de mesmo nome.
-As imagens da galeria e as de compartilhamento de link estão em "{I}" > "08 - Site".
-Os nomes dos arquivos são os que o código abaixo usa: não renomeie.
+Esta pasta tem os 8 vídeos feitos só para o site (loops, Pacote Completo e GL Gamma), cada um com a capa (JPG) de mesmo nome.
+O site também usa outros vídeos da Biblioteca (o filme das tecnologias, as histórias, os reels, as dúvidas e as aulas).
+Para o Codex, use o kit completo: Biblioteca de Vídeos GL > Kit do site > "Baixar o kit do site". Ele traz tudo com nomes simples, capas em tamanho cheio e o prompt.
+As imagens da galeria e as de compartilhamento estão em "{I}" > "08 - Site".
 
-ONDE USAR CADA PEÇA
-''' + '\n'.join(linhas_site) + f'''
+ONDE VAI CADA VÍDEO
+''' + '\n'.join(linhas_site) + '''
 
-Regra de ouro: loop sem som e sem controles só nas peças curtas e decorativas; o que tem legenda vai com botão de play. Os loops só começam quando aparecem na tela, então não pesam o carregamento.
-
-CÓDIGO PARA O CODEX
-Cole no Codex junto com os arquivos. Ajuste os caminhos para a pasta onde os vídeos ficarem no site.
-
-{codigo}
+Regra de ouro: loop sem som só nas peças curtas e decorativas; o que tem legenda toca no play. Nada carrega antes de aparecer na tela.
+O prompt completo para o Codex está em "PROMPT para o Codex.txt", nesta pasta.
 ''')
+add_texto(f"{V}/{PASTAS_V['site'][0]}/PROMPT para o Codex.txt", prompt_site)
 
 # 03 - Imagens
 pastas_i_ordem = sorted(img_por_pasta)
@@ -446,9 +448,9 @@ for pasta in pastas_i_ordem:
     cab = f"{pasta[len(I) + 1:].upper()}\n" + (g['desc'] + '\n' if g['desc'] else '') + '\n'
     add_texto(f'{pasta}/Legendas e usos.txt', cab + '\n\n'.join(legenda_imagem(im) for im in ims) + '\n')
 add_texto(f'{I}/Catálogo das imagens (abre no Excel).csv', csv(
-    [['Pasta', 'Arquivo', 'Peça', 'Formato', 'Legenda pronta ou uso']] +
+    [['Pasta', 'Arquivo', 'Peça', 'Formato', 'Legenda pronta ou uso', 'Código na Biblioteca']] +
     [[im['pasta'][len(I) + 1:], im['arquivo'], grupos_img[im['grupo']]['titulo'], im['fmt'],
-      im['leg'] or grupos_img[im['grupo']]['leg'] or grupos_img[im['grupo']]['desc']] for im in imagens]))
+      im['leg'] or grupos_img[im['grupo']]['leg'] or grupos_img[im['grupo']]['desc'], im['nome']] for im in imagens]))
 
 # 04 - Codex
 add_texto(f"{P['codex']}/LEIA-ME - vídeos feitos pelo CODEX.txt", f'''VÍDEOS FEITOS PELO CODEX (não pelo Claude)
@@ -545,6 +547,141 @@ Veja cada item e leve para a pasta certa, ou apague o que não serve mais.
 ''')
 
 # ---------------------------------------------------------------------------
+# Execução: calendário de outubro, teste de anúncios, placar semanal, parceiros e os textos da fase
+por_vid = {v['vid']: v for v in videos}
+por_img = {im['nome']: im for im in imagens}
+capas_reels = {im['nome'][len('capa-'):]: im for im in imagens if im['grupo'] == 'img-capas-reels'}
+
+def onde_video(cod):
+    v = por_vid[cod]
+    return (v['pasta'] + '/' + v['arquivo']).replace('/', ' > ')
+
+def onde_img(cod):
+    im = por_img[cod]
+    return (im['pasta'] + '/' + im['arquivo']).replace('/', ' > ')
+
+SEMANAS = {2: 'Semana 2 · Contexto: a favor ou contra', 3: 'Semana 3 · Valor e níveis',
+           4: 'Semana 4 · Plataformas e GL Gamma', 5: 'Semana 5 · Alvos e processo'}
+DIAS = ['seg', 'ter', 'qua', 'qui', 'sex', 'sáb', 'dom']
+REELS = 'Instagram Reels, TikTok e YouTube Shorts'
+# (data, semana, tipo, código da peça, objetivo, observação)
+CALENDARIO = [
+  ('05/10', 2, 'reels', 'v01-a-favor-ou-contra', 'Alcance e call', ''),
+  ('05/10', 2, 'story', 'story-call', 'Call', 'Sticker de link para o agendamento'),
+  ('06/10', 2, 'reels', 'aula-vwap', 'Seguidores', ''),
+  ('07/10', 2, 'reels', 'v04-gamma-exposure', 'GL Gamma', ''),
+  ('07/10', 2, 'story', 'story-enquete', 'Engajamento', 'Sticker de enquete'),
+  ('08/10', 2, 'post', 'post-correcao-contra', 'Autoridade', ''),
+  ('08/10', 2, 'story', 'story-enquete-resposta', 'Engajamento', 'A resposta da enquete de ontem'),
+  ('09/10', 2, 'reels', 'v07-tres-perguntas', 'Call', ''),
+  ('09/10', 2, 'story', 'story-call', 'Call', 'Sticker de link'),
+  ('10/10', 2, 'carrossel', 'img-carrossel-3-perguntas', 'Salvamentos', 'Também no LinkedIn, como documento'),
+  ('11/10', 2, 'frase', 'frase-contexto-primeiro', 'Respiro', ''),
+  ('11/10', 2, 'story', 'story-comunidade', 'Comunidade', 'Sticker de link para a comunidade'),
+  ('12/10', 3, 'reels', 'v02-setup-acontecendo', 'Alcance e call', 'Feriado nacional'),
+  ('13/10', 3, 'reels', 'aula-value-area', 'Seguidores', ''),
+  ('14/10', 3, 'carrossel', 'img-carrossel-gl-gamma', 'GL Gamma', 'Também no LinkedIn, como documento'),
+  ('15/10', 3, 'reels', 'v11-escada-de-valor', 'Autoridade', ''),
+  ('16/10', 3, 'reels', 'v09-defesa-na-vwap-3m', 'Call', ''),
+  ('16/10', 3, 'story', 'story-call', 'Call', 'Sticker de link'),
+  ('17/10', 3, 'post', 'post-nivel-respeitado', 'Autoridade', ''),
+  ('18/10', 3, 'frase', 'frase-o-mercado-nao-deve', 'Respiro', ''),
+  ('19/10', 4, 'reels', 'v06-ninjatrader', 'Alcance', ''),
+  ('20/10', 4, 'carrossel', 'img-carrossel-value-area', 'Salvamentos', 'Também no LinkedIn, como documento'),
+  ('21/10', 4, 'reels', 'objecao-opcoes', 'GL Gamma', ''),
+  ('22/10', 4, 'reels', 'v10-queda-no-ninjatrader', 'Autoridade', ''),
+  ('23/10', 4, 'reels', 'objecao-plataforma', 'Call', ''),
+  ('23/10', 4, 'story', 'story-call', 'Call', 'Sticker de link'),
+  ('24/10', 4, 'post', 'post-tradingview-e-ninjatrader', 'Autoridade', ''),
+  ('25/10', 4, 'frase', 'frase-risco-antes-do-clique', 'Respiro', ''),
+  ('26/10', 5, 'reels', 'v03-alvos-claros', 'Alcance e call', ''),
+  ('27/10', 5, 'carrossel', 'img-carrossel-nem-toda-queda', 'Salvamentos', 'Também no LinkedIn, como documento'),
+  ('28/10', 5, 'reels', 'v05-nivel-respeitado', 'Autoridade', ''),
+  ('29/10', 5, 'reels', 'objecao-mais-um-indicador', 'Call', ''),
+  ('29/10', 5, 'story', 'story-live-hoje', 'Live', 'Live "Replay com Giovane", com o kit de live'),
+  ('30/10', 5, 'reels', 'comercial-tecnologias-gl-9x16', 'Call', ''),
+  ('30/10', 5, 'story', 'story-call', 'Call', 'Sticker de link'),
+  ('31/10', 5, 'post', 'post-alvo-antes-do-preco', 'Autoridade', ''),
+  ('01/11', 5, 'frase', 'frase-tres-perguntas', 'Respiro', ''),
+]
+import datetime
+cal = [['Data', 'Dia', 'Semana e tema', 'Canal', 'Formato', 'Peça (na pasta organizada)', 'Capa', 'Legenda pronta', 'Objetivo', 'Observação']]
+for data, sem, tipo, cod, obj, obs in CALENDARIO:
+    d = datetime.date(2026, int(data[3:]), int(data[:2]))
+    dia = DIAS[d.weekday()]
+    if tipo == 'reels':
+        v = por_vid[cod]
+        capa = onde_img(capas_reels[cod]['nome']) if cod in capas_reels else 'Escolher um quadro no app'
+        cal.append([data, dia, SEMANAS[sem], REELS, 'Vídeo 9x16', onde_video(cod), capa, v['leg'], obj, obs])
+    elif tipo == 'carrossel':
+        g = grupos_img[cod]
+        pasta = [im['pasta'] for im in imagens if im['grupo'] == cod][0]
+        cal.append([data, dia, SEMANAS[sem], 'Instagram feed', 'Carrossel 4x5', pasta.replace('/', ' > ') + ' (todos os slides, na ordem)', '', g['leg'], obj, obs])
+    elif tipo == 'post':
+        im = por_img[cod]
+        cal.append([data, dia, SEMANAS[sem], 'Instagram feed', 'Post 4x5', onde_img(cod), '', im['leg'], obj, obs])
+    elif tipo == 'frase':
+        cal.append([data, dia, SEMANAS[sem], 'Instagram feed', 'Frase 1x1', onde_img(cod), '', 'Salve para lembrar. ' + AVISO, obj, obs])
+    else:
+        cal.append([data, dia, SEMANAS[sem], 'Instagram stories', 'Story 9x16', onde_img(cod), '', '', obj, obs])
+csv_calendario = csv(cal)
+
+FUNIL = '[link do funil]?utm_source=meta&utm_medium=pago&utm_campaign={{campaign.name}}&utm_term={{adset.name}}&utm_content={{ad.name}}'
+# (campanha, conjunto, nome do anúncio, peça 9x16, peça 4x5 ou '', título, descrição)
+ANUNCIOS = [
+  ('q4-2026_captacao-call_advantage', 'amplo-interesses_br_25-54', 'setup_reel-feed_varredura_v1', 'v02-setup-acontecendo', 'v02-setup-acontecendo-4x5', 'Veja o setup acontecendo', 'Call 1x1 gratuita'),
+  ('q4-2026_captacao-call_advantage', 'amplo-interesses_br_25-54', 'contexto_reel-feed_a-favor-ou-contra_v1', 'v01-a-favor-ou-contra', 'v01-a-favor-ou-contra-4x5', 'A favor ou contra você?', 'Call 1x1 gratuita'),
+  ('q4-2026_captacao-call_advantage', 'amplo-interesses_br_25-54', 'alvos_reel-feed_alvos-claros_v1', 'v03-alvos-claros', 'v03-alvos-claros-4x5', 'O alvo antes do preço', 'Call 1x1 gratuita'),
+  ('q4-2026_captacao-call_advantage', 'amplo-interesses_br_25-54', 'contexto_reel_pare-de-operar-contra_v1', 'v01b-gancho-pare-de-operar-contra', '', 'Pare de operar contra', 'Call 1x1 gratuita'),
+  ('q4-2026_captacao-call_advantage', 'amplo-interesses_br_25-54', 'processo_reel_se-nao-responde-nao-entre_v1', 'v07b-gancho-nao-entre', '', 'As 3 perguntas antes do trade', 'Call 1x1 gratuita'),
+  ('q4-2026_remarketing_call', 'video50-engajou180-visitou-funil', 'objecao_reel_plataforma_v1', 'objecao-plataforma', '', 'TradingView ou NinjaTrader', 'Call 1x1 gratuita'),
+  ('q4-2026_remarketing_call', 'video50-engajou180-visitou-funil', 'objecao_reel_mais-um-indicador_v1', 'objecao-mais-um-indicador', '', 'Não é mais um indicador', 'Call 1x1 gratuita'),
+  ('q4-2026_remarketing_call', 'video50-engajou180-visitou-funil', 'objecao_reel_opcoes_v1', 'objecao-opcoes', '', 'GL Gamma sem operar opções', 'GL Gamma: assinatura à parte'),
+  ('q4-2026_distribuicao_video', 'amplo-interesses_br_25-54', 'aula_reel_vwap_v1', 'aula-vwap', '', 'O que é VWAP', 'Aula de 15 segundos'),
+  ('q4-2026_distribuicao_video', 'amplo-interesses_br_25-54', 'aula_reel_value-area_v1', 'aula-value-area', '', 'O que é Value Area', 'Aula de 15 segundos'),
+]
+an = [['Campanha', 'Conjunto', 'Anúncio', 'Vídeo 9x16 (Reels e Stories)', 'Vídeo 4x5 (feed)', 'Texto principal', 'Título', 'Descrição', 'Botão', 'URL de destino']]
+for camp, conj, nome, v916, v45, tit, desc in ANUNCIOS:
+    # os ganchos não têm legenda própria: usam a do vídeo original
+    texto = por_vid[v916]['leg'] or {'v01b': por_vid['v01-a-favor-ou-contra']['leg'], 'v07b': por_vid['v07-tres-perguntas']['leg']}[v916[:4]]
+    an.append([camp, conj, nome, onde_video(v916), onde_video(v45) if v45 else 'Usar o 9x16 em todos os posicionamentos',
+               texto, tit, desc, 'Saiba mais', FUNIL])
+csv_anuncios = csv(an)
+
+FASES = [(1, 2, 'Fundação'), (3, 6, 'Tração'), (7, 10, 'Escala'), (11, 13, 'Colheita e revisão')]
+PILARES = ['Conteúdo', 'Tráfego pago', 'Divulgação', 'Imprensa', 'Relações públicas', 'Vendas']
+pl = [['Semana', 'Início', 'Fim', 'Fase', 'Pilar', 'Leads', 'Calls agendadas', 'Calls realizadas', 'Vendas', 'Receita (R$)', 'Custo (R$)', 'Observações']]
+inicio = datetime.date(2026, 9, 28)
+for n in range(1, 14):
+    a = inicio + datetime.timedelta(days=7 * (n - 1))
+    b = min(a + datetime.timedelta(days=6), datetime.date(2026, 12, 31))
+    fase = [f for i, j, f in FASES if i <= n <= j][0]
+    for pil in PILARES:
+        pl.append([n, a.strftime('%d/%m'), b.strftime('%d/%m'), fase, pil, '', '', '', '', '', '', ''])
+csv_placar = csv(pl)
+csv_parceiros = csv([['Nome', '@', 'Plataforma', 'Perfil (fluxo e volume, mesa proprietária, setup e games, aluno)', 'Seguidores', 'Passou no filtro (S/N)',
+                      'Status (listado, abordado, respondeu, em teste, ativo, pausado)', 'Data da abordagem', 'Código', 'Link com UTM', 'Leads', 'Calls', 'Vendas', 'Observações']])
+
+E = P['estrat']
+add_texto(f'{E}/Calendário de outubro (abre no Excel).csv', csv_calendario)
+add_texto(f'{E}/Teste de anúncios (abre no Excel).csv', csv_anuncios)
+add_texto(f'{E}/Placar semanal (abre no Excel).csv', csv_placar)
+add_texto(f"{P['textos']}/Parceiros (abre no Excel).csv", csv_parceiros)
+EXEC = os.path.join(MKT, 'execucao')
+for arq, titulo in [('kit-de-imprensa.md', 'Kit de imprensa e preparo do porta-voz'), ('manual-de-crise.md', 'Manual de crise'),
+                    ('programa-de-parceiros.md', 'Programa de parceiros'), ('vendas-follow-up.md', 'Vendas - follow-up com vídeo e checklist da call')]:
+    add_texto(f"{P['textos']}/{titulo}.txt", md_txt(ler(os.path.join(EXEC, arq))))
+for extra in ['plano-de-marketing.md', 'PROMPT-continuidade.md']:
+    caminho = os.path.join(MKT, extra)
+    if os.path.exists(caminho):
+        nome = 'Plano de marketing GL Academy (para o GL OS).md' if extra.startswith('plano') else 'Prompt de continuidade (Claude).txt'
+        add_texto(f'{E}/{nome}', ler(caminho) if nome.endswith('.md') else md_txt(ler(caminho)))
+# cópia das planilhas no repositório, para as próximas sessões
+if os.path.isdir(EXEC):
+    for nome, conteudo in [('calendario-outubro.csv', csv_calendario), ('teste-de-anuncios.csv', csv_anuncios), ('placar-semanal.csv', csv_placar), ('parceiros.csv', csv_parceiros)]:
+        open(os.path.join(EXEC, nome), 'w', encoding='utf-8-sig', newline='').write(conteudo.replace('\n', '\r\n'))
+
+# ---------------------------------------------------------------------------
 # Formato final dos textos para o Windows: CRLF; BOM nos textos com acento (o .bat e o .url ficam em ASCII puro)
 def para_windows(caminho, t):
     t = t.replace('\r\n', '\n').replace('\n', '\r\n')
@@ -606,11 +743,12 @@ passos = f'''<ol class="steps">
           <li><b>Abra "00 - Comece aqui"</b> e dê dois cliques em <i>Organizar a pasta de marketing</i>. Se o Windows avisar que protegeu o computador: <i>Mais informações</i> &gt; <i>Executar assim mesmo</i>.</li>
           <li><b>Confira a prévia</b>: a janela mostra o que vai para onde. Nada muda até você digitar <b>S</b> e apertar Enter.</li>
           <li><b>Pronto:</b> tudo fica em "Marketing de trading". As pastas que já existiam vão para "06 - Materiais da equipe" e "07 - Leads", e o ZIP do Codex é copiado para "04 - Feito pelo Codex" e extraído lá. A pasta abre sozinha no fim.</li>
-        </ol>'''
+        </ol>
+        <p class="desc"><b>Já extraiu o pacote antes, dentro de "Marketing de trading"?</b> Baixe só o ZIP leve, extraia na pasta Downloads e rode o organizador de lá. Ele confere arquivo por arquivo as pastas que vocês colocaram junto: o que já existe nas pastas 02 a 04 vai para "99 - Para revisar", o que é só de vocês fica em "06 - Materiais da equipe", e a lista sai em "00 - Comece aqui".</p>'''
 secao = f'''
   <section id="organizado">
     <div class="section-head"><h2>Levar tudo para o computador</h2><p>Um ZIP com os {n_videos} vídeos e as {n_imagens} imagens, separados por objetivo e função, com nomes legíveis e as legendas em cada pasta. Junto vem o organizador da pasta "Marketing de trading": ele arruma o que já existe lá e guarda os vídeos do Codex numa pasta só deles, sem apagar nada.</p></div>
-    <div class="dl-bar"><button type="button" class="btn btn-gold" data-org="tudo">Baixar tudo organizado (ZIP, {mb(total)})</button><button type="button" class="btn" data-org="leve">Só o organizador e os textos (ZIP leve)</button><span class="dl-status" role="status" aria-live="polite">Funciona no Windows 10 e 11.</span></div>
+    <div class="dl-bar"><button type="button" class="btn btn-gold" data-org="tudo">Baixar tudo organizado (ZIP, {mb(total)})</button><button type="button" class="btn" data-org="leve">Organizador atualizado e textos (ZIP leve)</button><span class="dl-status" role="status" aria-live="polite">Funciona no Windows 10 e 11.</span></div>
     <div class="two">
       <div class="panel"><h3>Como fica a pasta</h3><pre class="tree">{html.escape(chr(10).join(arvore))}</pre></div>
       <div class="panel">

@@ -40,6 +40,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
+| `kit_site.py` | kit do site: o melhor vídeo para cada espaço do site novo, capas em tamanho cheio, catálogo e o prompt para o Codex (o `build_library.py` chama depois do `organizacao.py`) |
 
 ## Como escrever um vídeo novo
 
@@ -69,7 +70,13 @@ Antes de escrever legenda ou cartela nova, confira `../glossario.md` (nomes dos 
 
 ## Pacote organizado
 
-O botão "Baixar tudo organizado" da Biblioteca monta no navegador o ZIP `GL Academy - Marketing (Claude).zip`, com os vídeos e imagens separados por objetivo e função, nomes legíveis e os textos de cada pasta. O `organizacao.py` define o lugar de cada arquivo e escreve esses textos. Dentro do ZIP vai o organizador da pasta "Marketing de trading" (`../organizacao/organizar-marketing.ps1`). Ele traz o pacote, arruma as pastas que já existiam e copia os vídeos do Codex para "04 - Feito pelo Codex", sem apagar nada. Para testar numa pasta simulada: `python3 ../organizacao/testar_organizador.py` (precisa do `pwsh`).
+O botão "Baixar tudo organizado" da Biblioteca monta no navegador o ZIP `GL Academy - Marketing (Claude).zip`, com os vídeos e imagens separados por objetivo e função, nomes legíveis e os textos de cada pasta. O `organizacao.py` define o lugar de cada arquivo e escreve esses textos. Dentro do ZIP vai o organizador da pasta "Marketing de trading" (`../organizacao/organizar-marketing.ps1`). Ele traz o pacote, arruma as pastas que já existiam, copia os vídeos do Codex para "04 - Feito pelo Codex" e confere as pastas da equipe contra os vídeos e imagens das pastas 02 a 04, sem apagar nada. O botão "Organizador atualizado e textos (ZIP leve)" baixa só o organizador e os textos, para quem já tem os vídeos. Para testar numa pasta simulada: `python3 ../organizacao/testar_organizador.py` (precisa do `pwsh`).
+
+Na pasta "01 - Estratégia e planejamento" o pacote leva o plano de marketing (`../plano-de-marketing.md`), o prompt de continuidade (`../PROMPT-continuidade.md`) e as planilhas de `../execucao/` (calendário de outubro, teste de anúncios e placar semanal), que o `organizacao.py` também grava no repositório.
+
+## Kit do site
+
+O botão "Baixar o kit do site" da Biblioteca monta `GL Academy - Kit do site.zip`: os vídeos escolhidos para o site em `media/` (loops, histórias, filmes, reels, FAQ e aulas), as capas, as imagens da galeria e de compartilhamento, `media/catalogo.json` e o prompt para o Codex. O `kit_site.py` escolhe os vídeos, gera em `biblioteca/kit/` as capas que faltam e grava o manifesto na página. O prompt é `../site/prompt-codex-videos-do-site.md`: mudou o prompt, rode o build de novo.
 
 ## Higgsfield
 

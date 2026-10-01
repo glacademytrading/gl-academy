@@ -296,3 +296,5 @@ print(len(img_files), 'imagens;', len(site_files), 'arquivos no kit do site')
 
 # Pacote organizado para levar ao computador (manifesto e textos na página)
 subprocess.run(['python3', os.path.join(ROOT, 'organizacao.py')], check=True)
+# Kit do site: os melhores vídeos para cada espaço do site, com capas e o prompt para o Codex
+subprocess.run(['python3', os.path.join(ROOT, 'kit_site.py')], check=True)

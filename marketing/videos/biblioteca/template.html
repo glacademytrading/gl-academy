@@ -402,8 +402,8 @@ Rascunhos de origem: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-
     setStatus('Confirme o download.');
     if (await saveFile(nome, out)) toast('ZIP pronto: ' + itens.length + ' ' + rotulo);
   }
-  async function baixarOrganizado(leve) {
-    var m = JSON.parse(document.getElementById('organizacao').textContent);
+  async function baixarManifesto(id, leve) {
+    var m = JSON.parse(document.getElementById(id).textContent);
     setStatus('Carregando o compactador…');
     var JSZip = await loadZip(), zip = new JSZip(), itens = leve ? [] : m.arquivos, prox = 0, feitos = 0;
     async function trabalhar() {
@@ -417,7 +417,7 @@ Rascunhos de origem: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-
     m.textos.forEach(function (t) { zip.file(t.z, t.t); });
     var out = await zip.generateAsync({ type: 'blob', compression: leve ? 'DEFLATE' : 'STORE' }, function (x) { setStatus('Montando o ZIP: ' + Math.round(x.percent) + '%'); });
     setStatus('Confirme o download.');
-    if (await saveFile(leve ? m.nomeLeve : m.nome, out)) toast(leve ? 'Organizador e textos prontos.' : 'ZIP pronto: ' + itens.length + ' arquivos em pastas.');
+    if (await saveFile(leve ? m.nomeLeve : m.nome, out)) toast(leve ? 'Organizador e textos prontos.' : 'ZIP pronto: ' + itens.length + ' arquivos.');
   }
   document.addEventListener('click', async function (e) {
     var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]'), kit = e.target.closest('[data-zipkit]'), org = e.target.closest('[data-org]');
@@ -427,14 +427,11 @@ Rascunhos de origem: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-
     ativo = (btn.closest('.dl-bar') && btn.closest('.dl-bar').querySelector('.dl-status')) || document.getElementById('dlstatus');
     try {
       if (org) {
-        await baixarOrganizado(org.dataset.org === 'leve');
+        await baixarManifesto('organizacao', org.dataset.org === 'leve');
       } else if (one) {
         if (await saveFile(base(one.dataset.dl), await fetchPath(one.dataset.dl))) toast('Download enviado: ' + base(one.dataset.dl));
       } else if (kit) {
-        var files = JSON.parse(document.getElementById('kit-site-files').textContent);
-        var itens = files.map(function (p) { return { path: p, folder: p.indexOf('site/') === 0 ? 'videos' : p.indexOf('img-site-og') > -1 ? 'compartilhamento' : 'galeria' }; });
-        var leia = '﻿Kit do site · GL Academy\n\nVídeos em MP4 sem som, cada um com a capa (JPG) de mesmo nome.\nOnde usar cada peça: Biblioteca de Vídeos GL, seção Kit do site.\n\nCódigo para o Codex:\n\n' + document.getElementById('site-code').textContent + '\n';
-        await montarZip('gl-academy-kit-do-site.zip', itens, { 'LEIA-ME.txt': leia }, 'arquivos');
+        await baixarManifesto('kit-site', false);
       } else {
         var gid = many.dataset.zip, all = gid === 'all', allImg = gid === 'all-img';
         var cards = Array.prototype.slice.call(document.querySelectorAll(all ? '.vcard' : allImg ? '.icard' : '#' + gid + ' [data-src]'));
