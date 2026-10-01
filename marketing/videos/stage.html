@@ -1,0 +1,316 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/local.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #050505; overflow: hidden; }
+#stage { position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 55%, #15110a 0%, #050505 65%); font-family: "Inter", sans-serif; color: #fff; }
+.scene { position: absolute; inset: 0; }
+.cam { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.cam img { display: block; image-rendering: auto; }
+.mask, .hide { position: absolute; }
+canvas.layer { position: absolute; inset: 0; }
+.dim { position: absolute; inset: 0; background: #050505; }
+#fx { position: absolute; inset: 0; pointer-events: none; }
+.box { position: absolute; border: 4px solid var(--c); border-radius: 12px; box-shadow: 0 0 28px var(--c), inset 0 0 18px rgba(0,0,0,.2); }
+.chip { position: absolute; background: var(--c); color: #0b0906; font: 800 30px/1 "Montserrat", sans-serif; letter-spacing: .02em; text-transform: uppercase; padding: 12px 18px; border-radius: 10px; white-space: nowrap; box-shadow: 0 8px 30px rgba(0,0,0,.6); }
+.playhead { position: absolute; width: 3px; background: linear-gradient(180deg, transparent, #f6d991 20%, #f6d991 80%, transparent); box-shadow: 0 0 24px 6px rgba(246,217,145,.55); }
+#gt { position: absolute; left: 0; right: 0; top: 0; background: linear-gradient(180deg, rgba(5,5,5,.96) 0%, rgba(5,5,5,.85) 45%, rgba(5,5,5,0) 100%); }
+#gb { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(0deg, rgba(5,5,5,.9) 0%, rgba(5,5,5,0) 100%); }
+#cap { position: absolute; left: 70px; right: 70px; }
+#cap .kick { display: inline-block; font: 800 30px/1 "Montserrat", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: 12px 18px; border-radius: 8px; margin-bottom: 26px; }
+#cap .head { font: 900 76px/1.08 "Montserrat", sans-serif; letter-spacing: -.01em; text-shadow: 0 4px 30px rgba(0,0,0,.8); }
+#cap .head em { font-style: normal; color: #f6d991; }
+#cap .head em.red { color: #ff6b6b; }
+#cap .head em.green { color: #4fe3a8; }
+#wm { position: absolute; display: flex; align-items: center; gap: 12px; opacity: .92; }
+#wm img { width: 64px; height: 64px; }
+#wm span { font: 800 24px/1 "Montserrat", sans-serif; letter-spacing: .18em; color: #d8ae55; }
+#rp { position: absolute; font: 600 24px/1 "Inter", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.72); border: 1px solid rgba(216,174,85,.55); border-radius: 999px; padding: 12px 20px; background: rgba(5,5,5,.6); }
+#rp i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #e3705f; margin-right: 12px; vertical-align: 1px; box-shadow: 0 0 10px #e3705f; }
+#end { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 42%, #1c160b 0%, #050505 62%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 34px; padding: 0 80px; }
+#end img { width: 420px; height: 420px; }
+#end .brand { font: 900 104px/1 "Montserrat", sans-serif; letter-spacing: .06em; background: linear-gradient(180deg, #f6d991, #b8893a); -webkit-background-clip: text; color: transparent; }
+#end .tag { font: 700 50px/1.2 "Montserrat", sans-serif; color: #fff; max-width: 900px; }
+#end .cta { font: 800 40px/1 "Montserrat", sans-serif; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: 26px 40px; border-radius: 16px; box-shadow: 0 0 50px rgba(216,174,85,.35); }
+#end .sub { font: 600 32px/1 "Inter", sans-serif; color: #d8ae55; letter-spacing: .08em; }
+#end .disc { font: 500 26px/1.4 "Inter", sans-serif; color: rgba(255,255,255,.6); max-width: 880px; margin-top: 20px; }
+.land #cap { left: 90px; right: auto; width: 1100px; }
+.land #cap .head { font-size: 64px; }
+.land #end { gap: 22px; }
+.land #end img { width: 300px; height: 300px; }
+.land #end .brand { font-size: 84px; }
+.land #end .tag { font-size: 40px; max-width: 1400px; }
+.land #end .disc { max-width: 1400px; }
+.txt { position: absolute; left: 0; right: 0; text-align: center; padding: 0 80px; }
+.txt .big { font: 900 120px/1.02 "Montserrat", sans-serif; letter-spacing: .02em; background: linear-gradient(180deg, #fff 30%, #f6d991); -webkit-background-clip: text; color: transparent; text-shadow: none; }
+.txt .mid { font: 800 64px/1.15 "Montserrat", sans-serif; color: #fff; text-shadow: 0 4px 30px rgba(0,0,0,.85); }
+.txt .mid em { font-style: normal; color: #f6d991; }
+.txt .small { font: 600 34px/1.3 "Inter", sans-serif; color: rgba(255,255,255,.8); letter-spacing: .06em; }
+.txt .live { display: inline-flex; align-items: center; gap: 16px; font: 800 40px/1 "Montserrat", sans-serif; letter-spacing: .2em; color: #fff; background: rgba(227,52,52,.92); padding: 16px 28px; border-radius: 12px; }
+.txt .live i { width: 18px; height: 18px; border-radius: 50%; background: #fff; display: inline-block; }
+.txt .pill { display: inline-block; font: 800 40px/1 "Montserrat", sans-serif; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: 22px 36px; border-radius: 14px; }
+.txt > * + * { margin-top: 26px; }
+.txt .word { font: 900 128px/1 "Montserrat", sans-serif; background: linear-gradient(180deg, #fff3cf 0%, #f6d991 38%, #b8893a 100%); -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 6px 30px rgba(216,174,85,.25)); white-space: nowrap; }
+.txt .rule { height: 3px; width: 640px; margin-left: auto; margin-right: auto; background: linear-gradient(90deg, transparent, #f6d991 20%, #f6d991 80%, transparent); transform-origin: 50% 50%; }
+.txt .tagl { font: 700 36px/1 "Montserrat", sans-serif; letter-spacing: .42em; color: #d8ae55; padding-left: .42em; }
+.spot { position: absolute; border-radius: 18px; border: 2px solid rgba(246,217,145,.55); box-shadow: 0 0 0 4000px rgba(5,5,5,.64), 0 0 36px rgba(246,217,145,.25); }
+.feed #cap { left: 60px; right: 60px; }
+.feed #cap .kick { font-size: 26px; margin-bottom: 18px; }
+.feed #cap .head { font-size: 62px; }
+.feed .chip { font-size: 26px; padding: 10px 16px; }
+.feed #end { gap: 20px; }
+.feed #end img { width: 290px; height: 290px; }
+.feed #end .brand { font-size: 80px; }
+.feed #end .tag { font-size: 40px; }
+.feed #end .cta { font-size: 34px; padding: 22px 34px; }
+.feed #end .sub { font-size: 28px; }
+.feed #end .disc { font-size: 22px; margin-top: 8px; }
+.pglow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(246,217,145,.34) 0%, rgba(216,174,85,.13) 32%, rgba(5,5,5,0) 68%); }
+.rays { position: absolute; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(246,217,145,.10) 0deg 3deg, rgba(246,217,145,0) 3deg 12deg); -webkit-mask-image: radial-gradient(circle, #000 0%, rgba(0,0,0,.55) 30%, transparent 66%); }
+.shine { position: absolute; -webkit-mask-size: 100% 100%; background: linear-gradient(105deg, rgba(255,255,255,0) 46.5%, rgba(255,246,214,.72) 50%, rgba(255,255,255,0) 53.5%); background-size: 260% 100%; background-repeat: no-repeat; mix-blend-mode: screen; opacity: 0; }
+.spark { position: absolute; mix-blend-mode: screen; background:
+  radial-gradient(circle, rgba(255,252,240,1) 0%, rgba(246,217,145,.7) 7%, rgba(246,217,145,0) 26%),
+  linear-gradient(90deg, rgba(255,246,214,0) 0%, rgba(255,246,214,.95) 50%, rgba(255,246,214,0) 100%) center / 100% 3px no-repeat,
+  linear-gradient(0deg, rgba(255,246,214,0) 0%, rgba(255,246,214,.95) 50%, rgba(255,246,214,0) 100%) center / 3px 100% no-repeat; }
+</style></head>
+<body><div id="stage"></div>
+<script>
+let S, W, H, AY, scenesEl = [], capIdx = -2;
+const ease = x => x < 0 ? 0 : x > 1 ? 1 : (x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+const clamp01 = x => Math.max(0, Math.min(1, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+
+function camAt(cam, t) {
+  if (t <= cam[0].t) return cam[0];
+  for (let i = 0; i < cam.length - 1; i++) {
+    const a = cam[i], b = cam[i + 1];
+    if (t <= b.t) { const k = ease((t - a.t) / (b.t - a.t)); return { cx: lerp(a.cx, b.cx, k), cy: lerp(a.cy, b.cy, k), z: lerp(a.z, b.z, k) }; }
+  }
+  return cam[cam.length - 1];
+}
+
+function sampleColor(img, x, y) {
+  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+  const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+  const d = g.getImageData(Math.round(x), Math.round(y), 1, 1).data; return `rgb(${d[0]},${d[1]},${d[2]})`;
+}
+
+async function init(spec) {
+  S = spec; W = spec.w; H = spec.h; AY = spec.ay || H / 2;
+  const st = document.getElementById('stage');
+  st.style.width = W + 'px'; st.style.height = H + 'px';
+  if (W > H) document.body.classList.add('land');
+  const feed = W <= H && H / W < 1.5; if (feed) document.body.classList.add('feed');
+  let html = '';
+  spec.scenes.forEach((s, i) => {
+    if (s.particles) {
+      const P = s.particles, logo = P.logo || 'emblem.png';
+      html += `<div class="scene" id="sc${i}">${P.rays ? '<div class="rays"></div>' : ''}${P.glow ? '<div class="pglow"></div>' : ''}<canvas class="layer" width="${W}" height="${H}"></canvas><img class="logo-final" src="${logo}" style="position:absolute;opacity:0">${P.shine ? `<div class="shine" style="-webkit-mask-image:url(${logo})"></div>` : ''}</div>`;
+      return;
+    }
+    const src = s.frames ? frameSrc(s.frames, 0) : s.img; html += `<div class="scene" id="sc${i}"><div class="cam"><img src="${src}"></div>${s.dim ? `<div class="dim" style="opacity:${s.dim}"></div>` : ''}</div>`; });
+  if (spec.dust) html += `<canvas class="layer" id="dust" width="${W}" height="${H}"></canvas>`;
+  html += `<div id="fx"></div><div id="gt"></div><div id="gb"></div><div id="cap"><div class="kick"></div><div class="head"></div></div>`;
+  (spec.texts || []).forEach((x, i) => { html += `<div class="txt" id="tx${i}" style="top:${x.top}px;opacity:0">${x.html}</div>`; });
+  html += `<div id="wm"><img src="emblem.png"><span>GL ACADEMY</span></div>`;
+  if (spec.replay !== false) html += `<div id="rp"><i></i>${spec.replayText || 'Replay · exemplo educacional'}</div>`;
+  if (spec.end) html += `<div id="end"><img src="emblem.png"><div class="brand">${spec.end.brand || 'GL MODEL'}</div><div class="tag">${spec.end.tag}</div><div class="cta">Agende sua call 1x1 gratuita</div><div class="sub">LINK NA BIO</div><div class="disc">${spec.end.disc || 'Trading envolve risco financeiro real. Conteúdo educacional; não é recomendação de investimento.'}</div></div>`;
+  st.innerHTML = html;
+  const land = W > H;
+  document.getElementById('gt').style.height = (land ? 360 : feed ? 470 : 820) + 'px';
+  document.getElementById('gb').style.height = (land ? 160 : feed ? 260 : 420) + 'px';
+  const cap = document.getElementById('cap'); cap.style.top = (land ? 70 : feed ? 128 : 230) + 'px';
+  const wm = document.getElementById('wm'); if (land) { wm.style.right = '60px'; wm.style.top = '56px'; } else { wm.style.right = '56px'; wm.style.top = feed ? '40px' : '110px'; }
+  if (feed) { wm.querySelector('img').style.width = wm.querySelector('img').style.height = '52px'; wm.querySelector('span').style.fontSize = '20px'; }
+  const rp = document.getElementById('rp'); if (rp) { if (land) { rp.style.left = '90px'; rp.style.bottom = '50px'; } else { rp.style.left = feed ? '60px' : '70px'; rp.style.top = feed ? '48px' : '114px'; rp.style.fontSize = '20px'; rp.style.padding = '10px 16px'; } }
+  if (!spec.captions || !spec.captions.length) cap.style.display = 'none';
+  await Promise.all([...document.images].map(im => im.decode()));
+  await document.fonts.ready;
+  spec.scenes.forEach((s, i) => {
+    const el = document.getElementById('sc' + i);
+    if (s.particles) { scenesEl.push({ el, pts: buildParticles(s.particles) }); return; }
+    const cam = el.querySelector('.cam'), img = cam.querySelector('img');
+    const layers = [];
+    if (s.reveal) {
+      const r = s.reveal, m = document.createElement('div'); m.className = 'mask';
+      m.style.background = r.color || sampleColor(img, r.sample ? r.sample[0] : r.x1 - 2, r.sample ? r.sample[1] : (r.dir === 'up' ? r.to + 4 : r.y0 + 4));
+      if (r.dir !== 'up') { m.style.top = r.y0 + 'px'; m.style.height = (r.y1 - r.y0) + 'px'; }
+      cam.appendChild(m); layers.push(['reveal', m, r]);
+    }
+    (s.hides || []).forEach(h => {
+      const m = document.createElement('div'); m.className = 'hide';
+      m.style.background = h.color || sampleColor(img, h.rect[0] - 3, h.rect[1] - 3);
+      Object.assign(m.style, { left: h.rect[0] + 'px', top: h.rect[1] + 'px', width: h.rect[2] + 'px', height: h.rect[3] + 'px' });
+      cam.appendChild(m); layers.push(['hide', m, h]);
+    });
+    scenesEl.push({ el, cam, layers });
+  });
+}
+
+function frameSrc(f, t) {
+  let k = Math.floor((t - (f.offset || 0)) * f.fps); if (k < 0) k = 0; if (k > f.n - 1) k = f.loop ? k % f.n : f.n - 1;
+  if (f.reverse) k = f.n - 1 - k;
+  return `${f.dir}/f${String(k + 1).padStart(4, '0')}.jpg`;
+}
+let curAY = 0;
+function rnd(seed) { let x = Math.sin(seed * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); }
+function buildParticles(P) {
+  const img = new Image(); img.src = P.logo || 'emblem.png';
+  const size = P.size, c = document.createElement('canvas'); c.width = size; c.height = size;
+  const g = c.getContext('2d'); g.drawImage(document.querySelector('.logo-final'), 0, 0, size, size);
+  const d = g.getImageData(0, 0, size, size).data, pts = []; const step = P.step || 4; let k = 0;
+  for (let y = 0; y < size; y += step) for (let x = 0; x < size; x += step) {
+    const i = (y * size + x) * 4; if (d[i + 3] < 90) continue; k++;
+    const a = rnd(k) * Math.PI * 2, r = (0.25 + rnd(k + 7) * 0.75) * Math.max(W, H) * 0.42;
+    // swirl: todas giram no mesmo sentido (vórtice); sem ele, cada partícula gira para um lado
+    const sw = P.swirl ? P.swirl * (.55 + rnd(k + 11) * .9) : (rnd(k + 11) - .5) * 2.2;
+    pts.push({ tx: x, ty: y, sx: Math.cos(a) * r + size / 2, sy: Math.sin(a) * r + size / 2, col: `rgba(${d[i]},${d[i + 1]},${d[i + 2]},`, dl: rnd(k + 3) * 0.35, sw });
+  }
+  return pts;
+}
+function drawParticles(E, s, t) {
+  const P = s.particles, cv = E.el.querySelector('canvas'), g = cv.getContext('2d'); g.clearRect(0, 0, W, H);
+  const ox = (P.cx != null ? P.cx : W / 2) - P.size / 2, oy = (P.cy != null ? P.cy : H / 2) - P.size / 2;
+  let p = clamp01((t - P.t0) / (P.t1 - P.t0)); if (P.reverse) p = 1 - p;
+  const fin = E.el.querySelector('.logo-final');
+  Object.assign(fin.style, { left: ox + 'px', top: oy + 'px', width: P.size + 'px', height: P.size + 'px' });
+  const settle = clamp01((p - .9) / .1); fin.style.opacity = settle; fin.style.filter = `drop-shadow(0 0 ${30 + 30 * settle}px rgba(216,174,85,${.35 * settle}))`;
+  // brilho, raios e reflexo (opcionais) acompanham o emblema
+  const R = P.size * 1.7, ring = { left: (ox + P.size / 2 - R / 2) + 'px', top: (oy + P.size / 2 - R / 2) + 'px', width: R + 'px', height: R + 'px' };
+  const gl = E.el.querySelector('.pglow'); if (gl) { Object.assign(gl.style, ring); gl.style.opacity = clamp01(p * 1.3) * (.82 + .18 * Math.sin(t * 2.1)); }
+  const ry = E.el.querySelector('.rays'); if (ry) { Object.assign(ry.style, ring); ry.style.opacity = ease(clamp01((p - .55) / .45)) * .9; ry.style.transform = `rotate(${t * 3.2}deg)`; }
+  const sh = E.el.querySelector('.shine');
+  if (sh) {
+    Object.assign(sh.style, { left: ox + 'px', top: oy + 'px', width: P.size + 'px', height: P.size + 'px' });
+    const k = clamp01((t - P.shine[0]) / (P.shine[1] - P.shine[0]));
+    sh.style.opacity = k > 0 && k < 1 ? 1 : 0; sh.style.backgroundPosition = `${lerp(100, 0, ease(k))}% 0`;
+  }
+  if (settle >= 1) return;
+  if (P.add) g.globalCompositeOperation = 'lighter';
+  const pos = (q, k) => {
+    const ang = (1 - k) * q.sw, dx = q.sx - q.tx, dy = q.sy - q.ty;
+    return [q.tx + (dx * Math.cos(ang) - dy * Math.sin(ang)) * (1 - k), q.ty + (dx * Math.sin(ang) + dy * Math.cos(ang)) * (1 - k)];
+  };
+  for (const q of E.pts) {
+    const k = ease(clamp01((p - q.dl) / (1 - q.dl)));
+    const [x, y] = pos(q, k);
+    const al = (0.6 + 0.4 * k) * (1 - settle) * (P.alpha || 1);
+    if (P.streak && k > 0 && k < 1) {
+      // rastro: liga a posição de um instante atrás à atual (efeito de movimento)
+      const [x2, y2] = pos(q, ease(clamp01((p - P.streak - q.dl) / (1 - q.dl))));
+      g.strokeStyle = q.col + al + ')'; g.lineWidth = 1.5 + (1 - k) * 1.3;
+      g.beginPath(); g.moveTo(ox + x2, oy + y2); g.lineTo(ox + x, oy + y); g.stroke();
+    } else {
+      g.fillStyle = q.col + al + ')';
+      const sz = 2.2 + (1 - k) * 1.6; g.fillRect(ox + x, oy + y, sz, sz);
+    }
+  }
+  g.globalCompositeOperation = 'source-over';
+}
+function drawDust(t) {
+  const D = S.dust, cv = document.getElementById('dust'); if (!cv) return; const g = cv.getContext('2d'); g.clearRect(0, 0, W, H);
+  const T = D.period || 20;
+  for (let i = 0; i < (D.n || 120); i++) {
+    const ph = (t / T + rnd(i)) % 1; const x = rnd(i + 50) * W + Math.sin((t / T + rnd(i + 9)) * Math.PI * 2) * 40;
+    const y = H - ph * (H + 60) + 30; const a = Math.sin(ph * Math.PI) * (0.25 + rnd(i + 3) * 0.55) * (D.alpha || 1);
+    const r = 1 + rnd(i + 17) * 2.4; g.beginPath(); g.fillStyle = `rgba(246,217,145,${a})`; g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+  }
+}
+function toScreen(c, x, y) { return [W / 2 + (x - c.cx) * c.z, curAY + (y - c.cy) * c.z]; }
+
+async function render(t) {
+  const waits = [];
+  const fx = document.getElementById('fx'); let fxHtml = '';
+  S.scenes.forEach((s, i) => {
+    const E = scenesEl[i];
+    const fin = s.t0 === 0 ? 1 : clamp01((t - s.t0) / .4), fout = clamp01((s.t1 - t) / .4);
+    const op = Math.min(fin, s.last ? 1 : fout);
+    E.el.style.opacity = op; E.el.style.display = op <= 0 ? 'none' : 'block';
+    if (op <= 0) return;
+    if (s.push) {
+      // aproximação lenta do quadro inteiro da cena (ex.: emblema parado no fim)
+      const k = ease(clamp01((t - s.push[0]) / (s.push[1] - s.push[0]))), P = s.particles || {};
+      E.el.style.transformOrigin = `${P.cx != null ? P.cx : W / 2}px ${P.cy != null ? P.cy : H / 2}px`;
+      E.el.style.transform = `scale(${lerp(1, s.push[2], k)})`;
+    }
+    if (s.particles) { drawParticles(E, s, t); return; }
+    const lt = t; curAY = s.ay != null ? s.ay : AY;
+    if (s.frames) { const im = E.cam.querySelector('img'); const src = frameSrc(s.frames, t - s.t0); if (!im.src.endsWith(src)) { im.src = src; waits.push(im.decode().catch(() => {})); } }
+    const cam = s.cam || [{ t: 0, cx: s.frames.w / 2, cy: s.frames.h / 2, z: Math.max(W / s.frames.w, H / s.frames.h) }];
+    const c = camAt(cam, lt);
+    E.cam.style.transform = `translate(${W / 2 - c.cx * c.z}px, ${curAY - c.cy * c.z}px) scale(${c.z})`;
+    E.layers.forEach(([kind, m, r]) => {
+      if (kind === 'reveal' && r.dir === 'up') {
+        const k = clamp01((lt - r.t0) / (r.t1 - r.t0));
+        const ry = lerp(r.from, r.to, k);
+        m.style.left = r.x0 + 'px'; m.style.width = (r.x1 - r.x0) + 'px';
+        m.style.top = (r.to - (r.pad || 0)) + 'px'; m.style.height = Math.max(0, ry - r.to + (r.pad || 0)) + 'px';
+        m.style.display = k >= 1 ? 'none' : 'block';
+        if (k > 0 && k < 1) { const [sx0, sy] = toScreen(c, r.x0, ry), [sx1] = toScreen(c, r.x1, ry); fxHtml += `<div class="playhead" style="left:${sx0}px;top:${sy - 1}px;width:${sx1 - sx0}px;height:3px;background:linear-gradient(90deg, transparent, #f6d991 15%, #f6d991 85%, transparent)"></div>`; }
+      } else if (kind === 'reveal') {
+        const k = clamp01((lt - r.t0) / (r.t1 - r.t0));
+        const rx = lerp(r.x0, r.x1, k);
+        m.style.left = rx + 'px'; m.style.width = Math.max(0, r.x1 - rx + (r.pad || 0)) + 'px';
+        m.style.display = k >= 1 ? 'none' : 'block';
+        if (k > 0 && k < 1) { const [sx, sy0] = toScreen(c, rx, r.y0), [, sy1] = toScreen(c, rx, r.y1); fxHtml += `<div class="playhead" style="left:${sx - 1}px;top:${sy0}px;height:${sy1 - sy0}px"></div>`; }
+      } else {
+        m.style.opacity = 1 - clamp01((lt - r.until) / .35);
+      }
+    });
+    (s.spots || []).forEach(b => {
+      // holofote: escurece tudo em volta do retângulo
+      if (t < b.t0 || t > b.t1) return;
+      const a = ease(clamp01((t - b.t0) / .4)) * clamp01((b.t1 - t) / .3), p = b.pad == null ? 16 : b.pad;
+      const [x0, y0] = toScreen(c, b.rect[0], b.rect[1]), [x1, y1] = toScreen(c, b.rect[0] + b.rect[2], b.rect[1] + b.rect[3]);
+      fxHtml += `<div class="spot" style="left:${x0 - p}px;top:${y0 - p}px;width:${x1 - x0 + 2 * p}px;height:${y1 - y0 + 2 * p}px;opacity:${a}"></div>`;
+    });
+    (s.boxes || []).forEach(b => {
+      if (t < b.t0 || t > b.t1) return;
+      const a = ease(clamp01((t - b.t0) / .35)) * clamp01((b.t1 - t) / .25);
+      const sc = 1 + (1 - ease(clamp01((t - b.t0) / .35))) * .18;
+      const p = b.pad == null ? 10 : b.pad;
+      const [x0, y0] = toScreen(c, b.rect[0], b.rect[1]), [x1, y1] = toScreen(c, b.rect[0] + b.rect[2], b.rect[1] + b.rect[3]);
+      const col = b.color || '#f6d991';
+      const bw = x1 - x0 + 2 * p, bh = y1 - y0 + 2 * p, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      fxHtml += `<div class="box" style="--c:${col};left:${cx - bw * sc / 2}px;top:${cy - bh * sc / 2}px;width:${bw * sc}px;height:${bh * sc}px;opacity:${a}"></div>`;
+      if (b.label) {
+        const below = b.below; const ly = below ? y1 + p + 18 : y0 - p - 66;
+        let lx = cx; fxHtml += `<div class="chip" style="--c:${col};left:${lx}px;top:${ly}px;opacity:${a};transform:translateX(-50%) translateX(${b.dx || 0}px)">${b.label}</div>`;
+      }
+    });
+  });
+  (S.sparks || []).forEach(sp => {
+    const k = (t - sp.t) / (sp.d || .8); if (k < 0 || k > 1) return;
+    const a = Math.sin(k * Math.PI), sz = (sp.s || 160) * (.35 + .65 * a);
+    fxHtml += `<div class="spark" style="left:${sp.x}px;top:${sp.y}px;width:${sz}px;height:${sz}px;opacity:${a};transform:translate(-50%,-50%) rotate(${k * 45}deg)"></div>`;
+  });
+  fx.innerHTML = fxHtml; if (S.dust) drawDust(t);
+  (S.texts || []).forEach((x, i) => {
+    const el = document.getElementById('tx' + i), kin = ease(clamp01((t - x.t0) / (x.in || .45)));
+    const a = kin * clamp01((x.t1 - t) / .35);
+    el.style.opacity = (t < x.t0 || t > x.t1) ? 0 : a;
+    el.style.transform = `translateY(${(1 - kin) * (x.rise == null ? 30 : x.rise)}px)`;
+    // entrada com espaçamento de letras fechando e linha dourada abrindo do centro
+    if (x.track) el.querySelectorAll('.trk').forEach(n => { n.style.letterSpacing = lerp(x.track[0], x.track[1], kin) + 'em'; });
+    el.querySelectorAll('.rule').forEach(n => { n.style.transform = `scaleX(${kin})`; });
+  });
+  // legendas
+  const caps = S.captions || []; let idx = -1;
+  caps.forEach((c, i) => { if (t >= c.t0 && t <= c.t1) idx = i; });
+  const cap = document.getElementById('cap');
+  if (idx !== capIdx) { capIdx = idx; if (idx >= 0) { cap.querySelector('.kick').innerHTML = caps[idx].kick || ''; cap.querySelector('.kick').style.display = caps[idx].kick ? 'inline-block' : 'none'; cap.querySelector('.head').innerHTML = caps[idx].text; } }
+  if (idx >= 0) { const c = caps[idx]; const a = ease(clamp01((t - c.t0) / .35)) * clamp01((c.t1 - t) / .25); cap.style.opacity = a; cap.style.transform = `translateY(${(1 - ease(clamp01((t - c.t0) / .35))) * 40}px)`; } else cap.style.opacity = 0;
+  // cartela final
+  if (S.end) {
+    const e = document.getElementById('end'); const k = clamp01((t - S.end.t0) / .5);
+    e.style.opacity = k; e.style.display = k <= 0 ? 'none' : 'flex';
+    const lg = e.querySelector('img'); lg.style.transform = `scale(${.86 + .14 * ease(k)})`;
+  }
+  const wmOp = S.end ? 1 - clamp01((t - S.end.t0) / .3) : 1;
+  document.getElementById('wm').style.opacity = .92 * wmOp;
+  const rp = document.getElementById('rp'); if (rp) rp.style.opacity = (t >= (S.replayFrom || 0) && t <= (S.replayUntil || 1e9)) ? wmOp : 0;
+  if (S.hideWm) document.getElementById('wm').style.opacity = 0;
+  await Promise.all(waits);
+}
+</script></body></html>

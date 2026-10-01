@@ -1,0 +1,12 @@
+# prints do operacional ficam na Biblioteca (artifact privado), não no git
+[0-9].png
+[0-9][0-9].png
+grade-*.png
+out/
+*.log
+biblioteca/videos/
+biblioteca/capas/
+biblioteca/prints/
+biblioteca/index.html
+biblioteca/sections.html
+biblioteca/manifest.json

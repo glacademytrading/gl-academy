@@ -1,0 +1,233 @@
+<title>Biblioteca de Vídeos GL</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: biblioteca em grade; vídeos verticais em colunas estreitas, horizontais em colunas largas */
+:root {
+  color-scheme: dark;
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1f1c15; --line: #322d22;
+  --fg: #f1ece1; --muted: #a69d8b; --gold: #d8ae55; --gold-2: #f6d991; --gold-ink: #1a1408; --ok: #45b98a;
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --ok: #1f7d58; } }
+:root[data-theme="light"] {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --ok: #1f7d58; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: max(16px, 4vw); padding-block: 48px 80px; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.05; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 800; }
+p { margin: 0; }
+a { color: var(--gold); }
+.eyebrow, .label { font-family: var(--font-data); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.lede { max-width: 66ch; color: var(--fg); font-size: 1.08rem; }
+.hero { display: flex; flex-direction: column; gap: 16px; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px; }
+.stat { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; background: var(--surface); }
+.stat b { font-family: var(--font-data); color: var(--gold); }
+section { display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 20px; }
+.section-head { display: flex; flex-direction: column; gap: 6px; }
+.section-head p { color: var(--muted); max-width: 70ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 20px; align-items: start; }
+#horizontais .grid, #lives .grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+.vcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.frame { background: #000; }
+.is-v .frame video { aspect-ratio: 9 / 16; }
+.is-h .frame video { aspect-ratio: 16 / 9; }
+.is-f .frame video { aspect-ratio: 4 / 5; }
+#marca .grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.prints { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 16px; }
+.print { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.print a { display: block; background: #000; }
+.print img { display: block; width: 100%; height: 150px; object-fit: cover; object-position: center; }
+.print p { padding: 10px 12px; font-size: .86rem; color: var(--muted); }
+.print b { color: var(--fg); }
+.steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+summary { cursor: pointer; font-weight: 600; }
+details pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-data); font-size: .78rem; line-height: 1.5; color: var(--muted); margin: 12px 0 0; }
+@media (max-width: 640px) {
+  .stack thead { display: none; }
+  .stack, .stack tbody, .stack tr, .stack td { display: block; width: 100%; }
+  .stack tr { border-bottom: 1px solid var(--line); padding: 6px 0; }
+  .stack tr:last-child { border-bottom: 0; }
+  .stack td { border-bottom: 0; padding: 4px 12px; }
+  .stack td::before { content: attr(data-label); display: block; font-family: var(--font-data); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+}
+code { font-family: var(--font-data); font-size: .85em; overflow-wrap: anywhere; }
+video { display: block; width: 100%; max-width: 100%; height: auto; background: #000; }
+.meta { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--font-data); font-size: .68rem; letter-spacing: .04em; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.tag-use { color: var(--gold); border-color: var(--gold); }
+.desc { font-size: .92rem; color: var(--muted); }
+.file { font-family: var(--font-data); font-size: .72rem; color: var(--muted); overflow-wrap: anywhere; }
+.cap { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+.cap-text { font-size: .86rem; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.btn { align-self: flex-start; font: inherit; font-size: .84rem; font-weight: 600; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); color: var(--fg); cursor: pointer; }
+.btn:hover { border-color: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.panel ul, .panel ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 20px; }
+.two > * { min-width: 0; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-data); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+tr:last-child td { border-bottom: 0; }
+.ok { color: var(--ok); font-weight: 600; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { text-decoration: none; font-size: .88rem; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--fg); }
+.toc a:hover { border-color: var(--gold); }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; }
+</style>
+
+<div class="page">
+  <header class="hero">
+    <p class="eyebrow">GL Academy · Marketing · Outubro de 2026</p>
+    <h1>Biblioteca de Vídeos GL</h1>
+    <p class="lede">Todos os vídeos foram feitos com os prints reais do operacional: o setup acontecendo, os alvos, o Gamma e o NinjaTrader, na identidade da GL. Cada vídeo tem a finalidade e, quando faz sentido, a legenda pronta para postar.</p>
+    <div class="stats" id="stats"></div>
+    <nav class="toc" aria-label="Seções"><a href="#vendem">Vendem o operacional</a><a href="#objecoes">Objeções</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos para anúncio</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas verticais</a><a href="#horizontais">Coringas 16:9</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#comerciais">Comerciais</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
+  </header>
+
+  <!--SECTIONS-->
+
+  <section id="uso">
+    <div class="section-head"><h2>Como usar</h2><p>Uma rotina simples para publicar todo dia sem gravar tudo do zero.</p></div>
+    <div class="two">
+      <div class="panel">
+        <h3>Semana de publicação</h3>
+        <ol>
+          <li><b>Segunda:</b> "A favor ou contra" no Reels e, em 4:5, como anúncio de topo no feed.</li>
+          <li><b>Terça:</b> uma aula rápida (VWAP ou Value Area). É o conteúdo que mais traz seguidor novo.</li>
+          <li><b>Quarta:</b> "Gamma Exposure no gráfico" ou "Preciso entender de opções?".</li>
+          <li><b>Quinta:</b> um setup: "Alvos claros", "Nem toda queda é venda" ou "Escada de valor".</li>
+          <li><b>Sexta:</b> "As 3 perguntas antes do trade", com chamada para a call.</li>
+          <li><b>Sempre ligado:</b> as 4 respostas às objeções em remarketing, para quem visitou o funil e não agendou.</li>
+          <li><b>Lives:</b> logo de 8 s ou abertura, loop de espera, encerramento e o comercial 16:9 no intervalo.</li>
+        </ol>
+      </div>
+      <div class="panel">
+        <h3>Cuidados</h3>
+        <ul>
+          <li>Os vídeos de replay já trazem o selo "Replay · exemplo educacional". Mantenha.</li>
+          <li>Nas legendas, nunca prometa lucro, renda ou aprovação em mesa.</li>
+          <li>Nos anúncios, use os ganchos que mais retêm e mude só a legenda para testar.</li>
+          <li>Os vídeos não têm som. Coloque música da biblioteca do Instagram, do TikTok ou do YouTube, que já vem licenciada.</li>
+          <li>Os loops de 60 s emendam sem corte; no OBS, marque "Repetir" na fonte de mídia.</li>
+          <li>Não abra Reels com o logo: o gancho precisa estar no primeiro segundo. Use a vinheta no fim dos Reels e o logo de 8 s na abertura do YouTube e das lives.</li>
+          <li>No feed, suba as versões 4:5; o 9:16 perde a legenda no corte do feed.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="prints">
+    <div class="section-head"><h2>Prints em uso</h2><p>Os 5 prints que geraram todos os vídeos desta página. Clique para abrir no tamanho original.</p></div>
+    <div class="prints">
+      <div class="print"><a href="prints/1.png" target="_blank" rel="noopener"><img src="prints/1.png" alt="Print 1: ES em duas telas no TradingView" loading="lazy"></a><p><b>Print 1 · ES, duas telas.</b> VWAPs W e 3M, marcas Y e o aviso "Correção contra W/M".</p></div>
+      <div class="print"><a href="prints/2.png" target="_blank" rel="noopener"><img src="prints/2.png" alt="Print 2: MES com VAH D e Zero Gamma" loading="lazy"></a><p><b>Print 2 · MES.</b> VAH D, VAL D e W, Zero Gamma e as setas do nível respeitado.</p></div>
+      <div class="print"><a href="prints/3.png" target="_blank" rel="noopener"><img src="prints/3.png" alt="Print 3: estrutura de mercado GL no NinjaTrader" loading="lazy"></a><p><b>Print 3 · NinjaTrader.</b> Estrutura de mercado GL com POC, VAH e VAL do dia, da semana e do mês.</p></div>
+      <div class="print"><a href="prints/4.png" target="_blank" rel="noopener"><img src="prints/4.png" alt="Print 4: alvos, escada de valor e painel de Gamma" loading="lazy"></a><p><b>Print 4 · Alvos e Gamma.</b> Alvos D/W, M e 3M, escada de valor e o painel de Gamma.</p></div>
+      <div class="print"><a href="prints/5.png" target="_blank" rel="noopener"><img src="prints/5.png" alt="Print 5: alta alinhada D/W/M" loading="lazy"></a><p><b>Print 5 · Alta alinhada.</b> Varredura, rompimento das VWAPs D e W e o rótulo "Alta alinhada D/W/M".</p></div>
+    </div>
+  </section>
+
+  <section id="lista">
+    <div class="section-head"><h2>Lista de prints para a próxima rodada</h2><p>Cada print bom vira pelo menos 2 vídeos sem gastar crédito: um com legenda e um coringa limpo. Esta lista também abastece a rodada da Higgsfield.</p></div>
+    <div class="two">
+      <div class="panel">
+        <h3>O que tirar, por prioridade</h3>
+        <ol>
+          <li><b>O mesmo setup em 3 momentos:</b> antes da entrada, na entrada e no alvo, com o mesmo zoom. Vira um "antes e depois" 100% real.</li>
+          <li><b>O mesmo gráfico com e sem o GL Model</b>, mesmo horário e zoom. Vira "gráfico comum × GL Model".</li>
+          <li><b>Um print por tecnologia:</b> Multi Fractal, Order Flow, GL Risk Auto travando a plataforma e o app. Hoje só temos GL Model e GL Gamma.</li>
+          <li><b>Gamma e liquidez em tela cheia:</b> Zero Gamma, Call Wall, Put Wall, HVL e o mapa de liquidez (o print que não chegou).</li>
+          <li><b>Rótulos de contexto de perto</b>, em dias diferentes: "Alta alinhada D/W/M", "Correção contra W/M".</li>
+          <li><b>Outros mercados:</b> ES, NQ, MES, MNQ e o que mais vocês operarem.</li>
+          <li><b>Fotos:</b> o Giovane na mesa de operação (com autorização dele), o setup de monitores e o GamePad na mão.</li>
+        </ol>
+      </div>
+      <div class="panel">
+        <h3>Como tirar</h3>
+        <ul>
+          <li>Captura de tela em PNG, não foto do monitor com o celular.</li>
+          <li>Tela cheia, sem abas do navegador e sem dados pessoais (conta, saldo, nome).</li>
+          <li>Tema escuro e zoom do gráfico um pouco maior que o normal, para os rótulos dos níveis ficarem legíveis.</li>
+          <li>Melhor ainda: grave a tela do replay por 1 a 3 minutos. O movimento real vira vários setups, quadro a quadro.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="higgsfield">
+    <div class="section-head">
+      <h2>Rodada premium na Higgsfield · pausada e pronta para retomar</h2>
+      <p>Pausada para não gastar crédito agora. Os rascunhos já pagos, os prompts e o custo de cada etapa estão abaixo. Saldo em 1º de outubro: <b>945,5 créditos</b>.</p>
+    </div>
+    <div class="table-wrap"><table class="stack">
+      <thead><tr><th>Peça</th><th>O que já existe</th><th>Próximo passo</th><th>Custo estimado</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Peça"><b>Logo GL em 8 s</b>, 16:9 e 9:16</td><td data-label="O que já existe">2 rascunhos em 480p, já pagos (48 créditos), no projeto "GL Academy · Marketing"</td><td data-label="Próximo passo">Comparar com o logo feito aqui, sem crédito (seção Logo e vinheta). Só finalizar se o da Higgsfield for claramente melhor</td><td data-label="Custo estimado">96 por formato em 1080p</td></tr>
+        <tr><td data-label="Peça"><b>Operacional em cena premium</b>: alta alinhada D/W/M, mapa de Gamma, alvos e NinjaTrader</td><td data-label="O que já existe">Prompts prontos</td><td data-label="Próximo passo">Estúdio de trading com câmera parada e monitor apagado. Eu coloco o gráfico real (ou o setup acontecendo) na tela, aqui, sem a IA redesenhar nada</td><td data-label="Custo estimado">Cerca de 18 por cena em rascunho e 60 para finalizar</td></tr>
+        <tr><td data-label="Peça"><b>Antes e depois</b></td><td data-label="O que já existe">Imagem do "antes" pronta, em 9:16 e 16:9</td><td data-label="Próximo passo">"Depois": a mesma pessoa, calma, com o GL Model na tela (print real colocado aqui)</td><td data-label="Custo estimado">Cerca de 15 por rascunho e 60 por clipe final</td></tr>
+      </tbody>
+    </table></div>
+    <div class="two">
+      <div class="panel">
+        <h3>Como retomar</h3>
+        <ol class="steps">
+          <li><b>Liberar a rede do ambiente</b> para <code>upload.higgsfield.ai</code>, <code>cdn.higgsfield.ai</code>, <code>d8j0ntlcm91z4.cloudfront.net</code> e <code>d2ol7oe51mr4n9.cloudfront.net</code>. É no menu do ambiente, na barra de título da sessão: Editar, Acesso à rede. Com isso eu envio os prints e baixo os clipes sozinho.</li>
+          <li><b>Mandar os prints novos</b> da lista desta página.</li>
+          <li><b>Escrever "Retomar Higgsfield".</b> Eu faço os rascunhos baratos, você aprova e só então finalizo em 1080p.</li>
+        </ol>
+        <p class="desc">Sem liberar a rede também dá: você sobe os prints no projeto "GL Academy · Marketing" e me avisa. Nesse caminho a IA usa o print como referência e pode redesenhar detalhes da tela.</p>
+      </div>
+      <div class="panel">
+        <h3>Por que colocar o gráfico aqui</h3>
+        <p>Os modelos de vídeo redesenham o que aparece numa tela: entortam números, níveis e candles. Com a câmera parada e o monitor apagado, a Higgsfield faz só o cenário premium (luz, pessoa, ambiente) e eu encaixo o print real no monitor, em perspectiva. O operacional aparece exatamente como ele é.</p>
+        <details><summary>Prompts prontos</summary><pre>CENA DE ESTÚDIO · imagem base (gpt_image_2_5, alta, 2k, 9:16)
+Photorealistic cinematic vertical shot of a premium dark trading studio at night. Over-the-shoulder view of a focused trader in a black shirt at a sleek walnut desk, facing one large monitor in the upper center of the frame. The monitor screen is completely black and evenly lit, facing the camera straight on, all four corners clearly visible. Warm gold rim light from the left, soft teal ambient glow, minimalist keyboard, shallow depth of field. No text, no logos, nothing on the screen.
+
+CENA DE ESTÚDIO · vídeo (Seedance 2.5, 5 s, imagem acima como quadro inicial, rascunho 480p)
+Locked-off tripod shot, the camera does not move at all. The trader breathes and makes small natural movements, adjusting the mouse; the gold light flickers gently. The monitor stays perfectly still and completely black for the whole shot. No camera movement, no zoom, no text.
+
+ANTES · vídeo (Seedance 2.5, 5 s, imagem do "antes" já pronta como quadro inicial)
+Slow push-in. The stressed trader rubs his face in frustration, red monitor light flickers on his tense face, the chaotic chart keeps flashing red. Dark, moody, film grain. No readable text.
+
+DEPOIS · imagem base (gpt_image_2_5, alta, 2k, 9:16)
+Same trader in his thirties, now calm and composed in an organized, softly lit studio in the morning, leaning back with a coffee, facing one large monitor whose screen is completely black and facing the camera straight on. Warm gold light, teal accents. No text, nothing on the screen.
+
+LOGO · finalizar os rascunhos
+Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-1e17-46f0-bf46-82c3ec82c434</pre></details>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+(function () {
+  var cards = document.querySelectorAll('.vcard');
+  var total = 0; document.querySelectorAll('.tags .tag:nth-child(2)').forEach(function (t) { total += parseInt(t.textContent, 10) || 0; });
+  document.getElementById('stats').innerHTML = '<span class="stat"><b>' + cards.length + '</b> vídeos prontos</span><span class="stat"><b>' + Math.round(total / 60) + ' min</b> de material</span><span class="stat"><b>0</b> crédito gasto nestes vídeos</span>';
+  var timer;
+  function toast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(timer); timer = setTimeout(function () { t.hidden = true; }, 2500); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var el = document.getElementById(b.dataset.copy), txt = el.textContent;
+    var done = function () { b.textContent = 'Copiada'; setTimeout(function () { b.textContent = 'Copiar legenda'; }, 1600); };
+    var fail = function () { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Texto selecionado. Use o comando de copiar.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fail); else fail();
+  });
+  // um vídeo por vez
+  document.addEventListener('play', function (e) { document.querySelectorAll('video').forEach(function (v) { if (v !== e.target) v.pause(); }); }, true);
+})();
+</script>

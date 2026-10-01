@@ -37,3 +37,7 @@ O assunto do e-mail termina com a prioridade, o pilar e o LeadID para triagem r�
 Preencha `META_PIXEL_ID` e/ou `GA4_ID` no topo de `script.js`. Vazios, nada é carregado.
 Eventos enviados: `Lead` (dados de contato enviados), `Schedule` (call agendada) e, no GA4, `quiz_etapa` a cada etapa.
 Antes de ativar, publique a política de privacidade e o aviso de cookies do site.
+
+## Vídeos de marketing
+
+O motor que gera os vídeos da Biblioteca de Vídeos GL a partir dos prints reais fica em `marketing/videos/`. O README da pasta explica como renderizar. O plano da rodada na Higgsfield, pausada e pronta para retomar, está em `marketing/videos/higgsfield-rodada-premium.md`.
