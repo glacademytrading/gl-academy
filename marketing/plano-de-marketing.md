@@ -411,7 +411,7 @@ Em três dias, o marketing ganhou um plano com objetivo único, um funil que med
 | 30/09 | Biblioteca de Vídeos GL, rodadas 1 a 3 | Vídeos que vendem, coringas, ganchos, versões 4:5, logo e vinheta, aulas, respostas às objeções, lives e comerciais; rodada premium na Higgsfield pausada depois de 64,5 créditos |
 | 29/09 | Funil e Sistema de Marketing GL | O funil passou a gravar o pilar, a origem e o parceiro de cada lead e ganhou correções de vendas; o painel dos 6 pilares foi publicado |
 
-No painel do Sistema de Marketing, só uma ação está marcada como "em andamento": o merge do funil. Nenhuma está marcada como feita.
+Também em 01/10 saíram as peças de execução da Fundação: o calendário de outubro, a planilha do teste de anúncios, o placar semanal, o kit de imprensa, o manual de crise, o programa de parceiros e o follow-up de vendas (pastas 01 e 05 do pacote). No painel do Sistema de Marketing, 10 ações estão em andamento: o merge do funil e 9 com o material pronto, esperando o time. Nenhuma está marcada como feita.
 
 ## O que falta fazer
 
