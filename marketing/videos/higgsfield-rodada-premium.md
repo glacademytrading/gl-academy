@@ -1,10 +1,13 @@
-# Rodada premium na Higgsfield: pausada e pronta para retomar
+# Rodada premium na Higgsfield
 
-Pausada em 1º de outubro de 2026, a pedido, para não gastar crédito enquanto os prints novos são tirados.
+## Situação em 1º de outubro de 2026
 
-- **Saldo:** 945,5 créditos.
-- **Já gasto nesta rodada:** 64,5 créditos (6 imagens base e 2 rascunhos do logo).
+- **Saldo: 2 créditos.** Entre 02:51 e 02:57 (UTC) de 01/10, o Codex gerou no projeto 8 imagens (gpt_image_2_5) e 13 vídeos (Seedance 2.5). Isso levou o saldo de 945,5 para 2.
+- Segundo o próprio Codex, saíram dessa produção 7 peças de estúdio (incluindo "antes", "depois" e a montagem dos dois) e o logo finalizado em 1080p a partir do rascunho que já existia. Os vídeos estão no ZIP dele (`GL_ACADEMY_VIDEOS_RODADA_2026-09-30.zip`), na pasta "04 - Feito pelo Codex" da organização do marketing.
+- Antes disso, a rodada tinha gasto 64,5 créditos: 6 imagens base e 2 rascunhos do logo.
 - **Projeto na Higgsfield:** "GL Academy · Marketing" (`f29c1595-8dbb-492e-8b54-2306a1d404b4`).
+
+O plano abaixo continua valendo para a próxima vez em que houver créditos. Antes de retomar, confira o que o Codex já entregou, para não repetir peça.
 
 ## Como retomar
 
@@ -24,9 +27,9 @@ Custos medidos com a própria Higgsfield (`get_cost`) em 30/09:
 
 | Peça | O que já existe | Próximo passo | Custo estimado |
 | --- | --- | --- | --- |
-| Logo GL em 8 s, 16:9 e 9:16 | Rascunhos `cb1397cd-73e7-495e-b7bf-62a7661a01a3` (16:9) e `bf568a70-1e17-46f0-bf46-82c3ec82c434` (9:16) | Comparar com `logo-gl-8s-*` feito aqui sem crédito. Finalizar só se o da Higgsfield for claramente melhor (passar `draft_job_id`) | 96 por formato |
-| Operacional em cena premium: alta alinhada D/W/M, mapa de Gamma, alvos, NinjaTrader | Prompts abaixo | Estúdio com câmera parada e monitor apagado. O gráfico real (ou o vídeo do setup acontecendo) entra na tela por composição local, em perspectiva | ~18 por cena em rascunho (imagem + 5 s) e 60 para finalizar |
-| Antes e depois | "Antes" pronto: `64ea5b7f-9dfb-4f02-aefe-c12af2300ad4` (9:16) e `bf5e92c2-f258-48af-9f06-523dd22ff257` (16:9) | Gerar o clipe do "antes" e a cena do "depois" com o monitor apagado para receber o print real | ~15 por rascunho e 60 por clipe final |
+| Logo GL em 8 s, 16:9 e 9:16 | Rascunhos `cb1397cd-73e7-495e-b7bf-62a7661a01a3` (16:9) e `bf568a70-1e17-46f0-bf46-82c3ec82c434` (9:16). O Codex finalizou o logo em 1080p a partir deles | Comparar o logo do Codex com `logo-gl-8s-*`, feito aqui sem crédito, e escolher o oficial. Não finalizar de novo | Já pago |
+| Operacional em cena premium: alta alinhada D/W/M, mapa de Gamma, alvos, NinjaTrader | Prompts abaixo. O Codex fez peças de estúdio: conferir no ZIP dele quais cenas já existem | Estúdio com câmera parada e monitor apagado. O gráfico real (ou o vídeo do setup acontecendo) entra na tela por composição local, em perspectiva | ~18 por cena em rascunho (imagem + 5 s) e 60 para finalizar |
+| Antes e depois | Imagens do "antes": `64ea5b7f-9dfb-4f02-aefe-c12af2300ad4` (9:16) e `bf5e92c2-f258-48af-9f06-523dd22ff257` (16:9). O Codex fez o antes, o depois e a montagem dos dois | Conferir a tela do "depois": se a IA redesenhou o gráfico, encaixar o print real por cima, localmente | Já pago. Refazer: ~15 por rascunho e 60 por clipe final |
 
 ### Outras mídias já na conta
 
@@ -79,4 +82,6 @@ Variações por cena:
 | Finalizar as 4 cenas aprovadas | ~240 |
 | Antes e depois 9:16: rascunhos e finais | ~153 |
 | Logo em 1080p, só se ganhar do logo local | 0 a 192 |
-| **Total** | **~465 a 657, de 945,5** |
+| **Total** | **~465 a 657** |
+
+Sem o antes e depois e o logo, que o Codex já fez, ficam as 4 cenas de estúdio: cerca de 312 créditos. O saldo atual é 2; recarregue antes de retomar.

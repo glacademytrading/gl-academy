@@ -2,10 +2,12 @@
 
 Quando os prints novos estiverem prontos: copie o texto abaixo, preencha o teto de créditos e cole numa conversa com o Claude Code, com os prints anexados em PNG. Funciona numa sessão nova, sem histórico. O mesmo texto está na Biblioteca de Vídeos GL, com botão de copiar.
 
+**Créditos (1º/10/2026):** a conta está com 2 créditos. O Codex usou o saldo da rodada (8 imagens e 13 vídeos no projeto "GL Academy · Marketing") e entregou o logo em 1080p, peças de estúdio e o antes e depois. Antes de colar o prompt, recarregue a conta e separe os vídeos do Codex (pasta "04 - Feito pelo Codex") para anexar ou citar, assim nada se repete.
+
 ```text
 Retomar a rodada de vídeos da GL Academy na Higgsfield.
 
-Contexto: o plano está pronto no repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Antes de tudo, leia marketing/videos/higgsfield-rodada-premium.md e marketing/videos/README.md. A Biblioteca de Vídeos GL (padrão visual, legendas e os prints já usados, na pasta prints/) está em https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm.
+Contexto: o plano está pronto no repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Antes de tudo, leia marketing/videos/higgsfield-rodada-premium.md e marketing/videos/README.md. A Biblioteca de Vídeos GL (padrão visual, legendas e os prints já usados, na pasta prints/) está em https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm. Em 1º/10/2026 o Codex já gastou créditos desta rodada (logo em 1080p, peças de estúdio, antes e depois): confira o projeto "GL Academy · Marketing" na Higgsfield e não repita essas peças.
 
 Prints novos: anexei os arquivos PNG nesta mensagem.
 

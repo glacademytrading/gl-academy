@@ -24,7 +24,7 @@ SPECS=./specs-r3.js node stills.js aula-vwap   # só os quadros de conferência 
 node grade.js 6.png                            # grade de coordenadas para escrever cenas
 node grade.js 6.png 900 60 1816 860 1.6        # recorte ampliado da grade
 SPECS=./specs-imagens.js node slides.js        # imagens estáticas em out/imagens/<grupo>/
-python3 build_library.py                       # monta biblioteca/index.html, vídeos leves, capas, imagens e kit do site
+python3 build_library.py                       # monta biblioteca/index.html, vídeos leves, capas, imagens, kit do site e o pacote organizado
 ```
 
 ## Arquivos de roteiro
@@ -39,6 +39,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
+| `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
 
 ## Como escrever um vídeo novo
 
@@ -65,6 +66,10 @@ Antes de escrever legenda ou cartela nova, confira `../glossario.md` (nomes dos 
 - Nunca prometer lucro, renda ou aprovação em mesa. Alvos são projeções do modelo.
 - A cartela final sempre traz o aviso de risco.
 - Todo vídeo ou imagem que mostra os níveis de Gamma leva o aviso "GL Gamma: assinatura à parte".
+
+## Pacote organizado
+
+O botão "Baixar tudo organizado" da Biblioteca monta no navegador o ZIP `GL Academy - Marketing (Claude).zip`, com os vídeos e imagens separados por objetivo e função, nomes legíveis e os textos de cada pasta. O `organizacao.py` define o lugar de cada arquivo e escreve esses textos. Dentro do ZIP vai o organizador da pasta "Marketing de trading" (`../organizacao/organizar-marketing.ps1`). Ele traz o pacote, arruma as pastas que já existiam e copia os vídeos do Codex para "04 - Feito pelo Codex", sem apagar nada. Para testar numa pasta simulada: `python3 ../organizacao/testar_organizador.py` (precisa do `pwsh`).
 
 ## Higgsfield
 

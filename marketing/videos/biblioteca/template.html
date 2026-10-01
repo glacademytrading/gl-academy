@@ -104,6 +104,7 @@ tr:last-child td { border-bottom: 0; }
 .toc { display: flex; flex-wrap: wrap; gap: 8px; }
 .toc a { text-decoration: none; font-size: .88rem; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--fg); }
 .toc a:hover { border-color: var(--gold); }
+.tree { margin: 0; font-family: var(--font-data); font-size: .78rem; line-height: 1.6; white-space: pre; overflow-x: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; }
 </style>
 
@@ -113,10 +114,10 @@ tr:last-child td { border-bottom: 0; }
     <h1>Biblioteca de Vídeos GL</h1>
     <p class="lede">Todos os vídeos foram feitos com os prints reais do operacional: o setup acontecendo, os alvos, o Gamma e o NinjaTrader, na identidade da GL. Cada vídeo tem a finalidade e, quando faz sentido, a legenda pronta para postar.</p>
     <div class="stats" id="stats"></div>
-    <div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="all">Baixar todos os vídeos (ZIP)</button><button type="button" class="btn" data-zip="all-img">Baixar todas as imagens (ZIP)</button><span class="dl-status" id="dlstatus" role="status" aria-live="polite">O ZIP vem separado por grupo, com um arquivo de legendas prontas.</span></div>
-    <nav class="toc" aria-label="Seções"><a href="#vendem">Vendem o operacional</a><a href="#objecoes">Objeções</a><a href="#vendas-whats">Sequência da call</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas</a><a href="#site">Kit do site</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#live2">Live 2.0 (OBS)</a><a href="#youtube">YouTube</a><a href="#comerciais">Comerciais</a><a href="#comunidade">Comunidade e parceiros</a><a href="#imagens">Imagens</a><a href="#roteiros">Roteiros para gravar</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
+    <div class="dl-bar"><button type="button" class="btn btn-gold" data-org="tudo">Baixar tudo organizado (ZIP)</button><button type="button" class="btn" data-zip="all">Só os vídeos (ZIP)</button><button type="button" class="btn" data-zip="all-img">Só as imagens (ZIP)</button><span class="dl-status" id="dlstatus" role="status" aria-live="polite">Pastas por objetivo, legendas em cada pasta e o organizador do Windows.</span></div>
+    <nav class="toc" aria-label="Seções"><a href="#organizado">Levar para o computador</a><a href="#vendem">Vendem o operacional</a><a href="#objecoes">Objeções</a><a href="#vendas-whats">Sequência da call</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas</a><a href="#site">Kit do site</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#live2">Live 2.0 (OBS)</a><a href="#youtube">YouTube</a><a href="#comerciais">Comerciais</a><a href="#comunidade">Comunidade e parceiros</a><a href="#imagens">Imagens</a><a href="#roteiros">Roteiros para gravar</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
   </header>
-
+<!--ORGANIZACAO-->
   <!--SECTIONS-->
 
   <section id="imagens">
@@ -255,14 +256,14 @@ Não precisa falar de valores ganhos ou perdidos: o foco é o processo (contexto
   <section id="higgsfield">
     <div class="section-head">
       <h2>Rodada premium na Higgsfield · pausada e pronta para retomar</h2>
-      <p>Pausada para não gastar crédito agora. Os rascunhos já pagos, os prompts e o custo de cada etapa estão abaixo. Saldo em 1º de outubro: <b>945,5 créditos</b>.</p>
+      <p>Saldo em 1º de outubro: <b>2 créditos</b>. Entre 02:51 e 02:57 (UTC) desse dia, o Codex usou o saldo da rodada (8 imagens e 13 vídeos no projeto "GL Academy · Marketing"). Segundo ele, saíram 7 peças de estúdio (incluindo o antes, o depois e a montagem dos dois) e o logo em 1080p. Esses vídeos ficam na pasta "04 - Feito pelo Codex" da organização. Antes de retomar, recarregue a conta e confira o que ele já fez, para não pagar duas vezes pela mesma peça.</p>
     </div>
     <div class="table-wrap"><table class="stack">
       <thead><tr><th>Peça</th><th>O que já existe</th><th>Próximo passo</th><th>Custo estimado</th></tr></thead>
       <tbody>
-        <tr><td data-label="Peça"><b>Logo GL em 8 s</b>, 16:9 e 9:16</td><td data-label="O que já existe">2 rascunhos em 480p, já pagos (48 créditos), no projeto "GL Academy · Marketing"</td><td data-label="Próximo passo">Comparar com o logo feito aqui, sem crédito (seção Logo e vinheta). Só finalizar se o da Higgsfield for claramente melhor</td><td data-label="Custo estimado">96 por formato em 1080p</td></tr>
-        <tr><td data-label="Peça"><b>Operacional em cena premium</b>: alta alinhada D/W/M, mapa de Gamma, alvos e NinjaTrader</td><td data-label="O que já existe">Prompts prontos</td><td data-label="Próximo passo">Estúdio de trading com câmera parada e monitor apagado. Eu coloco o gráfico real (ou o setup acontecendo) na tela, aqui, sem a IA redesenhar nada</td><td data-label="Custo estimado">Cerca de 18 por cena em rascunho e 60 para finalizar</td></tr>
-        <tr><td data-label="Peça"><b>Antes e depois</b></td><td data-label="O que já existe">Imagem do "antes" pronta, em 9:16 e 16:9</td><td data-label="Próximo passo">"Depois": a mesma pessoa, calma, com o GL Model na tela (print real colocado aqui)</td><td data-label="Custo estimado">Cerca de 15 por rascunho e 60 por clipe final</td></tr>
+        <tr><td data-label="Peça"><b>Logo GL em 8 s</b>, 16:9 e 9:16</td><td data-label="O que já existe">2 rascunhos em 480p e o logo em 1080p que o Codex finalizou a partir deles</td><td data-label="Próximo passo">Comparar o logo do Codex com o feito aqui, sem crédito (seção Logo e vinheta), e escolher o oficial. Não finalizar de novo</td><td data-label="Custo estimado">Já pago</td></tr>
+        <tr><td data-label="Peça"><b>Operacional em cena premium</b>: alta alinhada D/W/M, mapa de Gamma, alvos e NinjaTrader</td><td data-label="O que já existe">Prompts prontos. O Codex fez peças de estúdio: confira no ZIP dele quais cenas já existem</td><td data-label="Próximo passo">Estúdio de trading com câmera parada e monitor apagado. Eu coloco o gráfico real (ou o setup acontecendo) na tela, aqui, sem a IA redesenhar nada</td><td data-label="Custo estimado">Cerca de 18 por cena em rascunho e 60 para finalizar</td></tr>
+        <tr><td data-label="Peça"><b>Antes e depois</b></td><td data-label="O que já existe">O Codex fez o antes, o depois e a montagem dos dois</td><td data-label="Próximo passo">Conferir a tela do "depois": se a IA redesenhou o gráfico, eu encaixo o print real por cima, sem crédito</td><td data-label="Custo estimado">Já pago. Refazer: cerca de 15 por rascunho e 60 por clipe final</td></tr>
       </tbody>
     </table></div>
     <div class="panel">
@@ -270,7 +271,7 @@ Não precisa falar de valores ganhos ou perdidos: o foco é o processo (contexto
       <p class="desc">Quando tirar os prints novos, copie, preencha o teto de créditos e cole numa conversa com o Claude Code, com os prints anexados em PNG. Funciona até numa sessão nova, sem histórico.</p>
       <pre class="prompt" id="prompt-higgs">Retomar a rodada de vídeos da GL Academy na Higgsfield.
 
-Contexto: o plano está pronto no repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Antes de tudo, leia marketing/videos/higgsfield-rodada-premium.md e marketing/videos/README.md. A Biblioteca de Vídeos GL (padrão visual, legendas e os prints já usados, na pasta prints/) está em https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm.
+Contexto: o plano está pronto no repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Antes de tudo, leia marketing/videos/higgsfield-rodada-premium.md e marketing/videos/README.md. A Biblioteca de Vídeos GL (padrão visual, legendas e os prints já usados, na pasta prints/) está em https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm. Em 1º/10/2026 o Codex já gastou créditos desta rodada (logo em 1080p, peças de estúdio, antes e depois): confira o projeto &quot;GL Academy · Marketing&quot; na Higgsfield e não repita essas peças.
 
 Prints novos: anexei os arquivos PNG nesta mensagem.
 
@@ -309,8 +310,8 @@ Slow push-in. The stressed trader rubs his face in frustration, red monitor ligh
 DEPOIS · imagem base (gpt_image_2_5, alta, 2k, 9:16)
 Same trader in his thirties, now calm and composed in an organized, softly lit studio in the morning, leaning back with a coffee, facing one large monitor whose screen is completely black and facing the camera straight on. Warm gold light, teal accents. No text, nothing on the screen.
 
-LOGO · finalizar os rascunhos
-Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-1e17-46f0-bf46-82c3ec82c434</pre></details>
+LOGO · já finalizado pelo Codex em 1080p. Não repetir.
+Rascunhos de origem: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-1e17-46f0-bf46-82c3ec82c434</pre></details>
       </div>
     </div>
   </section>
@@ -334,8 +335,13 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
 
   // Downloads: pela capacidade "downloads" do Claude; fora dele, link direto
   var dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
-  var status = document.getElementById('dlstatus'), statusIdle = status.textContent, busy = false;
-  function setStatus(t) { status.textContent = t || statusIdle; }
+  var busy = false, ativo = null;
+  document.querySelectorAll('.dl-status').forEach(function (s) { s.dataset.idle = s.textContent; });
+  // o andamento aparece ao lado do botão clicado
+  function setStatus(t) {
+    if (!ativo) return;
+    ativo.textContent = t || ativo.dataset.idle;
+  }
   async function saveFile(name, blob) {
     var d = await dlCap;
     if (d) {
@@ -345,8 +351,11 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
         if (code === 'declined') return false;
         if (code === 'rate_limited') { toast('Já tem um download esperando confirmação.'); return false; }
         if (code === 'too_large') { toast('Arquivo grande demais para este aparelho. Baixe por grupo.'); return false; }
+        if (code === 'rejected_extension' || code === 'extension_not_enabled') { toast('Este tipo de arquivo não pode ser baixado aqui.'); return false; }
+        toast('O download não está disponível nesta visualização.'); return false;
       }
     }
+    // fora do Claude (página aberta direto no navegador): link de download comum
     var url = URL.createObjectURL(blob), a = document.createElement('a');
     a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
@@ -393,13 +402,33 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
     setStatus('Confirme o download.');
     if (await saveFile(nome, out)) toast('ZIP pronto: ' + itens.length + ' ' + rotulo);
   }
+  async function baixarOrganizado(leve) {
+    var m = JSON.parse(document.getElementById('organizacao').textContent);
+    setStatus('Carregando o compactador…');
+    var JSZip = await loadZip(), zip = new JSZip(), itens = leve ? [] : m.arquivos, prox = 0, feitos = 0;
+    async function trabalhar() {
+      while (prox < itens.length) {
+        var it = itens[prox++];
+        zip.file(it.z, await fetchPath(it.p));
+        feitos++; setStatus('Juntando ' + feitos + ' de ' + itens.length + '…');
+      }
+    }
+    await Promise.all([trabalhar(), trabalhar(), trabalhar(), trabalhar()]);
+    m.textos.forEach(function (t) { zip.file(t.z, t.t); });
+    var out = await zip.generateAsync({ type: 'blob', compression: leve ? 'DEFLATE' : 'STORE' }, function (x) { setStatus('Montando o ZIP: ' + Math.round(x.percent) + '%'); });
+    setStatus('Confirme o download.');
+    if (await saveFile(leve ? m.nomeLeve : m.nome, out)) toast(leve ? 'Organizador e textos prontos.' : 'ZIP pronto: ' + itens.length + ' arquivos em pastas.');
+  }
   document.addEventListener('click', async function (e) {
-    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]'), kit = e.target.closest('[data-zipkit]');
-    if (!one && !many && !kit) return;
+    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]'), kit = e.target.closest('[data-zipkit]'), org = e.target.closest('[data-org]');
+    if (!one && !many && !kit && !org) return;
     if (busy) { toast('Espere o download atual terminar.'); return; }
-    busy = true; var btn = one || many || kit, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando…';
+    busy = true; var btn = one || many || kit || org, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando…';
+    ativo = (btn.closest('.dl-bar') && btn.closest('.dl-bar').querySelector('.dl-status')) || document.getElementById('dlstatus');
     try {
-      if (one) {
+      if (org) {
+        await baixarOrganizado(org.dataset.org === 'leve');
+      } else if (one) {
         if (await saveFile(base(one.dataset.dl), await fetchPath(one.dataset.dl))) toast('Download enviado: ' + base(one.dataset.dl));
       } else if (kit) {
         var files = JSON.parse(document.getElementById('kit-site-files').textContent);
@@ -416,7 +445,7 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
     } catch (err) {
       toast('Não deu para baixar agora. Tente de novo em instantes.');
     } finally {
-      busy = false; btn.disabled = false; btn.textContent = label; setStatus('');
+      busy = false; btn.disabled = false; btn.textContent = label; setStatus(''); ativo = null;
     }
   });
 

@@ -23,7 +23,7 @@ GROUPS = [
     ('v03-alvos-claros', 'Alvos claros', 'Os alvos D/W, M e 3M aparecem antes do preço chegar.', 'Reels, anúncio, carrossel em vídeo',
      f'O alvo aparece antes do preço chegar. No GL Model, alvos diário, semanal e mensal ficam no gráfico junto com VAH e VAL. Alvos são projeções, não promessa de resultado. {AVISO}'),
     ('v04-gamma-exposure', 'Gamma Exposure no gráfico', 'Zero Gamma, Call Wall, HVL e os níveis GL explicados no próprio gráfico.', 'Reels educativo, anúncio do GL Gamma',
-     f'Gamma Exposure dentro do seu gráfico: Zero Gamma, Call Wall, HVL e os níveis GL, lidos junto com o GL Model. Salve para estudar. {AVISO}'),
+     f'Gamma Exposure dentro do seu gráfico: Zero Gamma, Call Wall, HVL e os níveis GL, lidos junto com o GL Model. Salve para estudar. GL Gamma é uma assinatura à parte. {AVISO}'),
     ('v05-nivel-respeitado', 'O nível foi respeitado', 'Defesa na região marcada e o preço buscando o VAH D 7.776 no MES.', 'Reels, prova do método',
      f'O mapa marca o nível. O preço respeita. Defesa na região marcada e alvo no VAH D. Exemplo educacional; resultado passado não garante resultado futuro.'),
     ('v06-ninjatrader', 'Também no NinjaTrader', 'O indicador de estrutura GL rodando no NinjaTrader, com POC e VAL semanais e mensais.', 'Reels, anúncio para quem usa NinjaTrader',
@@ -43,9 +43,9 @@ GROUPS = [
     ('objecao-plataforma', 'Funciona na minha plataforma?', 'TradingView e NinjaTrader com o mesmo mapa; os planos NinjaTrader já incluem o TradingView.', 'Remarketing, stories de venda, resposta em DM',
      f'Funciona na minha plataforma? O GL Model roda no TradingView e no NinjaTrader, com o mesmo mapa. E os planos NinjaTrader já incluem o TradingView. Tire suas dúvidas na call 1x1 gratuita, link na bio. {AVISO}'),
     ('objecao-mais-um-indicador', 'É só mais um indicador?', 'Contexto, valor, alvos e Gamma: quatro camadas no mesmo gráfico.', 'Remarketing, anúncio de meio de funil',
-     f'É só mais um indicador? Não, é um mapa: contexto D/W/M, valor do dia, da semana e do mês, alvos e Gamma, tudo no mesmo gráfico. Alvos são projeções, não promessa de resultado. Call 1x1 gratuita no link da bio. {AVISO}'),
+     f'É só mais um indicador? Não, é um mapa: contexto D/W/M, valor do dia, da semana e do mês, alvos e Gamma, tudo no mesmo gráfico. Alvos são projeções, não promessa de resultado. GL Gamma é uma assinatura à parte. Call 1x1 gratuita no link da bio. {AVISO}'),
     ('objecao-opcoes', 'Preciso entender de opções?', 'Os níveis de Gamma já vêm no gráfico de futuros: Zero Gamma, Call Wall e HVL.', 'Remarketing, anúncio do GL Gamma',
-     f'Preciso entender de opções para usar Gamma? Não precisa operar opções: Zero Gamma, Call Wall e HVL aparecem direto no seu gráfico de futuros. GL Gamma, o mapa das opções no seu gráfico. {AVISO}'),
+     f'Preciso entender de opções para usar Gamma? Não precisa operar opções: Zero Gamma, Call Wall e HVL aparecem direto no seu gráfico de futuros. GL Gamma, o mapa das opções no seu gráfico, é uma assinatura à parte. {AVISO}'),
     ('objecao-por-onde-comecar', 'Não sei por onde começar', 'Chamada direta para a call 1x1: 30 minutos, gratuita.', 'Anúncio de conversão, stories com link',
      f'Não sabe por onde começar? Comece pela call 1x1 gratuita: 30 minutos para contar o seu momento no mercado e entender o próximo passo. Link na bio. {AVISO}'),
   ]),
@@ -130,9 +130,9 @@ GROUPS = [
   ]),
   ('comerciais', 'Comerciais das tecnologias GL', 'Juntam tudo: contexto, setup, níveis, alvos, Gamma e NinjaTrader, terminando na chamada para a call.', [
     ('comercial-tecnologias-gl-16x9', 'Comercial 16:9', '44 segundos para YouTube, intervalo de live e site.', 'YouTube, lives, anúncio em vídeo',
-     f'As tecnologias da GL Academy: GL Model, Multi Fractal, GL Gamma, Order Flow, GL Risk Auto e Gamepad Trader Pro. Método, tecnologia e risco em primeiro lugar. Agende sua call 1x1 gratuita no link da descrição. {AVISO}'),
+     f'As tecnologias da GL Academy: GL Model, Multi Fractal, GL Gamma, Order Flow, GL Risk Auto e Gamepad Trader Pro. Método, tecnologia e risco em primeiro lugar. GL Gamma é uma assinatura à parte. Agende sua call 1x1 gratuita no link da descrição. {AVISO}'),
     ('comercial-tecnologias-gl-9x16', 'Comercial vertical', '40 segundos para Reels, Shorts, TikTok e anúncios.', 'Anúncio principal, Reels',
-     f'Contexto, entrada, alvos e Gamma no mesmo mapa. Essas são as tecnologias da GL Academy. Call 1x1 gratuita no link da bio. {AVISO}'),
+     f'Contexto, entrada, alvos e Gamma no mesmo mapa. Essas são as tecnologias da GL Academy. GL Gamma é uma assinatura à parte. Call 1x1 gratuita no link da bio. {AVISO}'),
   ]),
   ('comunidade', 'Comunidade e parceiros', 'Boas-vindas para quem entra na comunidade e a cartela para influenciadores parceiros (troque o @ e eu gero uma por parceiro em minutos).', [
     ('comunidade-boas-vindas', 'Boas-vindas da comunidade', 'O que a pessoa encontra, ativar notificações e a call 1x1.', 'Mensagem fixada no grupo do WhatsApp',
@@ -287,3 +287,6 @@ page = open(os.path.join(LIB, 'template.html'), encoding='utf-8').read()
 page = page.replace('<!--SECTIONS-->', '\n'.join(cards_html)).replace('<!--IMAGES-->', '\n'.join(img_html))
 open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
 print(len(img_files), 'imagens;', len(site_files), 'arquivos no kit do site')
+
+# Pacote organizado para levar ao computador (manifesto e textos na página)
+subprocess.run(['python3', os.path.join(ROOT, 'organizacao.py')], check=True)
