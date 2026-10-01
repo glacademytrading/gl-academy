@@ -12,6 +12,7 @@ const SPECS = require(process.env.SPECS || './specs.js');
       const p = await browser.newPage({ viewport: { width: spec.w, height: spec.h } });
       await p.goto('file://' + path.join(__dirname, 'stage.html'));
       await p.evaluate(s => init(s), spec); await p.evaluate(async t => await render(t), t);
+      if (spec.alpha) await p.evaluate(() => document.documentElement.classList.add('qa'));
       await p.screenshot({ path: path.join(dir, `${spec.id}-${t}.jpg`), type: 'jpeg', quality: 70 }); await p.close();
     }
     console.log('stills', spec.id);

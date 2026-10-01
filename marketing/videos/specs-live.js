@@ -104,7 +104,7 @@ module.exports = [
       { t0: 2.6, t1: 4.1, top: 880, html: '<div class="small">TECNOLOGIAS PARA TRADERS</div>' },
       { t0: 37.3, t1: 40.6, top: 250, html: '<div class="mid">As tecnologias da <em>GL Academy</em></div><div class="small">GL MODEL · MULTI FRACTAL · GL GAMMA<br>ORDER FLOW · GL RISK AUTO · GAMEPAD TRADER PRO</div>' }
     ],
-    end: { t0: 40.6, tag: 'Método, tecnologia e risco em primeiro lugar.' },
+    end: { t0: 40.6, tag: 'Método, tecnologia e risco em primeiro lugar.', disc: 'GL Gamma: assinatura à parte. Trading envolve risco financeiro real. Conteúdo educacional; não é recomendação de investimento.' },
     stills: [2, 7, 12, 30, 39, 42]
   },
   // Comercial vertical (Reels, Shorts, TikTok, anúncios)
@@ -136,7 +136,7 @@ module.exports = [
       { t0: 26.2, t1: 30.9, kick: 'GL Gamma', text: '<em>Gamma Exposure</em> no seu gráfico' },
       { t0: 31.2, t1: 35.3, kick: 'NinjaTrader', text: 'TradingView e <em>NinjaTrader</em>' }
     ],
-    end: { t0: 35.4, tag: 'GL Model · GL Gamma<br>Order Flow · GL Risk Auto' },
+    end: { t0: 35.4, tag: 'GL Model · GL Gamma<br>Order Flow · GL Risk Auto', disc: 'GL Gamma: assinatura à parte. Trading envolve risco financeiro real. Conteúdo educacional; não é recomendação de investimento.' },
     stills: [2, 12, 28, 37]
   }
 ];

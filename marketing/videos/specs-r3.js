@@ -108,9 +108,9 @@ const objecoes = [
       { t0: 3.1, t1: 5.5, kick: '1 · Contexto', text: 'O mercado está <em>a favor</em> ou contra?' },
       { t0: 5.7, t1: 7.9, kick: '2 · Valor', text: 'Onde está o <em>preço justo</em> do dia, semana e mês' },
       { t0: 8.1, t1: 10.3, kick: '3 · Alvos', text: '<em>Alvos</em> marcados antes do preço chegar' },
-      { t0: 10.5, t1: 12.7, kick: '4 · Gamma', text: 'O <em>mapa das opções</em> no seu gráfico' },
+      { t0: 10.5, t1: 12.7, kick: '4 · GL Gamma, à parte', text: 'O <em>mapa das opções</em> no seu gráfico' },
       { t0: 12.9, t1: 14.9, text: 'Tudo no <em>mesmo gráfico</em>' }],
-    end: { t0: 15.0, tag: 'Um mapa completo, não um sinal solto.', disc: 'Alvos são projeções do modelo, não promessa de resultado. Trading envolve risco financeiro real.' },
+    end: { t0: 15.0, tag: 'Um mapa completo, não um sinal solto.', disc: 'Alvos são projeções do modelo, não promessa de resultado. GL Gamma: assinatura à parte. Trading envolve risco financeiro real.' },
     stills: [1.5, 4.6, 6.4, 9.3, 11.2, 13.9] },
   { id: 'objecao-opcoes', ...V, dur: 15,
     scenes: [

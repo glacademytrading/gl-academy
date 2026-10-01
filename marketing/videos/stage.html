@@ -54,6 +54,45 @@ canvas.layer { position: absolute; inset: 0; }
 .txt .word { font: 900 128px/1 "Montserrat", sans-serif; background: linear-gradient(180deg, #fff3cf 0%, #f6d991 38%, #b8893a 100%); -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 6px 30px rgba(216,174,85,.25)); white-space: nowrap; }
 .txt .rule { height: 3px; width: 640px; margin-left: auto; margin-right: auto; background: linear-gradient(90deg, transparent, #f6d991 20%, #f6d991 80%, transparent); transform-origin: 50% 50%; }
 .txt .tagl { font: 700 36px/1 "Montserrat", sans-serif; letter-spacing: .42em; color: #d8ae55; padding-left: .42em; }
+/* peças de texto: vendas, comunidade, live, site e carrosséis */
+.txt .kick2 { font: 800 30px/1 "Montserrat", sans-serif; letter-spacing: .3em; color: #d8ae55; padding-left: .3em; }
+.txt .head2 { font: 900 96px/1.04 "Montserrat", sans-serif; letter-spacing: -.005em; background: linear-gradient(180deg, #fff 35%, #f6d991); -webkit-background-clip: text; color: transparent; }
+.txt .body2 { font: 600 44px/1.3 "Inter", sans-serif; color: rgba(255,255,255,.88); }
+.txt .disc { font: 500 24px/1.4 "Inter", sans-serif; color: rgba(255,255,255,.58); }
+.txt .steps2 { display: inline-flex; flex-direction: column; gap: 30px; text-align: left; }
+.txt .steps2 .it { display: flex; align-items: center; gap: 26px; font: 700 46px/1.2 "Inter", sans-serif; color: #fff; }
+.txt .steps2 .it b { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; font: 900 40px/1 "Montserrat", sans-serif; color: #0b0906; background: linear-gradient(180deg, #f6d991, #d8ae55); }
+.txt .code { display: inline-block; font: 900 84px/1 "Montserrat", sans-serif; letter-spacing: .04em; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: 26px 44px; border-radius: 18px; box-shadow: 0 0 60px rgba(216,174,85,.35); }
+.txt .cdnum { font: 900 260px/1 "Montserrat", sans-serif; letter-spacing: .02em; background: linear-gradient(180deg, #fff 30%, #f6d991); -webkit-background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+.txt .chiptag { display: inline-flex; align-items: center; gap: 12px; font: 800 30px/1 "Montserrat", sans-serif; letter-spacing: .06em; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: 14px 22px; border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,.55); }
+.txt .chiptag img { width: 36px; height: 36px; }
+.txt .ytrow { display: flex; justify-content: center; gap: 80px; }
+.txt .ytbox { width: 760px; height: 428px; border: 3px dashed rgba(246,217,145,.45); border-radius: 16px; display: grid; place-items: center; font: 700 28px/1 "Montserrat", sans-serif; letter-spacing: .2em; color: rgba(246,217,145,.55); background: rgba(5,5,5,.35); }
+.txt .ytcirc { width: 230px; height: 230px; border-radius: 50%; margin: 0 auto; border: 3px dashed rgba(246,217,145,.45); display: grid; place-items: center; background: rgba(5,5,5,.35); }
+.txt .ytcirc img { width: 190px; height: 190px; }
+.lt { display: inline-flex; align-items: stretch; background: rgba(10,9,6,.86); border-radius: 14px; overflow: hidden; box-shadow: 0 14px 50px rgba(0,0,0,.55); }
+.lt i { width: 12px; background: linear-gradient(180deg, #f6d991, #b8893a); }
+.lt img { width: 92px; height: 92px; margin: 18px 4px 18px 22px; }
+.lt div { padding: 22px 34px 22px 18px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.lt b { font: 800 50px/1 "Montserrat", sans-serif; color: #fff; letter-spacing: .01em; }
+.lt span { font: 700 24px/1 "Inter", sans-serif; letter-spacing: .22em; color: #d8ae55; }
+.ctabar { display: inline-flex; align-items: center; gap: 22px; background: linear-gradient(90deg, #d8ae55, #f6d991); color: #0b0906; padding: 18px 34px 18px 22px; border-radius: 16px; box-shadow: 0 14px 50px rgba(0,0,0,.55); font: 800 40px/1 "Montserrat", sans-serif; letter-spacing: .02em; }
+.ctabar img { width: 64px; height: 64px; }
+.ctabar small { font: 700 26px/1 "Inter", sans-serif; letter-spacing: .14em; opacity: .8; }
+.badge-live { display: inline-flex; align-items: center; gap: 16px; font: 800 40px/1 "Montserrat", sans-serif; letter-spacing: .2em; color: #fff; background: rgba(214,40,40,.94); padding: 16px 28px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+.badge-live i { width: 20px; height: 20px; border-radius: 50%; background: #fff; display: inline-block; }
+.wipe { width: 2600px; height: 1300px; background: linear-gradient(90deg, rgba(216,174,85,0) 0%, #b8893a 8%, #f6d991 30%, #d8ae55 60%, #8a6526 92%, rgba(138,101,38,0) 100%); }
+.slide-foot { position: absolute; left: 60px; right: 60px; bottom: 44px; display: flex; justify-content: space-between; align-items: center; font: 700 26px/1 "Inter", sans-serif; letter-spacing: .08em; color: rgba(255,255,255,.7); }
+.slide-foot b { color: #d8ae55; }
+.txt .s-kick { font: 600 26px/1 "Cinzel", serif; letter-spacing: .32em; color: #d9b36a; padding-left: .32em; }
+.txt .s-title { font: 700 84px/1.06 "Cinzel", serif; letter-spacing: .03em; color: #f1d9a6; text-shadow: 0 0 40px rgba(216,174,85,.25); }
+.txt .s-it { font: italic 500 54px/1.15 "Cormorant Garamond", serif; color: #e6c27a; }
+.txt .s-body { font: 500 36px/1.4 "Cormorant Garamond", serif; color: rgba(240,236,228,.88); }
+.txt .s-rule { width: 260px; height: 2px; margin: 26px auto 0; background: linear-gradient(90deg, transparent, #d8ae55, transparent); }
+html.alpha, html.alpha body, html.alpha #stage { background: transparent !important; }
+html.alpha #gt, html.alpha #gb { display: none; }
+html.alpha.qa body { background: repeating-conic-gradient(#3b3b3b 0 25%, #262626 0 50%) 0 0 / 48px 48px !important; }
+.tw { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
 .spot { position: absolute; border-radius: 18px; border: 2px solid rgba(246,217,145,.55); box-shadow: 0 0 0 4000px rgba(5,5,5,.64), 0 0 36px rgba(246,217,145,.25); }
 .feed #cap { left: 60px; right: 60px; }
 .feed #cap .kick { font-size: 26px; margin-bottom: 18px; }
@@ -98,11 +137,13 @@ function sampleColor(img, x, y) {
 
 async function init(spec) {
   S = spec; W = spec.w; H = spec.h; AY = spec.ay || H / 2;
+  if (spec.alpha) document.documentElement.classList.add('alpha');
   const st = document.getElementById('stage');
   st.style.width = W + 'px'; st.style.height = H + 'px';
+  if (spec.bg) st.style.background = spec.bg;
   if (W > H) document.body.classList.add('land');
   const feed = W <= H && H / W < 1.5; if (feed) document.body.classList.add('feed');
-  let html = '';
+  let html = spec.stars ? `<canvas class="layer" id="stars" width="${W}" height="${H}"></canvas>` : '';
   spec.scenes.forEach((s, i) => {
     if (s.particles) {
       const P = s.particles, logo = P.logo || 'emblem.png';
@@ -111,11 +152,14 @@ async function init(spec) {
     }
     const src = s.frames ? frameSrc(s.frames, 0) : s.img; html += `<div class="scene" id="sc${i}"><div class="cam"><img src="${src}"></div>${s.dim ? `<div class="dim" style="opacity:${s.dim}"></div>` : ''}</div>`; });
   if (spec.dust) html += `<canvas class="layer" id="dust" width="${W}" height="${H}"></canvas>`;
+  if (spec.shade) html += `<div style="position:absolute;inset:0;background:${spec.shade}"></div>`;
   html += `<div id="fx"></div><div id="gt"></div><div id="gb"></div><div id="cap"><div class="kick"></div><div class="head"></div></div>`;
-  (spec.texts || []).forEach((x, i) => { html += `<div class="txt" id="tx${i}" style="top:${x.top}px;opacity:0">${x.html}</div>`; });
+  (spec.texts || []).forEach((x, i) => { html += `<div class="txt" id="tx${i}" style="top:${x.top}px;opacity:0;${x.style || ''}">${x.html}</div>`; });
   html += `<div id="wm"><img src="emblem.png"><span>GL ACADEMY</span></div>`;
   if (spec.replay !== false) html += `<div id="rp"><i></i>${spec.replayText || 'Replay · exemplo educacional'}</div>`;
-  if (spec.end) html += `<div id="end"><img src="emblem.png"><div class="brand">${spec.end.brand || 'GL MODEL'}</div><div class="tag">${spec.end.tag}</div><div class="cta">Agende sua call 1x1 gratuita</div><div class="sub">LINK NA BIO</div><div class="disc">${spec.end.disc || 'Trading envolve risco financeiro real. Conteúdo educacional; não é recomendação de investimento.'}</div></div>`;
+  if (spec.end) html += `<div id="end"><img src="emblem.png"><div class="brand">${spec.end.brand || 'GL MODEL'}</div><div class="tag">${spec.end.tag}</div><div class="cta">${spec.end.cta || 'Agende sua call 1x1 gratuita'}</div>${spec.end.sub === '' ? '' : `<div class="sub">${spec.end.sub || 'LINK NA BIO'}</div>`}<div class="disc">${spec.end.disc || 'Trading envolve risco financeiro real. Conteúdo educacional; não é recomendação de investimento.'}</div></div>`;
+  // elementos animados por quadros-chave ficam por cima de tudo
+  (spec.tweens || []).forEach((x, i) => { html += `<div class="tw" id="tw${i}" style="${x.style || ''}">${x.html}</div>`; });
   st.innerHTML = html;
   const land = W > H;
   document.getElementById('gt').style.height = (land ? 360 : feed ? 470 : 820) + 'px';
@@ -125,7 +169,18 @@ async function init(spec) {
   if (feed) { wm.querySelector('img').style.width = wm.querySelector('img').style.height = '52px'; wm.querySelector('span').style.fontSize = '20px'; }
   const rp = document.getElementById('rp'); if (rp) { if (land) { rp.style.left = '90px'; rp.style.bottom = '50px'; } else { rp.style.left = feed ? '60px' : '70px'; rp.style.top = feed ? '48px' : '114px'; rp.style.fontSize = '20px'; rp.style.padding = '10px 16px'; } }
   if (!spec.captions || !spec.captions.length) cap.style.display = 'none';
+  if (spec.capBox) Object.assign(cap.style, spec.capBox);
+  if (spec.noGrad) { document.getElementById('gt').style.display = 'none'; document.getElementById('gb').style.display = 'none'; }
   await Promise.all([...document.images].map(im => im.decode()));
+  if (spec.stars) {
+    // céu estrelado fixo, sempre igual para o mesmo tamanho
+    const g = document.getElementById('stars').getContext('2d'), n = spec.stars.n || Math.round(W * H / 2600);
+    for (let i = 0; i < n; i++) {
+      const x = rnd(i * 3 + 1) * W, y = rnd(i * 3 + 2) * H, r = .35 + Math.pow(rnd(i * 3 + 3), 3) * 1.6, a = .18 + rnd(i + 900) * .7;
+      g.beginPath(); g.fillStyle = `rgba(${rnd(i + 77) > .8 ? '246,217,145' : '235,238,255'},${a})`; g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+    }
+  }
+  spec.scenes.forEach((s, i) => { if (s.clip) document.getElementById('sc' + i).style.clipPath = s.clip; });
   await document.fonts.ready;
   spec.scenes.forEach((s, i) => {
     const el = document.getElementById('sc' + i);
@@ -178,8 +233,8 @@ function drawParticles(E, s, t) {
   const settle = clamp01((p - .9) / .1); fin.style.opacity = settle; fin.style.filter = `drop-shadow(0 0 ${30 + 30 * settle}px rgba(216,174,85,${.35 * settle}))`;
   // brilho, raios e reflexo (opcionais) acompanham o emblema
   const R = P.size * 1.7, ring = { left: (ox + P.size / 2 - R / 2) + 'px', top: (oy + P.size / 2 - R / 2) + 'px', width: R + 'px', height: R + 'px' };
-  const gl = E.el.querySelector('.pglow'); if (gl) { Object.assign(gl.style, ring); gl.style.opacity = clamp01(p * 1.3) * (.82 + .18 * Math.sin(t * 2.1)); }
-  const ry = E.el.querySelector('.rays'); if (ry) { Object.assign(ry.style, ring); ry.style.opacity = ease(clamp01((p - .55) / .45)) * .9; ry.style.transform = `rotate(${t * 3.2}deg)`; }
+  const gl = E.el.querySelector('.pglow'); if (gl) { Object.assign(gl.style, ring); gl.style.opacity = clamp01(p * 1.3) * (.82 + .18 * Math.sin(P.glowPeriod ? 2 * Math.PI * t / P.glowPeriod : t * 2.1)); }
+  const ry = E.el.querySelector('.rays'); if (ry) { Object.assign(ry.style, ring); ry.style.opacity = ease(clamp01((p - .55) / .45)) * .9; ry.style.transform = `rotate(${t * (P.raysSpeed || 3.2)}deg)`; }
   const sh = E.el.querySelector('.shine');
   if (sh) {
     Object.assign(sh.style, { left: ox + 'px', top: oy + 'px', width: P.size + 'px', height: P.size + 'px' });
@@ -290,10 +345,21 @@ async function render(t) {
     const el = document.getElementById('tx' + i), kin = ease(clamp01((t - x.t0) / (x.in || .45)));
     const a = kin * clamp01((x.t1 - t) / .35);
     el.style.opacity = (t < x.t0 || t > x.t1) ? 0 : a;
-    el.style.transform = `translateY(${(1 - kin) * (x.rise == null ? 30 : x.rise)}px)`;
+    el.style.transform = `translate(${(1 - kin) * (x.dx || 0)}px, ${(1 - kin) * (x.rise == null ? 30 : x.rise)}px)`;
     // entrada com espaçamento de letras fechando e linha dourada abrindo do centro
     if (x.track) el.querySelectorAll('.trk').forEach(n => { n.style.letterSpacing = lerp(x.track[0], x.track[1], kin) + 'em'; });
     el.querySelectorAll('.rule').forEach(n => { n.style.transform = `scaleX(${kin})`; });
+  });
+  document.querySelectorAll('.pulse').forEach(el => { const T = +el.dataset.period || 2; el.style.opacity = .3 + .7 * (.5 + .5 * Math.cos(2 * Math.PI * t / T)); });
+  // contagem regressiva: <span class="cd" data-from="300"> mostra m:ss
+  document.querySelectorAll('.cd').forEach(el => { const r = Math.max(0, +el.dataset.from - Math.floor(t + 1e-6)); el.textContent = Math.floor(r / 60) + ':' + String(r % 60).padStart(2, '0'); });
+  (S.tweens || []).forEach((x, i) => {
+    const el = document.getElementById('tw' + i), k = x.keys; let a = k[0], b = k[0], q = 0;
+    if (t >= k[k.length - 1].t) a = b = k[k.length - 1];
+    else for (let j = 0; j < k.length - 1; j++) if (t >= k[j].t && t < k[j + 1].t) { a = k[j]; b = k[j + 1]; q = (x.linear ? clamp01 : ease)((t - a.t) / (b.t - a.t)); break; }
+    const v = n => lerp(a[n] != null ? a[n] : (n === 's' || n === 'o' ? 1 : 0), b[n] != null ? b[n] : (n === 's' || n === 'o' ? 1 : 0), q);
+    const o = v('o'); el.style.opacity = o; el.style.display = o <= .001 ? 'none' : 'block';
+    el.style.transform = `translate(${v('x')}px, ${v('y')}px) scale(${v('s')}) rotate(${v('r')}deg)`;
   });
   // legendas
   const caps = S.captions || []; let idx = -1;

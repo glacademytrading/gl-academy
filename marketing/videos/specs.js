@@ -94,7 +94,7 @@ module.exports = [
       { t0: 6.7, t1: 9.0, text: '<em>HVL e Gamma Flip</em>: níveis de virada da volatilidade' },
       { t0: 9.2, t1: 11.1, text: 'Tudo isso lido junto com o <em>GL Model</em>' }
     ],
-    end: END(11.2, 'Gamma Exposure no mesmo mapa do GL Model.'),
+    end: { t0: 11.2, brand: 'GL GAMMA', tag: 'Gamma Exposure no seu gráfico.', disc: 'Assinatura à parte. Trading envolve risco financeiro real. Conteúdo educacional; não é recomendação de investimento.' },
     stills: [3, 7.5]
   },
   // 5. Nível respeitado

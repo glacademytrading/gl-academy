@@ -23,7 +23,8 @@ SPECS=./specs-r3.js node stills.js aula-vwap   # só os quadros de conferência 
 ./sheet.sh out/folha.jpg 360 4 out/check/*.jpg # folha de contato com os quadros
 node grade.js 6.png                            # grade de coordenadas para escrever cenas
 node grade.js 6.png 900 60 1816 860 1.6        # recorte ampliado da grade
-python3 build_library.py                       # monta biblioteca/index.html, vídeos leves e capas
+SPECS=./specs-imagens.js node slides.js        # imagens estáticas em out/imagens/<grupo>/
+python3 build_library.py                       # monta biblioteca/index.html, vídeos leves, capas, imagens e kit do site
 ```
 
 ## Arquivos de roteiro
@@ -35,6 +36,9 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-live.js` | abertura, encerramento e loops de live; comerciais 16:9 e 9:16 |
 | `specs-r3.js` | logo de 8 s, vinheta de 4 s, aulas rápidas e respostas às objeções |
 | `specs-feed.js` | versões 4:5 para o feed, geradas a partir dos vídeos 9:16 |
+| `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
+| `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
+| `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 
 ## Como escrever um vídeo novo
 
@@ -51,11 +55,16 @@ Coordenadas sempre em pixels do print original (use `grade.js`). Um roteiro tem:
 - `captions`: legendas com `kick` (selo) e `text`, com `<em>` dourado, `<em class="red">` e `<em class="green">`.
 - `end`: cartela final com `tag`, a chamada para a call 1x1 e o aviso de risco.
 
+## Nomes e textos
+
+Antes de escrever legenda ou cartela nova, confira `../glossario.md` (nomes dos produtos e o que ainda está a confirmar). Os roteiros para o Giovane gravar e o guia de depoimentos estão em `../roteiros-e-depoimentos.md`.
+
 ## Regras que valem para todo vídeo
 
 - Prints de replay saem com o selo "Replay · exemplo educacional" (já automático).
 - Nunca prometer lucro, renda ou aprovação em mesa. Alvos são projeções do modelo.
 - A cartela final sempre traz o aviso de risco.
+- Todo vídeo ou imagem que mostra os níveis de Gamma leva o aviso "GL Gamma: assinatura à parte".
 
 ## Higgsfield
 

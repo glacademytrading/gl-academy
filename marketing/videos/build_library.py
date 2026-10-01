@@ -12,6 +12,8 @@ os.makedirs(os.path.join(LIB, 'capas'), exist_ok=True)
 AVISO = 'Conteúdo educacional; trading envolve risco financeiro real.'
 # partículas finas perdem detalhe no CRF 25; estes saem em CRF 20
 HQ = ('logo-', 'vinheta-', 'live-abertura', 'live-encerramento')
+# arquivos longos: compressão maior para caber no limite de 15 MB por arquivo
+CRF = {'live-contagem-5min': '31'}
 GROUPS = [
   ('vendem', 'Vídeos que vendem o operacional', 'Prontos para Reels, Shorts, TikTok e anúncios. Cada um prova uma coisa que o GL Model faz, com o print real.', [
     ('v01-a-favor-ou-contra', 'A favor ou contra', 'Antes e depois: o modelo avisa "Correção contra W/M · Calor 4%" e depois "Alta alinhada D/W/M · Calor 19%".', 'Anúncio de topo, Reels',
@@ -46,6 +48,14 @@ GROUPS = [
      f'Preciso entender de opções para usar Gamma? Não precisa operar opções: Zero Gamma, Call Wall e HVL aparecem direto no seu gráfico de futuros. GL Gamma, o mapa das opções no seu gráfico. {AVISO}'),
     ('objecao-por-onde-comecar', 'Não sei por onde começar', 'Chamada direta para a call 1x1: 30 minutos, gratuita.', 'Anúncio de conversão, stories com link',
      f'Não sabe por onde começar? Comece pela call 1x1 gratuita: 30 minutos para contar o seu momento no mercado e entender o próximo passo. Link na bio. {AVISO}'),
+  ]),
+  ('vendas-whats', 'Sequência da call no WhatsApp', 'Três vídeos para a pessoa aparecer na call: confirmação logo depois do agendamento, lembrete 1 hora antes e convite para remarcar se ela faltar. A legenda pronta é a mensagem para mandar junto.', [
+    ('call-confirmada', 'Call confirmada', 'O que vai acontecer e como se preparar, sem citar duração até ela ser definida.', 'WhatsApp, logo depois do agendamento',
+     'Oi, [nome]! Sua call com a GL Academy está confirmada para [dia] às [hora]. Qualquer imprevisto, é só responder esta mensagem que a gente remarca.'),
+    ('call-lembrete', 'Lembrete 1 hora antes', 'Curto, para mandar no dia da call.', 'WhatsApp, 1 hora antes',
+     'Oi, [nome]! Passando para lembrar: sua call com a GL Academy é hoje às [hora]. Até já!'),
+    ('call-remarcar', 'Vamos remarcar', 'Para quem não apareceu: sem bronca, com um novo horário.', 'WhatsApp, depois de uma falta',
+     'Oi, [nome]! Não conseguimos falar com você no horário marcado. Acontece! Quer escolher um novo horário? É só responder aqui.'),
   ]),
   ('aulas', 'Aulas rápidas', 'Conteúdo que ensina em 15 segundos usando o gráfico real. Atrai seguidor novo e mostra autoridade sem pedir nada em troca.', [
     ('aula-vwap', 'O que é a VWAP', 'Preço médio ponderado pelo volume, VWAP W e VWAP 3M e a defesa na VWAP 3M.', 'Reels educativo, conteúdo para atrair seguidores',
@@ -90,17 +100,45 @@ GROUPS = [
     ('vinheta-gl-4s-16x9', 'Vinheta curta · 16:9', '4 segundos: o emblema se forma e entra o nome.', 'Entrada e saída de vídeos do YouTube', ''),
     ('vinheta-gl-4s-9x16', 'Vinheta curta · 9:16', '4 segundos no formato vertical.', 'Fim de Reels e stories', ''),
   ]),
+  ('site', 'Kit do site', 'Loops leves e sem corte para as páginas do site, já otimizados (MP4 sem som). Onde usar cada um está no mapa logo abaixo.', [
+    ('site-circulo-pacote', 'Círculo do Pacote Completo', 'Emblema vivo: raios, brilho e poeira dourada. 8 s em loop, quadrado para recorte redondo.', 'Escolha: círculo central', ''),
+    ('site-circulo-tecnologias', 'Círculo de Tecnologias', 'Gráfico real em movimento lento. 8 s em loop, quadrado para recorte redondo.', 'Escolha e Tecnologias: círculo do topo', ''),
+    ('site-loop-tradingview', 'Loop TradingView', 'Contexto alta alinhada D/W/M com o selo da plataforma. 8 s em loop.', 'Tecnologias: card Pacote TradingView', ''),
+    ('site-loop-ninjatrader', 'Loop NinjaTrader', 'Estrutura de Mercado e valor do dia no NinjaTrader. 8 s em loop.', 'Tecnologias: card Operacional Completo', ''),
+    ('site-loop-gamma', 'Loop GL Gamma', 'Zero Gamma e Call Wall, com o aviso de assinatura à parte. 8 s em loop.', 'Tecnologias e Pacote Completo: GL Gamma', ''),
+    ('site-loop-alvos', 'Loop Alvos', 'Alvos D, W, M e 3M marcados no gráfico. 8 s em loop.', 'Galeria "Veja os sistemas em uso"', ''),
+    ('site-gamma-explicacao-16x9', 'Explicação do GL Gamma', 'Zero Gamma, Call Wall e HVL explicados, com legenda e o gráfico ao lado. 13 s.', 'Tecnologias: "Conhecer o GL Gamma"', ''),
+    ('site-pacote-completo-16x9', 'Visão geral do Pacote Completo', 'Operacional Completo, APP GL Model Academy e o que é contratado à parte. 23 s.', 'Pacote Completo: logo depois do topo', ''),
+  ]),
   ('lives', 'Lives e YouTube', 'Abertura, encerramento e as telas de espera em loop. No OBS: Fonte de mídia, marque "Repetir" nos loops.', [
     ('live-abertura-16x9', 'Abertura de live', 'O emblema GL se forma em partículas, passa pelo operacional e chama "A live vai começar".', 'Início das lives', ''),
     ('live-encerramento-16x9', 'Encerramento de live', 'Agradecimento, chamada para a call 1x1 e o emblema se desfazendo.', 'Fim das lives', ''),
     ('live-loop-comecando-16x9', 'Loop: a live já vai começar', '60 segundos em loop sem corte, com o operacional e mensagens da GL.', 'Antes da live começar', ''),
     ('live-loop-pausa-16x9', 'Loop: voltamos já', 'Mesmo loop para pausas, quando a câmera sai do ar.', 'Pausas durante a live', ''),
   ]),
+  ('live2', 'Kit de live 2.0 para o OBS', 'Sobreposições com fundo transparente (WebM) e a contagem regressiva. No OBS: Fonte de mídia, e marque "Repetir" no selo.', [
+    ('live-faixa-nome', 'Faixa com o nome', 'Giovane Lázaro · GL Academy. Entra pela esquerda e sai sozinha em 8 s.', 'OBS: por cima da câmera', ''),
+    ('live-faixa-call', 'Faixa "Agende sua call"', 'Entra por baixo e fica 10 s na tela.', 'OBS: chame a cada 15 minutos', ''),
+    ('live-selo-ao-vivo', 'Selo AO VIVO', 'Loop de 4 s com o ponto pulsando.', 'OBS: canto da tela, com Repetir', ''),
+    ('live-transicao', 'Transição dourada', 'Stinger de 1,5 s. No OBS, ponto de transição em 700 ms.', 'OBS: Transição de cena, Stinger', ''),
+    ('live-contagem-5min', 'Contagem regressiva de 5 minutos', 'De 5:00 a 0:00, terminando em "Começando agora".', 'Antes da live começar', ''),
+  ]),
+  ('youtube', 'YouTube', 'Trailer do canal e tela final para os últimos 20 segundos dos vídeos.', [
+    ('youtube-trailer', 'Trailer do canal', 'Vinheta, lives, setups, aulas e Gamma, terminando em "Inscreva-se". 33 s.', 'Trailer para quem ainda não é inscrito',
+     f'No canal da GL Academy: lives com o mercado ao vivo, setups em replay e aulas rápidas de VWAP, Value Area e Gamma. Inscreva-se e ative o sininho. {AVISO}'),
+    ('youtube-tela-final', 'Tela final', 'Espaço para 2 vídeos e o botão de inscrição. Posicione os elementos no YouTube Studio.', 'Últimos 20 s de cada vídeo', ''),
+  ]),
   ('comerciais', 'Comerciais das tecnologias GL', 'Juntam tudo: contexto, setup, níveis, alvos, Gamma e NinjaTrader, terminando na chamada para a call.', [
     ('comercial-tecnologias-gl-16x9', 'Comercial 16:9', '44 segundos para YouTube, intervalo de live e site.', 'YouTube, lives, anúncio em vídeo',
      f'As tecnologias da GL Academy: GL Model, Multi Fractal, GL Gamma, Order Flow, GL Risk Auto e Gamepad Trader Pro. Método, tecnologia e risco em primeiro lugar. Agende sua call 1x1 gratuita no link da descrição. {AVISO}'),
     ('comercial-tecnologias-gl-9x16', 'Comercial vertical', '40 segundos para Reels, Shorts, TikTok e anúncios.', 'Anúncio principal, Reels',
      f'Contexto, entrada, alvos e Gamma no mesmo mapa. Essas são as tecnologias da GL Academy. Call 1x1 gratuita no link da bio. {AVISO}'),
+  ]),
+  ('comunidade', 'Comunidade e parceiros', 'Boas-vindas para quem entra na comunidade e a cartela para influenciadores parceiros (troque o @ e eu gero uma por parceiro em minutos).', [
+    ('comunidade-boas-vindas', 'Boas-vindas da comunidade', 'O que a pessoa encontra, ativar notificações e a call 1x1.', 'Mensagem fixada no grupo do WhatsApp',
+     f'Seja bem-vindo à comunidade da GL Academy! Por aqui você acompanha as lives, os setups em replay e as aulas rápidas. Ative as notificações para não perder as lives. {AVISO}'),
+    ('parceiro-exemplo', 'Cartela de parceiro (exemplo)', 'Publicidade, @ do parceiro e chamada para a call pelo link dele.', 'Fim dos vídeos de parceiros',
+     f'#publi Sou parceiro da GL Academy. Quer ver o GL Model no seu gráfico? Agende sua call 1x1 gratuita pelo link da minha bio. {AVISO}'),
   ]),
 ]
 
@@ -122,31 +160,45 @@ for gid, gtitle, gdesc, items in GROUPS:
     cards = []
     for vid, title, desc, use, cap in items:
         src = os.path.join(OUT, vid + '.mp4')
+        ext = 'mp4'
+        if not os.path.exists(src) and os.path.exists(os.path.join(OUT, vid + '.webm')):
+            src, ext = os.path.join(OUT, vid + '.webm'), 'webm'
         if not os.path.exists(src):
             continue
-        dst = os.path.join(LIB, 'videos', vid + '.mp4')
+        rel = f'site/{vid}.mp4' if gid == 'site' else f'videos/{vid}.{ext}'
+        dst = os.path.join(LIB, rel)
         # versão leve para a página; só refaz quando o original mudou
-        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
-            crf = '20' if vid.startswith(HQ) else '25'
+        if ext == 'webm':
+            # sobreposições transparentes: o arquivo já é leve, vai como está
+            if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+                subprocess.run(['cp', src, dst], check=True)
+        elif gid != 'site' and (not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src)):
+            crf = CRF.get(vid) or ('20' if vid.startswith(HQ) else '25')
             subprocess.run([FF, '-y', '-loglevel', 'error', '-i', src, '-c:v', 'libx264', '-crf', crf, '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', dst], check=True)
         d = dur(src)
         poster = os.path.join(LIB, 'capas', vid + '.jpg')
-        subprocess.run([FF, '-y', '-loglevel', 'error', '-ss', str(max(1, d * 0.62)), '-i', src, '-frames:v', '1', '-vf', 'scale=540:-2', '-q:v', '5', poster], check=True)
+        if ext == 'webm':
+            # capa com o quadriculado de transparência (quadro de conferência)
+            qa = sorted(f for f in os.listdir(os.path.join(OUT, 'check')) if f.startswith(vid + '-'))
+            subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', os.path.join(OUT, 'check', qa[-1]), '-vf', 'scale=540:-2', '-q:v', '5', poster], check=True)
+        else:
+            t = 0 if vid.startswith(('site-loop', 'site-circulo')) else max(1, d * 0.62)
+            subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-ss', str(t), '-i', src, '-frames:v', '1', '-vf', 'scale=540:-2', '-q:v', '5', poster], check=True)
         w, h = size(src)
-        fmt, kind = ('16:9', 'is-h') if w > h else (('9:16', 'is-v') if h / w > 1.6 else ('4:5', 'is-f'))
+        fmt, kind = ('16:9', 'is-h') if w > h else (('9:16', 'is-v') if h / w > 1.6 else (('1:1', 'is-q') if h == w else ('4:5', 'is-f')))
         manifest.append(vid)
         cap_html = ''
         if cap:
             cid = 'cap-' + vid
             cap_html = f'<div class="cap"><p class="label">Legenda pronta</p><p class="cap-text" id="{cid}">{html.escape(cap)}</p><button type="button" class="btn" data-copy="{cid}">Copiar legenda</button></div>'
-        cards.append(f'''<article class="vcard {kind}" data-vid="{vid}" data-group="{gid}" data-title="{html.escape(title)}" data-fmt="{fmt}" data-dur="{d}" data-use="{html.escape(use)}">
-  <div class="frame"><video controls playsinline preload="none" poster="capas/{vid}.jpg" src="videos/{vid}.mp4"></video></div>
+        cards.append(f'''<article class="vcard {kind}" data-vid="{vid}" data-src="{rel}" data-group="{gid}" data-title="{html.escape(title)}" data-fmt="{fmt}" data-dur="{d}" data-use="{html.escape(use)}">
+  <div class="frame"><video controls playsinline preload="none" {'loop ' if vid.startswith(('site-loop', 'site-circulo', 'live-selo')) else ''}poster="capas/{vid}.jpg" src="{rel}"></video></div>
   <div class="meta">
     <p class="tags"><span class="tag">{fmt}</span><span class="tag">{d} s</span><span class="tag tag-use">{html.escape(use)}</span></p>
     <h3>{html.escape(title)}</h3>
     <p class="desc">{html.escape(desc)}</p>
-    <p class="file">{vid}.mp4</p>
-    <button type="button" class="btn btn-dl" data-dl="{vid}">Baixar MP4</button>
+    <p class="file">{os.path.basename(rel)}</p>
+    <button type="button" class="btn btn-dl" data-dl="{rel}">Baixar {ext.upper()}</button>
     {cap_html}
   </div>
 </article>''')
@@ -166,3 +218,72 @@ for n in range(1, 6):
     src = os.path.join(ROOT, f'{n}.png'); dst = os.path.join(LIB, 'prints', f'{n}.png')
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
         subprocess.run(['cp', src, dst], check=True)
+
+# ---------------------------------------------------------------------------
+# Imagens (carrosséis, posts, stories, thumbnails, site): galeria com download
+AV = 'Conteúdo educacional; trading envolve risco financeiro real.'
+IMG_GROUPS = [
+  ('img-carrossel-vwap', 'Carrossel: o que é VWAP', 'carrosseis/carrossel-vwap', '4:5', f'O que é VWAP, em 6 slides, no gráfico real. Salve para estudar. {AV}', {}),
+  ('img-carrossel-value-area', 'Carrossel: Value Area', 'carrosseis/carrossel-value-area', '4:5', f'Value Area, VAH, VAL e POC em 6 slides. Salve para estudar. {AV}', {}),
+  ('img-carrossel-3-perguntas', 'Carrossel: as 3 perguntas', 'carrosseis/carrossel-3-perguntas', '4:5', f'As 3 perguntas antes de qualquer trade: direção, entrada e alvos. Salve e use antes do próximo trade. {AV}', {}),
+  ('img-carrossel-nem-toda-queda', 'Carrossel: nem toda queda é venda', 'carrosseis/carrossel-nem-toda-queda', '4:5', f'Nem toda queda é venda: um replay em 6 slides sobre contexto. Exemplo educacional. {AV}', {}),
+  ('img-carrossel-gl-gamma', 'Carrossel: GL Gamma', 'carrosseis/carrossel-gl-gamma', '4:5', f'Os níveis do GL Gamma no seu gráfico: Zero Gamma, Call Wall e HVL. GL Gamma é uma assinatura à parte. {AV}', {}),
+  ('img-posts', 'Posts 4:5 com gráfico anotado', 'imagens/posts-4x5', '4:5', '', {
+    'post-alta-alinhada': f'Quando dia, semana e mês concordam, o contexto está a favor. O GL Model mostra isso antes da entrada. Replay, exemplo educacional. {AV}',
+    'post-correcao-contra': f'Nem toda queda é venda. Aqui o modelo classificou: correção contra a semana e o mês. Contexto primeiro. Replay, exemplo educacional. {AV}',
+    'post-defesa-vwap-3m': f'A VWAP do trimestre segurou o preço na correção. VWAPs no mesmo gráfico do GL Model. Replay, exemplo educacional. {AV}',
+    'post-alvo-antes-do-preco': f'O alvo aparece antes do preço chegar. Alvos são projeções do modelo, não promessa de resultado. {AV}',
+    'post-escada-de-valor': f'Degrau por degrau: o valor do mês, do trimestre e da semana marcados no gráfico. Replay, exemplo educacional. {AV}',
+    'post-zero-gamma': f'Zero Gamma: onde o regime de volatilidade costuma virar, direto no gráfico de futuros. GL Gamma é uma assinatura à parte. {AV}',
+    'post-valor-do-dia-ninjatrader': f'O valor do dia desenhado no NinjaTrader: VAH, POC e VAL pela Estrutura de Mercado. {AV}',
+    'post-nivel-respeitado': f'O nível estava marcado antes: o preço foi buscar o VAH D. Replay, exemplo educacional; resultado passado não garante resultado futuro.',
+    'post-varredura-na-minima': f'Varreu a mínima e voltou para o valor: o primeiro sinal do setup. Replay, exemplo educacional. {AV}',
+    'post-tradingview-e-ninjatrader': f'O mesmo mapa nas duas plataformas: Estrutura de Mercado e Estado de Mercado no TradingView e no NinjaTrader. {AV}'}),
+  ('img-frases', 'Frases 1:1', 'imagens/frases-1x1', '1:1', 'Posts de respiro entre os conteúdos técnicos. Legenda: a própria frase e "Salve para lembrar."', {}),
+  ('img-stories', 'Stories', 'imagens/stories-9x16', '9:16', 'Os espaços tracejados recebem os stickers do Instagram (link, enquete, lembrete). Poste a enquete num dia e a resposta no outro.', {}),
+  ('img-capas-reels', 'Capas de Reels', 'capas/capas-reels', '9:16', 'Título dentro da área que o perfil mostra em 4:5. Use como capa ao publicar cada Reels.', {}),
+  ('img-destaques', 'Capas de destaques', 'imagens/destaques', '9:16', 'O Instagram mostra o círculo central. Ordem sugerida: Setups, Aulas, Lives, Call, Gamma, Alunos.', {}),
+  ('img-youtube', 'Thumbnails do YouTube', 'imagens/youtube-thumbs', '16:9', 'Em 1280x720. Ficam ainda melhores com uma foto do Giovane à esquerda: mande uma e eu monto as versões com rosto.', {}),
+  ('img-site-galeria', 'Galeria do site', 'imagens/site-galeria', '16:9', 'Para a seção "Veja os sistemas em uso": gráfico real com o selo da plataforma e as marcações. O site já tem a legenda.', {}),
+  ('img-site-og', 'Imagens de compartilhamento do site', 'imagens/site-compartilhamento', '16:9', 'A imagem que aparece quando alguém compartilha o link da página no WhatsApp, Instagram ou LinkedIn. 1200x630, no estilo do site. Vai na meta og:image de cada página.', {}),
+]
+img_html, img_files = [], []
+for gid, title, folder, ratio, cap, caps in IMG_GROUPS:
+    src_dir = os.path.join(OUT, folder)
+    if not os.path.isdir(src_dir):
+        continue
+    files = sorted(f for f in os.listdir(src_dir) if f.endswith('.jpg'))
+    os.makedirs(os.path.join(LIB, 'imagens', gid), exist_ok=True)
+    cards = []
+    for f in files:
+        src, rel = os.path.join(src_dir, f), f'imagens/{gid}/{f}'
+        dst = os.path.join(LIB, rel)
+        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+            subprocess.run(['cp', src, dst], check=True)
+        img_files.append(rel)
+        name = f[:-4]; c = caps.get(name, '')
+        cap_html = ''
+        if c:
+            cid = 'cap-' + name
+            cap_html = f'<p class="cap-text" id="{cid}">{html.escape(c)}</p><button type="button" class="btn" data-copy="{cid}">Copiar legenda</button>'
+        cards.append(f'<figure class="icard" data-src="{rel}" data-group="{gid}" data-title="{html.escape(name)}"><a href="{rel}" target="_blank" rel="noopener"><img src="{rel}" alt="{html.escape(title)}: {html.escape(name)}" loading="lazy"></a><figcaption><span class="file">{f}</span><button type="button" class="btn btn-dl" data-dl="{rel}">Baixar JPG</button>{cap_html}</figcaption></figure>')
+    group_cap = ''
+    if cap and not caps:
+        cid = 'cap-' + gid
+        group_cap = f'<div class="cap" style="border:0;padding:0"><p class="label">Legenda pronta</p><p class="cap-text" id="{cid}">{html.escape(cap)}</p><button type="button" class="btn" data-copy="{cid}">Copiar legenda</button></div>' if 'carrossel' in gid else f'<p class="desc">{html.escape(cap)}</p>'
+    zipb = f'<button type="button" class="btn" data-zip="{gid}">Baixar este grupo (ZIP, {len(cards)} imagens)</button>'
+    cls = {'4:5': 'r45', '1:1': 'r11', '9:16': 'r916', '16:9': 'r169'}[ratio]
+    img_html.append(f'<section id="{gid}" class="imgsec"><div class="section-head"><h2>{html.escape(title)}</h2>{group_cap}{zipb}</div><div class="igrid {cls}">{"".join(cards)}</div></section>')
+
+# Kit do site: mapa de uso, código e a lista de arquivos para o ZIP
+site_files = sorted(f'site/{f}' for f in os.listdir(os.path.join(LIB, 'site'))) + [r for r in img_files if '/img-site-' in r]
+site_map = open(os.path.join(LIB, 'site-map.html'), encoding='utf-8').read()
+cards_html = [c.replace('<section id="site">', '<section id="site">', 1) for c in cards_html]
+for i, c in enumerate(cards_html):
+    if c.startswith('<section id="site">'):
+        cards_html[i] = c[:-len('</section>')] + site_map + f'<script type="application/json" id="kit-site-files">{json.dumps(site_files)}</script></section>'
+
+page = open(os.path.join(LIB, 'template.html'), encoding='utf-8').read()
+page = page.replace('<!--SECTIONS-->', '\n'.join(cards_html)).replace('<!--IMAGES-->', '\n'.join(img_html))
+open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
+print(len(img_files), 'imagens;', len(site_files), 'arquivos no kit do site')

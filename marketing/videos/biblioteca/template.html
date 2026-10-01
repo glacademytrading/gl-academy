@@ -41,6 +41,17 @@ section { display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 2
 .is-v .frame video { aspect-ratio: 9 / 16; }
 .is-h .frame video { aspect-ratio: 16 / 9; }
 .is-f .frame video { aspect-ratio: 4 / 5; }
+.is-q .frame video { aspect-ratio: 1 / 1; }
+.igrid { display: grid; gap: 16px; align-items: start; }
+.igrid.r45, .igrid.r11 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.igrid.r916 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); }
+.igrid.r169 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.icard { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.icard a { display: block; background: #000; }
+.icard img { display: block; width: 100%; height: auto; }
+.icard figcaption { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+.icard .cap-text { font-size: .8rem; }
+.rot { display: flex; flex-direction: column; gap: 12px; }
 #marca .grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 .prints { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 16px; }
 .print { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
@@ -102,11 +113,74 @@ tr:last-child td { border-bottom: 0; }
     <h1>Biblioteca de Vídeos GL</h1>
     <p class="lede">Todos os vídeos foram feitos com os prints reais do operacional: o setup acontecendo, os alvos, o Gamma e o NinjaTrader, na identidade da GL. Cada vídeo tem a finalidade e, quando faz sentido, a legenda pronta para postar.</p>
     <div class="stats" id="stats"></div>
-    <div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="all">Baixar todos os vídeos (ZIP)</button><span class="dl-status" id="dlstatus" role="status" aria-live="polite">O ZIP vem separado por grupo, com um arquivo de legendas prontas.</span></div>
-    <nav class="toc" aria-label="Seções"><a href="#vendem">Vendem o operacional</a><a href="#objecoes">Objeções</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos para anúncio</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas verticais</a><a href="#horizontais">Coringas 16:9</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#comerciais">Comerciais</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
+    <div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="all">Baixar todos os vídeos (ZIP)</button><button type="button" class="btn" data-zip="all-img">Baixar todas as imagens (ZIP)</button><span class="dl-status" id="dlstatus" role="status" aria-live="polite">O ZIP vem separado por grupo, com um arquivo de legendas prontas.</span></div>
+    <nav class="toc" aria-label="Seções"><a href="#vendem">Vendem o operacional</a><a href="#objecoes">Objeções</a><a href="#vendas-whats">Sequência da call</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas</a><a href="#site">Kit do site</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#live2">Live 2.0 (OBS)</a><a href="#youtube">YouTube</a><a href="#comerciais">Comerciais</a><a href="#comunidade">Comunidade e parceiros</a><a href="#imagens">Imagens</a><a href="#roteiros">Roteiros para gravar</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
   </header>
 
   <!--SECTIONS-->
+
+  <section id="imagens">
+    <div class="section-head"><h2>Imagens para redes e site</h2><p>Feitas com os 5 prints reais, sem gastar crédito: carrosséis, posts, frases, stories, capas, destaques, thumbnails do YouTube e as imagens do site. Clique numa imagem para abrir no tamanho original.</p>
+    <div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="all-img">Baixar todas as imagens (ZIP)</button></div></div>
+  </section>
+<!--IMAGES-->
+
+  <section id="roteiros">
+    <div class="section-head"><h2>Roteiros para gravar e depoimentos</h2><p>Para os vídeos que dependem de gravação. O Giovane grava no celular e eu edito com legendas, cortes dos setups e o logo, sem crédito.</p></div>
+    <div class="two">
+      <div class="panel rot">
+        <h3>Roteiros de 30 a 45 segundos</h3>
+        <details><summary>1. O que acontece na call gratuita</summary><p class="desc" style="margin-top:8px">Anúncio de conversão e mensagem depois do agendamento.</p><pre class="prompt" id="rot-1">GANCHO (0 a 3 s): &quot;Você agendou a call com a GL e quer saber o que vai acontecer? Eu te conto.&quot;
+DESENVOLVIMENTO: &quot;É uma conversa 1 a 1, sem custo. A gente quer entender o seu momento: há quanto tempo você opera, qual é o seu maior desafio e onde quer chegar. Depois mostramos no gráfico como o GL Model lê contexto, níveis e alvos, e qual caminho faz sentido para você: tecnologia, formação ou os dois. Se não fizer sentido, tudo bem.&quot;
+CHAMADA: &quot;Se ainda não agendou, o link está na bio.&quot;
+CORTES DA BIBLIOTECA: setup acontecendo, as 3 perguntas, call confirmada.</pre><button type="button" class="btn" data-copy="rot-1" data-label="Copiar roteiro" data-done="Roteiro copiado">Copiar roteiro</button></details><details><summary>2. Mentoria 1:1: como funciona</summary><p class="desc" style="margin-top:8px">Página Mentorias e card &quot;Mentoria 1:1 com Giovane&quot; do Pacote Completo.</p><pre class="prompt" id="rot-2">GANCHO: &quot;Oito encontros comigo, um a um. É assim que funciona a mentoria.&quot;
+DESENVOLVIMENTO: &quot;São oito encontros individuais de 1h30, com acesso ao APP GL Model Academy. A gente trabalha o seu método, o seu risco e as suas decisões, em cima do seu operacional. [Conte algo que você costuma ajustar com os alunos nos primeiros encontros.]&quot;
+CHAMADA: &quot;Quer saber se faz sentido para você? Agende uma conversa gratuita.&quot;
+CORTES DA BIBLIOTECA: aulas rápidas de VWAP e Value Area, escada de valor.</pre><button type="button" class="btn" data-copy="rot-2" data-label="Copiar roteiro" data-done="Roteiro copiado">Copiar roteiro</button></details><details><summary>3. TradingView ou NinjaTrader?</summary><p class="desc" style="margin-top:8px">Dúvida comum, remarketing e página Tecnologias.</p><pre class="prompt" id="rot-3">GANCHO: &quot;TradingView ou NinjaTrader: qual escolher para usar a GL?&quot;
+DESENVOLVIMENTO: &quot;Os dois pacotes têm a Estrutura de Mercado e o Estado de Mercado. Se você usa só TradingView, o Pacote TradingView resolve. Se usa NinjaTrader, o Operacional Completo traz as duas plataformas e o conjunto mais amplo de sistemas. [Diga qual você usa no dia a dia e por quê.]&quot;
+CHAMADA: &quot;Na dúvida, agenda a call gratuita que a gente te ajuda a escolher.&quot;
+CORTES DA BIBLIOTECA: funciona na minha plataforma, loops TradingView e NinjaTrader.</pre><button type="button" class="btn" data-copy="rot-3" data-label="Copiar roteiro" data-done="Roteiro copiado">Copiar roteiro</button></details><details><summary>4. GL Gamma em 40 segundos</summary><p class="desc" style="margin-top:8px">Conteúdo e venda do GL Gamma (assinatura à parte).</p><pre class="prompt" id="rot-4">GANCHO: &quot;O mercado de opções deixa marcas no gráfico de futuros. O GL Gamma mostra quais.&quot;
+DESENVOLVIMENTO: &quot;Zero Gamma, Call Wall, Put Wall e HVL: níveis onde o comportamento da volatilidade costuma mudar. Você não precisa operar opções, porque os níveis aparecem no seu gráfico. [Mostre um nível que o mercado respeitou, como exemplo educacional.]&quot;
+CHAMADA: &quot;O GL Gamma é uma assinatura à parte, nos planos Essential, Plus e Premium.&quot;
+CORTES DA BIBLIOTECA: Gamma Exposure no gráfico, preciso entender de opções, explicação do Gamma 16:9.</pre><button type="button" class="btn" data-copy="rot-4" data-label="Copiar roteiro" data-done="Roteiro copiado">Copiar roteiro</button></details><details><summary>5. Como eu preparo o meu dia de operação</summary><p class="desc" style="margin-top:8px">Conteúdo de autoridade.</p><pre class="prompt" id="rot-5">GANCHO: &quot;Antes de abrir qualquer posição, eu respondo três perguntas.&quot;
+DESENVOLVIMENTO: &quot;Primeiro, a direção: o contexto do dia, da semana e do mês está a favor ou contra? Segundo, a entrada: em qual nível marcado eu aceito entrar? Terceiro, os alvos: onde estão e onde a ideia fica invalidada. Se eu não respondo as três, eu espero. [Conte uma vez em que esperar te poupou de um trade ruim.]&quot;
+CHAMADA: &quot;Salve para usar antes do próximo trade.&quot;
+CORTES DA BIBLIOTECA: as 3 perguntas, a favor ou contra, carrossel das 3 perguntas.</pre><button type="button" class="btn" data-copy="rot-5" data-label="Copiar roteiro" data-done="Roteiro copiado">Copiar roteiro</button></details><details><summary>6. O erro que mais custa caro</summary><p class="desc" style="margin-top:8px">Conteúdo de conexão.</p><pre class="prompt" id="rot-6">GANCHO: &quot;O erro que mais me custou no começo foi [operar contra o contexto / aumentar a mão para recuperar].&quot;
+DESENVOLVIMENTO: &quot;[Conte o que aconteceu em duas ou três frases, sem citar valores.] Foi aí que eu passei a olhar o contexto antes de tudo. Hoje, quando o modelo marca correção contra W/M, eu espero.&quot;
+CHAMADA: &quot;Qual foi o seu erro mais caro? Comenta aqui.&quot;
+CORTES DA BIBLIOTECA: nem toda queda é venda, contexto contra.</pre><button type="button" class="btn" data-copy="rot-6" data-label="Copiar roteiro" data-done="Roteiro copiado">Copiar roteiro</button></details>
+        <h3 style="margin-top:8px">Como gravar</h3>
+        <ul>
+          <li>Celular na vertical, na altura dos olhos; a câmera traseira tem mais qualidade.</li>
+          <li>Luz de frente (janela ou ring light), fundo organizado; os monitores atrás funcionam bem.</li>
+          <li>Microfone de lapela ou fone com microfone, num lugar sem eco.</li>
+          <li>Grave cada roteiro 3 vezes, olhando para a lente, com uma pausa curta entre as frases.</li>
+          <li>Envie o arquivo original pelo Drive ou por cabo: o WhatsApp comprime o vídeo.</li>
+        </ul>
+      </div>
+      <div class="panel rot">
+        <h3>Pedido de depoimento</h3>
+        <pre class="prompt" id="dep-pedido">Oi, [nome]! Tudo bem? Aqui é o Giovane, da GL Academy. Estamos reunindo depoimentos de alunos e eu adoraria ter o seu. Você toparia gravar um vídeo curto (30 a 60 segundos, celular na vertical) contando:
+1. Como você operava antes da GL;
+2. O que mudou na sua leitura de mercado e na sua rotina;
+3. Para quem você recomendaria.
+
+Não precisa falar de valores ganhos ou perdidos: o foco é o processo (contexto, disciplina e gestão de risco). Se preferir, pode mandar por escrito. Junto, preciso da sua autorização de uso, na mensagem abaixo. Obrigado!</pre>
+        <button type="button" class="btn" data-copy="dep-pedido" data-label="Copiar mensagem" data-done="Mensagem copiada">Copiar mensagem</button>
+        <h3>Autorização de uso</h3>
+        <p class="desc">O aluno responde com este texto. Guarde a autorização; se ele pedir a retirada, o depoimento sai de todos os lugares.</p>
+        <pre class="prompt" id="dep-autoriza">Eu, [nome completo], autorizo a GL Academy a usar meu depoimento (texto, voz e imagem) em suas redes sociais, site e anúncios, sem prazo determinado e sem custo. Sei que posso pedir a retirada a qualquer momento pelo WhatsApp ou e-mail da GL Academy.</pre>
+        <button type="button" class="btn" data-copy="dep-autoriza" data-label="Copiar autorização" data-done="Autorização copiada">Copiar autorização</button>
+        <h3>O que não pode aparecer</h3>
+        <ul>
+          <li>Valores de ganho, percentual de retorno, "fiquei rico", "renda garantida" ou print de conta com lucro.</li>
+          <li>Promessa de aprovação em mesa proprietária.</li>
+          <li>Depoimento sem o aviso: "Resultado individual. Trading envolve risco financeiro real."</li>
+          <li>Nome ou foto de quem não autorizou, inclusive em prints de conversa.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <section id="uso">
     <div class="section-head"><h2>Como usar</h2><p>Uma rotina simples para publicar todo dia sem gravar tudo do zero.</p></div>
@@ -120,6 +194,8 @@ tr:last-child td { border-bottom: 0; }
           <li><b>Quinta:</b> um setup: "Alvos claros", "Nem toda queda é venda" ou "Escada de valor".</li>
           <li><b>Sexta:</b> "As 3 perguntas antes do trade", com chamada para a call.</li>
           <li><b>Sempre ligado:</b> as 4 respostas às objeções em remarketing, para quem visitou o funil e não agendou.</li>
+          <li><b>Todo agendamento:</b> a sequência da call no WhatsApp (confirmação, lembrete e, se faltar, remarcar).</li>
+          <li><b>Carrosséis e posts:</b> um carrossel por semana e um post anotado entre os vídeos.</li>
           <li><b>Lives:</b> logo de 8 s ou abertura, loop de espera, encerramento e o comercial 16:9 no intervalo.</li>
         </ol>
       </div>
@@ -244,7 +320,7 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
 (function () {
   var cards = document.querySelectorAll('.vcard');
   var total = 0; document.querySelectorAll('.tags .tag:nth-child(2)').forEach(function (t) { total += parseInt(t.textContent, 10) || 0; });
-  document.getElementById('stats').innerHTML = '<span class="stat"><b>' + cards.length + '</b> vídeos prontos</span><span class="stat"><b>' + Math.round(total / 60) + ' min</b> de material</span><span class="stat"><b>0</b> crédito gasto nestes vídeos</span>';
+  document.getElementById('stats').innerHTML = '<span class="stat"><b>' + cards.length + '</b> vídeos prontos</span><span class="stat"><b>' + document.querySelectorAll('.icard').length + '</b> imagens</span><span class="stat"><b>' + Math.round(total / 60) + ' min</b> de material</span><span class="stat"><b>0</b> crédito gasto nestes vídeos</span>';
   var timer;
   function toast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(timer); timer = setTimeout(function () { t.hidden = true; }, 2500); }
   document.addEventListener('click', function (e) {
@@ -276,8 +352,9 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
     setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
     return true;
   }
-  async function fetchVideo(vid) {
-    var r = await fetch('videos/' + vid + '.mp4'); if (!r.ok) throw new Error('HTTP ' + r.status);
+  function base(p) { return p.split('/').pop(); }
+  async function fetchPath(p) {
+    var r = await fetch(p); if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.blob();
   }
   var jszip;
@@ -292,34 +369,49 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
   }
   function legenda(card) {
     var cap = card.querySelector('.cap-text');
-    return '== ' + card.dataset.title + ' (' + card.dataset.fmt + ', ' + card.dataset.dur + ' s) ==\nArquivo: ' + card.dataset.vid + '.mp4\nUso: ' + card.dataset.use +
+    if (card.classList.contains('icard')) {
+      var gcap = card.closest('section').querySelector('.section-head .cap-text');
+      return '== ' + base(card.dataset.src) + ' ==\nLegenda: ' + (cap ? cap.textContent : gcap ? gcap.textContent : '(sem legenda)');
+    }
+    return '== ' + card.dataset.title + ' (' + card.dataset.fmt + ', ' + card.dataset.dur + ' s) ==\nArquivo: ' + base(card.dataset.src) + '\nUso: ' + card.dataset.use +
       '\nLegenda: ' + (cap ? cap.textContent : '(sem legenda: coringa, gancho ou peça de marca)');
   }
-  var sections = Array.prototype.map.call(document.querySelectorAll('section[id] .grid'), function (g) { return g.closest('section').id; });
-  function pasta(gid) { var i = sections.indexOf(gid); return (i < 9 ? '0' : '') + (i + 1) + '-' + gid; }
+  var order = Array.prototype.map.call(document.querySelectorAll('section[id] .grid, section[id] .igrid'), function (g) { return g.closest('section').id; });
+  function pasta(gid) { var i = order.indexOf(gid); return (i < 9 ? '0' : '') + (i + 1) + '-' + gid; }
+  async function montarZip(nome, itens, extra, rotulo) {
+    setStatus('Carregando o compactador…');
+    var JSZip = await loadZip(), zip = new JSZip(), leg = false;
+    var txt = ['﻿Biblioteca de Vídeos GL · legendas prontas', 'Conteúdo educacional; trading envolve risco financeiro real.', ''];
+    for (var i = 0; i < itens.length; i++) {
+      var it = itens[i]; setStatus('Juntando ' + (i + 1) + ' de ' + itens.length + '…');
+      (it.folder ? zip.folder(it.folder) : zip).file(base(it.path), await fetchPath(it.path));
+      if (it.card) { txt.push(legenda(it.card), ''); leg = true; }
+    }
+    if (leg) zip.file('LEGENDAS.txt', txt.join('\n'));
+    if (extra) Object.keys(extra).forEach(function (k) { zip.file(k, extra[k]); });
+    var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (m) { setStatus('Montando o ZIP: ' + Math.round(m.percent) + '%'); });
+    setStatus('Confirme o download.');
+    if (await saveFile(nome, out)) toast('ZIP pronto: ' + itens.length + ' ' + rotulo);
+  }
   document.addEventListener('click', async function (e) {
-    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]');
-    if (!one && !many) return;
+    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]'), kit = e.target.closest('[data-zipkit]');
+    if (!one && !many && !kit) return;
     if (busy) { toast('Espere o download atual terminar.'); return; }
-    busy = true; var btn = one || many, label = btn.textContent; btn.disabled = true;
+    busy = true; var btn = one || many || kit, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando…';
     try {
       if (one) {
-        btn.textContent = 'Preparando…';
-        if (await saveFile(one.dataset.dl + '.mp4', await fetchVideo(one.dataset.dl))) toast('Download enviado: ' + one.dataset.dl + '.mp4');
+        if (await saveFile(base(one.dataset.dl), await fetchPath(one.dataset.dl))) toast('Download enviado: ' + base(one.dataset.dl));
+      } else if (kit) {
+        var files = JSON.parse(document.getElementById('kit-site-files').textContent);
+        var itens = files.map(function (p) { return { path: p, folder: p.indexOf('site/') === 0 ? 'videos' : p.indexOf('img-site-og') > -1 ? 'compartilhamento' : 'galeria' }; });
+        var leia = '﻿Kit do site · GL Academy\n\nVídeos em MP4 sem som, cada um com a capa (JPG) de mesmo nome.\nOnde usar cada peça: Biblioteca de Vídeos GL, seção Kit do site.\n\nCódigo para o Codex:\n\n' + document.getElementById('site-code').textContent + '\n';
+        await montarZip('gl-academy-kit-do-site.zip', itens, { 'LEIA-ME.txt': leia }, 'arquivos');
       } else {
-        var gid = many.dataset.zip, all = gid === 'all';
-        var cards = Array.prototype.slice.call(document.querySelectorAll(all ? '.vcard' : '#' + gid + ' .vcard'));
-        btn.textContent = 'Preparando…'; setStatus('Carregando o compactador…');
-        var JSZip = await loadZip(), zip = new JSZip(), txt = ['\ufeffBiblioteca de Vídeos GL · legendas prontas', 'Conteúdo educacional; trading envolve risco financeiro real.', ''];
-        for (var i = 0; i < cards.length; i++) {
-          var c = cards[i]; setStatus('Juntando ' + (i + 1) + ' de ' + cards.length + '…');
-          (all ? zip.folder(pasta(c.dataset.group)) : zip).file(c.dataset.vid + '.mp4', await fetchVideo(c.dataset.vid));
-          txt.push(legenda(c), '');
-        }
-        zip.file('LEGENDAS.txt', txt.join('\n'));
-        var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (m) { setStatus('Montando o ZIP: ' + Math.round(m.percent) + '%'); });
-        setStatus('Confirme o download.');
-        if (await saveFile(all ? 'gl-academy-videos.zip' : 'gl-academy-' + gid + '.zip', out)) toast('ZIP pronto: ' + cards.length + ' vídeos');
+        var gid = many.dataset.zip, all = gid === 'all', allImg = gid === 'all-img';
+        var cards = Array.prototype.slice.call(document.querySelectorAll(all ? '.vcard' : allImg ? '.icard' : '#' + gid + ' [data-src]'));
+        var itens = cards.map(function (c) { return { path: c.dataset.src, folder: (all || allImg) ? pasta(c.dataset.group) : '', card: c }; });
+        var nome = all ? 'gl-academy-videos.zip' : allImg ? 'gl-academy-imagens.zip' : 'gl-academy-' + gid + '.zip';
+        await montarZip(nome, itens, null, cards.length && cards[0].classList.contains('icard') ? 'imagens' : 'vídeos');
       }
     } catch (err) {
       toast('Não deu para baixar agora. Tente de novo em instantes.');
