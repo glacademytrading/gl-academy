@@ -172,6 +172,12 @@ for gid, gtitle, gdesc, items in GROUPS:
             # sobreposições transparentes: o arquivo já é leve, vai como está
             if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
                 subprocess.run(['cp', src, dst], check=True)
+        elif gid == 'site' and (not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src)):
+            # kit do site: versão leve sem som e a capa em tamanho cheio, com os nomes que o código do site usa
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', src, '-an', '-c:v', 'libx264', '-crf', '27', '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', dst], check=True)
+            t = '2.5' if vid in ('site-gamma-explicacao-16x9', 'site-pacote-completo-16x9') else '0'
+            subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-ss', t, '-i', src, '-frames:v', '1', '-q:v', '3', dst[:-4] + '.jpg'], check=True)
         elif gid != 'site' and (not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src)):
             crf = CRF.get(vid) or ('20' if vid.startswith(HQ) else '25')
             subprocess.run([FF, '-y', '-loglevel', 'error', '-i', src, '-c:v', 'libx264', '-crf', crf, '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', dst], check=True)
