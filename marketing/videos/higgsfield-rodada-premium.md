@@ -10,7 +10,7 @@ Pausada em 1º de outubro de 2026, a pedido, para não gastar crédito enquanto 
 
 1. **Liberar a rede do ambiente** para `upload.higgsfield.ai`, `cdn.higgsfield.ai`, `d8j0ntlcm91z4.cloudfront.net` e `d2ol7oe51mr4n9.cloudfront.net`. Isso se faz no menu do ambiente, na barra de título da sessão: Editar, Acesso à rede. Com isso o Claude envia os prints e baixa os clipes sem ninguém subir arquivo à mão.
 2. **Mandar os prints novos** (lista na Biblioteca, seção "Lista de prints").
-3. **Escrever "Retomar Higgsfield".** O fluxo é sempre: rascunho barato em 480p, aprovação, e só então 1080p.
+3. **Colar o prompt de `PROMPT-retomar-higgsfield.md`** (também na Biblioteca, com botão de copiar) com os prints anexados. O fluxo é sempre: rascunho barato em 480p, aprovação, e só então 1080p.
 
 Sem liberar a rede também dá: os prints são enviados no projeto acima, à mão. Nesse caminho a IA usa o print como referência e pode redesenhar detalhes da tela.
 

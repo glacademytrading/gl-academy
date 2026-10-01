@@ -60,6 +60,13 @@ details pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(-
   .stack td { border-bottom: 0; padding: 4px 12px; }
   .stack td::before { content: attr(data-label); display: block; font-family: var(--font-data); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 }
+.btn.btn-gold { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+.btn.btn-gold:hover { filter: brightness(1.08); }
+.btn[disabled] { opacity: .6; cursor: progress; }
+.section-head .btn { margin-top: 6px; }
+.dl-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.dl-status { font-family: var(--font-data); font-size: .8rem; color: var(--muted); }
+.prompt { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-data); font-size: .8rem; line-height: 1.55; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin: 0; max-height: 420px; overflow-y: auto; }
 code { font-family: var(--font-data); font-size: .85em; overflow-wrap: anywhere; }
 video { display: block; width: 100%; max-width: 100%; height: auto; background: #000; }
 .meta { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
@@ -95,6 +102,7 @@ tr:last-child td { border-bottom: 0; }
     <h1>Biblioteca de Vídeos GL</h1>
     <p class="lede">Todos os vídeos foram feitos com os prints reais do operacional: o setup acontecendo, os alvos, o Gamma e o NinjaTrader, na identidade da GL. Cada vídeo tem a finalidade e, quando faz sentido, a legenda pronta para postar.</p>
     <div class="stats" id="stats"></div>
+    <div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="all">Baixar todos os vídeos (ZIP)</button><span class="dl-status" id="dlstatus" role="status" aria-live="polite">O ZIP vem separado por grupo, com um arquivo de legendas prontas.</span></div>
     <nav class="toc" aria-label="Seções"><a href="#vendem">Vendem o operacional</a><a href="#objecoes">Objeções</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos para anúncio</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas verticais</a><a href="#horizontais">Coringas 16:9</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#comerciais">Comerciais</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
   </header>
 
@@ -181,13 +189,32 @@ tr:last-child td { border-bottom: 0; }
         <tr><td data-label="Peça"><b>Antes e depois</b></td><td data-label="O que já existe">Imagem do "antes" pronta, em 9:16 e 16:9</td><td data-label="Próximo passo">"Depois": a mesma pessoa, calma, com o GL Model na tela (print real colocado aqui)</td><td data-label="Custo estimado">Cerca de 15 por rascunho e 60 por clipe final</td></tr>
       </tbody>
     </table></div>
+    <div class="panel">
+      <h3>Prompt pronto para retomar</h3>
+      <p class="desc">Quando tirar os prints novos, copie, preencha o teto de créditos e cole numa conversa com o Claude Code, com os prints anexados em PNG. Funciona até numa sessão nova, sem histórico.</p>
+      <pre class="prompt" id="prompt-higgs">Retomar a rodada de vídeos da GL Academy na Higgsfield.
+
+Contexto: o plano está pronto no repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Antes de tudo, leia marketing/videos/higgsfield-rodada-premium.md e marketing/videos/README.md. A Biblioteca de Vídeos GL (padrão visual, legendas e os prints já usados, na pasta prints/) está em https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm.
+
+Prints novos: anexei os arquivos PNG nesta mensagem.
+
+Faça nesta ordem:
+1. Confira o saldo da Higgsfield e, antes de gastar, me mostre o custo de cada etapa (get_cost).
+2. Analise cada print novo e me diga que vídeos ele rende.
+3. Primeiro os vídeos sem crédito, no motor de marketing/videos: um setup acontecendo por print, com legenda e versão limpa, no mesmo padrão da Biblioteca. Publique tudo na Biblioteca, no mesmo link.
+4. Depois a Higgsfield, seguindo o plano: cenas de estúdio com câmera parada e monitor apagado (Seedance 2.5), com o print real encaixado na tela localmente, e o antes e depois. Sempre rascunho em 480p primeiro; só finalize em 1080p o que eu aprovar.
+5. Teto desta rodada: ___ créditos.
+
+Regras: nada de promessa de lucro ou renda; selo &quot;Replay · exemplo educacional&quot; nos replays; aviso de risco no fim; a IA nunca redesenha o gráfico real. Se a rede bloquear a Higgsfield, me diga quais domínios liberar e siga com o que não depende dela.</pre>
+      <button type="button" class="btn btn-gold" data-copy="prompt-higgs" data-label="Copiar prompt" data-done="Prompt copiado">Copiar prompt</button>
+    </div>
     <div class="two">
       <div class="panel">
         <h3>Como retomar</h3>
         <ol class="steps">
           <li><b>Liberar a rede do ambiente</b> para <code>upload.higgsfield.ai</code>, <code>cdn.higgsfield.ai</code>, <code>d8j0ntlcm91z4.cloudfront.net</code> e <code>d2ol7oe51mr4n9.cloudfront.net</code>. É no menu do ambiente, na barra de título da sessão: Editar, Acesso à rede. Com isso eu envio os prints e baixo os clipes sozinho.</li>
           <li><b>Mandar os prints novos</b> da lista desta página.</li>
-          <li><b>Escrever "Retomar Higgsfield".</b> Eu faço os rascunhos baratos, você aprova e só então finalizo em 1080p.</li>
+          <li><b>Colar o prompt pronto</b> (logo abaixo) numa conversa com o Claude Code, com os prints anexados em PNG. O Claude faz os rascunhos baratos, você aprova e só então ele finaliza em 1080p.</li>
         </ol>
         <p class="desc">Sem liberar a rede também dá: você sobe os prints no projeto "GL Academy · Marketing" e me avisa. Nesse caminho a IA usa o print como referência e pode redesenhar detalhes da tela.</p>
       </div>
@@ -223,10 +250,84 @@ Finalizar em 1080p a partir dos rascunhos já pagos: 16:9 cb1397cd-73e7-495e-b7b
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-copy]'); if (!b) return;
     var el = document.getElementById(b.dataset.copy), txt = el.textContent;
-    var done = function () { b.textContent = 'Copiada'; setTimeout(function () { b.textContent = 'Copiar legenda'; }, 1600); };
+    var label = b.dataset.label || 'Copiar legenda', doneTxt = b.dataset.done || 'Copiada';
+    var done = function () { b.textContent = doneTxt; setTimeout(function () { b.textContent = label; }, 1600); };
     var fail = function () { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Texto selecionado. Use o comando de copiar.'); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, fail); else fail();
   });
+
+  // Downloads: pela capacidade "downloads" do Claude; fora dele, link direto
+  var dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+  var status = document.getElementById('dlstatus'), statusIdle = status.textContent, busy = false;
+  function setStatus(t) { status.textContent = t || statusIdle; }
+  async function saveFile(name, blob) {
+    var d = await dlCap;
+    if (d) {
+      try { await d.save({ filename: name, data: blob }); return true; }
+      catch (err) {
+        var code = err && err.code;
+        if (code === 'declined') return false;
+        if (code === 'rate_limited') { toast('Já tem um download esperando confirmação.'); return false; }
+        if (code === 'too_large') { toast('Arquivo grande demais para este aparelho. Baixe por grupo.'); return false; }
+      }
+    }
+    var url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
+    return true;
+  }
+  async function fetchVideo(vid) {
+    var r = await fetch('videos/' + vid + '.mp4'); if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.blob();
+  }
+  var jszip;
+  function loadZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (!jszip) jszip = new Promise(function (ok, no) {
+      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      sc.onload = function () { ok(window.JSZip); }; sc.onerror = function () { jszip = null; no(new Error('JSZip')); };
+      document.head.appendChild(sc);
+    });
+    return jszip;
+  }
+  function legenda(card) {
+    var cap = card.querySelector('.cap-text');
+    return '== ' + card.dataset.title + ' (' + card.dataset.fmt + ', ' + card.dataset.dur + ' s) ==\nArquivo: ' + card.dataset.vid + '.mp4\nUso: ' + card.dataset.use +
+      '\nLegenda: ' + (cap ? cap.textContent : '(sem legenda: coringa, gancho ou peça de marca)');
+  }
+  var sections = Array.prototype.map.call(document.querySelectorAll('section[id] .grid'), function (g) { return g.closest('section').id; });
+  function pasta(gid) { var i = sections.indexOf(gid); return (i < 9 ? '0' : '') + (i + 1) + '-' + gid; }
+  document.addEventListener('click', async function (e) {
+    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]');
+    if (!one && !many) return;
+    if (busy) { toast('Espere o download atual terminar.'); return; }
+    busy = true; var btn = one || many, label = btn.textContent; btn.disabled = true;
+    try {
+      if (one) {
+        btn.textContent = 'Preparando…';
+        if (await saveFile(one.dataset.dl + '.mp4', await fetchVideo(one.dataset.dl))) toast('Download enviado: ' + one.dataset.dl + '.mp4');
+      } else {
+        var gid = many.dataset.zip, all = gid === 'all';
+        var cards = Array.prototype.slice.call(document.querySelectorAll(all ? '.vcard' : '#' + gid + ' .vcard'));
+        btn.textContent = 'Preparando…'; setStatus('Carregando o compactador…');
+        var JSZip = await loadZip(), zip = new JSZip(), txt = ['\ufeffBiblioteca de Vídeos GL · legendas prontas', 'Conteúdo educacional; trading envolve risco financeiro real.', ''];
+        for (var i = 0; i < cards.length; i++) {
+          var c = cards[i]; setStatus('Juntando ' + (i + 1) + ' de ' + cards.length + '…');
+          (all ? zip.folder(pasta(c.dataset.group)) : zip).file(c.dataset.vid + '.mp4', await fetchVideo(c.dataset.vid));
+          txt.push(legenda(c), '');
+        }
+        zip.file('LEGENDAS.txt', txt.join('\n'));
+        var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (m) { setStatus('Montando o ZIP: ' + Math.round(m.percent) + '%'); });
+        setStatus('Confirme o download.');
+        if (await saveFile(all ? 'gl-academy-videos.zip' : 'gl-academy-' + gid + '.zip', out)) toast('ZIP pronto: ' + cards.length + ' vídeos');
+      }
+    } catch (err) {
+      toast('Não deu para baixar agora. Tente de novo em instantes.');
+    } finally {
+      busy = false; btn.disabled = false; btn.textContent = label; setStatus('');
+    }
+  });
+
   // um vídeo por vez
   document.addEventListener('play', function (e) { document.querySelectorAll('video').forEach(function (v) { if (v !== e.target) v.pause(); }); }, true);
 })();

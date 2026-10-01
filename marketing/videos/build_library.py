@@ -10,6 +10,8 @@ os.makedirs(os.path.join(LIB, 'videos'), exist_ok=True)
 os.makedirs(os.path.join(LIB, 'capas'), exist_ok=True)
 
 AVISO = 'Conteúdo educacional; trading envolve risco financeiro real.'
+# partículas finas perdem detalhe no CRF 25; estes saem em CRF 20
+HQ = ('logo-', 'vinheta-', 'live-abertura', 'live-encerramento')
 GROUPS = [
   ('vendem', 'Vídeos que vendem o operacional', 'Prontos para Reels, Shorts, TikTok e anúncios. Cada um prova uma coisa que o GL Model faz, com o print real.', [
     ('v01-a-favor-ou-contra', 'A favor ou contra', 'Antes e depois: o modelo avisa "Correção contra W/M · Calor 4%" e depois "Alta alinhada D/W/M · Calor 19%".', 'Anúncio de topo, Reels',
@@ -125,7 +127,8 @@ for gid, gtitle, gdesc, items in GROUPS:
         dst = os.path.join(LIB, 'videos', vid + '.mp4')
         # versão leve para a página; só refaz quando o original mudou
         if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
-            subprocess.run([FF, '-y', '-loglevel', 'error', '-i', src, '-c:v', 'libx264', '-crf', '25', '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', dst], check=True)
+            crf = '20' if vid.startswith(HQ) else '25'
+            subprocess.run([FF, '-y', '-loglevel', 'error', '-i', src, '-c:v', 'libx264', '-crf', crf, '-preset', 'slow', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', dst], check=True)
         d = dur(src)
         poster = os.path.join(LIB, 'capas', vid + '.jpg')
         subprocess.run([FF, '-y', '-loglevel', 'error', '-ss', str(max(1, d * 0.62)), '-i', src, '-frames:v', '1', '-vf', 'scale=540:-2', '-q:v', '5', poster], check=True)
@@ -136,18 +139,20 @@ for gid, gtitle, gdesc, items in GROUPS:
         if cap:
             cid = 'cap-' + vid
             cap_html = f'<div class="cap"><p class="label">Legenda pronta</p><p class="cap-text" id="{cid}">{html.escape(cap)}</p><button type="button" class="btn" data-copy="{cid}">Copiar legenda</button></div>'
-        cards.append(f'''<article class="vcard {kind}">
+        cards.append(f'''<article class="vcard {kind}" data-vid="{vid}" data-group="{gid}" data-title="{html.escape(title)}" data-fmt="{fmt}" data-dur="{d}" data-use="{html.escape(use)}">
   <div class="frame"><video controls playsinline preload="none" poster="capas/{vid}.jpg" src="videos/{vid}.mp4"></video></div>
   <div class="meta">
     <p class="tags"><span class="tag">{fmt}</span><span class="tag">{d} s</span><span class="tag tag-use">{html.escape(use)}</span></p>
     <h3>{html.escape(title)}</h3>
     <p class="desc">{html.escape(desc)}</p>
     <p class="file">{vid}.mp4</p>
+    <button type="button" class="btn btn-dl" data-dl="{vid}">Baixar MP4</button>
     {cap_html}
   </div>
 </article>''')
     if cards:
-        cards_html.append(f'<section id="{gid}"><div class="section-head"><h2>{gtitle}</h2><p>{gdesc}</p></div><div class="grid">{"".join(cards)}</div></section>')
+        zipb = f'<button type="button" class="btn" data-zip="{gid}">Baixar este grupo (ZIP, {len(cards)} vídeos)</button>'
+        cards_html.append(f'<section id="{gid}"><div class="section-head"><h2>{gtitle}</h2><p>{gdesc}</p>{zipb}</div><div class="grid">{"".join(cards)}</div></section>')
 
 open(os.path.join(LIB, 'sections.html'), 'w', encoding='utf-8').write('\n'.join(cards_html))
 json.dump(manifest, open(os.path.join(LIB, 'manifest.json'), 'w'))

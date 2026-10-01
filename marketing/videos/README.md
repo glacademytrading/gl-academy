@@ -59,4 +59,4 @@ Coordenadas sempre em pixels do print original (use `grade.js`). Um roteiro tem:
 
 ## Higgsfield
 
-A rodada premium está pausada e pronta para retomar. Veja `higgsfield-rodada-premium.md`.
+A rodada premium está pausada e pronta para retomar. Veja `higgsfield-rodada-premium.md`; o texto para colar e começar está em `PROMPT-retomar-higgsfield.md`.
