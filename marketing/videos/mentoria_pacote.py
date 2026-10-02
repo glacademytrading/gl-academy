@@ -2,6 +2,7 @@
 # faltam), os materiais de estudo, os prints e as capas. Tudo sai das próprias aulas (specs-mentoria.js).
 #   python3 mentoria_pacote.py        -> roteiros no repositório + botão e manifesto na Biblioteca (o build_library.py chama)
 #   python3 mentoria_pacote.py --zip  -> também grava o ZIP com os vídeos em qualidade cheia (out/) em ../entregas
+#   python3 mentoria_pacote.py --zip --leve -> o mesmo ZIP com os vídeos da Biblioteca (a metade do tamanho), em ../entregas/leve
 import ast, html, json, os, re, subprocess, sys, zipfile
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -286,10 +287,11 @@ if os.path.exists(idx):
 
 # ZIP local, com os vídeos em qualidade cheia
 if '--zip' in sys.argv:
-    destino = os.environ.get('MENTORIA_ZIP_DIR') or os.path.join(os.path.dirname(ROOT), 'entregas')
+    leve = '--leve' in sys.argv  # vídeos da Biblioteca (CRF 25): o mesmo ZIP do botão, para caber onde 80 MB não cabem
+    destino = os.path.join(os.environ.get('MENTORIA_ZIP_DIR') or os.path.join(os.path.dirname(ROOT), 'entregas'), *(['leve'] if leve else []))
     os.makedirs(destino, exist_ok=True)
     caminho = os.path.join(destino, NOME_ZIP)
-    itens = sorted([(z, None, t) for z, t in textos.items()] + [(z, local, None) for local, _, z in arquivos])
+    itens = sorted([(z, None, t) for z, t in textos.items()] + [(z, os.path.join(LIB, p) if leve else local, None) for local, p, z in arquivos])
     with zipfile.ZipFile(caminho, 'w') as zf:
         for z, local, t in itens:
             if local:

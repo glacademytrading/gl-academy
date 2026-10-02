@@ -45,7 +45,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
 | `kit_site.py` | kit do site: o melhor vídeo para cada espaço do site novo, capas em tamanho cheio, catálogo e o prompt para o Codex (o `build_library.py` chama depois do `organizacao.py`) |
-| `mentoria_pacote.py` | ZIP da Mentoria GL: as aulas por módulo, o plano para o GL OS com o roteiro de cada aula e os prints que faltam, o cronograma de 4 semanas, o diário, a ficha, o checklist, os prints e as capas. Grava `../mentoria/roteiros-das-aulas.md` e o botão "Baixar a mentoria completa" na Biblioteca (o `build_library.py` chama antes do `organizacao.py`); com `--zip`, grava também o ZIP com os vídeos em qualidade cheia em `../entregas` |
+| `mentoria_pacote.py` | ZIP da Mentoria GL: as aulas por módulo, o plano para o GL OS com o roteiro de cada aula e os prints que faltam, o cronograma de 4 semanas, o diário, a ficha, o checklist, os prints e as capas. Grava `../mentoria/roteiros-das-aulas.md` e o botão "Baixar a mentoria completa" na Biblioteca (o `build_library.py` chama antes do `organizacao.py`); com `--zip`, grava também o ZIP com os vídeos em qualidade cheia em `../entregas` (84 MB), e com `--zip --leve`, o mesmo ZIP com os vídeos da Biblioteca (45 MB) em `../entregas/leve` |
 
 ## Como escrever um vídeo novo
 
