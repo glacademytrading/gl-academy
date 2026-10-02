@@ -87,6 +87,8 @@ PASTAS_V = {
             'Ensinam em 15 segundos com o gráfico real. Atraem seguidores e mostram autoridade sem pedir nada.'),
   'vendas-whats': ('06 - WhatsApp - sequência da call', 'Fazer a pessoa aparecer na call',
                    'Confirmação logo depois do agendamento, lembrete 1 hora antes e convite para remarcar se ela faltar. A legenda é a mensagem para mandar junto.'),
+  'operacional': ('14 - Operacional por dentro', 'Vender',
+                  'O gráfico se construindo e cada parte do operacional destacada: painel, cores, alvos de volume e de volatilidade, VWAPs e Gamma.'),
   'coringas': ('07 - Coringas sem texto (fundo para narrar)/Verticais 9x16', 'Produzir conteúdo todo dia',
                'Movimento do setup sem legenda. Coloque narração, texto ou gancho por cima e publique.'),
   'horizontais': ('07 - Coringas sem texto (fundo para narrar)/Horizontais 16x9', 'Produzir conteúdo todo dia',
@@ -107,12 +109,13 @@ PASTAS_V = {
 }
 TEMAS = [
   ('Contexto D/W/M: a favor ou contra', r'^(v01|v08|c06|c07|h02)'),
+  ('Estado de Mercado (painel Market State)', r'^(v12|c11|h04|v15|c14)'),
   ('Setup acontecendo (replay)', r'^(v02|c01|h01|h02)'),
-  ('Alvos', r'^(v03|c02|site-loop-alvos|v11|c10)'),
-  ('VWAP', r'^(v09|c08|aula-vwap)'),
-  ('Value Area: VAH, VAL e POC', r'^(aula-value-area|v05|c04|v11|c10)'),
-  ('GL Gamma (assinatura à parte)', r'^(v04|objecao-opcoes|c03|site-loop-gamma|site-gamma)'),
-  ('NinjaTrader', r'^(v06|v10|c05|c09|h03|site-loop-ninjatrader|objecao-plataforma)'),
+  ('Alvos', r'^(v03|c02|site-loop-alvos|v11|c10|v12|v15|v16|c11|c14|c15|h04)'),
+  ('VWAP', r'^(v09|c08|aula-vwap|v12)'),
+  ('Value Area: VAH, VAL e POC', r'^(aula-value-area|v05|c04|v11|c10|v14|v16|c13|c15)'),
+  ('GL Gamma (assinatura à parte)', r'^(v04|objecao-opcoes|c03|site-loop-gamma|site-gamma|v13|v14|v15|v16|c12|c13|c14|c15)'),
+  ('NinjaTrader', r'^(v06|v10|c05|c09|h03|site-loop-ninjatrader|objecao-plataforma|v12|v13|c11|c12|h04)'),
   ('TradingView', r'^(objecao-plataforma|site-loop-tradingview|h01)'),
   ('As 3 perguntas antes do trade', r'^v07'),
   ('Call 1x1 e conversão', r'^(objecao-por-onde-comecar|call-|comercial|objecao-mais-um-indicador)'),
@@ -201,7 +204,14 @@ PRINTS = [('1', 'Print 1 - ES em duas telas (TradingView)', 'VWAPs W e 3M, marca
           ('2', 'Print 2 - MES com VAH D e Zero Gamma', 'VAH D, VAL D e W, Zero Gamma e as setas do nível respeitado.'),
           ('3', 'Print 3 - Estrutura de Mercado no NinjaTrader', 'POC, VAH e VAL do dia, da semana e do mês.'),
           ('4', 'Print 4 - Alvos, escada de valor e Gamma', 'Alvos D/W, M e 3M, escada de valor e o painel de Gamma.'),
-          ('5', 'Print 5 - Alta alinhada D-W-M', 'Varredura, rompimento das VWAPs D e W e o rótulo "Alta alinhada D/W/M".')]
+          ('5', 'Print 5 - Alta alinhada D-W-M', 'Varredura, rompimento das VWAPs D e W e o rótulo "Alta alinhada D/W/M".'),
+          ('6', 'Print 6 - ES 30 min com o Estado de Mercado', 'Três semanas no 30 minutos: cores do estado, alvos de volume, VWAPs D, W e M, alvos de volatilidade e o painel "Equilíbrio na banda".'),
+          ('7', 'Print 7 - ES 1 min com GL Gamma e painel de risco', 'Calls (C+ 26,33K), puts (P+ 28,9K), Zero Gamma, clusters e o painel de risco "Ofensivo forte".'),
+          ('8', 'Print 8 - ES perdendo o Zero Gamma', 'VAH D, Zero Gamma, VAL D e VAL NY e a região das puts com absorção.'),
+          ('9', 'Print 9 - Expansão de alta acelerada', 'Alvos de volatilidade D, W e M e o painel "Expansão de alta acelerada".'),
+          ('10', 'Print 10 - Base, rompimento e alvo com Gamma', 'VAL D com puts e cluster, VAH W, Zero Gamma, VAH D e o alvo W +1%.'),
+          ('11', 'Print 11 - Alvo de liquidez atingido', 'O preço no alvo estrutural de volume e o painel "Expansão de alta muito forte".'),
+          ('12', 'Print 12 - O mesmo gráfico com o GL Gamma', 'GEX do SPX e do SPY sobre o ES: Zero Gamma, C+ 23,51K no alvo W +1% e P+ 9,42K na base.')]
 for n, nome, _ in PRINTS:
     arquivos.append({'p': f'prints/{n}.png', 'z': f"{P['prints']}/{nome}.png"})
 
@@ -265,7 +275,7 @@ pastas_lista = [
   (P['equipe'], 'o que vocês já tinham (comerciais, depoimentos, fotos, imagens, vídeos e vinhetas).'),
   (P['leads'], 'contatos de leads. Só quem trabalha com vendas e atendimento deve abrir.'),
   (P['ferr'], 'Higgsfield (plano e prompt para retomar), Aurora e tutoriais.'),
-  (P['prints'], 'os 5 prints que geraram os vídeos e a lista dos próximos.'),
+  (P['prints'], 'os prints que geraram os vídeos e a lista dos próximos.'),
   (P['revisar'], 'o que estava solto na pasta e não tinha lugar certo.'),
 ]
 add_texto(f"{P['comece']}/LEIA-ME - Comece aqui.txt", f'''GL ACADEMY · MARKETING ORGANIZADO
@@ -426,7 +436,7 @@ add_texto(f"{V}/{PASTAS_V['site'][0]}/PROMPT para o Codex.txt", prompt_site)
 # 03 - Imagens
 pastas_i_ordem = sorted(img_por_pasta)
 add_texto(f'{I}/LEIA-ME.txt', f'''IMAGENS FEITAS PELO CLAUDE
-{n_imagens} imagens feitas com os 5 prints reais, sem gastar crédito de IA.
+{n_imagens} imagens feitas com os prints reais, sem gastar crédito de IA.
 
 ''' + '\n'.join(f"{p[len(I) + 1:]} ({len(img_por_pasta[p])} imagens)" for p in pastas_i_ordem) + '''
 
@@ -521,7 +531,7 @@ Esta pasta guarda contatos de leads (nome, telefone, e-mail). Pela LGPD:
 add_texto(f"{P['ferr']}/Higgsfield - plano da rodada premium.txt", md_txt(ler(os.path.join(MKT, 'videos', 'higgsfield-rodada-premium.md'))))
 add_texto(f"{P['ferr']}/Higgsfield - prompt para retomar.txt", md_txt(ler(os.path.join(MKT, 'videos', 'PROMPT-retomar-higgsfield.md'))))
 add_texto(f"{P['prints']}/Lista de prints para a próxima rodada.txt", '''PRINTS DO OPERACIONAL
-Os 5 prints desta pasta geraram todos os vídeos e imagens do Claude. No motor de vídeo eles se chamam 1.png a 5.png, na mesma ordem.
+Os prints desta pasta geraram todos os vídeos e imagens do Claude. No motor de vídeo eles se chamam 1.png a 12.png, na mesma ordem.
 
 ''' + '\n'.join(f'{nome}: {desc}' for _, nome, desc in PRINTS) + '''
 

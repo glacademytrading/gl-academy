@@ -39,6 +39,18 @@ GROUPS = [
     ('v11-escada-de-valor', 'Escada de valor', 'O preço sobe degrau por degrau: VAL M, VAH M, VAH Q, VAH W e o alvo D/W.', 'Reels, anúncio',
      'A escada de valor: do valor mensal ao trimestral, ao semanal, até o alvo D/W. Cada degrau marcado no gráfico pelo GL Model. Exemplo educacional; resultado passado não garante resultado futuro.'),
   ]),
+  ('operacional', 'O operacional por dentro', 'Rodada de 2 de outubro, com os prints de 1º e 2 de outubro no NinjaTrader: o gráfico se constrói na tela e cada parte do operacional é destacada, do painel aos alvos e ao Gamma.', [
+    ('v15-volatilidade-volume-gamma', 'Antes e depois: volatilidade, volume e Gamma', 'Antes: o preço passa pelos alvos de volatilidade D, W e M ("Expansão de alta acelerada"). Depois: chega no alvo estrutural de volume ("Expansão de alta muito forte"). E, somando o GL Gamma, calls no alvo W +1% e puts na base.', 'Reels, anúncio, prova do método',
+     'Antes e depois. Primeiro, o preço passou pelos alvos de volatilidade D, W e M, e o painel marcou expansão de alta acelerada. Depois, chegou no alvo estrutural de volume, onde está a liquidez, e o painel subiu para expansão de alta muito forte. Somando o GL Gamma: preço acima do Zero Gamma, calls no mesmo nível do alvo W +1% e puts lá embaixo, na base. Volatilidade, volume e Gamma no mesmo mapa. Alvos são projeções, não promessa de resultado. GL Gamma é uma assinatura à parte. Call 1x1 gratuita no link da bio. Trading envolve risco financeiro real.'),
+    ('v12-estado-de-mercado', 'Estado de Mercado por dentro', 'O 30 minutos se construindo: cores do estado, alvos estruturais de volume, VWAPs D, W e M, alvos de volatilidade D, W, M e 3M e o painel "Equilíbrio na banda".', 'Reels, anúncio, YouTube Shorts',
+     f'O GL Estado de Mercado por dentro: as cores mostram o estado do mercado, as faixas verdes marcam os alvos estruturais de volume, as VWAPs do dia, da semana e do mês ficam no gráfico e os alvos de volatilidade D, W, M e 3M aparecem acima do preço. E o painel lê tudo em português: equilíbrio na banda, macro comprador. Alvos são projeções, não promessa de resultado. Call 1x1 gratuita no link da bio. {AVISO}'),
+    ('v13-chao-das-puts', 'Calls em cima, puts embaixo', 'No 1 minuto: a maior barra de calls, a maior de puts, o preço parando nas puts, a volta ao Zero Gamma e o painel de risco "Ofensivo forte".', 'Reels, anúncio do GL Gamma',
+     f'O mapa de Gamma no gráfico de 1 minuto: em cima, a maior barra de calls; embaixo, a maior de puts. O preço caiu mais de 50 pontos, parou na região das puts e voltou para o Zero Gamma. E o painel de risco marcava ofensivo forte, 5 de 5 janelas positivas. GL Gamma é uma assinatura à parte. {AVISO}'),
+    ('v14-perdeu-o-zero-gamma', 'Perdeu o Zero Gamma', 'O preço trava no VAH D, perde o Zero Gamma, atravessa o VAL D e o VAL NY, acelera e reage na região das puts.', 'Reels educativo, anúncio do GL Gamma',
+     f'O que acontece quando o preço perde o Zero Gamma? Aqui ele travou no VAH D, perdeu o Zero Gamma, atravessou o VAL D e o VAL NY e acelerou até a região das puts, onde reagiu. Calls em cima, puts embaixo, Zero Gamma no meio. GL Gamma é uma assinatura à parte. {AVISO}'),
+    ('v16-rompimento-gamma', 'Base, rompimento e alvo', 'Base no VAL D com puts (P+) e cluster, rompimento do VAH W e do Zero Gamma, parada no VAH D e o próximo alvo W +1%.', 'Reels, anúncio',
+     f'A base, o rompimento e o alvo. O preço segurou no VAL D, onde estavam o nível de puts e um cluster, rompeu o VAH W e o Zero Gamma, parou no VAH D e no cluster de 7.805, e o próximo alvo no mapa é o W +1%. Alvos são projeções, não promessa de resultado. GL Gamma é uma assinatura à parte. {AVISO}'),
+  ]),
   ('objecoes', 'Respostas às objeções', 'Para remarketing: quem já viu a GL e não agendou costuma travar numa dessas dúvidas. Cada vídeo responde uma e termina na call 1x1.', [
     ('objecao-plataforma', 'Funciona na minha plataforma?', 'TradingView e NinjaTrader com o mesmo mapa; os planos NinjaTrader já incluem o TradingView.', 'Remarketing, stories de venda, resposta em DM',
      f'Funciona na minha plataforma? O GL Model roda no TradingView e no NinjaTrader, com o mesmo mapa. E os planos NinjaTrader já incluem o TradingView. Tire suas dúvidas na call 1x1 gratuita, link na bio. {AVISO}'),
@@ -76,6 +88,11 @@ GROUPS = [
     ('v01-a-favor-ou-contra-4x5', 'A favor ou contra · 4:5', 'Antes e depois do contexto, no formato do feed.', 'Anúncio no feed', ''),
     ('v03-alvos-claros-4x5', 'Alvos claros · 4:5', 'Alvos D/W, M e 3M, no formato do feed.', 'Anúncio no feed', ''),
     ('v08-nem-toda-queda-e-venda-4x5', 'Nem toda queda é venda · 4:5', 'Contexto antes da entrada, no formato do feed.', 'Anúncio no feed', ''),
+    ('v15-volatilidade-volume-gamma-4x5', 'Antes e depois: volatilidade, volume e Gamma · 4:5', 'Os três atos no formato do feed.', 'Anúncio no feed', ''),
+    ('v12-estado-de-mercado-4x5', 'Estado de Mercado por dentro · 4:5', 'O painel, as cores e os alvos, no formato do feed.', 'Anúncio no feed', ''),
+    ('v13-chao-das-puts-4x5', 'Calls em cima, puts embaixo · 4:5', 'O mapa de Gamma no 1 minuto, no formato do feed.', 'Anúncio no feed', ''),
+    ('v14-perdeu-o-zero-gamma-4x5', 'Perdeu o Zero Gamma · 4:5', 'Do VAH D à região das puts, no formato do feed.', 'Anúncio no feed', ''),
+    ('v16-rompimento-gamma-4x5', 'Base, rompimento e alvo · 4:5', 'Base, rompimento e o alvo W +1%, no formato do feed.', 'Anúncio no feed', ''),
   ]),
   ('coringas', 'Coringas verticais (sem texto)', 'Movimento do setup sem legenda. Coloque qualquer narração, texto ou gancho por cima e publique. São a base para produzir conteúdo todo dia.', [
     ('c01-setup-acontecendo-limpo', 'Setup acontecendo', 'Revelação do setup de alta alinhada.', 'Fundo de Reels e stories', ''),
@@ -88,11 +105,17 @@ GROUPS = [
     ('c08-vwap-3m-limpo', 'Defesa na VWAP 3M', 'Rompimento, correção e defesa na VWAP 3M.', 'Fundo para falar de VWAP', ''),
     ('c09-queda-ninjatrader-limpo', 'Queda no NinjaTrader', 'Perda da zona e novo valor do dia.', 'Fundo para conteúdo de NinjaTrader', ''),
     ('c10-escada-de-valor-limpo', 'Escada de valor', 'Revelação de baixo para cima pelos níveis de valor.', 'Fundo para falar de VAH e VAL', ''),
+    ('c11-estado-de-mercado-limpo', 'Estado de Mercado', 'O 30 minutos se construindo, os alvos e o painel.', 'Fundo para falar do painel e dos alvos', ''),
+    ('c12-gamma-1-minuto-limpo', 'Gamma no 1 minuto', 'Construção do gráfico com calls, puts, Zero Gamma e o painel de risco.', 'Fundo para falar de Gamma', ''),
+    ('c13-zero-gamma-limpo', 'Zero Gamma perdido', 'Do VAH D até a região das puts.', 'Fundo para falar de Gamma', ''),
+    ('c14-volatilidade-volume-gamma-limpo', 'Antes e depois com Gamma', 'Dos alvos de volatilidade ao alvo de volume e o GL Gamma.', 'Fundo para falar de alvos', ''),
+    ('c15-rompimento-gamma-limpo', 'Rompimento com Gamma', 'Base, rompimento e o alvo W +1%.', 'Fundo para falar de rompimentos', ''),
   ]),
   ('horizontais', 'Coringas horizontais (16:9)', 'Para YouTube, vídeo de boas-vindas do funil, VSL e trechos de live.', [
     ('h01-duas-telas-limpo', 'Duas telas no TradingView', 'Leitura em dois tempos gráficos com revelação.', 'YouTube, VSL', ''),
     ('h02-alta-alinhada-limpo', 'Alta alinhada', 'Setup acontecendo até o marcador D/W/M.', 'YouTube, VSL', ''),
     ('h03-ninjatrader-limpo', 'NinjaTrader', 'Estrutura de mercado GL no NinjaTrader.', 'YouTube, VSL', ''),
+    ('h04-estado-de-mercado-limpo', 'Estado de Mercado', 'O 30 minutos se construindo: três semanas, os alvos e o painel.', 'YouTube, VSL', ''),
   ]),
   ('marca', 'Logo e vinheta GL', 'O emblema real se formando em partículas douradas, com brilho e 2 segundos parado no fim. Feitos aqui, sem gastar crédito.', [
     ('logo-gl-8s-16x9', 'Logo GL em 8 segundos · 16:9', 'Partículas formam o emblema, entra "GL ACADEMY" e o emblema fica parado nos 2 s finais.', 'Abertura de vídeos do YouTube, VSL e lives', ''),
@@ -220,7 +243,7 @@ print(len(manifest), 'vídeos')
 page = open(os.path.join(LIB, 'template.html'), encoding='utf-8').read().replace('<!--SECTIONS-->', '\n'.join(cards_html))
 open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
 os.makedirs(os.path.join(LIB, 'prints'), exist_ok=True)
-for n in range(1, 6):
+for n in range(1, 13):
     src = os.path.join(ROOT, f'{n}.png'); dst = os.path.join(LIB, 'prints', f'{n}.png')
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
         subprocess.run(['cp', src, dst], check=True)

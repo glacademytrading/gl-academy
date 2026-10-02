@@ -12,7 +12,7 @@ Biblioteca publicada (privada): https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDf
 
 ## Prints
 
-Os prints `1.png` a `5.png` **não ficam no git**. Eles estão publicados na Biblioteca, na pasta `prints/`. Antes de renderizar, copie-os para esta pasta com os mesmos nomes. Prints novos seguem a numeração (`6.png`, `7.png`…).
+Os prints `1.png` a `12.png` **não ficam no git**. Eles estão publicados na Biblioteca, na pasta `prints/`. Antes de renderizar, copie-os para esta pasta com os mesmos nomes. Prints novos seguem a numeração (`13.png`, `14.png`…).
 
 ## Comandos
 
@@ -23,7 +23,9 @@ SPECS=./specs-r3.js node stills.js aula-vwap   # só os quadros de conferência 
 ./sheet.sh out/folha.jpg 360 4 out/check/*.jpg # folha de contato com os quadros
 node grade.js 6.png                            # grade de coordenadas para escrever cenas
 node grade.js 6.png 900 60 1816 860 1.6        # recorte ampliado da grade
+node amostra.js 7.png 813,86 465,26             # cor do fundo em cada ponto (para as máscaras e tampas)
 SPECS=./specs-imagens.js node slides.js        # imagens estáticas em out/imagens/<grupo>/
+node quadros-capas.js && SPECS=./specs-carrosseis.js node slides.js capas-reels   # capas de Reels a partir dos coringas limpos
 python3 build_library.py                       # monta biblioteca/index.html, vídeos leves, capas, imagens, kit do site e o pacote organizado
 ```
 
@@ -37,6 +39,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-r3.js` | logo de 8 s, vinheta de 4 s, aulas rápidas e respostas às objeções |
 | `specs-feed.js` | versões 4:5 para o feed, geradas a partir dos vídeos 9:16 |
 | `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
+| `specs-r5.js` | o operacional por dentro (prints 6 a 12): Estado de Mercado, Gamma no 1 minuto, Zero Gamma perdido, o antes e depois dos alvos de volatilidade, de volume e do GL Gamma, e o rompimento; com coringas limpos, versões 4:5 e uma horizontal |
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
