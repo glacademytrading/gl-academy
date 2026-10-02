@@ -45,6 +45,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
 | `kit_site.py` | kit do site: o melhor vídeo para cada espaço do site novo, capas em tamanho cheio, catálogo e o prompt para o Codex (o `build_library.py` chama depois do `organizacao.py`) |
+| `mentoria_pacote.py` | ZIP da Mentoria GL: as aulas por módulo, o plano para o GL OS com o roteiro de cada aula e os prints que faltam, o cronograma de 4 semanas, o diário, a ficha, o checklist, os prints e as capas. Grava `../mentoria/roteiros-das-aulas.md` e o botão "Baixar a mentoria completa" na Biblioteca (o `build_library.py` chama antes do `organizacao.py`); com `--zip`, grava também o ZIP com os vídeos em qualidade cheia em `../entregas` |
 
 ## Como escrever um vídeo novo
 
@@ -81,6 +82,8 @@ O botão "Baixar tudo organizado" da Biblioteca monta no navegador o ZIP `GL Aca
 Na pasta "01 - Estratégia e planejamento" o pacote leva o plano de marketing (`../plano-de-marketing.md`), o prompt de continuidade (`../PROMPT-continuidade.md`) e as planilhas de `../execucao/` (calendário de outubro, teste de anúncios e placar semanal), que o `organizacao.py` também grava no repositório.
 
 ## Kit do site
+
+O botão "Baixar a mentoria completa (ZIP)", na seção Mentoria GL, monta `Mentoria GL - aulas do operacional.zip` no navegador, com o mesmo conteúdo do ZIP que o `mentoria_pacote.py --zip` grava. O plano é `../mentoria/plano-da-mentoria.md` e a lista do que falta é `../mentoria/prints-que-faltam.md`: na versão para o GL OS, o roteiro de cada aula e essa lista entram como anexos. Mudou uma aula, o plano ou a lista, rode o build de novo.
 
 O botão "Baixar o kit do site" da Biblioteca monta `GL Academy - Kit do site.zip`: os vídeos escolhidos para o site em `media/` (loops, histórias, filmes, reels, FAQ e aulas), as capas, as imagens da galeria e de compartilhamento, `media/catalogo.json` e o prompt para o Codex. O `kit_site.py` escolhe os vídeos, gera em `biblioteca/kit/` as capas que faltam e grava o manifesto na página. O prompt é `../site/prompt-codex-videos-do-site.md`: mudou o prompt, rode o build de novo.
 

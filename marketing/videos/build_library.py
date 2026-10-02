@@ -343,6 +343,8 @@ open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
 print(len(img_files), 'imagens;', len(site_files), 'arquivos no kit do site')
 
 # Pacote organizado para levar ao computador (manifesto e textos na página)
+# a Mentoria GL ganha o botão do ZIP completo e os roteiros (que o pacote organizado também usa)
+subprocess.run(['python3', os.path.join(ROOT, 'mentoria_pacote.py')], check=True)
 subprocess.run(['python3', os.path.join(ROOT, 'organizacao.py')], check=True)
 # Kit do site: os melhores vídeos para cada espaço do site, com capas e o prompt para o Codex
 subprocess.run(['python3', os.path.join(ROOT, 'kit_site.py')], check=True)

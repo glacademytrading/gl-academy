@@ -63,8 +63,13 @@ function aula(o) {
     return s;
   });
   const passosT = []; let u = INTRO; o.passos.forEach(p => { passosT.push(+(u + p.d / 2).toFixed(1)); u += p.d; });
+  // dados da aula para o plano, os roteiros e o ZIP da mentoria (mentoria_pacote.py); não mudam o vídeo
+  const prints = []; let pi = o.img;
+  o.passos.forEach(p => { pi = p.img || pi; const n = parseInt(pi, 10); if (!prints.includes(n)) prints.push(n); });
+  const meta = { modulo: o.modulo, aula: o.aula, curto: o.curto, titulo: o.titulo, objetivo: o.objetivo, proxima: o.proxima, gamma: !!o.gamma, prints,
+    passos: o.passos.map(p => ({ tag: p.tag, cls: p.cls || '', titulo: p.titulo, texto: p.texto || '', lista: p.lista || [] })) };
   return {
-    id: o.id, ...L, dur, noGrad: true, scenes, texts,
+    id: o.id, ...L, dur, noGrad: true, scenes, texts, meta,
     end: { t0: t, brand: 'MENTORIA GL', tag: o.proxima ? `Próxima aula: ${o.proxima}` : 'Fim da mentoria: revise cada aula no replay.',
       cta: 'Pratique no replay antes de operar', sub: '', disc: DISC + (o.gamma ? ' GL Gamma: assinatura à parte.' : '') },
     stills: [1.5, ...passosT, +(t + 1.5).toFixed(1)]

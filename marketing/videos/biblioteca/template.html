@@ -436,14 +436,17 @@ Rascunhos de origem: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-
     if (await saveFile(leve ? m.nomeLeve : m.nome, out)) toast(leve ? 'Organizador e textos prontos.' : 'ZIP pronto: ' + itens.length + ' arquivos.');
   }
   document.addEventListener('click', async function (e) {
-    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]'), kit = e.target.closest('[data-zipkit]'), org = e.target.closest('[data-org]');
-    if (!one && !many && !kit && !org) return;
+    var one = e.target.closest('[data-dl]'), many = e.target.closest('[data-zip]'), kit = e.target.closest('[data-zipkit]'), org = e.target.closest('[data-org]'), pac = e.target.closest('[data-pacote]');
+    if (!one && !many && !kit && !org && !pac) return;
     if (busy) { toast('Espere o download atual terminar.'); return; }
-    busy = true; var btn = one || many || kit || org, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando…';
+    busy = true; var btn = one || many || kit || org || pac, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando…';
     ativo = (btn.closest('.dl-bar') && btn.closest('.dl-bar').querySelector('.dl-status')) || document.getElementById('dlstatus');
     try {
       if (org) {
         await baixarManifesto('organizacao', org.dataset.org === 'leve');
+      } else if (pac) {
+        // pacote de uma seção (ex.: a Mentoria GL): arquivos e textos num manifesto próprio
+        await baixarManifesto(pac.dataset.pacote, false);
       } else if (one) {
         if (await saveFile(base(one.dataset.dl), await fetchPath(one.dataset.dl))) toast('Download enviado: ' + base(one.dataset.dl));
       } else if (kit) {

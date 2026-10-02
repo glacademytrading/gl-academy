@@ -513,6 +513,9 @@ Mande cada vídeo com a mensagem. Os vídeos estão em "''' + V + '/' + PASTAS_V
 add_texto(f"{P['textos']}/Roteiros para gravar e depoimentos.txt", md_txt(ler(os.path.join(MKT, 'roteiros-e-depoimentos.md'))))
 add_texto(f"{P['textos']}/Glossário de nomes e produtos.txt", md_txt(ler(os.path.join(MKT, 'glossario.md'))))
 add_texto(f"{V}/{PASTAS_V['mentoria'][0]}/LEIA-ME - plano da mentoria.txt", md_txt(ler(os.path.join(MKT, 'mentoria', 'plano-da-mentoria.md'))))
+for arq_md, titulo in [('roteiros-das-aulas.md', 'Roteiros das aulas'), ('prints-que-faltam.md', 'Próximas aulas - prints que faltam')]:
+    if os.path.exists(os.path.join(MKT, 'mentoria', arq_md)):
+        add_texto(f"{V}/{PASTAS_V['mentoria'][0]}/{titulo}.txt", md_txt(ler(os.path.join(MKT, 'mentoria', arq_md))))
 todas = ['TODAS AS LEGENDAS PRONTAS', AVISO, '', '== VÍDEOS ==', '']
 for pasta in pastas_v_ordem:
     com = [v for v in por_pasta[pasta] if v['leg']]
