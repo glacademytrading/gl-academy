@@ -93,6 +93,25 @@ html.alpha, html.alpha body, html.alpha #stage { background: transparent !import
 html.alpha #gt, html.alpha #gb { display: none; }
 html.alpha.qa body { background: repeating-conic-gradient(#3b3b3b 0 25%, #262626 0 50%) 0 0 / 48px 48px !important; }
 .tw { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
+/* aulas da mentoria (16:9): painel à direita e cartela de abertura */
+.ms-bg { position: absolute; left: 1290px; top: 130px; width: 600px; height: 890px; background: linear-gradient(180deg, rgba(14,12,8,.96), rgba(8,7,5,.96)); border: 1px solid rgba(216,174,85,.28); border-left: 4px solid #d8ae55; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+.ms-head { font: 700 20px/1 "Montserrat", sans-serif; letter-spacing: .2em; color: rgba(216,174,85,.85); text-transform: uppercase; }
+.ms-aula { font: 800 30px/1.2 "Montserrat", sans-serif; color: rgba(255,255,255,.92); margin-top: 14px; }
+.ms-rule { height: 2px; background: linear-gradient(90deg, #d8ae55, rgba(216,174,85,0)); margin: 26px 0 0; }
+.ms-step { display: inline-block; font: 800 22px/1 "Montserrat", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: 10px 14px; border-radius: 8px; }
+.ms-step.red { background: #ff6b6b; } .ms-step.green { background: #4fe3a8; } .ms-step.ask { background: #fff; }
+.ms-title { font: 800 44px/1.12 "Montserrat", sans-serif; color: #fff; margin-top: 22px; }
+.ms-title em { font-style: normal; color: #f6d991; }
+.ms-body { font: 500 29px/1.42 "Inter", sans-serif; color: rgba(255,255,255,.84); margin-top: 20px; }
+.ms-body b { color: #fff; font-weight: 700; }
+.ms-list { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 18px; }
+.ms-list li { font: 600 28px/1.32 "Inter", sans-serif; color: #fff; padding-left: 46px; position: relative; }
+.ms-list li::before { content: ""; position: absolute; left: 0; top: 4px; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(180deg, #f6d991, #d8ae55); }
+.ms-intro { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: radial-gradient(ellipse at 50% 45%, #1c160b 0%, #050505 62%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; text-align: center; }
+.ms-intro img { width: 150px; height: 150px; }
+.ms-intro .k { font: 700 28px/1 "Montserrat", sans-serif; letter-spacing: .32em; color: #d8ae55; padding-left: .32em; }
+.ms-intro .t { font: 900 84px/1.06 "Montserrat", sans-serif; max-width: 1500px; background: linear-gradient(180deg, #fff 35%, #f6d991); -webkit-background-clip: text; color: transparent; }
+.ms-intro .o { font: 500 34px/1.4 "Inter", sans-serif; color: rgba(255,255,255,.8); max-width: 1300px; }
 .spot { position: absolute; border-radius: 18px; border: 2px solid rgba(246,217,145,.55); box-shadow: 0 0 0 4000px rgba(5,5,5,.64), 0 0 36px rgba(246,217,145,.25); }
 .feed #cap { left: 60px; right: 60px; }
 .feed #cap .kick { font-size: 26px; margin-bottom: 18px; }
@@ -189,8 +208,16 @@ async function init(spec) {
     const layers = [];
     if (s.reveal) {
       const r = s.reveal, m = document.createElement('div'); m.className = 'mask';
-      m.style.background = r.color || sampleColor(img, r.sample ? r.sample[0] : r.x1 - 2, r.sample ? r.sample[1] : (r.dir === 'up' ? r.to + 4 : r.y0 + 4));
+      const bg = r.color || sampleColor(img, r.sample ? r.sample[0] : r.x1 - 2, r.sample ? r.sample[1] : (r.dir === 'up' ? r.to + 4 : r.y0 + 4));
       if (r.dir !== 'up') { m.style.top = r.y0 + 'px'; m.style.height = (r.y1 - r.y0) + 'px'; }
+      if (r.gaps && r.dir !== 'up') {
+        // faixas horizontais que ficam visíveis (níveis já conhecidos antes do preço chegar)
+        let y = r.y0;
+        [...r.gaps].sort((a, b) => a[0] - b[0]).concat([[r.y1, r.y1]]).forEach(([ga, gb]) => {
+          if (ga > y) { const c = document.createElement('div'); Object.assign(c.style, { position: 'absolute', left: 0, right: 0, top: (y - r.y0) + 'px', height: (ga - y) + 'px', background: bg }); m.appendChild(c); }
+          y = Math.max(y, gb);
+        });
+      } else m.style.background = bg;
       cam.appendChild(m); layers.push(['reveal', m, r]);
     }
     (s.hides || []).forEach(h => {
@@ -303,6 +330,14 @@ async function render(t) {
         m.style.top = (r.to - (r.pad || 0)) + 'px'; m.style.height = Math.max(0, ry - r.to + (r.pad || 0)) + 'px';
         m.style.display = k >= 1 ? 'none' : 'block';
         if (k > 0 && k < 1) { const [sx0, sy] = toScreen(c, r.x0, ry), [sx1] = toScreen(c, r.x1, ry); fxHtml += `<div class="playhead" style="left:${sx0}px;top:${sy - 1}px;width:${sx1 - sx0}px;height:3px;background:linear-gradient(90deg, transparent, #f6d991 15%, #f6d991 85%, transparent)"></div>`; }
+      } else if (kind === 'reveal' && r.keys) {
+        // revelação com pausas: keys [{t, x}] em linha reta entre os pontos; a máscara vai até x1
+        const ks = r.keys; let rx = ks[0].x;
+        if (lt >= ks[ks.length - 1].t) rx = ks[ks.length - 1].x;
+        else for (let j = 0; j < ks.length - 1; j++) if (lt >= ks[j].t && lt < ks[j + 1].t) { rx = lerp(ks[j].x, ks[j + 1].x, (lt - ks[j].t) / (ks[j + 1].t - ks[j].t)); break; }
+        m.style.left = rx + 'px'; m.style.width = Math.max(0, r.x1 - rx + (r.pad || 0)) + 'px';
+        m.style.display = rx >= r.x1 ? 'none' : 'block';
+        if (lt >= ks[0].t && rx < r.x1) { const [sx, sy0] = toScreen(c, rx, r.y0), [, sy1] = toScreen(c, rx, r.y1); fxHtml += `<div class="playhead" style="left:${sx - 1}px;top:${sy0}px;height:${sy1 - sy0}px"></div>`; }
       } else if (kind === 'reveal') {
         const k = clamp01((lt - r.t0) / (r.t1 - r.t0));
         const rx = lerp(r.x0, r.x1, k);

@@ -89,6 +89,8 @@ PASTAS_V = {
                    'Confirmação logo depois do agendamento, lembrete 1 hora antes e convite para remarcar se ela faltar. A legenda é a mensagem para mandar junto.'),
   'operacional': ('14 - Operacional por dentro', 'Vender',
                   'O gráfico se construindo e cada parte do operacional destacada: painel, cores, alvos de volume e de volatilidade, VWAPs e Gamma.'),
+  'mentoria': ('15 - Mentoria - aulas do operacional', 'Ensinar os alunos',
+               'Aulas curtas para a área do aluno: o gráfico para no ponto de decisão e depois mostra região de atuação, gatilho, invalidação, alvos e resultado. O Giovane valida as regras antes de liberar.'),
   'coringas': ('07 - Coringas sem texto (fundo para narrar)/Verticais 9x16', 'Produzir conteúdo todo dia',
                'Movimento do setup sem legenda. Coloque narração, texto ou gancho por cima e publique.'),
   'horizontais': ('07 - Coringas sem texto (fundo para narrar)/Horizontais 16x9', 'Produzir conteúdo todo dia',
@@ -124,6 +126,10 @@ TEMAS = [
   ('Lives', r'^live-'),
   ('YouTube', r'^(youtube|logo-gl-8s-16x9|vinheta-gl-4s-16x9|h0)'),
   ('Comunidade e parceiros', r'^(comunidade|parceiro)'),
+  ('Mentoria GL (aulas do operacional)', r'^m\d\d-'),
+  ('Estado de alta', r'^(m03|m04|m05|m15|m16)'),
+  ('Estado de baixa', r'^(m06|m07|m08|m13|m14|m18)'),
+  ('Equilíbrio', r'^(m09|m10|m19)'),
 ]
 
 def temas(vid):
@@ -212,7 +218,15 @@ PRINTS = [('1', 'Print 1 - ES em duas telas (TradingView)', 'VWAPs W e 3M, marca
           ('10', 'Print 10 - Base, rompimento e alvo com Gamma', 'VAL D com puts e cluster, VAH W, Zero Gamma, VAH D e o alvo W +1%.'),
           ('11', 'Print 11 - Alvo de liquidez atingido', 'O preço no alvo estrutural de volume e o painel "Expansão de alta muito forte".'),
           ('12', 'Print 12 - O mesmo gráfico com o GL Gamma', 'GEX do SPX e do SPY sobre o ES: Zero Gamma, C+ 23,51K no alvo W +1% e P+ 9,42K na base.'),
-          ('13', 'Print 13 - Retorno à média com GL Gamma', 'Absorção de 7.804 no topo, P+ 41,96K com o alvo D -0,3% e a absorção de 7.754 embaixo, e o painel de volta ao equilíbrio.')]
+          ('13', 'Print 13 - Retorno à média com GL Gamma', 'Absorção de 7.804 no topo, P+ 41,96K com o alvo D -0,3% e a absorção de 7.754 embaixo, e o painel de volta ao equilíbrio.'),
+          ('14', 'Print 14 - ES 30 min - o mapa do swing', 'De 15/09 a 01/10: expansão, topo, topos e fundos mais baixos, níveis D, W e M, clusters e Zero Gamma.'),
+          ('15', 'Print 15 - ES 1 min - bandas em queda', 'VAH D e VAL W perdidos, bandas pontilhadas para baixo, VAL NY e VAL D.'),
+          ('16', 'Print 16 - ES 5 min - topos descendentes (TradingView)', 'Topos mais baixos e regiões de atuação da Estrutura de Mercado.'),
+          ('17', 'Print 17 - ES 5 min com o Estado de Mercado (TradingView)', 'Velas coloridas, faixas verdes de volume e a caixa da madrugada.'),
+          ('18', 'Print 18 - ES 5 min sem o Estado de Mercado (TradingView)', 'O mesmo dia do print 17 com o indicador desligado.'),
+          ('19', 'Print 19 - ES do fundo ao alvo', 'Varredura até 7.576, fundos mais altos e o alvo de 7.772 com a seta.'),
+          ('20', 'Print 20 - Abaixo do Zero Gamma', 'Put Wall, MAJOR+, Zero Gamma, MAJOR- e barras negativas de GEX.'),
+          ('21', 'Print 21 - NQ rompendo o valor', 'Caixa sob os VAH, puts e Zero Gamma embaixo, calls e alvos W e M.')]
 for n, nome, _ in PRINTS:
     arquivos.append({'p': f'prints/{n}.png', 'z': f"{P['prints']}/{nome}.png"})
 
@@ -498,6 +512,7 @@ Mande cada vídeo com a mensagem. Os vídeos estão em "''' + V + '/' + PASTAS_V
 ''' + '\n\n'.join(f"{i}. {v['titulo'].upper()}\nQuando: {v['uso']}\nVídeo: {v['arquivo']}\nMensagem:\n{v['leg']}" for i, v in enumerate(whats, 1)) + '\n')
 add_texto(f"{P['textos']}/Roteiros para gravar e depoimentos.txt", md_txt(ler(os.path.join(MKT, 'roteiros-e-depoimentos.md'))))
 add_texto(f"{P['textos']}/Glossário de nomes e produtos.txt", md_txt(ler(os.path.join(MKT, 'glossario.md'))))
+add_texto(f"{V}/{PASTAS_V['mentoria'][0]}/LEIA-ME - plano da mentoria.txt", md_txt(ler(os.path.join(MKT, 'mentoria', 'plano-da-mentoria.md'))))
 todas = ['TODAS AS LEGENDAS PRONTAS', AVISO, '', '== VÍDEOS ==', '']
 for pasta in pastas_v_ordem:
     com = [v for v in por_pasta[pasta] if v['leg']]

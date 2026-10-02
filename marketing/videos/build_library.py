@@ -53,6 +53,27 @@ GROUPS = [
     ('v17-retorno-a-media', 'Retorno à média com GL Gamma', 'Depois da alta nos alvos, o GL Gamma mostra a confluência embaixo: P+ 41,96K, alvo D -0,3% e absorção de 7.754 no mesmo preço. O preço perde o Zero Gamma e o cluster, toca a confluência e o painel volta ao equilíbrio.', 'Reels, anúncio do GL Gamma',
      f'Depois da alta nos alvos, o retorno à média. No topo, o alvo de liquidez e absorção em 7.804. Embaixo, a maior barra do mapa: puts (P+ 41,96K), no mesmo preço do alvo D -0,3% e da absorção de 7.754. O preço perdeu o Zero Gamma e o cluster de 7.774, tocou a confluência e o painel voltou para equilíbrio na banda. Alvos são projeções, não promessa de resultado. GL Gamma é uma assinatura à parte. {AVISO}'),
   ]),
+  ('mentoria', 'Mentoria GL: o operacional na prática', 'Aulas curtas em 16:9 para os alunos: o gráfico se constrói até o ponto de decisão, pausa para o aluno pensar e depois mostra a região de atuação, o gatilho, a invalidação, os alvos e o resultado. Regras propostas a partir dos prints: o Giovane valida antes de liberar.', [
+    ('m01-painel-market-state', 'Aula 1 · O painel Market State', 'Como ler Agora, Contexto e Leitura, e o que muda no tipo de trade. Prints 6, 9, 11.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m02-contexto-a-favor-ou-contra', 'Aula 2 · Contexto a favor ou contra', 'Por que uma queda forte nem sempre é venda, e quando o contexto está do seu lado. Prints 1, 5.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m03-setup-de-alta', 'Aula 3 · Setup de alta: varredura, valor e rompimento', 'Onde atuar depois da varredura, o gatilho, o stop e os alvos. Print 5.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m04-base-rompimento-alvo', 'Aula 4 · Base, rompimento e alvo com Gamma', 'Comprar na base com confluência ou no rompimento, com stop e alvos do mapa. Print 10.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m05-expansao-ate-onde', 'Aula 5 · Expansão: até onde deixar correr', 'Realizar nos alvos de volatilidade, mirar o alvo de volume e ler as calls acima. Prints 9, 11, 12.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m06-queda-pela-estrutura', 'Aula 6 · A queda pela estrutura', 'Vender o repique na zona, o gatilho no POC M e os alvos nos níveis de baixo. Print 3.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m07-perdeu-o-zero-gamma', 'Aula 7 · Perdeu o Zero Gamma', 'Vender na rejeição do VAH D, o gatilho no Zero Gamma e o alvo nas puts. Print 8.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m08-teto-de-calls-piso-de-puts', 'Aula 8 · Do teto de calls ao piso de puts', 'No 1 minuto: vender no teto, o gatilho no cluster, o alvo nas puts e quando parar. Print 7.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m09-equilibrio-na-banda', 'Aula 9 · Equilíbrio na banda: operar os extremos', 'Onde comprar no equilíbrio, o gatilho, o stop e o alvo na média. Print 6.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m10-retorno-a-media-gamma', 'Aula 10 · Retorno à média com Gamma', 'Realizar no alvo de liquidez e operar a volta até a confluência das puts. Print 13.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m11-nivel-respeitado', 'Aula 11 · Nível respeitado: defesa e alvo no VAH D', 'Comprar a defesa de um nível de puts, com gatilho, stop e alvo no topo do valor. Print 2.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m12-escada-de-valor', 'Aula 12 · Escada de valor e alvos M e 3M', 'Usar os níveis de valor como degraus: região, gatilho, stop e os alvos maiores. Print 4.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m13-topos-descendentes', 'Aula 13 · Topos descendentes pela estrutura', 'Reconhecer o estado de baixa pelos topos e vender o repique na região de atuação. Print 16.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m14-queda-no-1-minuto', 'Aula 14 · Queda no 1 minuto: as bandas apontam para baixo', 'Vender o repique na banda, com gatilho, stop, alvos e a hora de parar. Print 15.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m15-do-fundo-ao-alvo', 'Aula 15 · Do fundo ao alvo: fundos mais altos', 'Comprar o primeiro fundo mais alto depois da varredura e conduzir até o nível de cima. Print 19.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m16-rompimento-do-valor-nq', 'Aula 16 · Rompimento do valor no NQ', 'A caixa sob os VAH, o piso de puts, o gatilho do rompimento e os alvos de calls, W e M. Print 21.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m17-com-e-sem-estado-de-mercado', 'Aula 17 · Com e sem o Estado de Mercado', 'O mesmo dia com o indicador desligado e ligado: o que muda na leitura. Prints 17, 18.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m18-abaixo-do-zero-gamma', 'Aula 18 · Abaixo do Zero Gamma: o regime muda', 'Quando o Zero Gamma vira teto, onde vender e onde estão os alvos no mapa. Print 20.', 'Área do aluno, mentoria, YouTube não listado', ''),
+    ('m19-mapa-do-swing', 'Aula 19 · O mapa do swing: três semanas no 30 minutos', 'Ler o estado do swing pelos topos e fundos e montar o plano do dia pelos níveis. Print 14.', 'Área do aluno, mentoria, YouTube não listado', ''),
+  ]),
   ('objecoes', 'Respostas às objeções', 'Para remarketing: quem já viu a GL e não agendou costuma travar numa dessas dúvidas. Cada vídeo responde uma e termina na call 1x1.', [
     ('objecao-plataforma', 'Funciona na minha plataforma?', 'TradingView e NinjaTrader com o mesmo mapa; os planos NinjaTrader já incluem o TradingView.', 'Remarketing, stories de venda, resposta em DM',
      f'Funciona na minha plataforma? O GL Model roda no TradingView e no NinjaTrader, com o mesmo mapa. E os planos NinjaTrader já incluem o TradingView. Tire suas dúvidas na call 1x1 gratuita, link na bio. {AVISO}'),
@@ -247,7 +268,7 @@ print(len(manifest), 'vídeos')
 page = open(os.path.join(LIB, 'template.html'), encoding='utf-8').read().replace('<!--SECTIONS-->', '\n'.join(cards_html))
 open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
 os.makedirs(os.path.join(LIB, 'prints'), exist_ok=True)
-for n in range(1, 14):
+for n in range(1, 22):
     src = os.path.join(ROOT, f'{n}.png'); dst = os.path.join(LIB, 'prints', f'{n}.png')
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
         subprocess.run(['cp', src, dst], check=True)

@@ -40,6 +40,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-feed.js` | versões 4:5 para o feed, geradas a partir dos vídeos 9:16 |
 | `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
 | `specs-r5.js` | o operacional por dentro (prints 6 a 13): Estado de Mercado, Gamma no 1 minuto, Zero Gamma perdido, o antes e depois dos alvos de volatilidade, de volume e do GL Gamma, o rompimento e o retorno à média; com coringas limpos, versões 4:5 e uma horizontal |
+| `specs-mentoria.js` | Mentoria GL: 19 aulas 16:9 (prints 1 a 21). O gráfico para no ponto de decisão, pausa para o aluno e mostra região de atuação, gatilho, invalidação, alvos e resultado. Plano em `marketing/mentoria/plano-da-mentoria.md` |
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
@@ -53,6 +54,8 @@ Coordenadas sempre em pixels do print original (use `grade.js`). Um roteiro tem:
 - `scenes`: cada cena usa um print (`img`) com `t0` e `t1`, e pode ter:
   - `cam`: quadros-chave `{ t, cx, cy, z }` (centro e zoom);
   - `reveal`: revela o gráfico da esquerda para a direita, ou de baixo para cima com `dir: 'up'`, como se o setup estivesse acontecendo;
+    - `keys: [{t, x}]` faz a revelação andar e parar (o gráfico para no ponto de decisão e continua depois);
+    - `gaps: [[y0, y1], ...]` deixa faixas horizontais visíveis por baixo da máscara (níveis já conhecidos antes do preço chegar);
   - `hides`: tampa rótulos até um instante (`until`);
   - `boxes`: caixas com etiqueta (`label`, `color`, `below`, `dx`);
   - `spots`: holofote que escurece tudo em volta;
