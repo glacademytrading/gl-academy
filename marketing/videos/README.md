@@ -12,7 +12,7 @@ Biblioteca publicada (privada): https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDf
 
 ## Prints
 
-Os prints `1.png` a `12.png` **não ficam no git**. Eles estão publicados na Biblioteca, na pasta `prints/`. Antes de renderizar, copie-os para esta pasta com os mesmos nomes. Prints novos seguem a numeração (`13.png`, `14.png`…).
+Os prints `1.png` a `13.png` **não ficam no git**. Eles estão publicados na Biblioteca, na pasta `prints/`. Antes de renderizar, copie-os para esta pasta com os mesmos nomes. Prints novos seguem a numeração (`14.png`, `15.png`…).
 
 ## Comandos
 
@@ -39,7 +39,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-r3.js` | logo de 8 s, vinheta de 4 s, aulas rápidas e respostas às objeções |
 | `specs-feed.js` | versões 4:5 para o feed, geradas a partir dos vídeos 9:16 |
 | `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
-| `specs-r5.js` | o operacional por dentro (prints 6 a 12): Estado de Mercado, Gamma no 1 minuto, Zero Gamma perdido, o antes e depois dos alvos de volatilidade, de volume e do GL Gamma, e o rompimento; com coringas limpos, versões 4:5 e uma horizontal |
+| `specs-r5.js` | o operacional por dentro (prints 6 a 13): Estado de Mercado, Gamma no 1 minuto, Zero Gamma perdido, o antes e depois dos alvos de volatilidade, de volume e do GL Gamma, o rompimento e o retorno à média; com coringas limpos, versões 4:5 e uma horizontal |
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |

@@ -111,10 +111,10 @@ TEMAS = [
   ('Contexto D/W/M: a favor ou contra', r'^(v01|v08|c06|c07|h02)'),
   ('Estado de Mercado (painel Market State)', r'^(v12|c11|h04|v15|c14)'),
   ('Setup acontecendo (replay)', r'^(v02|c01|h01|h02)'),
-  ('Alvos', r'^(v03|c02|site-loop-alvos|v11|c10|v12|v15|v16|c11|c14|c15|h04)'),
+  ('Alvos', r'^(v03|c02|site-loop-alvos|v11|c10|v12|v15|v16|v17|c11|c14|c15|c16|h04)'),
   ('VWAP', r'^(v09|c08|aula-vwap|v12)'),
   ('Value Area: VAH, VAL e POC', r'^(aula-value-area|v05|c04|v11|c10|v14|v16|c13|c15)'),
-  ('GL Gamma (assinatura à parte)', r'^(v04|objecao-opcoes|c03|site-loop-gamma|site-gamma|v13|v14|v15|v16|c12|c13|c14|c15)'),
+  ('GL Gamma (assinatura à parte)', r'^(v04|objecao-opcoes|c03|site-loop-gamma|site-gamma|v13|v14|v15|v16|v17|c12|c13|c14|c15|c16)'),
   ('NinjaTrader', r'^(v06|v10|c05|c09|h03|site-loop-ninjatrader|objecao-plataforma|v12|v13|c11|c12|h04)'),
   ('TradingView', r'^(objecao-plataforma|site-loop-tradingview|h01)'),
   ('As 3 perguntas antes do trade', r'^v07'),
@@ -211,7 +211,8 @@ PRINTS = [('1', 'Print 1 - ES em duas telas (TradingView)', 'VWAPs W e 3M, marca
           ('9', 'Print 9 - Expansão de alta acelerada', 'Alvos de volatilidade D, W e M e o painel "Expansão de alta acelerada".'),
           ('10', 'Print 10 - Base, rompimento e alvo com Gamma', 'VAL D com puts e cluster, VAH W, Zero Gamma, VAH D e o alvo W +1%.'),
           ('11', 'Print 11 - Alvo de liquidez atingido', 'O preço no alvo estrutural de volume e o painel "Expansão de alta muito forte".'),
-          ('12', 'Print 12 - O mesmo gráfico com o GL Gamma', 'GEX do SPX e do SPY sobre o ES: Zero Gamma, C+ 23,51K no alvo W +1% e P+ 9,42K na base.')]
+          ('12', 'Print 12 - O mesmo gráfico com o GL Gamma', 'GEX do SPX e do SPY sobre o ES: Zero Gamma, C+ 23,51K no alvo W +1% e P+ 9,42K na base.'),
+          ('13', 'Print 13 - Retorno à média com GL Gamma', 'Absorção de 7.804 no topo, P+ 41,96K com o alvo D -0,3% e a absorção de 7.754 embaixo, e o painel de volta ao equilíbrio.')]
 for n, nome, _ in PRINTS:
     arquivos.append({'p': f'prints/{n}.png', 'z': f"{P['prints']}/{nome}.png"})
 
@@ -531,7 +532,7 @@ Esta pasta guarda contatos de leads (nome, telefone, e-mail). Pela LGPD:
 add_texto(f"{P['ferr']}/Higgsfield - plano da rodada premium.txt", md_txt(ler(os.path.join(MKT, 'videos', 'higgsfield-rodada-premium.md'))))
 add_texto(f"{P['ferr']}/Higgsfield - prompt para retomar.txt", md_txt(ler(os.path.join(MKT, 'videos', 'PROMPT-retomar-higgsfield.md'))))
 add_texto(f"{P['prints']}/Lista de prints para a próxima rodada.txt", '''PRINTS DO OPERACIONAL
-Os prints desta pasta geraram todos os vídeos e imagens do Claude. No motor de vídeo eles se chamam 1.png a 12.png, na mesma ordem.
+Os prints desta pasta geraram todos os vídeos e imagens do Claude. No motor de vídeo eles se chamam 1.png a 13.png, na mesma ordem.
 
 ''' + '\n'.join(f'{nome}: {desc}' for _, nome, desc in PRINTS) + '''
 

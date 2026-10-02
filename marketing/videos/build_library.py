@@ -50,6 +50,8 @@ GROUPS = [
      f'O que acontece quando o preço perde o Zero Gamma? Aqui ele travou no VAH D, perdeu o Zero Gamma, atravessou o VAL D e o VAL NY e acelerou até a região das puts, onde reagiu. Calls em cima, puts embaixo, Zero Gamma no meio. GL Gamma é uma assinatura à parte. {AVISO}'),
     ('v16-rompimento-gamma', 'Base, rompimento e alvo', 'Base no VAL D com puts (P+) e cluster, rompimento do VAH W e do Zero Gamma, parada no VAH D e o próximo alvo W +1%.', 'Reels, anúncio',
      f'A base, o rompimento e o alvo. O preço segurou no VAL D, onde estavam o nível de puts e um cluster, rompeu o VAH W e o Zero Gamma, parou no VAH D e no cluster de 7.805, e o próximo alvo no mapa é o W +1%. Alvos são projeções, não promessa de resultado. GL Gamma é uma assinatura à parte. {AVISO}'),
+    ('v17-retorno-a-media', 'Retorno à média com GL Gamma', 'Depois da alta nos alvos, o GL Gamma mostra a confluência embaixo: P+ 41,96K, alvo D -0,3% e absorção de 7.754 no mesmo preço. O preço perde o Zero Gamma e o cluster, toca a confluência e o painel volta ao equilíbrio.', 'Reels, anúncio do GL Gamma',
+     f'Depois da alta nos alvos, o retorno à média. No topo, o alvo de liquidez e absorção em 7.804. Embaixo, a maior barra do mapa: puts (P+ 41,96K), no mesmo preço do alvo D -0,3% e da absorção de 7.754. O preço perdeu o Zero Gamma e o cluster de 7.774, tocou a confluência e o painel voltou para equilíbrio na banda. Alvos são projeções, não promessa de resultado. GL Gamma é uma assinatura à parte. {AVISO}'),
   ]),
   ('objecoes', 'Respostas às objeções', 'Para remarketing: quem já viu a GL e não agendou costuma travar numa dessas dúvidas. Cada vídeo responde uma e termina na call 1x1.', [
     ('objecao-plataforma', 'Funciona na minha plataforma?', 'TradingView e NinjaTrader com o mesmo mapa; os planos NinjaTrader já incluem o TradingView.', 'Remarketing, stories de venda, resposta em DM',
@@ -93,6 +95,7 @@ GROUPS = [
     ('v13-chao-das-puts-4x5', 'Calls em cima, puts embaixo · 4:5', 'O mapa de Gamma no 1 minuto, no formato do feed.', 'Anúncio no feed', ''),
     ('v14-perdeu-o-zero-gamma-4x5', 'Perdeu o Zero Gamma · 4:5', 'Do VAH D à região das puts, no formato do feed.', 'Anúncio no feed', ''),
     ('v16-rompimento-gamma-4x5', 'Base, rompimento e alvo · 4:5', 'Base, rompimento e o alvo W +1%, no formato do feed.', 'Anúncio no feed', ''),
+    ('v17-retorno-a-media-4x5', 'Retorno à média com GL Gamma · 4:5', 'A confluência de Gamma e o retorno à média, no formato do feed.', 'Anúncio no feed', ''),
   ]),
   ('coringas', 'Coringas verticais (sem texto)', 'Movimento do setup sem legenda. Coloque qualquer narração, texto ou gancho por cima e publique. São a base para produzir conteúdo todo dia.', [
     ('c01-setup-acontecendo-limpo', 'Setup acontecendo', 'Revelação do setup de alta alinhada.', 'Fundo de Reels e stories', ''),
@@ -110,6 +113,7 @@ GROUPS = [
     ('c13-zero-gamma-limpo', 'Zero Gamma perdido', 'Do VAH D até a região das puts.', 'Fundo para falar de Gamma', ''),
     ('c14-volatilidade-volume-gamma-limpo', 'Antes e depois com Gamma', 'Dos alvos de volatilidade ao alvo de volume e o GL Gamma.', 'Fundo para falar de alvos', ''),
     ('c15-rompimento-gamma-limpo', 'Rompimento com Gamma', 'Base, rompimento e o alvo W +1%.', 'Fundo para falar de rompimentos', ''),
+    ('c16-retorno-a-media-limpo', 'Retorno à média', 'A alta nos alvos e a volta até a confluência das puts.', 'Fundo para falar de Gamma e de alvos', ''),
   ]),
   ('horizontais', 'Coringas horizontais (16:9)', 'Para YouTube, vídeo de boas-vindas do funil, VSL e trechos de live.', [
     ('h01-duas-telas-limpo', 'Duas telas no TradingView', 'Leitura em dois tempos gráficos com revelação.', 'YouTube, VSL', ''),
@@ -243,7 +247,7 @@ print(len(manifest), 'vídeos')
 page = open(os.path.join(LIB, 'template.html'), encoding='utf-8').read().replace('<!--SECTIONS-->', '\n'.join(cards_html))
 open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
 os.makedirs(os.path.join(LIB, 'prints'), exist_ok=True)
-for n in range(1, 13):
+for n in range(1, 14):
     src = os.path.join(ROOT, f'{n}.png'); dst = os.path.join(LIB, 'prints', f'{n}.png')
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
         subprocess.run(['cp', src, dst], check=True)

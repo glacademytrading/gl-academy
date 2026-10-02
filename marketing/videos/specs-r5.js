@@ -1,4 +1,4 @@
-// Rodada 5: o operacional por dentro, com os prints 6 a 10 (ES, 1 e 2 de outubro de 2026).
+// Rodada 5: o operacional por dentro, com os prints 6 a 13 (ES, 1 e 2 de outubro de 2026).
 // Cada vídeo monta o gráfico na tela e depois destaca, uma por uma, as partes do operacional:
 // painel, alvos, cores, VWAPs, Gamma e o painel de risco. Coordenadas em pixels de cada print.
 const V = { w: 1080, h: 1920, ay: 1120 };
@@ -114,6 +114,28 @@ const rompimento = (extra = {}) => ({
   reveal: { x0: 5, x1: 820, y0: 0, y1: 1211, t0: 0.4, t1: 6.8, pad: 2 },
   hides: [{ rect: [1004, 406, 70, 24], until: 6.6 }],                          // preço atual no eixo
   boxes: extra.boxes || []
+});
+
+// 13.png · ES · retorno à média: depois da alta nos alvos, o preço volta à confluência das puts ---------
+// No topo, o alvo de liquidez e a absorção de 7.804; embaixo, P+ 41,96K, o alvo D -0,3% e a absorção de 7.754
+// no mesmo preço. O preço perde o Zero Gamma e o cluster, toca a confluência e o painel volta ao equilíbrio.
+const retorno = (extra = {}) => ({
+  t0: 0, t1: extra.t1 || 21.5, img: '13.png', last: true,
+  cam: [
+    { t: 0, cx: 300, cy: 250, z: 1.6 }, { t: 6.8, cx: 300, cy: 250, z: 1.6 },
+    { t: 7.3, cx: 330, cy: 110, z: 2.6 }, { t: 8.8, cx: 330, cy: 110, z: 2.6 },
+    { t: 9.3, cx: 520, cy: 288, z: 1.6 }, { t: 11.0, cx: 520, cy: 288, z: 1.6 },
+    { t: 11.5, cx: 250, cy: 288, z: 2.0 }, { t: 13.4, cx: 250, cy: 288, z: 2.0 },
+    { t: 13.9, cx: 170, cy: 160, z: 2.2 }, { t: 15.4, cx: 170, cy: 160, z: 2.2 },
+    { t: 15.9, cx: 290, cy: 240, z: 2.6 }, { t: 17.4, cx: 290, cy: 240, z: 2.6 },
+    { t: 17.9, cx: 630, cy: 549, z: 3.0 }, { t: 19.6, cx: 630, cy: 549, z: 3.0 },
+    { t: 20.1, cx: 430, cy: 330, z: 1.25 }],
+  reveal: { x0: 0, x1: 296, y0: 0, y1: 790, t0: 0.4, t1: 5.8, pad: 2 },
+  hides: [
+    { rect: [800, 218, 65, 22], until: 5.8 },                                  // preço atual no eixo
+    { rect: [462, 485, 336, 130], until: 17.6 }],                              // painel Market State
+  boxes: extra.boxes || [],
+  spots: extra.spots || []
 });
 
 const principais = [
@@ -248,6 +270,33 @@ const principais = [
     ],
     end: { t0: 17.0, tag: 'Base, rompimento e alvo no mesmo mapa.', disc: 'Alvos são projeções do modelo, não promessa de resultado. GL Gamma: assinatura à parte. Trading envolve risco financeiro real.' },
     stills: [1, 4, 6.2, 8.4, 11.3, 13.4, 15.8, 18]
+  },
+  // 17. Retorno à média: a alta chega nos alvos e o GL Gamma mostra a confluência embaixo
+  {
+    id: 'v17-retorno-a-media', ...V, dur: 24.0,
+    scenes: [retorno({ boxes: [
+      { rect: [45, 40, 250, 22], t0: 5.3, t1: 6.8, label: 'Alvo de liquidez · absorção', below: true },
+      { rect: [284, 92, 80, 38], t0: 7.3, t1: 8.8, label: 'C+ 1,92K · C+ 423', below: true },
+      { rect: [284, 280, 476, 16], t0: 9.3, t1: 11.0, color: RED, label: 'P+ 41,96K · puts', below: true },
+      { rect: [45, 276, 412, 22], t0: 11.5, t1: 13.4, label: 'Confluência 7.754 · 7.755', below: true },
+      { rect: [45, 116, 250, 16], t0: 13.9, t1: 15.4, color: RED, label: 'Zero Gamma 7.789', below: true },
+      { rect: [45, 185, 250, 16], t0: 13.9, t1: 15.4, color: RED, label: 'Cluster 7.774', below: true },
+      { rect: [280, 186, 20, 116], t0: 15.9, t1: 17.4, color: GREEN, label: 'Toca a confluência', below: true }],
+      spots: [{ rect: [464, 487, 331, 125], t0: 17.9, t1: 19.7, pad: 10 }] })],
+    captions: [
+      { t0: 0.2, t1: 2.4, kick: 'Replay · ES', text: 'Depois da alta nos alvos, o <em>retorno à média</em>' },
+      { t0: 2.6, t1: 4.9, text: 'O preço sobe pelas bandas…' },
+      { t0: 5.0, t1: 6.8, text: '…e chega no alvo de liquidez, com <em>absorção em 7.804</em>' },
+      { t0: 7.0, t1: 8.8, kick: 'GL Gamma', text: 'Acima, pouca call: <em>C+ 1,92K</em> e <em>C+ 423</em>' },
+      { t0: 9.0, t1: 11.0, kick: 'GL Gamma', text: 'Abaixo, a maior barra do mapa: puts, <em>P+ 41,96K</em>' },
+      { t0: 11.2, t1: 13.4, kick: 'Confluência', text: 'Puts, <em>alvo D -0,3%</em> e absorção de 7.754 no mesmo preço' },
+      { t0: 13.6, t1: 15.4, text: 'O preço perde o <em>Zero Gamma</em> e o cluster de 7.774…' },
+      { t0: 15.6, t1: 17.4, text: '…e toca a confluência: <em class="green">retorno à média</em>' },
+      { t0: 17.6, t1: 19.7, kick: 'GL · Market State', text: 'O painel volta para <em>equilíbrio na banda</em>' },
+      { t0: 19.9, t1: 21.4, text: 'Alvos, volume e Gamma: a confluência no <em>mesmo gráfico</em>' }
+    ],
+    end: { t0: 21.5, brand: 'GL GAMMA', tag: 'A confluência de Gamma, volume e alvos no seu gráfico.', disc: 'Alvos são projeções do modelo, não promessa de resultado. GL Gamma: assinatura à parte. Trading envolve risco financeiro real.' },
+    stills: [1, 3.8, 6, 8, 10, 12.3, 14.6, 16.6, 18.7, 20.6, 23]
   }
 ];
 
@@ -259,7 +308,8 @@ const limpos = [
   limpo('c12-gamma-1-minuto-limpo', gamma1m({ t1: 21 }), 21),
   limpo('c13-zero-gamma-limpo', zeroGamma({ t1: 15.5 }), 15.5),
   { id: 'c14-volatilidade-volume-gamma-limpo', ...V, dur: 27.5, scenes: [expansaoAntes(), expansaoDepois(), expansaoGamma({ t1: 27.5 })], stills: [3, 9, 13, 16, 19, 23, 26] },
-  limpo('c15-rompimento-gamma-limpo', rompimento({ t1: 16.8 }), 16.8)
+  limpo('c15-rompimento-gamma-limpo', rompimento({ t1: 16.8 }), 16.8),
+  limpo('c16-retorno-a-media-limpo', retorno({ t1: 21.4 }), 21.4)
 ];
 
 // Horizontal 16:9: o print de 30 minutos inteiro, depois os alvos e o painel

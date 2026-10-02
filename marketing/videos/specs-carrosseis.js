@@ -95,7 +95,8 @@ const capas = [
   ['capa-v13-chao-das-puts', 'c12-gamma-1-minuto-limpo', 7.6, 'CALLS EM CIMA, PUTS EMBAIXO'],
   ['capa-v14-perdeu-o-zero-gamma', 'c13-zero-gamma-limpo', 7.0, 'PERDEU O ZERO GAMMA'],
   ['capa-v15-volatilidade-volume-gamma', 'c14-volatilidade-volume-gamma-limpo', 26.5, 'TRÊS LEITURAS, UM GRÁFICO'],
-  ['capa-v16-rompimento-gamma', 'c15-rompimento-gamma-limpo', 6.8, 'BASE, ROMPIMENTO E ALVO']
+  ['capa-v16-rompimento-gamma', 'c15-rompimento-gamma-limpo', 6.8, 'BASE, ROMPIMENTO E ALVO'],
+  ['capa-v17-retorno-a-media', 'c16-retorno-a-media-limpo', 16.6, 'RETORNO À MÉDIA']
 ].map(([id, src, t, title]) => ({ id, group: 'capas-reels', folder: 'capas', src, srcT: t, w: 1080, h: 1920, dur: 3, at: 2, replay: false, hideWm: true,
   shade: 'linear-gradient(180deg, rgba(5,5,5,.15) 0%, rgba(5,5,5,.62) 34%, rgba(5,5,5,.66) 50%, rgba(5,5,5,.62) 66%, rgba(5,5,5,.15) 100%)', noGrad: true,
   scenes: [{ t0: 0, t1: 9, last: true, img: `out/frames/${id}.jpg`, ay: 960, cam: [{ t: 0, cx: 540, cy: 960, z: 1 }] }],
