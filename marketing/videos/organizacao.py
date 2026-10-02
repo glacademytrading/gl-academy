@@ -89,7 +89,7 @@ PASTAS_V = {
                    'Confirmação logo depois do agendamento, lembrete 1 hora antes e convite para remarcar se ela faltar. A legenda é a mensagem para mandar junto.'),
   'operacional': ('14 - Operacional por dentro', 'Vender',
                   'O gráfico se construindo e cada parte do operacional destacada: painel, cores, alvos de volume e de volatilidade, VWAPs e Gamma.'),
-  'mentoria': ('15 - Mentoria - aulas do operacional', 'Ensinar os alunos',
+  'mentoria': ('15 - Mentoria', 'Ensinar os alunos',
                'Aulas curtas para a área do aluno: o gráfico para no ponto de decisão e depois mostra região de atuação, gatilho, invalidação, alvos e resultado. O Giovane valida as regras antes de liberar.'),
   'coringas': ('07 - Coringas sem texto (fundo para narrar)/Verticais 9x16', 'Produzir conteúdo todo dia',
                'Movimento do setup sem legenda. Coloque narração, texto ou gancho por cima e publique.'),

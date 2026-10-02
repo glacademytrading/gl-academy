@@ -54,7 +54,7 @@ Plano das videoaulas feitas com os prints reais do operacional. É um tutorial d
 | 18 | Abaixo do Zero Gamma: o regime muda | 20 | Zero Gamma como teto, alvos no MAJOR- e no GEX negativo |
 | 19 | O mapa do swing: três semanas no 30 minutos | 14 | Ler o swing e montar o plano condicional do dia |
 
-Os arquivos têm o nome `m01-...` a `m19-...` (pasta "15 - Mentoria - aulas do operacional" no pacote organizado).
+Os arquivos têm o nome `m01-...` a `m19-...` (pasta "15 - Mentoria" no pacote organizado).
 
 ## Como usar com os alunos
 
