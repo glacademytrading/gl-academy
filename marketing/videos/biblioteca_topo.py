@@ -40,7 +40,7 @@ GUIA = {
   'objecoes': ('Respostas às objeções', 'Cada vídeo responde uma dúvida de quem viu a GL e não agendou.', 'Remarketing (anúncio para quem visitou o funil)', 'Sempre ligado'),
   'vendas-whats': ('Sequência da call no WhatsApp', 'Confirmação, lembrete 1 hora antes e convite para remarcar.', 'WhatsApp, para quem agendou', 'Em todo agendamento'),
   'mentoria': ('Mentoria GL (aulas)', 'As aulas 16:9 do operacional para os alunos, com o plano para o GL OS e o ZIP completo.',
-               'Área do aluno, APP ou YouTube não listado', 'Nos 8 encontros da Mentoria 1:1, depois da validação do Giovane'),
+               'Área do aluno, APP ou YouTube não listado', 'Nos 8 encontros da Mentoria 1:1, depois que Giovane validar as regras'),
   'comunidade': ('Comunidade e parceiros', 'Boas-vindas da comunidade e a cartela de parceiro.', 'Grupo do WhatsApp e vídeos dos parceiros',
                  'Na entrada de cada pessoa e em cada parceria'),
   'lives': ('Telas de live', 'Abertura, encerramento e telas de espera em loop.', 'OBS, nas lives', 'Em toda live'),
@@ -53,7 +53,7 @@ GUIA = {
 
 # O que ainda não fazemos: (título, por que importa, o que precisa, quem, âncora)
 LACUNAS = [
-  ('Vídeos com o Giovane falando', 'Rosto e voz geram a confiança que o gráfico sozinho não gera. É o formato que mais converte em call.',
+  ('Vídeos com Giovane falando', 'Rosto e voz geram a confiança que o gráfico sozinho não gera. É o formato que mais converte em call.',
    'Gravar no celular os 6 roteiros que já estão prontos (30 a 45 segundos cada). Eu edito com legenda, cortes dos setups e o logo.', 'giovane', 'roteiros'),
   ('Depoimentos de alunos', 'Prova social do processo (a rotina, a disciplina, a leitura), nunca de lucro.',
    'Pedir aos alunos com o modelo e a autorização de uso que estão em "Roteiros para gravar".', 'equipe', 'roteiros'),
@@ -64,13 +64,13 @@ LACUNAS = [
   ('Cortes das lives', 'Os melhores 30 a 60 segundos de cada live viram Reels e Shorts sem gravar nada novo.',
    'A gravação de cada live (o arquivo do OBS ou o link do YouTube).', 'equipe', 'lives'),
   ('Vídeos longos no YouTube', 'É onde o YouTube recomenda o canal e onde a pessoa passa tempo suficiente para confiar.',
-   'Uma narração do Giovane por módulo da mentoria: eu junto as aulas do módulo num vídeo de 8 a 12 minutos.', 'giovane', 'youtube'),
+   'Giovane narra cada módulo da mentoria e eu junto as aulas do módulo num vídeo de 8 a 12 minutos.', 'giovane', 'youtube'),
   ('Carrosséis da série', 'O carrossel é o formato que mais gera salvamento no feed, e cada episódio rende um.',
    'Nada: eu faço com os mesmos prints e a mesma explicação de cada episódio.', 'claude', 'operacional-social'),
   ('Stories de cada episódio', 'A enquete "Você venderia aqui?" no story e a resposta no dia seguinte trazem a audiência para o Reels.',
    'Nada: eu faço o par de stories (pergunta e resposta) de cada episódio.', 'claude', 'operacional-social'),
 ]
-QUEM = {'giovane': 'Precisa do Giovane', 'equipe': 'Precisa da equipe', 'claude': 'Eu faço, é só pedir'}
+QUEM = {'giovane': 'Depende de Giovane', 'equipe': 'Depende da equipe', 'claude': 'Eu faço, é só pedir'}
 
 # ---------------------------------------------------------------------------
 def _inline(s):
@@ -163,7 +163,7 @@ def secao_orderflow(texto):
     extras = ''.join(f'<details><summary>{esc(k)}</summary>{md_html(sec[k])}</details>' for k in
                      ['A mensagem dos vídeos', 'Como o order flow se encaixa no operacional GL', 'O episódio que resume tudo', 'O que fica fora dos vídeos'] if k in sec)
     return f'''<section id="orderflow">
-  <div class="section-head"><p class="status espera">Esperando os prints do Giovane</p><h2>Mentoria de Order Flow: os prints para tirar</h2>
+  <div class="section-head"><p class="status espera">Esperando os prints</p><h2>Mentoria de Order Flow: os prints para tirar</h2>
     <p>Os {len(trechos)} trechos da gravação no Deep DOM que viram vídeo: Reels e Shorts no formato da série e aulas 16:9 para os alunos. Em cada trecho: a frase e o horário do replay, o que o público aprende, o gancho e os prints exatos.</p></div>
   <div class="two">
     <div class="panel destaque"><h3>Comece por estes</h3>{md_html(sec.get("Se der para tirar só uma parte agora", ""))}</div>
