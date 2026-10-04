@@ -250,17 +250,42 @@ const carCall = montarCarrossel('car-call', [
   { fim: { cena: livre('5.png', [490, 411, 1.05], []), titulo: 'Agende a sua', corpo: 'É gratuita e é um a um.', disc: 'Conteúdo educacional. Trading envolve risco financeiro real.' } }
 ]);
 
+// GL Risk Auto (prints 22, 25 e 26): o plano medido em R, o trade acima do teto barrado e o que cabe liberado.
+// Escondidos: as setas do Giovane no print 26, o alvo em dólar, saldo e P/L e a barra do Windows (print 25).
+const P26 = [{ rect: [858, 452, 95, 55], color: '#000000' }, { rect: [862, 580, 105, 65], color: '#000000' },
+  { rect: [878, 888, 118, 66], color: '#000000' }, { rect: [378, 1300, 95, 62], color: '#000000' }, { rect: [784, 943, 72, 22] }];
+const P25 = [{ rect: [4, 216, 126, 32], color: '#0b0b0b' }, { rect: [58, 162, 72, 9], color: '#0b0b0b' }, { rect: [0, 574, 1034, 27], color: '#0b0b0b' }];
+const RED = '#ff6b6b';
+const AVISO_RISK = 'Risco estimado no stop; custos e slippage não incluídos. Conteúdo educacional: trading envolve risco financeiro real.';
+const hR = '<div class="h">GL Risk Auto</div>';
+const carRisk = montarCarrossel('car-risk', [
+  { cena: livre('26.png', [560, 760, 0.9], [], { hides: P26, dim: .2, enquadrar: false }), max: 640,
+    html: `${hR}<div class="hook">O trade que <em>não cabe</em> no seu teto não passa</div><div class="sub">O GL Risk Auto mede o risco antes do clique.</div><div class="swipe">Arraste →</div>` },
+  { cena: livre('26.png', [690, 730, 1.05], [{ rect: [583, 643, 262, 16], label: 'Entrada' }, { rect: [583, 507, 268, 20], color: RED, label: 'Stop', below: false }, { rect: [583, 940, 160, 26], color: GREEN, label: 'Alvo em 2,26R' }], { hides: P26 }), max: 580,
+    html: `${hR}<div class="st">1 · O plano</div><div class="t">Entrada, stop e alvo <em>em R</em></div><div class="b">Você desenha o plano e o painel mede na hora: aqui, uma venda com alvo em 2,26R.</div>` },
+  { cena: livre('26.png', [176, 1398, 2.6], [{ rect: [3, 1413, 346, 20], color: RED, label: 'Acima do teto: bloqueado' }], { hides: P26 }), max: 580,
+    html: `${hR}<div class="st red">2 · O teto</div><div class="t">Acima do teto, <em>o trade não passa</em></div><div class="b">Risco de US$387,50 com teto de US$285,71 na conta: o GL Risk Auto barra a entrada antes da ordem.</div>` },
+  { cena: livre('25.png', [70, 130, 3.2], [{ rect: [8, 33, 118, 24], color: GREEN, label: 'Plano pronto' }], { hides: P25 }), max: 580,
+    html: `${hR}<div class="st green">3 · Dentro da gestão</div><div class="t">Coube no teto: <em>plano pronto</em></div><div class="b">Com o risco dentro do limite, o painel mostra quantos contratos cabem e o START confirma.</div>` },
+  { cena: livre('22.png', [160, 300, 3.0], [{ rect: [20, 286, 282, 30], label: 'A compra · Y vende' }]), max: 580,
+    html: `${hR}<div class="st">4 · Pelo controle</div><div class="t">A compra, Y vende, <em>START confirma</em></div><div class="b">Stop e alvo sobem e descem um tick nos gatilhos. Sem planilha e sem conta de cabeça.</div>` },
+  { fim: { cena: livre('26.png', [560, 760, 0.9], [], { hides: P26 }), titulo: 'Gestão antes do clique', corpo: 'Quer ver o GL Risk Auto na sua conta?', disc: AVISO_RISK } }
+]);
+const stRisk = [story('st-risk', 'st-extras', livre('26.png', [176, 1398, 2.6], [{ rect: [3, 1413, 346, 20], color: RED, label: 'Bloqueado' }], { hides: P26 }), [
+  topo('GL Risk Auto', 'Você sabe quanto arrisca <em>antes</em> de clicar?', 330),
+  base('<div class="sb">Acima do teto da conta, o GL Risk Auto barra o trade antes da ordem.</div><div class="dash" style="height:110px">LINK DA CALL</div><div class="note">Risco estimado no stop; custos e slippage não incluídos.</div>')])];
+
 // ---------------------------------------------------------------------------------------------------------------
 const CARROSSEIS = EPS.map(carrosselEpisodio), STORIES = EPS.map(storiesEpisodio);
 module.exports = [
   ...CARROSSEIS.flatMap(c => c.specs),
   ...STORIES.flatMap(s => [s.enquete, s.resposta]),
-  ...lancamento, ...carDuvidas, ...stDuvidas, ...carCall
+  ...lancamento, ...carDuvidas, ...stDuvidas, ...carCall, ...carRisk, ...stRisk
 ];
 // o que o kit_posts.py precisa: slides de cada carrossel, a enquete e a resposta de cada episódio e as peças extras
 module.exports.META = {
   episodios: EPS.map((ep, i) => ({ vid: ep.vid, ep: ep.ep, mentoria: ep.mentoria, carrossel: CARROSSEIS[i].group,
     slides: CARROSSEIS[i].specs.map(s => s.id), enquete: STORIES[i].enquete.id, resposta: STORIES[i].resposta.id, stories: STORIES[i].dados })),
   duvidas: DUVIDAS.map((d, i) => ({ id: `st-duvida-${i + 1}`, pergunta: d.curta, resposta: semTag(d.r) })),
-  extras: { lancamento: lancamento.map(s => s.id), duvidas: carDuvidas.map(s => s.id), call: carCall.map(s => s.id) }
+  extras: { lancamento: lancamento.map(s => s.id), duvidas: carDuvidas.map(s => s.id), call: carCall.map(s => s.id), risk: carRisk.map(s => s.id), stRisk: stRisk.map(s => s.id) }
 };

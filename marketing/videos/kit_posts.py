@@ -67,6 +67,14 @@ LEG_CALL = '\n'.join([
     'Agende pelo link da bio.', '', 'Conteúdo educacional. Trading envolve risco financeiro real.', '',
     '#daytrade #trading #glacademy'])
 
+LEG_RISK = '\n'.join([
+    'O trade que não cabe no seu teto não passa.', '',
+    'O GL Risk Auto mede o plano em R antes do clique. Nesta venda, o alvo estava em 2,26R, mas o risco de US$387,50 passava do teto de US$285,71 da conta: a entrada foi barrada.',
+    'Quando o plano cabe na gestão, aparece "plano pronto" e o START do controle confirma. A compra no A, a venda no Y.', '',
+    'Quer ver o GL Risk Auto na sua conta? Call 1x1 gratuita no link da bio.', '',
+    'Risco estimado no stop; custos e slippage não incluídos. Conteúdo educacional: trading envolve risco financeiro real.', '',
+    '#daytrade #trading #gestaoderisco #ninjatrader #glacademy'])
+
 def montar():
     M = meta()
     eps = {e['vid']: e for e in SO.episodios()}
@@ -116,13 +124,18 @@ def montar():
     st_d = [dict(d, img=copiar(os.path.join(OUT, 'posts', 'st-duvidas', d['id'] + '.jpg'), f"img/stories/{d['id']}.jpg")) for d in M['duvidas']]
     lanc = [copiar(os.path.join(OUT, 'posts', 'st-extras', i + '.jpg'), f'img/stories/{i}.jpg') for i in X['lancamento']]
     dest = [copiar(os.path.join(OUT, 'imagens', 'destaques', f'destaque-{k}.jpg'), f'img/destaques/destaque-{k}.jpg') for k in ('serie', 'duvidas')]
+    car_r = [copiar(os.path.join(OUT, 'posts', 'car-risk', i + '.jpg'), f'img/car-risk/{i}.jpg') for i in X.get('risk', [])]
+    st_r = [copiar(os.path.join(OUT, 'posts', 'st-extras', i + '.jpg'), f'img/stories/{i}.jpg') for i in X.get('stRisk', [])]
     C = RAIZ + '/01 - Carrosséis (Instagram 4x5)'
     arquivos += [{'p': p, 'z': f'{C}/Dúvidas antes da call/Slide {k:02d}.jpg'} for k, p in enumerate(car_d, 1)]
     arquivos += [{'p': p, 'z': f'{C}/Como funciona a call 1x1/Slide {k:02d}.jpg'} for k, p in enumerate(car_c, 1)]
     textos += [{'z': f'{C}/Dúvidas antes da call/Legenda.txt', 't': LEG_DUVIDAS}, {'z': f'{C}/Como funciona a call 1x1/Legenda.txt', 't': LEG_CALL}]
+    arquivos += [{'p': p, 'z': f'{C}/GL Risk Auto - o teto de risco/Slide {k:02d}.jpg'} for k, p in enumerate(car_r, 1)]
+    textos += [{'z': f'{C}/GL Risk Auto - o teto de risco/Legenda.txt', 't': LEG_RISK}]
     ST = RAIZ + '/04 - Stories (9x16)'
     arquivos += [{'p': d['img'], 'z': f"{ST}/Dúvida {k} - {limpar(d['pergunta'])}.jpg"} for k, d in enumerate(st_d, 1)]
     arquivos += [{'p': lanc[0], 'z': f'{ST}/Série - amanhã às 19h.jpg'}, {'p': lanc[1], 'z': f'{ST}/Série - hoje às 19h.jpg'}]
+    arquivos += [{'p': p, 'z': f'{ST}/GL Risk Auto - quanto você arrisca.jpg'} for p in st_r]
     vespera = SO.INICIO - datetime.timedelta(days=1)
     agenda.insert(0, {'data': vespera.isoformat(), 'hora': '20:00', 'ep': 1, 'tipo': 'lancamento', 'titulo': 'Story · a série começa amanhã', 'img': lanc[0], 'vid': M['episodios'][0]['vid']})
     D = RAIZ + '/06 - Capas de destaques (círculo do perfil)'
@@ -152,7 +165,7 @@ def montar():
 
     maior = max((x['z'] for x in arquivos + textos), key=len)
     assert len(BASE_WIN) + len(maior) <= 240, (len(BASE_WIN) + len(maior), maior)
-    extras = {'car_duvidas': car_d, 'car_call': car_c, 'leg_duvidas': LEG_DUVIDAS, 'leg_call': LEG_CALL, 'st_duvidas': st_d, 'lancamento': lanc, 'destaques': dest}
+    extras = {'car_risk': car_r, 'st_risk': st_r, 'leg_risk': LEG_RISK, 'car_duvidas': car_d, 'car_call': car_c, 'leg_duvidas': LEG_DUVIDAS, 'leg_call': LEG_CALL, 'st_duvidas': st_d, 'lancamento': lanc, 'destaques': dest}
     return episodios, agenda, extras, arquivos, textos, len(BASE_WIN) + len(maior)
 
 LEIA_ME = '''SÉRIE OPERACIONAL NA PRÁTICA: CARROSSÉIS E STORIES
@@ -213,14 +226,16 @@ def gerar():
                    for p, t in zip(X['lancamento'], ['Hoje à noite: “amanhã, 19h”', 'Qualquer dia de episódio: “hoje, 19h”']))
     dest = ''.join(f'<figure class="dest">{img(p, t)}<figcaption><b>{t}</b><button type="button" class="btn mini" data-dl="{esc(p)}">Baixar</button></figcaption></figure>'
                    for p, t in zip(X['destaques'], ['Destaque Série', 'Destaque Dúvidas']))
-    zipx = {'duvidas': [a for a in arquivos if a['p'] in X['car_duvidas']], 'call': [a for a in arquivos if a['p'] in X['car_call']]}
+    zipx = {'duvidas': [a for a in arquivos if a['p'] in X['car_duvidas']], 'call': [a for a in arquivos if a['p'] in X['car_call']],
+            'risk': [a for a in arquivos if a['p'] in X['car_risk']]}
+    strisk = ''.join(f'<figure>{img(p, "Story do GL Risk Auto")}<figcaption><b>Story · quanto você arrisca</b><span>Figurinha <b>Link</b>: o agendamento da call</span><span class="acoes"><button type="button" class="btn mini" data-dl="{esc(p)}">Baixar</button></span></figcaption></figure>' for p in X['st_risk'])
     total_img = len({a['p'] for a in arquivos})
     rep = {
       '<!--N-IMG-->': str(total_img), '<!--N-EPS-->': str(len(episodios)),
       '<!--EPISODIOS-->': eps_html,
       '<!--TIRA-DUVIDAS-->': tira(X['car_duvidas'], 'Slide do carrossel de dúvidas'), '<!--LEG-DUVIDAS-->': esc(X['leg_duvidas']),
       '<!--TIRA-CALL-->': tira(X['car_call'], 'Slide do carrossel da call'), '<!--LEG-CALL-->': esc(X['leg_call']),
-      '<!--ST-DUVIDAS-->': duv, '<!--LANCAMENTO-->': lanc, '<!--DESTAQUES-->': dest, '<!--BIBLIOTECA-->': BIBLIOTECA,
+      '<!--ST-DUVIDAS-->': duv, '<!--TIRA-RISK-->': tira(X['car_risk'], 'Slide do carrossel do GL Risk Auto'), '<!--LEG-RISK-->': esc(X['leg_risk']), '<!--ST-RISK-->': strisk, '<!--LANCAMENTO-->': lanc, '<!--DESTAQUES-->': dest, '<!--BIBLIOTECA-->': BIBLIOTECA,
       '<!--DADOS-->': json.dumps({'agenda': dados_hoje, 'zip': {'nome': NOME_ZIP, 'arquivos': arquivos, 'textos': textos}, 'zipeps': zipeps, 'zipx': zipx},
                                  ensure_ascii=False).replace('</', '<' + chr(92) + '/'),
     }
