@@ -78,9 +78,10 @@ function aula(o) {
 
 const PAUSA = (titulo, texto) => ({ tag: 'Pause o vídeo', cls: 'ask', titulo, texto, d: 4 });
 
-module.exports = [
+// as aulas (dados brutos): a série vertical (specs-social.js) monta outro formato a partir delas
+const RAW = [
   // ---------------------------------------------------------------- Módulo 1 · Leitura do estado
-  aula({
+  ({
     id: 'm01-painel-market-state', modulo: 'Módulo 1 · Leitura do estado', aula: 'Aula 1', curto: 'O painel Market State',
     titulo: 'O painel Market State', objetivo: 'Como ler Agora, Contexto e Leitura, e o que muda no tipo de trade.',
     proxima: 'Contexto a favor ou contra', img: '6.png',
@@ -102,7 +103,7 @@ module.exports = [
         lista: ['Equilíbrio: extremos da banda e volta à média', 'Expansão: a favor, nos retestes', 'Extensão alta: não persiga, proteja o lucro'] }
     ]
   }),
-  aula({
+  ({
     id: 'm02-contexto-a-favor-ou-contra', modulo: 'Módulo 1 · Leitura do estado', aula: 'Aula 2', curto: 'Contexto a favor ou contra',
     titulo: 'Contexto a favor ou contra', objetivo: 'Por que uma queda forte nem sempre é venda, e quando o contexto está do seu lado.',
     proxima: 'Setup de alta', img: '1.png',
@@ -123,7 +124,7 @@ module.exports = [
     ]
   }),
   // ---------------------------------------------------------------- Módulo 2 · Estado de alta
-  aula({
+  ({
     id: 'm03-setup-de-alta', modulo: 'Módulo 2 · Estado de alta', aula: 'Aula 3', curto: 'Setup de alta',
     titulo: 'Setup de alta: varredura, valor e rompimento', objetivo: 'Onde atuar depois da varredura, o gatilho, o stop e os alvos.',
     proxima: 'Base, rompimento e alvo com Gamma', img: '5.png',
@@ -147,7 +148,7 @@ module.exports = [
         lista: ['Alvos de baixa cumpridos e volta ao valor: região', 'Força acima das VWAPs D e W: gatilho', 'Stop abaixo da varredura', 'Alvos D, W e 3M já marcados'] }
     ]
   }),
-  aula({
+  ({
     id: 'm04-base-rompimento-alvo', modulo: 'Módulo 2 · Estado de alta', aula: 'Aula 4', curto: 'Base, rompimento e alvo',
     titulo: 'Base, rompimento e alvo com Gamma', objetivo: 'Comprar na base com confluência ou no rompimento, com stop e alvos do mapa.',
     proxima: 'Expansão: até onde deixar correr', img: '10.png', gamma: true,
@@ -170,7 +171,7 @@ module.exports = [
         lista: ['Base com confluência: região', 'Rompimento do VAH W: gatilho', 'Stop abaixo da base ou do VAH W', 'Alvos: VAH D e W +1%'] }
     ]
   }),
-  aula({
+  ({
     id: 'm05-expansao-ate-onde', modulo: 'Módulo 2 · Estado de alta', aula: 'Aula 5', curto: 'Expansão: até onde correr',
     titulo: 'Expansão: até onde deixar correr', objetivo: 'Realizar nos alvos de volatilidade, mirar o alvo de volume e ler as calls acima.',
     proxima: 'A queda pela estrutura', img: '9.png', gamma: true,
@@ -192,7 +193,7 @@ module.exports = [
     ]
   }),
   // ---------------------------------------------------------------- Módulo 3 · Estado de baixa
-  aula({
+  ({
     id: 'm06-queda-pela-estrutura', modulo: 'Módulo 3 · Estado de baixa', aula: 'Aula 6', curto: 'A queda pela estrutura',
     titulo: 'A queda pela estrutura', objetivo: 'Vender o repique na zona, o gatilho no POC M e os alvos nos níveis de baixo.',
     proxima: 'Perdeu o Zero Gamma', img: '3.png',
@@ -215,7 +216,7 @@ module.exports = [
         lista: ['Abaixo do POC W: viés de baixa', 'Repique na zona: região de venda', 'Perda do POC M: gatilho', 'Alvos: VAL M, VAL W e zonas abaixo'] }
     ]
   }),
-  aula({
+  ({
     id: 'm07-perdeu-o-zero-gamma', modulo: 'Módulo 3 · Estado de baixa', aula: 'Aula 7', curto: 'Perdeu o Zero Gamma',
     titulo: 'Perdeu o Zero Gamma', objetivo: 'Vender na rejeição do VAH D, o gatilho no Zero Gamma e o alvo nas puts.',
     proxima: 'Do teto de calls ao piso de puts', img: '8.png', gamma: true,
@@ -238,7 +239,7 @@ module.exports = [
         lista: ['Topo travado no VAH D: região', 'Perda do Zero Gamma: gatilho', 'Stop acima do VAH D', 'Alvos: VAL D, VAL NY e puts'] }
     ]
   }),
-  aula({
+  ({
     id: 'm08-teto-de-calls-piso-de-puts', modulo: 'Módulo 3 · Estado de baixa', aula: 'Aula 8', curto: 'Do teto de calls ao piso de puts',
     titulo: 'Do teto de calls ao piso de puts', objetivo: 'No 1 minuto: vender no teto, o gatilho no cluster, o alvo nas puts e quando parar.',
     proxima: 'Equilíbrio na banda', img: '7.png', gamma: true,
@@ -262,7 +263,7 @@ module.exports = [
     ]
   }),
   // ---------------------------------------------------------------- Módulo 4 · Equilíbrio
-  aula({
+  ({
     id: 'm09-equilibrio-na-banda', modulo: 'Módulo 4 · Equilíbrio', aula: 'Aula 9', curto: 'Equilíbrio na banda',
     titulo: 'Equilíbrio na banda: operar os extremos', objetivo: 'Onde comprar no equilíbrio, o gatilho, o stop e o alvo na média.',
     proxima: 'Retorno à média com Gamma', img: '6.png',
@@ -285,7 +286,7 @@ module.exports = [
         lista: ['O meio da banda não paga', 'Compra no extremo de baixo, com reação', 'Stop abaixo da faixa de volume', 'Alvos: a média e o alvo D'] }
     ]
   }),
-  aula({
+  ({
     id: 'm10-retorno-a-media-gamma', modulo: 'Módulo 4 · Equilíbrio', aula: 'Aula 10', curto: 'Retorno à média com Gamma',
     titulo: 'Retorno à média com Gamma', objetivo: 'Realizar no alvo de liquidez e operar a volta até a confluência das puts.',
     proxima: 'Nível respeitado', img: '13.png', gamma: true,
@@ -309,7 +310,7 @@ module.exports = [
     ]
   }),
   // ---------------------------------------------------------------- Módulo 5 · Níveis e alvos
-  aula({
+  ({
     id: 'm11-nivel-respeitado', modulo: 'Módulo 5 · Níveis e alvos', aula: 'Aula 11', curto: 'Nível respeitado',
     titulo: 'Nível respeitado: defesa e alvo no VAH D', objetivo: 'Comprar a defesa de um nível de puts, com gatilho, stop e alvo no topo do valor.',
     proxima: 'Escada de valor', img: '2.png', gamma: true,
@@ -332,7 +333,7 @@ module.exports = [
         lista: ['Valor acima de um nível de puts', 'Teste com pavio: região', 'Força para fora do valor: gatilho', 'Alvo: VAH D, o topo do valor'] }
     ]
   }),
-  aula({
+  ({
     id: 'm12-escada-de-valor', modulo: 'Módulo 5 · Níveis e alvos', aula: 'Aula 12', curto: 'Escada de valor',
     titulo: 'Escada de valor e alvos M e 3M', objetivo: 'Usar os níveis de valor como degraus: região, gatilho, stop e os alvos maiores.',
     proxima: 'Topos descendentes pela estrutura', img: '4.png', gamma: true,
@@ -356,7 +357,7 @@ module.exports = [
     ]
 }),
   // ---------------------------------------------------------------- Módulo 6 · Mais estados de alta e baixa (prints 15, 16, 19 e 21)
-  aula({
+  ({
     id: 'm13-topos-descendentes', modulo: 'Módulo 6 · Mais alta e baixa', aula: 'Aula 13', curto: 'Topos descendentes',
     titulo: 'Topos descendentes pela estrutura', objetivo: 'Reconhecer o estado de baixa pelos topos e vender o repique na região de atuação.',
     proxima: 'Queda no 1 minuto: as bandas', img: '16.png',
@@ -382,7 +383,7 @@ module.exports = [
         lista: ['Topos mais baixos: estado de baixa', 'Repique na região de atuação: venda', 'Perda da base do repique: gatilho', 'Stop acima do repique; alvos nas regiões de baixo'] }
     ]
   }),
-  aula({
+  ({
     id: 'm14-queda-no-1-minuto', modulo: 'Módulo 6 · Mais alta e baixa', aula: 'Aula 14', curto: 'Queda no 1 minuto',
     titulo: 'Queda no 1 minuto: as bandas apontam para baixo', objetivo: 'Vender o repique na banda, com gatilho, stop, alvos e a hora de parar.',
     proxima: 'Do fundo ao alvo', img: '15.png',
@@ -406,7 +407,7 @@ module.exports = [
         lista: ['Bandas apontando para baixo: estado de baixa', 'Repique na banda: região de venda', 'Perda da linha branca: gatilho', 'Alvos: VAL NY e VAL D', 'Voltou acima das bandas: pare'] }
     ]
   }),
-  aula({
+  ({
     id: 'm15-do-fundo-ao-alvo', modulo: 'Módulo 6 · Mais alta e baixa', aula: 'Aula 15', curto: 'Do fundo ao alvo',
     titulo: 'Do fundo ao alvo: fundos mais altos', objetivo: 'Comprar o primeiro fundo mais alto depois da varredura e conduzir até o nível de cima.',
     proxima: 'Rompimento do valor no NQ', img: '19.png',
@@ -431,7 +432,7 @@ module.exports = [
         lista: ['Varredura e volta acima do nível: atenção', 'Recuo que segura a região: compra', 'Rompimento da lateral: gatilho', 'Fundos mais altos: estado de alta', 'Alvo: o nível de cima'] }
     ]
   }),
-  aula({
+  ({
     id: 'm16-rompimento-do-valor-nq', modulo: 'Módulo 6 · Mais alta e baixa', aula: 'Aula 16', curto: 'Rompimento do valor no NQ',
     titulo: 'Rompimento do valor no NQ', objetivo: 'A caixa sob os VAH, o piso de puts, o gatilho do rompimento e os alvos de calls, W e M.',
     proxima: 'Com e sem o Estado de Mercado', img: '21.png', gamma: true,
@@ -455,7 +456,7 @@ module.exports = [
     ]
   }),
   // ---------------------------------------------------------------- Módulo 7 · Ferramentas e revisão (prints 14, 17, 18 e 20)
-  aula({
+  ({
     id: 'm17-com-e-sem-estado-de-mercado', modulo: 'Módulo 7 · Ferramentas', aula: 'Aula 17', curto: 'Com e sem o Estado de Mercado',
     titulo: 'Com e sem o Estado de Mercado', objetivo: 'O mesmo dia com o indicador desligado e ligado: o que muda na leitura.',
     proxima: 'Abaixo do Zero Gamma', img: '18.png',
@@ -478,7 +479,7 @@ module.exports = [
         lista: ['Sem o estado: as velas parecem iguais', 'Com o estado: cor das velas e faixas de volume', 'Amarelo e pontos embaixo: a favor da alta', 'Laranja e pontos em cima: a favor da baixa'] }
     ]
   }),
-  aula({
+  ({
     id: 'm18-abaixo-do-zero-gamma', modulo: 'Módulo 7 · Ferramentas', aula: 'Aula 18', curto: 'Abaixo do Zero Gamma',
     titulo: 'Abaixo do Zero Gamma: o regime muda', objetivo: 'Quando o Zero Gamma vira teto, onde vender e onde estão os alvos no mapa.',
     proxima: 'O mapa do swing', img: '20.png', gamma: true,
@@ -501,7 +502,7 @@ module.exports = [
         lista: ['Acima do Zero Gamma: o preço tende a ser mais contido', 'Perdeu o Zero Gamma: o movimento acelera', 'Volta ao Zero Gamma por baixo: teto', 'Alvos: MAJOR- e as barras negativas'] }
     ]
   }),
-  aula({
+  ({
     id: 'm19-mapa-do-swing', modulo: 'Módulo 7 · Ferramentas', aula: 'Aula 19', curto: 'O mapa do swing',
     titulo: 'O mapa do swing: três semanas no 30 minutos', objetivo: 'Ler o estado do swing pelos topos e fundos e montar o plano do dia pelos níveis.',
     proxima: null, img: '14.png', gamma: true,
@@ -526,3 +527,6 @@ module.exports = [
     ]
   })
 ];
+
+module.exports = RAW.map(o => aula(o));
+module.exports.RAW = RAW;

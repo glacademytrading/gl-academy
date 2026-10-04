@@ -41,6 +41,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
 | `specs-r5.js` | o operacional por dentro (prints 6 a 13): Estado de Mercado, Gamma no 1 minuto, Zero Gamma perdido, o antes e depois dos alvos de volatilidade, de volume e do GL Gamma, o rompimento e o retorno à média; com coringas limpos, versões 4:5 e uma horizontal |
 | `specs-mentoria.js` | Mentoria GL: 19 aulas 16:9 (prints 1 a 21). O gráfico para no ponto de decisão, pausa para o aluno e mostra região de atuação, gatilho, invalidação, alvos e resultado. Plano em `marketing/mentoria/plano-da-mentoria.md` |
+| `specs-social.js` | série "Operacional na prática" (9:16, Reels e Shorts): as aulas da mentoria no vertical, com o gancho sobre o gráfico, o painel fora das áreas de botões e legenda e a capa de cada episódio (`capa-op...`, pelo `stills.js` com `QUALIDADE=92`). Legendas, títulos do YouTube e datas em `social_operacional.py`; o calendário sai em `../execucao/calendario-operacional-na-pratica.csv` |
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |

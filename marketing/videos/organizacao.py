@@ -91,6 +91,8 @@ PASTAS_V = {
                   'O gráfico se construindo e cada parte do operacional destacada: painel, cores, alvos de volume e de volatilidade, VWAPs e Gamma.'),
   'mentoria': ('15 - Mentoria', 'Ensinar os alunos',
                'Aulas curtas para a área do aluno: o gráfico para no ponto de decisão e depois mostra região de atuação, gatilho, invalidação, alvos e resultado. O Giovane valida as regras antes de liberar.'),
+  'operacional-social': ('16 - Operacional na prática', 'Educar e atrair seguidores',
+                         'A Mentoria GL em 9:16, um episódio por dia útil às 19h no Reels e no Shorts. A legenda de cada vídeo está em "Legendas e usos", os títulos do YouTube em "Títulos do YouTube Shorts" e o calendário na pasta de estratégia.'),
   'coringas': ('07 - Coringas sem texto (fundo para narrar)/Verticais 9x16', 'Produzir conteúdo todo dia',
                'Movimento do setup sem legenda. Coloque narração, texto ou gancho por cima e publique.'),
   'horizontais': ('07 - Coringas sem texto (fundo para narrar)/Horizontais 16x9', 'Produzir conteúdo todo dia',
@@ -127,6 +129,7 @@ TEMAS = [
   ('YouTube', r'^(youtube|logo-gl-8s-16x9|vinheta-gl-4s-16x9|h0)'),
   ('Comunidade e parceiros', r'^(comunidade|parceiro)'),
   ('Mentoria GL (aulas do operacional)', r'^m\d\d-'),
+  ('Operacional na prática (Reels e Shorts)', r'^op\d\d-'),
   ('Estado de alta', r'^(m03|m04|m05|m15|m16)'),
   ('Estado de baixa', r'^(m06|m07|m08|m13|m14|m18)'),
   ('Equilíbrio', r'^(m09|m10|m19)'),
@@ -180,7 +183,7 @@ NOMES_IMG = {
 }
 PASTAS_I = {
   'img-posts': ('02 - Posts com gráfico anotado (4x5)', '4:5'), 'img-frases': ('03 - Frases (1x1)', '1:1'),
-  'img-stories': ('04 - Stories (9x16)', '9:16'), 'img-capas-reels': ('05 - Capas de Reels (9x16)', '9:16'),
+  'img-stories': ('04 - Stories (9x16)', '9:16'), 'img-capas-reels': ('05 - Capas de Reels (9x16)', '9:16'), 'img-capas-operacional': ('09 - Capas dos episódios (9x16)', '9:16'),
   'img-destaques': ('06 - Capas de destaques (círculo do perfil)', '9:16'), 'img-youtube': ('07 - Thumbnails do YouTube (16x9)', '16:9'),
   'img-site-galeria': ('08 - Site/Galeria - Veja os sistemas em uso', '16:9'),
   'img-site-og': ('08 - Site/Compartilhamento de link (og-image)', '1200x630'),
@@ -198,7 +201,7 @@ for im in imagens:
         arq = nome + '.jpg'  # o código do site usa estes nomes
     else:
         pasta, fmt = I + '/' + PASTAS_I[g][0], PASTAS_I[g][1]
-        if g == 'img-capas-reels':
+        if g in ('img-capas-reels', 'img-capas-operacional'):
             arq = 'Capa - ' + limpar(sem_formato(titulo_video[nome[len('capa-'):]])) + '.jpg'
         else:
             arq = limpar(NOMES_IMG[nome]) + '.jpg'
@@ -691,8 +694,29 @@ csv_placar = csv(pl)
 csv_parceiros = csv([['Nome', '@', 'Plataforma', 'Perfil (fluxo e volume, mesa proprietária, setup e games, aluno)', 'Seguidores', 'Passou no filtro (S/N)',
                       'Status (listado, abordado, respondeu, em teste, ativo, pausado)', 'Data da abordagem', 'Código', 'Link com UTM', 'Leads', 'Calls', 'Vendas', 'Observações']])
 
+# Série "Operacional na prática": um episódio por dia útil, no Reels e no Shorts, com a legenda e o título do YouTube
+import social_operacional as SO
+eps_op = [e for e in SO.episodios() if e['vid'] in por_vid]
+cal_op = [['Data', 'Dia', 'Horário', 'Episódio', 'Canal', 'Formato', 'Vídeo (na pasta organizada)', 'Capa', 'Legenda do Instagram',
+           'Título do YouTube Shorts', 'Descrição do YouTube Shorts', 'Objetivo', 'Observação']]
+for e in eps_op:
+    capa = 'capa-' + e['vid']
+    obs = ('Abre a série: fixe no perfil' if e['ep'] == 1 else 'Fim da série: story perguntando qual tema vira o próximo episódio' if e is eps_op[-1]
+           else 'Responda os comentários com a pergunta do vídeo' if e['pausa'] else '')
+    cal_op.append([e['data'].strftime('%d/%m'), DIAS[e['data'].weekday()], SO.HORARIO, f"Ep. {e['ep']} · {e['gancho']}", 'Instagram Reels e YouTube Shorts',
+                   'Vídeo 9x16', onde_video(e['vid']), onde_img(capa) if capa in por_img else 'Escolher um quadro no app', e['legenda'],
+                   e['titulo_yt'], e['descricao_yt'], 'Seguidores e autoridade', obs])
+csv_cal_op = csv(cal_op)
+if eps_op and os.path.exists(os.path.join(MKT, 'execucao', 'serie-operacional-na-pratica.md')):
+    add_texto(f"{V}/{PASTAS_V['operacional-social'][0]}/LEIA-ME - como postar a série.txt", md_txt(ler(os.path.join(MKT, 'execucao', 'serie-operacional-na-pratica.md'))))
+if eps_op:
+    add_texto(f"{V}/{PASTAS_V['operacional-social'][0]}/Títulos do YouTube Shorts.txt",
+              'TÍTULOS E DESCRIÇÕES PARA O YOUTUBE SHORTS\n\n' + '\n\n'.join(f"== Ep. {e['ep']} ({e['data'].strftime('%d/%m')}) ==\nTítulo: {e['titulo_yt']}\nDescrição:\n{e['descricao_yt']}" for e in eps_op) + '\n')
+
 E = P['estrat']
 add_texto(f'{E}/Calendário de outubro (abre no Excel).csv', csv_calendario)
+if eps_op:
+    add_texto(f'{E}/Calendário - Operacional na prática (abre no Excel).csv', csv_cal_op)
 add_texto(f'{E}/Teste de anúncios (abre no Excel).csv', csv_anuncios)
 add_texto(f'{E}/Placar semanal (abre no Excel).csv', csv_placar)
 add_texto(f"{P['textos']}/Parceiros (abre no Excel).csv", csv_parceiros)
@@ -707,7 +731,7 @@ for extra in ['plano-de-marketing.md', 'PROMPT-continuidade.md']:
         add_texto(f'{E}/{nome}', ler(caminho) if nome.endswith('.md') else md_txt(ler(caminho)))
 # cópia das planilhas no repositório, para as próximas sessões
 if os.path.isdir(EXEC):
-    for nome, conteudo in [('calendario-outubro.csv', csv_calendario), ('teste-de-anuncios.csv', csv_anuncios), ('placar-semanal.csv', csv_placar), ('parceiros.csv', csv_parceiros)]:
+    for nome, conteudo in [('calendario-outubro.csv', csv_calendario)] + ([('calendario-operacional-na-pratica.csv', csv_cal_op)] if eps_op else []) + [ ('teste-de-anuncios.csv', csv_anuncios), ('placar-semanal.csv', csv_placar), ('parceiros.csv', csv_parceiros)]:
         open(os.path.join(EXEC, nome), 'w', encoding='utf-8-sig', newline='').write(conteudo.replace('\n', '\r\n'))
 
 # ---------------------------------------------------------------------------

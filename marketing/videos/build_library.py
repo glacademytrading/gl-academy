@@ -190,6 +190,10 @@ GROUPS = [
   ]),
 ]
 
+# série vertical "Operacional na prática": legendas e datas saem de social_operacional.py
+import social_operacional
+GROUPS.insert([g[0] for g in GROUPS].index('mentoria') + 1, social_operacional.grupo())
+
 def dur(path):
     r = subprocess.run([FF, '-i', path], capture_output=True, text=True).stderr
     for line in r.splitlines():
@@ -296,11 +300,20 @@ IMG_GROUPS = [
   ('img-frases', 'Frases 1:1', 'imagens/frases-1x1', '1:1', 'Posts de respiro entre os conteúdos técnicos. Legenda: a própria frase e "Salve para lembrar."', {}),
   ('img-stories', 'Stories', 'imagens/stories-9x16', '9:16', 'Os espaços tracejados recebem os stickers do Instagram (link, enquete, lembrete). Poste a enquete num dia e a resposta no outro.', {}),
   ('img-capas-reels', 'Capas de Reels', 'capas/capas-reels', '9:16', 'Título dentro da área que o perfil mostra em 4:5. Use como capa ao publicar cada Reels.', {}),
+  ('img-capas-operacional', 'Capas da série Operacional na prática', 'capas-social', '9:16', 'A capa de cada episódio, com o gancho e o gráfico inteiro. No Instagram: Editar capa > Adicionar da galeria. No YouTube Shorts: escolha a capa ao publicar pelo app.', {}),
   ('img-destaques', 'Capas de destaques', 'imagens/destaques', '9:16', 'O Instagram mostra o círculo central. Ordem sugerida: Setups, Aulas, Lives, Call, Gamma, Alunos.', {}),
   ('img-youtube', 'Thumbnails do YouTube', 'imagens/youtube-thumbs', '16:9', 'Em 1280x720. Ficam ainda melhores com uma foto do Giovane à esquerda: mande uma e eu monto as versões com rosto.', {}),
   ('img-site-galeria', 'Galeria do site', 'imagens/site-galeria', '16:9', 'Para a seção "Veja os sistemas em uso": gráfico real com o selo da plataforma e as marcações. O site já tem a legenda.', {}),
   ('img-site-og', 'Imagens de compartilhamento do site', 'imagens/site-compartilhamento', '16:9', 'A imagem que aparece quando alguém compartilha o link da página no WhatsApp, Instagram ou LinkedIn. 1200x630, no estilo do site. Vai na meta og:image de cada página.', {}),
 ]
+# capas da série vertical: os quadros "capa-op..." (QUALIDADE=92 SPECS=./specs-social.js node stills.js capa-op01-... )
+os.makedirs(os.path.join(OUT, 'capas-social'), exist_ok=True)
+for f in os.listdir(os.path.join(OUT, 'check')):
+    mc = re.match(r'(capa-op\d\d-.+)-0\.5\.jpg$', f)
+    if mc:
+        src, dst = os.path.join(OUT, 'check', f), os.path.join(OUT, 'capas-social', mc.group(1) + '.jpg')
+        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+            subprocess.run(['cp', src, dst], check=True)
 img_html, img_files = [], []
 for gid, title, folder, ratio, cap, caps in IMG_GROUPS:
     src_dir = os.path.join(OUT, folder)
