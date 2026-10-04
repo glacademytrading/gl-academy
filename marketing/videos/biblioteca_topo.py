@@ -5,7 +5,7 @@ import html, json, re
 
 esc = lambda s: html.escape(str(s), quote=True)
 KIT = 'https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp'   # Carrosséis e Stories GL (página irmã, kit_posts.py)
-RISK = 'RISK_URL_PENDENTE'   # Campanha GL Risk Auto (página irmã, kit_risk.py)
+RISK = 'https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1'   # Campanha GL Risk Auto (página irmã, kit_risk.py)
 # tipos que ficam na página de carrosséis e stories: (link, o que mostrar em "Prontos")
 EXTERNOS = {'kit-serie': (KIT + '#serie', '<b>19</b> carrosséis e <b>38</b> stories'), 'kit-conv': (KIT + '#converter', '<b>2</b> carrosséis e <b>4</b> stories'),
             'risk-auto': (RISK + '#hoje', '<b>43</b> vídeos e <b>98</b> imagens')}

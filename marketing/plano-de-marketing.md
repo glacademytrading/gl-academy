@@ -386,6 +386,8 @@ Cada pasta de vídeos tem um arquivo "Legendas e usos.txt". A pasta 02 tem um ca
 | Lugar | O que tem |
 | --- | --- |
 | [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm) | Os 70 vídeos e 82 imagens com legenda e botão de copiar, o ZIP organizado, o kit do site com o prompt do Codex, roteiros e o plano da Higgsfield |
+| [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1) | Os 43 vídeos e 98 imagens da campanha "Risco primeiro" (Reels, feed 4:5, anúncios do YouTube, aulas 20 e 21 da Mentoria, 4 tutoriais), o que postar em cada dia, legendas, textos dos anúncios, roteiros e o ZIP organizado |
+| [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) | Os carrosséis e stories da série Operacional na prática e as peças de dúvidas e call |
 | [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns) | Objetivo, calculadora do funil, os 6 pilares com ações e status compartilhado, kit de textos (anúncios, release, roteiro da call, mensagens), calendário do trimestre, medição e regras |
 | Repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0 | O funil com atribuição por pilar (falta o merge), o motor de vídeo, o organizador, os prompts e o glossário |
 | Projeto "GL Academy · Marketing" na Higgsfield | Imagens base, rascunhos do logo e o que o Codex gerou |
@@ -507,7 +509,7 @@ Continuar o projeto de marketing da GL Academy.
 
 CONTEXTO
 - Repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Leia antes de tudo: marketing/plano-de-marketing.md (o plano completo), marketing/glossario.md, marketing/execucao/ (calendário, anúncios, placar, imprensa, crise, parceiros e vendas), marketing/roteiros-e-depoimentos.md, marketing/site/prompt-codex-videos-do-site.md e marketing/videos/README.md.
-- Páginas: Biblioteca de Vídeos GL (https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm) e Sistema de Marketing GL (https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns), que guarda o status de cada ação na coleção "status" e a meta oficial na coleção "config".
+- Páginas: Biblioteca de Vídeos GL (https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm), Campanha GL Risk Auto (https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1), Carrosséis e Stories GL (https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) e Sistema de Marketing GL (https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns), que guarda o status de cada ação na coleção "status" e a meta oficial na coleção "config".
 - Objetivo único do ciclo (28/09 a 31/12/2026): clientes fechados na call 1x1 gratuita. Métrica guia: calls realizadas por semana. Os 6 pilares (Conteúdo, Tráfego pago, Divulgação, Assessoria de imprensa, Relações públicas e Vendas) passam o bastão um para o outro.
 
 O QUE MUDOU DESDE A ÚLTIMA CONVERSA (preencha)

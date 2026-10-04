@@ -106,7 +106,7 @@ A rodada premium está pausada e pronta para retomar. Veja `higgsfield-rodada-pr
 
 ## Campanha GL Risk Auto
 
-Página (privada): Campanha GL Risk Auto, ligada na Biblioteca e na página de carrosséis. Para refazer depois de mudar um roteiro:
+Página (privada): [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1), ligada na Biblioteca e na página de carrosséis. Para refazer depois de mudar um roteiro:
 
 ```bash
 SPECS=./specs-risk.js node render.js          # verticais, 4:5 e coringas

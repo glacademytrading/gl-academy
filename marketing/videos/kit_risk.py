@@ -129,7 +129,7 @@ AULAS = [
          leg=leg('Um trade do começo ao fim, com o risco medido (Mentoria GL, aula 20).',
                  'Contexto no 30 minutos, a VAH D e o bloco vermelho no 5 minutos, comprados na resistência, o risco medido em R, a entrada autorizada dentro do teto e a saída com o sinal verde. Pare nas perguntas e responda nos comentários antes de ver.',
                  'Salve para estudar. ' + CALL, aviso=AV_REPLAY)),
-    dict(id='m21-teto-e-tamanho-de-posicao', tipo='mentoria', n='Aula 21', curto='Teto de risco e tamanho de posição', thumb='thumb-ra-m21',
+    dict(id='m21-teto-e-tamanho-de-posicao', tipo='mentoria', n='Aula 21', curto='Teto de risco e tamanho de posição', arq='Teto e tamanho de posição', thumb='thumb-ra-m21',
          sub='De onde vem o teto, quantos contratos cabem e por que a mão não cresce no impulso.',
          yt='Teto de risco e tamanho de posição: quantos contratos cabem? | Mentoria GL, aula 21',
          ytd='De onde vem o teto por trade, o auto risco depois de cada trade fechado, por que o plano acima do teto não passa e como o GL Risk Auto calcula quantos contratos cabem no stop.\n\nO vídeo para nas perguntas: pause e decida antes de ver a resposta.\n\nAgende a call 1x1 gratuita: ' + FUNIL + '\n\n' + AV_MESA,
@@ -271,6 +271,10 @@ def limpar(nome):
     nome = nome.replace('·', '-').replace(':', ' -').replace('/', '-').replace('\\', '-').replace('?', '')
     nome = re.sub(r'[*"<>|]', '', nome)
     return re.sub(r'\s+', ' ', nome).strip(' .-')
+
+
+def arq(a):
+    return limpar(a.get('arq', a['curto']))
 
 
 def node_json(js):
@@ -427,14 +431,14 @@ def montar():
         h_src, h_pst = video(a['id'], os.path.join(PAG, imagem('thumbs-ra', a['thumb'])), 1.5, 640)
         vid9 = a['id'] + '-9x16'
         v_src, v_pst = video(vid9, os.path.join(PAG, capa_de[vid9]))
-        pasta = f'{VID}/04 - Mentoria - Módulo 8 Gestão de risco' if a['tipo'] == 'mentoria' else f'{VID}/05 - Tutoriais'
-        base_nome = f"{a['n']} - {limpar(a['curto'])}"
+        pasta = f'{VID}/04 - Mentoria - Gestão de risco' if a['tipo'] == 'mentoria' else f'{VID}/05 - Tutoriais'
+        base_nome = f"{a['n']} - {arq(a)}"
         arquivos.append({'p': h_src, 'z': f'{pasta}/{base_nome} (16x9).mp4'})
         arquivos.append({'p': v_src, 'z': f'{pasta}/{base_nome} (9x16).mp4'})
         arquivos.append({'p': capa_de[vid9], 'z': f"{IMG}/03 - Capas de Reels (9x16)/Capa - {base_nome}.jpg"})
         aulas.append(dict(a, h_src=h_src, h_pst=h_pst, v_src=v_src, v_pst=v_pst, h_nome=f'GL Risk Auto - {base_nome} (16x9).mp4',
                           v_nome=f'GL Risk Auto - {base_nome} (9x16).mp4', h_dur=seg(a['id']), v_dur=seg(vid9), capa9=capa_de[vid9]))
-    for tipo, pasta in (('mentoria', f'{VID}/04 - Mentoria - Módulo 8 Gestão de risco'), ('tutorial', f'{VID}/05 - Tutoriais')):
+    for tipo, pasta in (('mentoria', f'{VID}/04 - Mentoria - Gestão de risco'), ('tutorial', f'{VID}/05 - Tutoriais')):
         textos.append({'z': f'{pasta}/Títulos e legendas.txt', 't': '\n\n'.join(
             f"{a['n'].upper()} - {a['curto'].upper()}\n\nYOUTUBE (16x9)\nTítulo: {a['yt']}\nDescrição:\n{a['ytd']}\n\nREELS E SHORTS (9x16)\n{a['leg']}\n\n" + '-' * 60
             for a in AULAS if a['tipo'] == tipo)})
@@ -533,9 +537,9 @@ def montar():
                           texto=f"Versão 9:16, {a['v_dur']}. Legenda pronta.",
                           botoes=[{'rot': 'Baixar o vídeo', 'dl': a['v_src'], 'nome': a['v_nome'], 'ouro': True}, {'rot': 'Baixar a capa', 'dl': a['capa9'], 'nome': 'Capa - ' + a['curto'] + '.jpg'},
                                   {'rot': 'Copiar a legenda', 'copy': 'leg9-' + a['id'], 'feito': 'Legenda copiada'}])
-                pasta = '04 - Mentoria - Módulo 8 Gestão de risco' if a['tipo'] == 'mentoria' else '05 - Tutoriais'
+                pasta = '04 - Mentoria - Gestão de risco' if a['tipo'] == 'mentoria' else '05 - Tutoriais'
                 linhas_cal.append([d.strftime('%d/%m'), DIAS[d.weekday()], hora, 'Instagram Reels, TikTok e YouTube Shorts', titulo,
-                                   f"{VID}/{pasta}/{a['n']} - {limpar(a['curto'])} (9x16).mp4", 'Título do Shorts: ' + a['yt'], a['leg']])
+                                   f"{VID}/{pasta}/{a['n']} - {arq(a)} (9x16).mp4", 'Título do Shorts: ' + a['yt'], a['leg']])
         elif tipo == 'youtube':
             a = aula_de[ref]
             titulo = f"{a['n']} · {a['curto']}"
@@ -543,8 +547,8 @@ def montar():
                       texto=f"Vídeo 16:9, {a['h_dur']}. Título, descrição e thumbnail prontos.",
                       botoes=[{'rot': 'Baixar o vídeo', 'dl': a['h_src'], 'nome': a['h_nome'], 'ouro': True}, {'rot': 'Baixar a thumbnail', 'dl': f"img/thumbs-ra/{a['thumb']}.jpg", 'nome': 'Thumbnail - ' + a['curto'] + '.jpg'},
                               {'rot': 'Copiar o título', 'copy': 'yt-' + a['id'], 'feito': 'Título copiado'}, {'rot': 'Copiar a descrição', 'copy': 'ytd-' + a['id'], 'feito': 'Descrição copiada'}])
-            pasta = '04 - Mentoria - Módulo 8 Gestão de risco' if a['tipo'] == 'mentoria' else '05 - Tutoriais'
-            linhas_cal.append([d.strftime('%d/%m'), DIAS[d.weekday()], hora, 'YouTube', titulo, f"{VID}/{pasta}/{a['n']} - {limpar(a['curto'])} (16x9).mp4", a['yt'], a['ytd']])
+            pasta = '04 - Mentoria - Gestão de risco' if a['tipo'] == 'mentoria' else '05 - Tutoriais'
+            linhas_cal.append([d.strftime('%d/%m'), DIAS[d.weekday()], hora, 'YouTube', titulo, f"{VID}/{pasta}/{a['n']} - {arq(a)} (16x9).mp4", a['yt'], a['ytd']])
         elif tipo == 'carrossel':
             c = car_de[ref]
             it.update(rotulo=f'Carrossel · {hora[:2]}h', titulo=c['titulo'], img=c['slides'][0], ancora=ref,
@@ -616,7 +620,7 @@ LEIA_ME_VID = '''GL RISK AUTO: VÍDEOS
      nas imagens (03 - Capas de Reels) e a legenda e o título do Shorts em "Legendas e títulos".
 02 - Feed e anúncios da Meta (4x5): as versões para o feed e para os anúncios.
 03 - Anúncios do YouTube (16x9): 4 bumpers de 6 s, 2 de 15 s e 1 de 30 s, com os textos de cada anúncio.
-04 - Mentoria - Módulo 8 Gestão de risco: as aulas 20 e 21, em 16x9 (YouTube e GL OS) e 9x16 (Reels).
+04 - Mentoria - Gestão de risco: as aulas 20 e 21, em 16x9 (YouTube e GL OS) e 9x16 (Reels).
 05 - Tutoriais: os tutoriais 1 a 4 do GL Risk Auto, em 16x9 e 9x16.
 06 - Coringas sem texto: o mesmo movimento, sem legenda, para cobrir a fala gravada.
 
