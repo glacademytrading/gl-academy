@@ -1,0 +1,300 @@
+<title>Campanha GL Risk Auto</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a mesma identidade da Biblioteca de Vídeos GL e da página de carrosséis. Topo com o que postar hoje e o plano;
+   depois as peças por trilha (vídeos verticais, anúncios, mentoria, tutoriais, imagens), os textos dos anúncios e os roteiros. */
+:root {
+  color-scheme: dark;
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1f1c15; --line: #322d22;
+  --fg: #f1ece1; --muted: #a69d8b; --gold: #d8ae55; --gold-2: #f6d991; --gold-ink: #1a1408; --ok: #45b98a; --stop: #e0695f;
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --ok: #1f7d58; --stop: #b23b31; } }
+:root[data-theme="light"] {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --ok: #1f7d58; --stop: #b23b31; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: max(16px, 4vw); padding-block: 48px 80px; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.05; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 800; }
+h4 { font-size: .95rem; font-weight: 800; }
+p { margin: 0; }
+a { color: var(--gold); }
+.eyebrow { font-family: var(--font-data); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.lede { max-width: 66ch; font-size: 1.08rem; }
+.muted { color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 20px; }
+.head { display: flex; flex-direction: column; gap: 8px; }
+.head p { color: var(--muted); max-width: 72ch; }
+.hero { display: flex; flex-direction: column; gap: 16px; }
+.frase { font: 800 clamp(1.2rem, 2.6vw, 1.6rem)/1.2 var(--font-display); color: var(--gold-2); max-width: 30ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px; }
+.stat { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; background: var(--surface); }
+.stat b { font-family: var(--font-data); color: var(--gold); }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { text-decoration: none; font-size: .88rem; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--fg); }
+.toc a:hover, .toc a:focus-visible { border-color: var(--gold); }
+.btn { font: 600 .9rem/1.2 var(--font-body); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; cursor: pointer; }
+.btn:hover { border-color: var(--gold); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible, video:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn.ouro { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+.btn.mini { padding: 6px 10px; font-size: .8rem; }
+.btn[disabled] { opacity: .45; cursor: default; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.status { font-size: .85rem; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pill { font-family: var(--font-data); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; color: var(--muted); white-space: nowrap; }
+.tipo { font-family: var(--font-data); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--gold); }
+details { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--surface-2); }
+summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: .88rem; line-height: 1.5; margin: 10px 0 0; color: var(--fg); }
+.aviso { font-size: .85rem; color: var(--muted); max-width: 80ch; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; z-index: 5; }
+/* hoje */
+.hoje { border-color: var(--gold); }
+.hoje-top { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.hoje-top h3 { font-size: 1.3rem; }
+.itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; }
+.item { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: start; border-top: 1px solid var(--line); padding-top: 14px; }
+.item img { width: 100%; border-radius: 8px; background: #000; display: block; }
+.item .info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.vazio { color: var(--muted); }
+/* o plano */
+.doc { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr)); gap: 18px; align-items: start; }
+.doc .panel h3 { font-size: 1.15rem; }
+.doc .panel p, .doc .panel li { max-width: 72ch; }
+.doc ul, .doc ol { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.doc code { font-family: var(--font-data); font-size: .85em; background: var(--surface-2); border-radius: 4px; padding: 1px 4px; }
+.tabela { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+.tabela table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .88rem; }
+.tabela th, .tabela td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.tabela th { font-family: var(--font-data); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+.tabela tr:last-child td { border-bottom: 0; }
+.doc .largo { grid-column: 1 / -1; }
+/* vídeos */
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 18px; }
+.vgrid.wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+.vcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; scroll-margin-top: 20px; }
+.vcard video { width: 100%; border-radius: 10px; background: #000; display: block; }
+.r916 { aspect-ratio: 9 / 16; } .r45 { aspect-ratio: 4 / 5; } .r169 { aspect-ratio: 16 / 9; }
+.vcard .info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.vcard .sub { color: var(--muted); font-size: .9rem; }
+.quando { font-size: .85rem; font-variant-numeric: tabular-nums; }
+.quando b { font-family: var(--font-data); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.dupla { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 760px) { .dupla { grid-template-columns: 1fr; } }
+.dupla .fmt { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.aulas { display: flex; flex-direction: column; gap: 18px; }
+/* imagens */
+.tira { list-style: none; margin: 0; padding: 0 0 8px; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; }
+.tira li { flex: 0 0 190px; scroll-snap-align: start; }
+.tira img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; background: #000; display: block; }
+.duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 20px; }
+.bloco-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figure img { width: 100%; border-radius: 10px; background: #000; display: block; }
+figcaption { font-size: .82rem; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+figcaption b { color: var(--fg); }
+.grade-st { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 14px; }
+.grade-st img { aspect-ratio: 9 / 16; object-fit: cover; }
+.grade-yt { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.grade-yt img { aspect-ratio: 16 / 9; object-fit: cover; }
+.grade-q { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 14px; }
+.grade-q img { aspect-ratio: 1; object-fit: cover; }
+.par { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pares { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 18px; }
+/* anúncios */
+.anuncios td .acoes { margin-top: 6px; }
+.anuncios td:first-child { white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .tira { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+  <header class="hero">
+    <p class="eyebrow">GL Academy · campanha risco primeiro · outubro e novembro de 2026</p>
+    <h1>Campanha GL Risk Auto</h1>
+    <p class="frase">O risco se decide antes do clique. Se não cabe no teto, não entra.</p>
+    <p class="lede">Tudo o que a campanha do GL Risk Auto precisa, feito com os prints reais do painel: vídeos para atrair e converter, anúncios para a Meta e o YouTube, as aulas de gestão de risco da Mentoria GL, os tutoriais de uso, carrosséis, stories, capas e os roteiros para gravar. Cada peça tem o dia de postar, a legenda e o download.</p>
+    <div class="stats"><span class="stat"><b><!--N-VID--></b> vídeos</span><span class="stat"><b><!--N-IMG--></b> imagens</span><span class="stat"><b>6</b> roteiros para gravar</span><span class="stat"><b>0</b> crédito gasto</span></div>
+    <div class="acoes"><button type="button" class="btn ouro" id="zip-tudo">Baixar tudo organizado (ZIP)</button><button type="button" class="btn" data-dl="calendario-gl-risk-auto.csv" data-nome="Calendário GL Risk Auto.csv">Baixar o calendário (planilha)</button><button type="button" class="btn" data-dl="anuncios-gl-risk-auto.csv" data-nome="Anúncios GL Risk Auto.csv">Baixar os anúncios (planilha)</button><span class="status" id="st-tudo" role="status" aria-live="polite">As pastas são as mesmas do pacote da Biblioteca: extraia na pasta "Marketing de trading" e tudo se junta.</span></div>
+    <nav class="toc" aria-label="Seções"><a href="#hoje">Postar hoje</a><a href="#plano">O plano</a><a href="#reels">Reels e Shorts</a><a href="#feed">Feed 4:5</a><a href="#youtube">Anúncios do YouTube</a><a href="#mentoria">Mentoria</a><a href="#tutoriais">Tutoriais</a><a href="#carrosseis">Carrosséis</a><a href="#stories">Stories</a><a href="#capas">Capas e thumbnails</a><a href="#anuncios">Textos dos anúncios</a><a href="#roteiros">Roteiros para gravar</a><a href="#coringas">Coringas</a><a href="<!--BIBLIOTECA-->" target="_blank" rel="noopener">Biblioteca de Vídeos GL</a><a href="<!--KIT-->" target="_blank" rel="noopener">Carrosséis e Stories GL</a></nav>
+  </header>
+
+  <section id="hoje" class="panel hoje" aria-live="polite">
+    <div class="hoje-top"><div><p class="eyebrow" id="hoje-rot">Postar hoje</p><h3 id="hoje-dia">Carregando…</h3></div>
+      <div class="acoes"><button type="button" class="btn" id="dia-ant">← Dia anterior</button><button type="button" class="btn" id="dia-prox">Próximo dia →</button></div></div>
+    <div class="itens" id="hoje-itens"><p class="vazio">As peças do GL Risk Auto do dia aparecem aqui.</p></div>
+    <p class="aviso">Até 29/10 a série Operacional na prática ocupa as 19h dos dias úteis; o GL Risk Auto entra nos fins de semana, com carrossel na quarta e o YouTube no domingo. De novembro em diante, ganha também os dias úteis.</p>
+  </section>
+
+  <section id="plano">
+    <div class="head"><p class="eyebrow">O plano</p><h2>Risco primeiro: como a campanha funciona</h2><p>O que os prints provam, as dores do trader que viram gancho, como falar de mesa proprietária, as quatro trilhas, o calendário, os anúncios e o que depende de Giovane. O mesmo texto vai no ZIP, na pasta 01.</p></div>
+    <div class="doc"><!--PLANO--></div>
+  </section>
+
+  <section id="reels">
+    <div class="head"><p class="eyebrow">Atrair, ensinar e converter</p><h2>Reels, Shorts e TikTok</h2><p>Doze vídeos verticais. O mesmo arquivo vai no Reels, no Shorts e no TikTok; a capa está em "Capas e thumbnails". Os ganchos abrem no primeiro quadro.</p></div>
+    <div class="vgrid"><!--REELS--></div>
+  </section>
+
+  <section id="feed">
+    <div class="head"><p class="eyebrow">Anúncios da Meta</p><h2>Feed 4:5</h2><p>As versões 4:5 para o feed e para os anúncios da Meta. Nos Reels e Stories dos anúncios, use a versão 9:16 do mesmo vídeo.</p></div>
+    <div class="vgrid"><!--FEED--></div>
+  </section>
+
+  <section id="youtube">
+    <div class="head"><p class="eyebrow">Anúncios do YouTube</p><h2>Bumpers de 6 s, 15 s e 30 s</h2><p>A legenda fica numa coluna à esquerda e o print à direita. Os textos de cada anúncio (título, título longo e descrição) estão em "Textos dos anúncios".</p></div>
+    <div class="vgrid wide"><!--YOUTUBE--></div>
+  </section>
+
+  <section id="mentoria">
+    <div class="head"><p class="eyebrow">Mentoria GL · Módulo 8 · Gestão de risco</p><h2>Aulas 20 e 21</h2><p>No formato da Mentoria GL: o gráfico à esquerda, a explicação à direita e a pausa para o aluno decidir. A versão 9:16 é para Reels e Shorts. Roteiro proposto a partir dos prints: Giovane valida antes de liberar para os alunos.</p></div>
+    <div class="aulas"><!--MENTORIA--></div>
+  </section>
+
+  <section id="tutoriais">
+    <div class="head"><p class="eyebrow">GL Risk Auto · Tutoriais</p><h2>Como usar o painel</h2><p>Para clientes novos e para quem está decidindo. No YouTube, os quatro formam uma playlist; no Reels, cada um vira um vídeo de consulta rápida.</p></div>
+    <div class="aulas"><!--TUTORIAIS--></div>
+  </section>
+
+  <section id="carrosseis">
+    <div class="head"><p class="eyebrow">Instagram e LinkedIn</p><h2>Carrosséis</h2><p>Arraste a tira para ver os slides. "Baixar o carrossel" traz os slides na ordem e a legenda num ZIP. No LinkedIn, suba os slides como documento.</p></div>
+    <div class="duas"><!--CARROSSEIS--></div>
+  </section>
+
+  <section id="stories">
+    <div class="head"><p class="eyebrow">Stories</p><h2>Enquete hoje, resposta amanhã</h2><p>O story da enquete vai às 12h; a resposta, às 12h do dia seguinte, com a figurinha Link apontando para o Reels. Coloque a figurinha no espaço tracejado. Guarde tudo no destaque "Risk Auto".</p></div>
+    <div class="pares"><!--STORIES--></div>
+  </section>
+
+  <section id="capas">
+    <div class="head"><p class="eyebrow">Capas, thumbnails, frases e destaque</p><h2>Para o perfil e o YouTube</h2><p>As capas de Reels têm o título no meio, dentro do recorte da grade do perfil. As thumbnails seguem o padrão do canal: título à esquerda, o painel à direita.</p></div>
+    <div class="panel"><h3>Capas de Reels (9:16)</h3><div class="grade-st"><!--CAPAS--></div></div>
+    <div class="panel"><h3>Thumbnails do YouTube (16:9)</h3><div class="grade-yt"><!--THUMBS--></div></div>
+    <div class="panel"><h3>Frases (1:1) e a capa de destaque</h3><div class="grade-q"><!--FRASES--></div></div>
+  </section>
+
+  <section id="anuncios">
+    <div class="head"><p class="eyebrow">Tráfego pago</p><h2>Textos dos anúncios</h2><p>Na Meta, três criativos entram no teste de captação de 12/10 a 25/10 e três vão para o remarketing. No YouTube, o teste depende da verba. Os parâmetros de URL seguem o plano de marketing.</p></div>
+    <div class="tabela anuncios"><table><thead><tr><th>Anúncio</th><th>Onde</th><th>Vídeo</th><th>Textos</th></tr></thead><tbody><!--ANUNCIOS--></tbody></table></div>
+  </section>
+
+  <section id="roteiros">
+    <div class="head"><p class="eyebrow">Rosto e voz</p><h2>Roteiros para gravar</h2><p>Seis roteiros. A tela entra pelos coringas sem texto, então a gravação pode ser só o rosto. O que está entre colchetes é para completar com a sua experiência.</p></div>
+    <div class="doc"><!--ROTEIROS--></div>
+  </section>
+
+  <section id="coringas">
+    <div class="head"><p class="eyebrow">Para editar</p><h2>Coringas sem texto</h2><p>O mesmo movimento dos vídeos, sem legenda, caixas e cartela, para cobrir a fala gravada. Verticais para Reels e horizontais para o YouTube.</p></div>
+    <div class="vgrid"><!--CORINGAS--></div>
+  </section>
+
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script type="application/json" id="dados"><!--DADOS--></script>
+<script>
+(function () {
+  var D = {}; try { D = JSON.parse(document.getElementById('dados').textContent); } catch (e) { D = { agenda: [] }; }
+  var timer;
+  function toast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(timer); timer = setTimeout(function () { t.hidden = true; }, 2600); }
+  function el(tag, attrs, txt) { var x = document.createElement(tag); Object.keys(attrs || {}).forEach(function (k) { x.setAttribute(k, attrs[k]); }); if (txt != null) x.textContent = txt; return x; }
+
+  // copiar
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var alvo = document.getElementById(b.dataset.copy); if (!alvo) return;
+    var txt = alvo.textContent, label = b.dataset.label || b.textContent, feito = b.dataset.done || 'Copiado';
+    var ok = function () { b.textContent = feito; setTimeout(function () { b.textContent = label; }, 1600); };
+    var falha = function () { if (alvo.hidden) { toast('Não deu para copiar: ' + txt.replace(/\n/g, ' / ').slice(0, 140)); return; } var r = document.createRange(); r.selectNodeContents(alvo); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Texto selecionado. Use o comando de copiar.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, falha); else falha();
+  });
+
+  // downloads pela capacidade do Claude; fora dele, link comum
+  var dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+  async function salvar(nome, blob) {
+    var d = await dlCap;
+    if (d) {
+      try { await d.save({ filename: nome, data: blob }); return true; }
+      catch (err) { var c = err && err.code; if (c === 'declined') return false; toast(c === 'too_large' ? 'Arquivo grande demais para este aparelho. Baixe por seção.' : c === 'rate_limited' ? 'Já tem um download esperando confirmação.' : 'O download não está disponível nesta visualização.'); return false; }
+    }
+    var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 120000); return true;
+  }
+  async function buscar(p) { var r = await fetch(p); if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); }
+  var jszip;
+  function carregarZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (!jszip) jszip = new Promise(function (ok, no) { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = function () { ok(window.JSZip); }; s.onerror = function () { jszip = null; no(new Error('JSZip')); }; document.head.appendChild(s); });
+    return jszip;
+  }
+  // itens: [{p, z}] (z = caminho dentro do ZIP); textos: [{z, t}]
+  async function zipar(nome, itens, textos, status) {
+    status('Carregando o compactador…');
+    var JSZip = await carregarZip(), zip = new JSZip(), prox = 0, feitos = 0;
+    async function trabalhar() { while (prox < itens.length) { var it = itens[prox++]; zip.file(it.z, await buscar(it.p)); feitos++; status('Juntando ' + feitos + ' de ' + itens.length + '…'); } }
+    await Promise.all([trabalhar(), trabalhar(), trabalhar(), trabalhar()]);
+    (textos || []).forEach(function (t) { zip.file(t.z, t.t); });
+    var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (m) { status('Montando o ZIP: ' + Math.round(m.percent) + '%'); });
+    status('Confirme o download.');
+    if (await salvar(nome, out)) toast('ZIP pronto: ' + itens.length + ' arquivos.');
+  }
+  var ocupado = false;
+  async function acao(btn, fn) {
+    if (ocupado) { toast('Espere o download atual terminar.'); return; }
+    ocupado = true; var rot = btn.textContent; btn.disabled = true;
+    var st = btn.id === 'zip-tudo' ? document.getElementById('st-tudo') : null, idle = st ? st.textContent : '';
+    var status = function (t) { if (st) st.textContent = t; else btn.textContent = t; };
+    try { await fn(status); } catch (err) { toast('Não deu para baixar. Tente de novo.'); }
+    finally { ocupado = false; btn.disabled = false; btn.textContent = rot; if (st) st.textContent = idle; }
+  }
+  function soNome(p) { return p.split('/').pop(); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('#zip-tudo, [data-dl], [data-zipg]'); if (!b) return;
+    if (b.id === 'zip-tudo') return acao(b, function (st) { return zipar(D.zip.nome, D.zip.arquivos, D.zip.textos, st); });
+    if (b.dataset.dl) { var nome = b.dataset.nome || soNome(b.dataset.dl); return acao(b, async function (st) { st('Preparando…'); if (await salvar(nome, await buscar(b.dataset.dl))) toast('Download enviado: ' + nome); }); }
+    if (b.dataset.zipg) { var g = D.grupos[b.dataset.zipg]; if (!g) return; return acao(b, function (st) { return zipar(g.nome, g.arquivos, g.textos, st); }); }
+  });
+
+  // postar hoje: as peças da data de quem abre (ou a próxima data com peças)
+  var ag = D.agenda || [], datas = [];
+  ag.forEach(function (a) { if (datas.indexOf(a.data) < 0) datas.push(a.data); });
+  var d = new Date(), hoje = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  var i = 0; while (i < datas.length - 1 && datas[i] < hoje) i++;
+  function desenhar() {
+    var box = document.getElementById('hoje-itens'); box.textContent = '';
+    if (!datas.length) { box.appendChild(el('p', { class: 'vazio' }, 'Sem peças agendadas.')); return; }
+    var dia = datas[i], itens = ag.filter(function (a) { return a.data === dia; });
+    document.getElementById('hoje-rot').textContent = dia === hoje ? 'Postar hoje' : dia < hoje ? 'Já passou' : (dia === datas.filter(function (x) { return x >= hoje; })[0] ? 'Próximo dia de posts' : 'Agendado');
+    document.getElementById('hoje-dia').textContent = itens[0].dia;
+    document.getElementById('dia-ant').disabled = i === 0; document.getElementById('dia-prox').disabled = i === datas.length - 1;
+    itens.forEach(function (a) {
+      var it = el('div', { class: 'item' }), info = el('div', { class: 'info' });
+      it.appendChild(el('img', { src: a.img, alt: a.titulo, loading: 'lazy' }));
+      info.appendChild(el('p', { class: 'tipo' }, a.rotulo));
+      info.appendChild(el('h4', {}, a.titulo));
+      if (a.texto) info.appendChild(el('p', { class: 'muted' }, a.texto));
+      var ac = el('div', { class: 'acoes' });
+      (a.botoes || []).forEach(function (bt) {
+        var at = { type: 'button', class: 'btn mini' + (bt.ouro ? ' ouro' : '') };
+        if (bt.dl) { at['data-dl'] = bt.dl; if (bt.nome) at['data-nome'] = bt.nome; }
+        if (bt.zipg) at['data-zipg'] = bt.zipg;
+        if (bt.copy) { at['data-copy'] = bt.copy; at['data-label'] = bt.rot; at['data-done'] = bt.feito || 'Copiado'; }
+        ac.appendChild(el('button', at, bt.rot));
+      });
+      info.appendChild(ac);
+      if (a.ancora) info.appendChild(el('a', { href: '#' + a.ancora }, 'Ver a peça'));
+      it.appendChild(info); box.appendChild(it);
+    });
+  }
+  document.getElementById('dia-ant').addEventListener('click', function () { if (i > 0) { i--; desenhar(); } });
+  document.getElementById('dia-prox').addEventListener('click', function () { if (i < datas.length - 1) { i++; desenhar(); } });
+  desenhar();
+})();
+</script>

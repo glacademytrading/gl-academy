@@ -118,7 +118,7 @@ Conteúdo gera confiança e demanda: educa o trader até ele querer o que a GL e
 | Pare de ser a liquidez | Alcance | Nem toda queda é venda, Setup acontecendo (varredura na mínima), carrossel e post da varredura | Reels do Giovane sobre stop óbvio e agressor preso |
 | A Frase Central | Autoridade | As 3 perguntas antes do trade, carrossel e ganchos de teste | O trade comentado da semana, com o Giovane |
 | Mapa institucional | Autoridade | Aulas de VWAP e Value Area, Escada de valor, Gamma Exposure, Defesa na VWAP 3M, carrosséis de VWAP, Value Area e GL Gamma | Prints de Multi Fractal, Order Flow e mapa de liquidez |
-| Risco primeiro | Dor e solução | Frase "Risco definido antes do clique" | Vídeo do GL Risk Auto travando a plataforma |
+| Risco primeiro | Dor e solução | Campanha GL Risk Auto: 12 Reels, 5 versões 4:5, 7 anúncios do YouTube, as aulas 20 e 21 da Mentoria, 4 tutoriais, 7 carrosséis, 13 stories, capas e thumbnails (`execucao/campanha-gl-risk-auto.md`) | Gravar os 6 roteiros de `roteiros-gl-risk-auto.md` e a tela do painel em uso |
 | Bastidores e prova | Confiança | Kit de live, comunidade e o guia de depoimentos | Depoimentos de processo e a rotina do Giovane |
 
 **O que já existe:** 70 vídeos e 82 imagens na Biblioteca, com a legenda pronta de cada um. São 11 vídeos que vendem o operacional, 6 testes de gancho, 4 versões para o feed, 2 aulas, 13 coringas sem texto, 5 carrosséis, 10 posts, 5 frases, 5 stories, 10 capas de Reels, 6 capas de destaques e 6 thumbnails. Também há 6 roteiros para o Giovane gravar e o guia de depoimentos.
@@ -403,6 +403,7 @@ Em três dias, o marketing ganhou um plano com objetivo único, um funil que med
 
 | Quando | O que foi feito | Detalhe |
 | --- | --- | --- |
+| 04/10 | Campanha GL Risk Auto | Com os prints 22 a 34: 43 vídeos (Reels, feed 4:5, anúncios do YouTube, aulas 20 e 21 da Mentoria, tutoriais e coringas), 98 imagens, o plano da campanha, o calendário até 25/11, os textos dos anúncios e 6 roteiros para gravar, na página Campanha GL Risk Auto |
 | 01/10, tarde | Kit do site completo e prompt para o Codex | 28 vídeos escolhidos para cada espaço do site, capas em tamanho cheio, catálogo e o prompt. Este plano para o GL OS |
 | 01/10, 08h | Pacote organizado e organizador da pasta | ZIP de 136 MB com pastas por objetivo, legendas, catálogo e índice por tema; organizador para o Windows testado em 8 cenários |
 | 01/10, 07h | Rodada 4 | Sequência da call no WhatsApp, kit de live para o OBS, YouTube, comunidade, parceiros, loops do site e 82 imagens (carrosséis, posts, frases, stories, capas, thumbnails) |

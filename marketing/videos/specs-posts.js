@@ -282,6 +282,8 @@ module.exports = [
   ...STORIES.flatMap(s => [s.enquete, s.resposta]),
   ...lancamento, ...carDuvidas, ...stDuvidas, ...carCall, ...carRisk, ...stRisk
 ];
+// os mesmos construtores para outras peças (imagens do GL Risk Auto em specs-risk-posts.js)
+module.exports.H = { montarCarrossel, livre, story, topo, base, EMB };
 // o que o kit_posts.py precisa: slides de cada carrossel, a enquete e a resposta de cada episódio e as peças extras
 module.exports.META = {
   episodios: EPS.map((ep, i) => ({ vid: ep.vid, ep: ep.ep, mentoria: ep.mentoria, carrossel: CARROSSEIS[i].group,

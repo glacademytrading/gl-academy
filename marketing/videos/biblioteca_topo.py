@@ -5,8 +5,10 @@ import html, json, re
 
 esc = lambda s: html.escape(str(s), quote=True)
 KIT = 'https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp'   # Carrosséis e Stories GL (página irmã, kit_posts.py)
+RISK = 'RISK_URL_PENDENTE'   # Campanha GL Risk Auto (página irmã, kit_risk.py)
 # tipos que ficam na página de carrosséis e stories: (link, o que mostrar em "Prontos")
-EXTERNOS = {'kit-serie': (KIT + '#serie', '<b>19</b> carrosséis e <b>38</b> stories'), 'kit-conv': (KIT + '#converter', '<b>2</b> carrosséis e <b>4</b> stories')}
+EXTERNOS = {'kit-serie': (KIT + '#serie', '<b>19</b> carrosséis e <b>38</b> stories'), 'kit-conv': (KIT + '#converter', '<b>2</b> carrosséis e <b>4</b> stories'),
+            'risk-auto': (RISK + '#hoje', '<b>43</b> vídeos e <b>98</b> imagens')}
 
 # ---------------------------------------------------------------------------
 # As partes da página, na ordem do funil. Cada grupo da Biblioteca entra numa parte só.
@@ -14,7 +16,7 @@ PARTES = [
   ('atrair', 'Atrair e ensinar', 'Conteúdo orgânico que traz seguidor novo e mostra como o operacional funciona de verdade. É o que se posta todo dia.',
    ['operacional-social', 'kit-serie', 'orderflow', 'aulas', 'operacional', 'coringas', 'horizontais']),
   ('vender', 'Anunciar e vender', 'Para os anúncios e os posts de venda: cada vídeo prova uma coisa que a tecnologia GL faz e chama para a call 1x1.',
-   ['vendem', 'ganchos', 'feed', 'comerciais', 'objecoes']),
+   ['vendem', 'risk-auto', 'ganchos', 'feed', 'comerciais', 'objecoes']),
   ('converter', 'Converter e cuidar de quem chegou', 'Depois do agendamento e depois da compra: a pessoa aparece na call, o aluno aprende e a comunidade recebe bem.',
    ['kit-conv', 'vendas-whats', 'mentoria', 'comunidade']),
   ('canais', 'Lives, YouTube, site e marca', 'As peças fixas de cada canal: telas e sobreposições de live, trailer e tela final do YouTube, loops do site e a vinheta.',
@@ -27,6 +29,8 @@ GUIA = {
                          'Instagram Reels e YouTube Shorts', 'Um por dia útil, às 19h (de 05/10 a 29/10)'),
   'kit-serie': ('Carrosséis e stories da série', 'Um carrossel por episódio e o par de stories: a enquete no ponto de decisão e a resposta no dia seguinte.',
                 'Feed e stories do Instagram', 'Enquete às 12h do dia do episódio, resposta às 12h do dia seguinte e o carrossel uma semana depois'),
+  'risk-auto': ('Campanha GL Risk Auto', 'Vídeos, anúncios do YouTube, as aulas 20 e 21 da Mentoria, os tutoriais, carrosséis e stories do GL Risk Auto, com o plano, o calendário, os textos dos anúncios e os roteiros para gravar.',
+                'Reels, Shorts, TikTok, YouTube, feed e anúncios', 'Fins de semana às 19h até 01/11; depois, também nos dias úteis'),
   'kit-conv': ('Dúvidas antes da call e como funciona a call', 'Dois carrosséis e quatro stories que respondem às dúvidas de quem ainda não agendou.',
                'Feed (fixados no perfil) e destaque "Dúvidas"', 'Uma vez, e fixar no perfil'),
   'orderflow': ('Série de Order Flow (Deep DOM)', 'Os trechos da mentoria de Order Flow, explicados para quem nunca viu um book.',
@@ -61,7 +65,7 @@ GUIA = {
 # O que ainda não fazemos: (título, por que importa, o que precisa, quem, âncora)
 LACUNAS = [
   ('Vídeos com Giovane falando', 'Rosto e voz geram a confiança que o gráfico sozinho não gera. É o formato que mais converte em call.',
-   'Gravar no celular os 6 roteiros que já estão prontos (30 a 45 segundos cada). Eu edito com legenda, cortes dos setups e o logo.', 'giovane', 'roteiros'),
+   'Gravar no celular os 6 roteiros que já estão prontos (30 a 45 segundos cada) e os 6 do GL Risk Auto. Eu edito com legenda, cortes dos setups e o logo.', 'giovane', 'roteiros'),
   ('Depoimentos de alunos', 'Prova social do processo (a rotina, a disciplina, a leitura), nunca de lucro.',
    'Pedir aos alunos com o modelo e a autorização de uso que estão em "Roteiros para gravar".', 'equipe', 'roteiros'),
   ('Série de Order Flow', 'Mostra que a GL opera e ensina no book, com a mesma clareza da série do operacional.',

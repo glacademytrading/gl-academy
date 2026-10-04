@@ -530,3 +530,6 @@ const RAW = [
 
 module.exports = RAW.map(o => aula(o));
 module.exports.RAW = RAW;
+// o mesmo formato de aula para outros roteiros (aulas e tutoriais do GL Risk Auto em specs-risk-aulas.js)
+module.exports.aula = aula;
+module.exports.PAUSA = PAUSA;
