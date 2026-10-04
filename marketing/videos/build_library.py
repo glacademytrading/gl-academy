@@ -329,7 +329,7 @@ IMG_GROUPS = [
   ('img-stories', 'Stories', 'imagens/stories-9x16', '9:16', 'Os espaços tracejados recebem os stickers do Instagram (link, enquete, lembrete). Poste a enquete num dia e a resposta no outro.', {}),
   ('img-capas-reels', 'Capas de Reels', 'capas/capas-reels', '9:16', 'Título dentro da área que o perfil mostra em 4:5. Use como capa ao publicar cada Reels.', {}),
   ('img-capas-operacional', 'Capas da série Operacional na prática', 'capas-social', '9:16', 'A capa de cada episódio, com o gancho e o gráfico inteiro. No Instagram: Editar capa > Adicionar da galeria. No YouTube Shorts: escolha a capa ao publicar pelo app.', {}),
-  ('img-destaques', 'Capas de destaques', 'imagens/destaques', '9:16', 'O Instagram mostra o círculo central. Ordem sugerida: Setups, Aulas, Lives, Call, Gamma, Alunos.', {}),
+  ('img-destaques', 'Capas de destaques', 'imagens/destaques', '9:16', 'O Instagram mostra o círculo central. Ordem sugerida: Série, Setups, Aulas, Lives, Call, Gamma, Alunos, Dúvidas. Os stories da série e das dúvidas estão na página Carrosséis e Stories GL.', {}),
   ('img-youtube', 'Thumbnails do YouTube', 'imagens/youtube-thumbs', '16:9', 'Em 1280x720. Ficam ainda melhores com uma foto do Giovane à esquerda: mande uma e eu monto as versões com rosto.', {}),
   ('img-site-galeria', 'Galeria do site', 'imagens/site-galeria', '16:9', 'Para a seção "Veja os sistemas em uso": gráfico real com o selo da plataforma e as marcações. O site já tem a legenda.', {}),
   ('img-site-og', 'Imagens de compartilhamento do site', 'imagens/site-compartilhamento', '16:9', 'A imagem que aparece quando alguém compartilha o link da página no WhatsApp, Instagram ou LinkedIn. 1200x630, no estilo do site. Vai na meta og:image de cada página.', {}),
@@ -387,3 +387,6 @@ subprocess.run(['python3', os.path.join(ROOT, 'mentoria_pacote.py')], check=True
 subprocess.run(['python3', os.path.join(ROOT, 'organizacao.py')], check=True)
 # Kit do site: os melhores vídeos para cada espaço do site, com capas e o prompt para o Codex
 subprocess.run(['python3', os.path.join(ROOT, 'kit_site.py')], check=True)
+# Carrosséis e stories (página irmã): imagens do posts.js, legendas, calendário e o ZIP organizado
+if os.path.isdir(os.path.join(OUT, 'posts')):
+    subprocess.run(['python3', os.path.join(ROOT, 'kit_posts.py')], check=True)

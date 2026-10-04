@@ -4,16 +4,19 @@
 import html, json, re
 
 esc = lambda s: html.escape(str(s), quote=True)
+KIT = 'https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp'   # Carrosséis e Stories GL (página irmã, kit_posts.py)
+# tipos que ficam na página de carrosséis e stories: (link, o que mostrar em "Prontos")
+EXTERNOS = {'kit-serie': (KIT + '#serie', '<b>19</b> carrosséis e <b>38</b> stories'), 'kit-conv': (KIT + '#converter', '<b>2</b> carrosséis e <b>4</b> stories')}
 
 # ---------------------------------------------------------------------------
 # As partes da página, na ordem do funil. Cada grupo da Biblioteca entra numa parte só.
 PARTES = [
   ('atrair', 'Atrair e ensinar', 'Conteúdo orgânico que traz seguidor novo e mostra como o operacional funciona de verdade. É o que se posta todo dia.',
-   ['operacional-social', 'orderflow', 'aulas', 'operacional', 'coringas', 'horizontais']),
+   ['operacional-social', 'kit-serie', 'orderflow', 'aulas', 'operacional', 'coringas', 'horizontais']),
   ('vender', 'Anunciar e vender', 'Para os anúncios e os posts de venda: cada vídeo prova uma coisa que a tecnologia GL faz e chama para a call 1x1.',
    ['vendem', 'ganchos', 'feed', 'comerciais', 'objecoes']),
   ('converter', 'Converter e cuidar de quem chegou', 'Depois do agendamento e depois da compra: a pessoa aparece na call, o aluno aprende e a comunidade recebe bem.',
-   ['vendas-whats', 'mentoria', 'comunidade']),
+   ['kit-conv', 'vendas-whats', 'mentoria', 'comunidade']),
   ('canais', 'Lives, YouTube, site e marca', 'As peças fixas de cada canal: telas e sobreposições de live, trailer e tela final do YouTube, loops do site e a vinheta.',
    ['lives', 'live2', 'youtube', 'marca', 'site']),
 ]
@@ -22,6 +25,10 @@ PARTES = [
 GUIA = {
   'operacional-social': ('Série Operacional na prática', 'Episódios 9:16 que ensinam o operacional passo a passo, com a pergunta para os comentários.',
                          'Instagram Reels e YouTube Shorts', 'Um por dia útil, às 19h (de 05/10 a 29/10)'),
+  'kit-serie': ('Carrosséis e stories da série', 'Um carrossel por episódio e o par de stories: a enquete no ponto de decisão e a resposta no dia seguinte.',
+                'Feed e stories do Instagram', 'Enquete às 12h do dia do episódio, resposta às 12h do dia seguinte e o carrossel uma semana depois'),
+  'kit-conv': ('Dúvidas antes da call e como funciona a call', 'Dois carrosséis e quatro stories que respondem às dúvidas de quem ainda não agendou.',
+               'Feed (fixados no perfil) e destaque "Dúvidas"', 'Uma vez, e fixar no perfil'),
   'orderflow': ('Série de Order Flow (Deep DOM)', 'Os trechos da mentoria de Order Flow, explicados para quem nunca viu um book.',
                 'Reels, Shorts e aulas para os alunos', 'Depois que chegarem os prints'),
   'aulas': ('Aulas rápidas', 'Um conceito em 15 segundos (VWAP, Value Area) com o gráfico real.', 'Reels, Shorts e TikTok', 'Uma por semana'),
@@ -65,10 +72,6 @@ LACUNAS = [
    'A gravação de cada live (o arquivo do OBS ou o link do YouTube).', 'equipe', 'lives'),
   ('Vídeos longos no YouTube', 'É onde o YouTube recomenda o canal e onde a pessoa passa tempo suficiente para confiar.',
    'Giovane narra cada módulo da mentoria e eu junto as aulas do módulo num vídeo de 8 a 12 minutos.', 'giovane', 'youtube'),
-  ('Carrosséis da série', 'O carrossel é o formato que mais gera salvamento no feed, e cada episódio rende um.',
-   'Nada: eu faço com os mesmos prints e a mesma explicação de cada episódio.', 'claude', 'operacional-social'),
-  ('Stories de cada episódio', 'A enquete "Você venderia aqui?" no story e a resposta no dia seguinte trazem a audiência para o Reels.',
-   'Nada: eu faço o par de stories (pergunta e resposta) de cada episódio.', 'claude', 'operacional-social'),
 ]
 QUEM = {'giovane': 'Depende de Giovane', 'equipe': 'Depende da equipe', 'claude': 'Eu faço, é só pedir'}
 
@@ -180,6 +183,7 @@ def secao_comece(serie, tarefas_dl):
             f'<h3>Ep. {primeiro["ep"]} · {esc(primeiro["gancho"])}</h3></div>') if primeiro else '<p class="desc">Sem episódios agendados.</p>'
     tarefas = [
       ('postar', 'Postar o episódio do dia às 19h, no Reels e no Shorts', 'Equipe de redes', '#hoje', 'Ver o post de hoje'),
+      ('stories', 'Postar os stories (12h) e o carrossel do dia', 'Equipe de redes', KIT + '#hoje', 'Abrir carrosséis e stories'),
       ('orderflow', 'Tirar os prints da Mentoria de Order Flow, começando pelos 8 da lista', 'Giovane', '#orderflow', 'Ver a lista'),
       ('validar', 'Validar as regras das 19 aulas da Mentoria antes de liberar para os alunos', 'Giovane', '#mentoria', 'Ver as aulas'),
       ('gravar', 'Gravar os 6 roteiros prontos (30 a 45 segundos cada, no celular)', 'Giovane', '#roteiros', 'Ver os roteiros'),
@@ -188,6 +192,7 @@ def secao_comece(serie, tarefas_dl):
     li = []
     for tid, txt, quem, alvo, rot in tarefas:
         acao = (f'<a href="{alvo}">{rot}</a>' if alvo.startswith('#') else
+                f'<a href="{alvo}" target="_blank" rel="noopener">{rot}</a>' if alvo.startswith('http') else
                 f'<button type="button" class="btn btn-link" data-dl="{esc(alvo)}">{rot}</button>')
         li.append(f'<li><label><input type="checkbox" data-tarefa="{tid}"> <span>{esc(txt)}</span></label><p class="tarefa-info"><span class="quem">{esc(quem)}</span>{acao}</p></li>')
     return f'''<section id="comece" class="comece">
@@ -205,12 +210,13 @@ def secao_guia(contagem):
     for k, (pid, ptit, _, gids) in enumerate(PARTES, 1):
         linhas = []
         for g in gids:
-            if g not in GUIA or (g not in contagem and g != 'orderflow'):
+            if g not in GUIA or (g not in contagem and g != 'orderflow' and g not in EXTERNOS):
                 continue
             nome, oque, onde, quando = GUIA[g]
             n = contagem.get(g, 0)
-            pront = '<span class="status espera">Esperando os prints</span>' if g == 'orderflow' else f'<b>{n}</b> prontos'
-            linhas.append(f'<tr><td data-label="Tipo"><a href="#{g}">{esc(nome)}</a></td><td data-label="O que é">{esc(oque)}</td>'
+            pront = ('<span class="status espera">Esperando os prints</span>' if g == 'orderflow' else EXTERNOS[g][1] if g in EXTERNOS else f'<b>{n}</b> prontos')
+            href = f'{EXTERNOS[g][0]}" target="_blank" rel="noopener' if g in EXTERNOS else '#' + g
+            linhas.append(f'<tr><td data-label="Tipo"><a href="{href}">{esc(nome)}</a></td><td data-label="O que é">{esc(oque)}</td>'
                           f'<td data-label="Onde usar">{esc(onde)}</td><td data-label="Quando">{esc(quando)}</td><td data-label="Prontos">{pront}</td></tr>')
         prontos = sum(contagem.get(g, 0) for g in gids if g in GUIA)
         tabelas.append(f'<details class="guia-parte" open><summary><span class="t"><span>{k} · {ptit}</span><span class="n">{len(linhas)} tipos · {prontos} vídeos prontos</span></span></summary>'
@@ -221,7 +227,7 @@ def secao_guia(contagem):
     return f'''<section id="guia">
   <div class="section-head"><p class="eyebrow">Guia</p><h2>Como usar cada tipo de vídeo</h2><p>Cada tipo de vídeo tem um trabalho. Aqui está o que é cada um, onde postar, com que frequência e quantos estão prontos, na ordem do funil. Clique no nome para ir até os vídeos e no título da parte para abrir ou fechar a tabela.</p></div>
   {"".join(tabelas)}
-  <div class="section-head"><h3>O que ainda não fazemos (e deveríamos)</h3><p>Os formatos que faltam para o conteúdo ficar completo. Os de cima dependem de gravação ou de prints; os dois últimos eu faço com o que já temos.</p></div>
+  <div class="section-head"><h3>O que ainda não fazemos (e deveríamos)</h3><p>Os formatos que faltam para o conteúdo ficar completo. Todos dependem de gravação, de prints ou da equipe. Os carrosséis e os stories da série já estão prontos, na página de carrosséis e stories.</p></div>
   <div class="lacunas">{lac}</div>
 </section>'''
 
@@ -230,7 +236,8 @@ def partes_html(por_id, extras):
     usados, out = set(), []
     for k, (pid, ptit, pdesc, gids) in enumerate(PARTES, 1):
         presentes = [g for g in gids if g in por_id or g in extras]
-        chips = ''.join(f'<a href="#{g}">{esc(GUIA[g][0]) if g in GUIA else g}</a>' for g in presentes)
+        chips = ''.join(f'<a href="{EXTERNOS[g][0]}" target="_blank" rel="noopener">{esc(GUIA[g][0])} ↗</a>' if g in EXTERNOS else
+                        f'<a href="#{g}">{esc(GUIA[g][0]) if g in GUIA else g}</a>' for g in gids if g in presentes or g in EXTERNOS)
         out.append(f'<section id="parte-{pid}" class="parte"><p class="eyebrow">Parte {k}</p><h2>{ptit}</h2><p>{pdesc}</p><nav class="toc">{chips}</nav></section>')
         for g in presentes:
             out.append(extras.get(g) or por_id[g]); usados.add(g)

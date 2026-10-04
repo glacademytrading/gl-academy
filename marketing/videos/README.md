@@ -45,6 +45,9 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
 | `specs-imagens.js` | posts, frases, stories, destaques, thumbnails do YouTube, galeria do site e imagens de compartilhamento (com `slides.js`) |
 | `biblioteca_topo.py` | a organização da Biblioteca: "O que fazer hoje" (o post do dia da série, escolhido pela data de quem abre a página, e as tarefas, marcadas só no navegador), o guia de cada tipo de vídeo (`PARTES`, `GUIA` e `LACUNAS`: o que é, onde usar, quando, quantos estão prontos e o que ainda não fazemos), as quatro partes por objetivo e a seção de Order Flow, lida de `../mentoria/orderflow-trechos-e-prints.md`. Grupo novo na Biblioteca entra em `PARTES` e `GUIA`; sem isso ele vai para o fim da página |
+| `specs-posts.js` | carrosséis 4:5 e stories 9:16 da série "Operacional na prática" (um carrossel e o par enquete e resposta por episódio, com o estado do gráfico no fim de cada passo da aula, as mesmas marcações e textos), o lançamento da série e as peças de conversão (4 dúvidas antes da call, como funciona a call). Render: `SPECS=./specs-posts.js node posts.js [grupo ...]` |
+| `posts.js` | renderizador das imagens do `specs-posts.js`: reduz o texto que não cabe (`data-fit`), põe o gráfico entre os textos (`data-lim`), recorta o gráfico dos stories numa janela e ajusta a câmera até as marcações caberem inteiras |
+| `kit_posts.py` | página Carrosséis e Stories GL (`posts/`): o que postar em cada dia, os 19 episódios com a tira do carrossel, a legenda e os stories, as peças de conversão, o calendário `../execucao/calendario-carrosseis-e-stories.csv` e o ZIP nas mesmas pastas do pacote da Biblioteca (o `build_library.py` chama no fim) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
 | `kit_site.py` | kit do site: o melhor vídeo para cada espaço do site novo, capas em tamanho cheio, catálogo e o prompt para o Codex (o `build_library.py` chama depois do `organizacao.py`) |
 | `mentoria_pacote.py` | ZIP da Mentoria GL: as aulas por módulo, o plano para o GL OS com o roteiro de cada aula e os prints que faltam, o cronograma de 4 semanas, o diário, a ficha, o checklist, os prints e as capas. Grava `../mentoria/roteiros-das-aulas.md` e o botão "Baixar a mentoria completa" na Biblioteca (o `build_library.py` chama antes do `organizacao.py`); com `--zip`, grava também o ZIP com os vídeos em qualidade cheia em `../entregas` (84 MB), e com `--zip --leve`, o mesmo ZIP com os vídeos da Biblioteca (45 MB) em `../entregas/leve` |
@@ -94,3 +97,7 @@ O botão "Baixar o kit do site" da Biblioteca monta `GL Academy - Kit do site.zi
 ## Higgsfield
 
 A rodada premium está pausada e pronta para retomar. Veja `higgsfield-rodada-premium.md`; o texto para colar e começar está em `PROMPT-retomar-higgsfield.md`.
+
+## Rótulos internos dos prints
+
+Alguns prints mostram o nome de versão do indicador ("INTERNA 1.1.1" no print 3, "Interna Teste" nos prints 7, 14 e 15). O `stage.html` esconde esses rótulos em qualquer peça que use esses prints (`INTERNOS`), então nenhuma caixa ou enquadramento deve apontar para eles. Print novo com rótulo interno: acrescente o retângulo em `INTERNOS`.

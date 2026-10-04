@@ -83,7 +83,7 @@ const objecoes = [
         boxes: [{ rect: [832, 86, 105, 30], t0: 3.3, t1: 5.7, label: 'GL Model · TradingView', below: true, dx: -150 }] },
       { t0: 5.8, t1: 11.4, img: '3.png', last: true,
         cam: [{ t: 5.8, cx: 420, cy: 300, z: 1.25 }, { t: 8.3, cx: 430, cy: 320, z: 1.25 }, { t: 9.5, cx: 1380, cy: 640, z: 1.9 }],
-        boxes: [{ rect: [8, 36, 365, 16], t0: 6.2, t1: 8.2, label: 'GL Academy no NinjaTrader', below: true, dx: 200 },
+        boxes: [{ rect: [0, 0, 330, 24], t0: 6.2, t1: 8.2, label: 'Gráfico do NinjaTrader', below: true, dx: 120 },
           { rect: [1414, 645, 100, 80], t0: 9.6, t1: 11.3, label: 'Mesmo mapa de valor', below: true, dx: -80 }] }],
     captions: [
       { t0: 0.2, t1: 2.8, kick: 'Dúvida comum', text: '“Funciona na <em>minha</em> plataforma?”' },

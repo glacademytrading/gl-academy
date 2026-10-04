@@ -177,6 +177,7 @@ NOMES_IMG = {
   'story-comunidade': 'Comunidade GL no WhatsApp',
   'destaque-setups': '1 - Setups', 'destaque-aulas': '2 - Aulas', 'destaque-lives': '3 - Lives',
   'destaque-call': '4 - Call', 'destaque-gamma': '5 - Gamma', 'destaque-alunos': '6 - Alunos',
+  'destaque-serie': '0 - Série', 'destaque-duvidas': '7 - Dúvidas',
   'thumb-o-que-e-vwap': 'O que é VWAP', 'thumb-value-area': 'VAH, VAL e POC', 'thumb-gamma-exposure': 'Gamma no gráfico',
   'thumb-nem-toda-queda': 'Nem toda queda é venda', 'thumb-3-perguntas': '3 perguntas antes do trade',
   'thumb-mercado-ao-vivo': 'Mercado ao vivo',

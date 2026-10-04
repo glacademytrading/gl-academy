@@ -1,0 +1,266 @@
+<title>Carrosséis e Stories GL</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a mesma identidade da Biblioteca de Vídeos GL. Topo com o que postar hoje; um bloco por episódio
+   com a tira do carrossel e o par de stories; peças de conversão no fim. */
+:root {
+  color-scheme: dark;
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1f1c15; --line: #322d22;
+  --fg: #f1ece1; --muted: #a69d8b; --gold: #d8ae55; --gold-2: #f6d991; --gold-ink: #1a1408; --ok: #45b98a;
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --ok: #1f7d58; } }
+:root[data-theme="light"] {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --ok: #1f7d58; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: max(16px, 4vw); padding-block: 48px 80px; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.05; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+h3 { font-size: 1.2rem; font-weight: 800; }
+h4 { font-size: .95rem; font-weight: 800; }
+p { margin: 0; }
+a { color: var(--gold); }
+.eyebrow { font-family: var(--font-data); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.lede { max-width: 66ch; font-size: 1.08rem; }
+.muted { color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 20px; }
+.head { display: flex; flex-direction: column; gap: 8px; }
+.head p { color: var(--muted); max-width: 70ch; }
+.hero { display: flex; flex-direction: column; gap: 16px; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px; }
+.stat { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; background: var(--surface); }
+.stat b { font-family: var(--font-data); color: var(--gold); }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { text-decoration: none; font-size: .88rem; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--fg); }
+.toc a:hover, .toc a:focus-visible { border-color: var(--gold); }
+.btn { font: 600 .9rem/1.2 var(--font-body); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; cursor: pointer; }
+.btn:hover { border-color: var(--gold); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn.ouro { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+.btn.mini { padding: 6px 10px; font-size: .8rem; }
+.btn[disabled] { opacity: .45; cursor: default; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.status { font-size: .85rem; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.ritmo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.ritmo div { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--surface); display: flex; flex-direction: column; gap: 4px; }
+.ritmo b { font-family: var(--font-data); color: var(--gold); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+/* hoje */
+.hoje { border-color: var(--gold); }
+.hoje-top { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.hoje-top h3 { font-size: 1.3rem; }
+.itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; }
+.item { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; align-items: start; border-top: 1px solid var(--line); padding-top: 14px; }
+.item img { width: 100%; border-radius: 8px; background: #000; display: block; }
+.item .info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.item .tipo { font-family: var(--font-data); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--gold); }
+.vazio { color: var(--muted); }
+/* episódios */
+.eps { display: flex; flex-direction: column; gap: 22px; }
+.ep { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 20px; min-width: 0; }
+.ep-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 16px; align-items: start; }
+.ep-n { font: 900 1.6rem/1 var(--font-display); color: var(--gold); white-space: nowrap; }
+.ep-tit { display: flex; flex-direction: column; gap: 4px; }
+.ep-tit p { color: var(--muted); font-size: .92rem; }
+.datas { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 4px 0 0; font-size: .85rem; }
+.datas div { display: flex; gap: 6px; }
+.datas dt { font-family: var(--font-data); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+.datas dd { margin: 0; font-variant-numeric: tabular-nums; }
+.ep-body { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 900px) { .ep-body { grid-template-columns: 1fr; } }
+.bloco { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.bloco-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.pill { font-family: var(--font-data); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; color: var(--muted); }
+.tira { list-style: none; margin: 0; padding: 0 0 8px; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; }
+.tira li { flex: 0 0 200px; scroll-snap-align: start; }
+.tira img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; background: #000; display: block; }
+details { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--surface-2); }
+summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: .88rem; line-height: 1.5; margin: 10px 0 0; color: var(--fg); }
+.par { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figure img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 10px; background: #000; display: block; }
+figcaption { font-size: .82rem; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+figcaption b { color: var(--fg); }
+.grade-st { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 14px; }
+figure.dest img { aspect-ratio: 9 / 16; }
+.duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 20px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; }
+.aviso { font-size: .85rem; color: var(--muted); max-width: 80ch; }
+@media (prefers-reduced-motion: reduce) { .tira { scroll-behavior: auto; } }
+</style>
+
+<div class="page">
+  <header class="hero">
+    <p class="eyebrow">GL Academy · Instagram · outubro de 2026</p>
+    <h1>Carrosséis e Stories GL</h1>
+    <p class="lede">Os carrosséis e os stories da série Operacional na prática, feitos com os mesmos prints e passos dos vídeos, e as peças que respondem às dúvidas antes da call. Cada peça tem o dia de postar, a legenda e o que colocar na figurinha.</p>
+    <div class="stats"><span class="stat"><b><!--N-IMG--></b> imagens</span><span class="stat"><b><!--N-EPS--></b> episódios com carrossel e stories</span><span class="stat"><b>0</b> crédito gasto</span></div>
+    <div class="acoes"><button type="button" class="btn ouro" id="zip-tudo">Baixar tudo organizado (ZIP)</button><button type="button" class="btn" data-dl="calendario-carrosseis-e-stories.csv">Baixar o calendário (planilha)</button><span class="status" id="st-tudo" role="status" aria-live="polite">As pastas são as mesmas do pacote da Biblioteca: extraia na mesma pasta e tudo se junta.</span></div>
+    <nav class="toc" aria-label="Seções"><a href="#hoje">Postar hoje</a><a href="#ritmo">Como postar</a><a href="#serie">Os 19 episódios</a><a href="#converter">Dúvidas e call</a><a href="#extras">Lançamento e destaques</a><a href="<!--BIBLIOTECA-->" target="_blank" rel="noopener">Biblioteca de Vídeos GL (os Reels)</a></nav>
+  </header>
+
+  <section id="hoje" class="panel hoje" aria-live="polite">
+    <div class="hoje-top"><div><p class="eyebrow" id="hoje-rot">Postar hoje</p><h3 id="hoje-dia">Carregando…</h3></div>
+      <div class="acoes"><button type="button" class="btn" id="dia-ant">← Dia anterior</button><button type="button" class="btn" id="dia-prox">Próximo dia →</button></div></div>
+    <div class="itens" id="hoje-itens"><p class="vazio">Os stories e carrosséis do dia aparecem aqui.</p></div>
+    <p class="aviso">O Reels do episódio sai às 19h: o vídeo, a capa e as legendas estão na Biblioteca, em "O que fazer hoje".</p>
+  </section>
+
+  <section id="ritmo">
+    <div class="head"><p class="eyebrow">Como postar</p><h2>O ritmo de cada episódio</h2><p>Quatro peças por episódio, em três dias. A planilha do calendário traz tudo em ordem de data.</p></div>
+    <div class="ritmo">
+      <div><b>Dia do episódio · 12h</b><span>Story 1, a enquete: a pergunta no ponto de decisão. Figurinha Enquete no espaço tracejado.</span></div>
+      <div><b>Dia do episódio · 19h</b><span>Reels e Shorts do episódio (na Biblioteca).</span></div>
+      <div><b>Dia seguinte · 12h</b><span>Story 2, a resposta. Figurinha Link no espaço tracejado, com o link do Reels.</span></div>
+      <div><b>Uma semana depois · 12h</b><span>O carrossel do episódio, todos os slides na ordem, com a legenda pronta.</span></div>
+    </div>
+    <p class="aviso">Guarde os stories da série no destaque "Série". Os textos e as respostas seguem os roteiros das aulas; o Giovane valida as regras antes de liberar. Exemplos educacionais em replay: não é recomendação de investimento e trading envolve risco financeiro real.</p>
+  </section>
+
+  <section id="serie">
+    <div class="head"><p class="eyebrow">Série Operacional na prática</p><h2>Os 19 episódios</h2><p>Arraste a tira para ver os slides. "Baixar o carrossel" traz os slides na ordem e a legenda num ZIP.</p></div>
+    <div class="eps">
+<!--EPISODIOS-->
+    </div>
+  </section>
+
+  <section id="converter">
+    <div class="head"><p class="eyebrow">Converter</p><h2>Dúvidas antes da call e como funciona a call</h2><p>Para postar uma vez e fixar no perfil. Os stories de dúvidas vão no destaque "Dúvidas", com a figurinha Link apontando para o agendamento.</p></div>
+    <div class="duas">
+      <div class="panel"><div class="bloco-top"><h3>Carrossel · 4 dúvidas</h3><span class="pill">6 slides</span></div>
+        <ul class="tira"><!--TIRA-DUVIDAS--></ul>
+        <div class="acoes"><button type="button" class="btn ouro" data-zipx="duvidas">Baixar o carrossel (ZIP)</button><button type="button" class="btn" data-copy="leg-duvidas" data-label="Copiar a legenda" data-done="Legenda copiada">Copiar a legenda</button></div>
+        <details><summary>Ver a legenda</summary><pre id="leg-duvidas"><!--LEG-DUVIDAS--></pre></details></div>
+      <div class="panel"><div class="bloco-top"><h3>Carrossel · como funciona a call</h3><span class="pill">7 slides</span></div>
+        <ul class="tira"><!--TIRA-CALL--></ul>
+        <div class="acoes"><button type="button" class="btn ouro" data-zipx="call">Baixar o carrossel (ZIP)</button><button type="button" class="btn" data-copy="leg-call" data-label="Copiar a legenda" data-done="Legenda copiada">Copiar a legenda</button></div>
+        <details><summary>Ver a legenda</summary><pre id="leg-call"><!--LEG-CALL--></pre></details></div>
+    </div>
+    <div class="panel"><h3>Stories · uma dúvida em cada</h3><div class="grade-st"><!--ST-DUVIDAS--></div></div>
+  </section>
+
+  <section id="extras">
+    <div class="head"><p class="eyebrow">Lançamento e destaques</p><h2>Para abrir a série e organizar o perfil</h2><p>O story "amanhã, 19h" vai hoje à noite. O "hoje, 19h" serve para qualquer dia de episódio, com a figurinha Lembrete.</p></div>
+    <div class="grade-st"><!--LANCAMENTO--><!--DESTAQUES--></div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script type="application/json" id="dados"><!--DADOS--></script>
+<script>
+(function () {
+  var D = {}; try { D = JSON.parse(document.getElementById('dados').textContent); } catch (e) { D = { agenda: [] }; }
+  var timer;
+  function toast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(timer); timer = setTimeout(function () { t.hidden = true; }, 2500); }
+  function el(tag, attrs, txt) { var x = document.createElement(tag); Object.keys(attrs || {}).forEach(function (k) { x.setAttribute(k, attrs[k]); }); if (txt != null) x.textContent = txt; return x; }
+
+  // copiar
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var alvo = document.getElementById(b.dataset.copy); if (!alvo) return;
+    var txt = alvo.textContent, label = b.dataset.label, feito = b.dataset.done || 'Copiado';
+    var ok = function () { b.textContent = feito; setTimeout(function () { b.textContent = label; }, 1600); };
+    var falha = function () { if (alvo.hidden) { toast('Não deu para copiar: ' + txt.replace(/\n/g, ' / ')); return; } var r = document.createRange(); r.selectNodeContents(alvo); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Texto selecionado. Use o comando de copiar.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, falha); else falha();
+  });
+
+  // downloads pela capacidade do Claude; fora dele, link comum
+  var dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+  async function salvar(nome, blob) {
+    var d = await dlCap;
+    if (d) {
+      try { await d.save({ filename: nome, data: blob }); return true; }
+      catch (err) { var c = err && err.code; if (c === 'declined') return false; toast(c === 'too_large' ? 'Arquivo grande demais para este aparelho. Baixe por episódio.' : c === 'rate_limited' ? 'Já tem um download esperando confirmação.' : 'O download não está disponível nesta visualização.'); return false; }
+    }
+    var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 120000); return true;
+  }
+  async function buscar(p) { var r = await fetch(p); if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); }
+  var jszip;
+  function carregarZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (!jszip) jszip = new Promise(function (ok, no) { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = function () { ok(window.JSZip); }; s.onerror = function () { jszip = null; no(new Error('JSZip')); }; document.head.appendChild(s); });
+    return jszip;
+  }
+  // itens: [{p, z}] (z = caminho dentro do ZIP); textos: [{z, t}]
+  async function zipar(nome, itens, textos, status) {
+    status('Carregando o compactador…');
+    var JSZip = await carregarZip(), zip = new JSZip(), prox = 0, feitos = 0;
+    async function trabalhar() { while (prox < itens.length) { var it = itens[prox++]; zip.file(it.z, await buscar(it.p)); feitos++; status('Juntando ' + feitos + ' de ' + itens.length + '…'); } }
+    await Promise.all([trabalhar(), trabalhar(), trabalhar(), trabalhar()]);
+    (textos || []).forEach(function (t) { zip.file(t.z, t.t); });
+    var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (m) { status('Montando o ZIP: ' + Math.round(m.percent) + '%'); });
+    status('Confirme o download.');
+    if (await salvar(nome, out)) toast('ZIP pronto: ' + itens.length + ' imagens.');
+  }
+  var ocupado = false;
+  async function acao(btn, fn) {
+    if (ocupado) { toast('Espere o download atual terminar.'); return; }
+    ocupado = true; var rot = btn.textContent; btn.disabled = true;
+    var st = btn.id === 'zip-tudo' ? document.getElementById('st-tudo') : null, idle = st ? st.textContent : '';
+    var status = function (t) { if (st) st.textContent = t; else btn.textContent = t; };
+    try { await fn(status); } catch (err) { toast('Não deu para baixar. Tente de novo.'); }
+    finally { ocupado = false; btn.disabled = false; btn.textContent = rot; if (st) st.textContent = idle; }
+  }
+  function soNome(p) { return p.split('/').pop(); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('#zip-tudo, [data-dl], [data-zipep], [data-zipx]'); if (!b) return;
+    if (b.id === 'zip-tudo') return acao(b, function (st) { return zipar(D.zip.nome, D.zip.arquivos, D.zip.textos, st); });
+    if (b.dataset.dl) return acao(b, async function (st) { st('Preparando…'); if (await salvar(soNome(b.dataset.dl), await buscar(b.dataset.dl))) toast('Download enviado: ' + soNome(b.dataset.dl)); });
+    if (b.dataset.zipep) {
+      var id = b.dataset.zipep, itens = (D.zipeps[id] || []).map(function (a) { return { p: a.p, z: soNome(a.z) }; });
+      var leg = document.getElementById('leg-' + id);
+      return acao(b, function (st) { return zipar('Carrossel ' + id.replace('op', 'Ep ') + '.zip', itens, leg ? [{ z: 'Legenda.txt', t: leg.textContent }] : [], st); });
+    }
+    if (b.dataset.zipx) {
+      var k = b.dataset.zipx, lg = document.getElementById('leg-' + k);
+      return acao(b, function (st) { return zipar('Carrossel ' + (k === 'call' ? 'como funciona a call' : 'dúvidas antes da call') + '.zip', D.zipx[k].map(function (a) { return { p: a.p, z: soNome(a.z) }; }), [{ z: 'Legenda.txt', t: lg.textContent }], st); });
+    }
+  });
+
+  // postar hoje: as peças da data de quem abre (ou a próxima data com peças)
+  var ag = D.agenda || [], datas = [];
+  ag.forEach(function (a) { if (datas.indexOf(a.data) < 0) datas.push(a.data); });
+  var d = new Date(), hoje = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  var i = 0; while (i < datas.length - 1 && datas[i] < hoje) i++;
+  var NOMES = { lancamento: 'Story · lançamento', enquete: 'Story 1 · enquete', resposta: 'Story 2 · resposta', carrossel: 'Carrossel' };
+  function desenhar() {
+    var box = document.getElementById('hoje-itens'); box.textContent = '';
+    if (!datas.length) { box.appendChild(el('p', { class: 'vazio' }, 'Sem peças agendadas.')); return; }
+    var dia = datas[i], itens = ag.filter(function (a) { return a.data === dia; });
+    document.getElementById('hoje-rot').textContent = dia === hoje ? 'Postar hoje' : dia < hoje ? 'Já passou' : (dia === datas.filter(function (x) { return x >= hoje; })[0] ? 'Próximo dia de posts' : 'Agendado');
+    document.getElementById('hoje-dia').textContent = itens[0].quando.replace(/ · \d+h$/, '');
+    document.getElementById('dia-ant').disabled = i === 0; document.getElementById('dia-prox').disabled = i === datas.length - 1;
+    itens.forEach(function (a, k) {
+      var it = el('div', { class: 'item' }), info = el('div', { class: 'info' });
+      var im = el('img', { src: a.img, alt: a.titulo }); it.appendChild(im);
+      info.appendChild(el('p', { class: 'tipo' }, NOMES[a.tipo] + ' · ' + a.hora.slice(0, 2) + 'h' + (a.tipo === 'lancamento' ? '' : ' · Ep. ' + a.ep)));
+      info.appendChild(el('h4', {}, a.tipo === 'lancamento' ? 'Série Operacional na prática' : a.ep_tit));
+      var txt = a.tipo === 'lancamento' ? 'Hoje à noite: a série começa amanhã, 19h. Figurinha Lembrete.' : a.tipo === 'enquete' ? 'Figurinha Enquete: ' + a.opcoes.join(' / ') + '.' : a.tipo === 'resposta' ? 'Figurinha Link com o Reels do Ep. ' + a.ep + '.' : a.slides + ' slides, na ordem, com a legenda.';
+      info.appendChild(el('p', { class: 'muted' }, txt));
+      var ac = el('div', { class: 'acoes' });
+      var cid = a.vid.slice(0, 4);
+      if (a.tipo === 'carrossel') {
+        ac.appendChild(el('button', { type: 'button', class: 'btn ouro mini', 'data-zipep': cid }, 'Baixar o carrossel'));
+        ac.appendChild(el('button', { type: 'button', class: 'btn mini', 'data-copy': 'leg-' + cid, 'data-label': 'Copiar a legenda', 'data-done': 'Legenda copiada' }, 'Copiar a legenda'));
+      } else {
+        ac.appendChild(el('button', { type: 'button', class: 'btn ouro mini', 'data-dl': a.img }, 'Baixar o story'));
+        if (a.tipo === 'enquete') ac.appendChild(el('button', { type: 'button', class: 'btn mini', 'data-copy': 'op-' + cid, 'data-label': 'Copiar as opções', 'data-done': 'Opções copiadas' }, 'Copiar as opções'));
+      }
+      info.appendChild(ac);
+      var ver = el('a', { href: '#' + cid }, 'Ver o episódio'); info.appendChild(ver);
+      it.appendChild(info); box.appendChild(it);
+    });
+  }
+  document.getElementById('dia-ant').addEventListener('click', function () { if (i > 0) { i--; desenhar(); } });
+  document.getElementById('dia-prox').addEventListener('click', function () { if (i < datas.length - 1) { i++; desenhar(); } });
+  desenhar();
+})();
+</script>

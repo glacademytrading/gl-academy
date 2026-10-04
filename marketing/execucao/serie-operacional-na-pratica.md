@@ -50,6 +50,17 @@ A planilha "Calendário - Operacional na prática" traz, para cada dia, o caminh
 4. **Na primeira hora:** responda os comentários com a pergunta do episódio. Quem respondeu certo ganha um "isso" e quem errou ganha a explicação curta. É o que mais faz o vídeo circular.
 5. **Fixe o episódio 1 no perfil** enquanto a série estiver no ar.
 
+## Carrosséis e stories de cada episódio
+
+Estão na página Carrosséis e Stories GL (https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp), que mostra o que postar em cada dia, e na planilha "Calendário dos stories e carrosséis".
+
+- **Story 1, a enquete:** no dia do episódio, às 12h. A pergunta do ponto de decisão com o gráfico parado ali. Coloque a figurinha Enquete no espaço tracejado, com as opções da página.
+- **Story 2, a resposta:** no dia seguinte, às 12h. A resposta com o gráfico anotado. Coloque a figurinha Link com o link do Reels do episódio.
+- **Carrossel:** uma semana depois do Reels, às 12h. Os mesmos passos do vídeo, slide por slide, com a pergunta no meio ("comente antes de arrastar") e a legenda pronta.
+- **Lançamento:** o story "amanhã, 19h" vai na véspera do episódio 1 (04/10, à noite). O story "hoje, 19h" serve para qualquer dia de episódio.
+- **Destaques:** guarde os stories da série no destaque "Série" e os de dúvidas no destaque "Dúvidas" (as capas estão na página e na Biblioteca).
+- **Para fixar no perfil:** o episódio 1, o carrossel "4 dúvidas antes da call" e o carrossel "Como funciona a call".
+
 ## O que medir em cada episódio
 
 - Quantos passam dos 3 primeiros segundos (o gancho funciona?).

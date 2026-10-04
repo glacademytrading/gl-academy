@@ -102,7 +102,9 @@ const ICONS = {
   lives: '<circle cx="50" cy="50" r="9"/><path d="M33 33a24 24 0 0 0 0 34M67 33a24 24 0 0 1 0 34M22 22a40 40 0 0 0 0 56M78 22a40 40 0 0 1 0 56"/>',
   call: '<rect x="16" y="22" width="68" height="62" rx="8"/><path d="M16 40h68M34 14v16M66 14v16"/><path d="m38 62 8 8 16-18"/>',
   gamma: '<path d="M30 20h44M38 20v62M28 82h20"/>',
-  alunos: '<path d="m50 14 10 22 24 3-18 16 5 24-21-12-21 12 5-24-18-16 24-3z"/>'
+  alunos: '<path d="m50 14 10 22 24 3-18 16 5 24-21-12-21 12 5-24-18-16 24-3z"/>',
+  serie: '<rect x="12" y="20" width="76" height="56" rx="10"/><path d="M43 36v24l21-12z"/><path d="M30 86h40"/>',
+  duvidas: '<path d="M22 20h56a10 10 0 0 1 10 10v30a10 10 0 0 1-10 10H48L30 84V70h-8a10 10 0 0 1-10-10V30a10 10 0 0 1 10-10z"/><path d="M41 38a9 9 0 1 1 13 8c-3 1.5-4 3.5-4 6v2"/><path d="M50 62v.5"/>'
 };
 const destaque = (id, key) => base(id, 'destaques', 1080, 1920, { bg: STARS_BG, stars: { n: 520 },
   scenes: [], texts: [T(660, `<div style="width:600px;height:600px;margin:0 auto;border-radius:50%;border:4px solid #d8ae55;box-shadow:0 0 60px rgba(216,174,85,.35), inset 0 0 60px rgba(216,174,85,.15);display:grid;place-items:center;background:radial-gradient(circle, #15110a 0%, #050505 70%)"><svg viewBox="0 0 100 100" width="300" height="300" fill="none" stroke="#f1d9a6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[key]}</svg></div>`)] });

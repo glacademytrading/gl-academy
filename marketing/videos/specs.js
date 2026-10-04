@@ -123,7 +123,7 @@ module.exports = [
       cam: [{ t: 0, cx: 190, cy: 44, z: 2.7 }, { t: 2.2, cx: 190, cy: 44, z: 2.7 }, { t: 3.2, cx: 420, cy: 330, z: 1.25 }, { t: 7.6, cx: 1250, cy: 520, z: 1.25 }, { t: 8.8, cx: 1455, cy: 690, z: 2.6 }],
       reveal: { x0: 180, x1: 1518, y0: 60, y1: 830, t0: 2.4, t1: 7.6, pad: 2 },
       boxes: [
-        { rect: [8, 36, 366, 16], t0: 0.3, t1: 2.3, label: 'Indicador GL no NinjaTrader', below: true, dx: 120 },
+        { rect: [0, 0, 330, 24], t0: 0.3, t1: 2.3, label: 'Gráfico do NinjaTrader', below: true, dx: 60 },
         { rect: [1405, 628, 112, 132], t0: 8.8, t1: 10.1, label: 'VAH D · POC D', dx: -60 }] }],
     captions: [
       { t0: 0.2, t1: 2.3, kick: 'NinjaTrader', text: 'O mapa GL agora no <em>NinjaTrader</em>' },
