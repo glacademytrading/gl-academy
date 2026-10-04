@@ -44,7 +44,7 @@ A planilha "Calendário - Operacional na prática" traz, para cada dia, o caminh
 
 ## Como postar
 
-1. Baixe o vídeo e a capa do dia: estão na Biblioteca (seção "Operacional na prática: Reels e Shorts") e no pacote organizado (pasta 16 dos vídeos e pasta 09 das imagens).
+1. Abra a Biblioteca: o post do dia está no topo, em "O que fazer hoje", com o vídeo, a capa, a legenda e o título e a descrição do YouTube, cada um com o seu botão. Os 19 episódios também estão na seção "Série Operacional na prática" e no pacote organizado (pasta 16 dos vídeos e pasta 09 das imagens).
 2. **Instagram:** novo Reels, escolha o vídeo, toque em "Editar capa" e "Adicionar da galeria", cole a legenda e publique com "Compartilhar também no feed" ligado.
 3. **YouTube:** pelo app, crie um Short com o mesmo vídeo, use o título e a descrição da planilha e escolha a capa.
 4. **Na primeira hora:** responda os comentários com a pergunta do episódio. Quem respondeu certo ganha um "isso" e quem errou ganha a explicação curta. É o que mais faz o vídeo circular.

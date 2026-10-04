@@ -8,9 +8,9 @@ INICIO = datetime.date(2026, 10, 5)   # segunda-feira; um episódio por dia úti
 HORARIO = '19:00'
 AVISO = 'Exemplo educacional em replay, não é recomendação de investimento. Trading envolve risco financeiro real.'
 GRUPO = ('operacional-social', 'Operacional na prática: Reels e Shorts',
-         'A Mentoria GL em 9:16, um episódio por dia útil: o gráfico para no ponto de decisão, a pergunta vai para os comentários e '
-         'depois vem a região de atuação, o gatilho, o stop, os alvos e o resultado. Legenda pronta em cada vídeo; a capa de cada '
-         'episódio está em "Capas da série Operacional na prática" e o calendário no pacote organizado.')
+         'Para postar no Instagram (Reels) e no YouTube (Shorts): um episódio por dia útil, às 19h, de 05/10 a 29/10, na ordem abaixo. '
+         'Cada card tem o vídeo, a capa, a legenda do Instagram e o título e a descrição do YouTube. O post do dia também aparece no topo da página, em "Postar hoje".')
+DIAS = ['seg', 'ter', 'qua', 'qui', 'sex', 'sáb', 'dom']
 
 def _ponto(s):
     return s if s[-1:] in '.?!' else s + '.'
@@ -57,6 +57,19 @@ def episodios():
 
 def grupo():
     """Entrada da Biblioteca (mesmo formato do GROUPS do build_library.py)."""
-    itens = [(e['vid'], e['titulo_card'], f"{_ponto(e['objetivo'])} Postar em {e['data'].strftime('%d/%m')}, {HORARIO}.",
-              'Reels e Shorts · série Operacional na prática', e['legenda']) for e in episodios()]
+    itens = [(e['vid'], e['titulo_card'], _ponto(e['objetivo']), 'Reels e Shorts · série Operacional na prática', e['legenda']) for e in episodios()]
     return GRUPO + (itens,)
+
+def quando(e):
+    """Rótulo do dia de postagem: "seg, 05/10 · 19h"."""
+    return f"{DIAS[e['data'].weekday()]}, {e['data'].strftime('%d/%m')} · {HORARIO[:2]}h"
+
+def capa(vid):
+    """Caminho da capa do episódio na Biblioteca."""
+    return f'imagens/img-capas-operacional/capa-{vid}.jpg'
+
+def dados_pagina():
+    """O que o bloco "Postar hoje" da Biblioteca precisa de cada episódio."""
+    return [{'vid': e['vid'], 'ep': e['ep'], 'data': e['data'].isoformat(), 'quando': quando(e), 'gancho': e['gancho'],
+             'video': f"videos/{e['vid']}.mp4", 'capa': capa(e['vid']), 'legenda': e['legenda'],
+             'titulo_yt': e['titulo_yt'], 'descricao_yt': e['descricao_yt']} for e in episodios()]

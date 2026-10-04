@@ -731,6 +731,9 @@ for extra in ['plano-de-marketing.md', 'PROMPT-continuidade.md']:
         add_texto(f'{E}/{nome}', ler(caminho) if nome.endswith('.md') else md_txt(ler(caminho)))
 # cópia das planilhas no repositório, para as próximas sessões
 if os.path.isdir(EXEC):
+    # os dois calendários também vão para a Biblioteca, para baixar direto da página
+    for nome, conteudo in [('calendario-outubro.csv', csv_calendario)] + ([('calendario-operacional-na-pratica.csv', csv_cal_op)] if eps_op else []):
+        open(os.path.join(LIB, nome), 'w', encoding='utf-8-sig', newline='').write(conteudo.replace('\n', '\r\n'))
     for nome, conteudo in [('calendario-outubro.csv', csv_calendario)] + ([('calendario-operacional-na-pratica.csv', csv_cal_op)] if eps_op else []) + [ ('teste-de-anuncios.csv', csv_anuncios), ('placar-semanal.csv', csv_placar), ('parceiros.csv', csv_parceiros)]:
         open(os.path.join(EXEC, nome), 'w', encoding='utf-8-sig', newline='').write(conteudo.replace('\n', '\r\n'))
 

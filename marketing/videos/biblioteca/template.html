@@ -106,6 +106,59 @@ tr:last-child td { border-bottom: 0; }
 .toc a:hover { border-color: var(--gold); }
 .tree { margin: 0; font-family: var(--font-data); font-size: .78rem; line-height: 1.6; white-space: pre; overflow-x: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; }
+/* Comece por aqui, guia de cada tipo de vídeo e as partes por objetivo */
+.toc a.novo { border-color: var(--gold); color: var(--gold); font-weight: 600; }
+.comece .two, #orderflow .two { align-items: start; }
+.hoje { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 18px; align-items: start; border-color: var(--gold); }
+.hoje img { width: 100%; height: auto; display: block; border-radius: 10px; background: #000; }
+.hoje .info { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.hoje .quando, .when { font-family: var(--font-data); font-size: .74rem; letter-spacing: .07em; text-transform: uppercase; color: var(--gold); }
+.hoje h3 { font-size: 1.25rem; }
+.hoje .steps { font-size: .9rem; gap: 14px; }
+.hoje .steps li::marker { color: var(--gold); font-family: var(--font-data); }
+.hoje .acoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.hoje .acoes .btn { align-self: auto; }
+.hoje .navega { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: .85rem; color: var(--muted); }
+.hoje .navega .btn[disabled] { cursor: default; opacity: .4; }
+@media (max-width: 520px) { .hoje { grid-template-columns: 1fr; } .hoje img { max-width: 180px; } }
+.panel .tarefas { list-style: none; padding: 0; gap: 12px; }
+.tarefas li { display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.tarefas li:last-child { border-bottom: 0; padding-bottom: 0; }
+.tarefas label { display: flex; gap: 10px; align-items: baseline; cursor: pointer; }
+.tarefas .tarefa-info { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding-left: 28px; font-size: .88rem; }
+.tarefas input { accent-color: var(--gold); width: 18px; height: 18px; flex: none; transform: translateY(3px); }
+.tarefas input:checked + span { color: var(--muted); text-decoration: line-through; }
+.tarefas .quem { font-family: var(--font-data); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.btn.btn-link { border: 0; background: none; padding: 0; color: var(--gold); text-decoration: underline; font-weight: 500; font-size: inherit; }
+.nota { font-size: .8rem; }
+details.guia-parte { background: none; border: 0; border-radius: 0; padding: 0; }
+details.guia-parte > summary { list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; align-items: baseline; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; padding: 4px 0; }
+details.guia-parte > summary .t { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
+details.guia-parte > summary::-webkit-details-marker { display: none; }
+details.guia-parte > summary::before { content: "\25B8"; color: var(--gold); display: inline-block; transition: transform .15s; }
+details.guia-parte[open] > summary { margin-bottom: 10px; }
+details.guia-parte[open] > summary::before { transform: rotate(90deg); }
+details.guia-parte > summary .n { font-family: var(--font-data); font-size: .7rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.guia td:first-child a { font-weight: 600; }
+.guia td:last-child { white-space: nowrap; }
+.lacunas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; }
+.lacuna { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.lacuna h4 { margin: 0; font-family: var(--font-display); font-size: 1rem; }
+.lacuna p { font-size: .9rem; color: var(--muted); }
+.lacuna .precisa { color: var(--fg); }
+.quem-tag { align-self: flex-start; font-family: var(--font-data); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.lacuna.giovane .quem-tag { color: var(--gold); border-color: var(--gold); }
+.lacuna.claude .quem-tag { color: var(--ok); border-color: var(--ok); }
+.status { font-family: var(--font-data); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.status.espera { color: var(--gold); }
+.parte { gap: 10px; padding-top: 30px; border-top: 2px solid var(--gold); }
+.parte > p:not(.eyebrow) { color: var(--muted); max-width: 70ch; }
+.panel.destaque { border-color: var(--gold); }
+.trechos { display: flex; flex-direction: column; gap: 8px; }
+#orderflow details ul { margin: 10px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: .92rem; }
+#orderflow details p, #orderflow details .table-wrap { margin-top: 10px; font-size: .92rem; }
+li.solto { list-style: none; margin-left: -20px; }
+.mais { display: block; margin-top: 6px; color: var(--muted); }
 </style>
 
 <div class="page">
@@ -115,13 +168,14 @@ tr:last-child td { border-bottom: 0; }
     <p class="lede">Todos os vídeos foram feitos com os prints reais do operacional: o setup acontecendo, os alvos, o Gamma e o NinjaTrader, na identidade da GL. Cada vídeo tem a finalidade e, quando faz sentido, a legenda pronta para postar.</p>
     <div class="stats" id="stats"></div>
     <div class="dl-bar"><button type="button" class="btn btn-gold" data-org="tudo">Baixar tudo organizado (ZIP)</button><button type="button" class="btn" data-zip="all">Só os vídeos (ZIP)</button><button type="button" class="btn" data-zip="all-img">Só as imagens (ZIP)</button><span class="dl-status" id="dlstatus" role="status" aria-live="polite">Pastas por objetivo, legendas em cada pasta e o organizador do Windows.</span></div>
-    <nav class="toc" aria-label="Seções"><a href="#organizado">Levar para o computador</a><a href="#vendem">Vendem o operacional</a><a href="#operacional">Operacional por dentro</a><a href="#mentoria">Mentoria GL</a><a href="#operacional-social">Reels e Shorts da série</a><a href="#objecoes">Objeções</a><a href="#vendas-whats">Sequência da call</a><a href="#aulas">Aulas rápidas</a><a href="#ganchos">Ganchos</a><a href="#feed">Feed 4:5</a><a href="#coringas">Coringas</a><a href="#site">Kit do site</a><a href="#marca">Logo e vinheta</a><a href="#lives">Lives</a><a href="#live2">Live 2.0 (OBS)</a><a href="#youtube">YouTube</a><a href="#comerciais">Comerciais</a><a href="#comunidade">Comunidade e parceiros</a><a href="#imagens">Imagens</a><a href="#roteiros">Roteiros para gravar</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
+    <nav class="toc" aria-label="Seções"><a class="novo" href="#comece">Postar hoje</a><a class="novo" href="#guia">Guia dos vídeos</a><a class="novo" href="#operacional-social">Série Operacional na prática (Reels e Shorts)</a><a class="novo" href="#mentoria">Mentoria GL (aulas)</a><a class="novo" href="#orderflow">Order Flow: prints para tirar</a><a href="#parte-atrair">1 · Atrair e ensinar</a><a href="#parte-vender">2 · Anunciar e vender</a><a href="#parte-converter">3 · Converter e cuidar</a><a href="#parte-canais">4 · Lives, YouTube, site e marca</a><a href="#organizado">Levar para o computador</a><a href="#imagens">Imagens</a><a href="#roteiros">Roteiros para gravar</a><a href="#uso">Como usar</a><a href="#prints">Prints</a><a href="#higgsfield">Higgsfield</a></nav>
   </header>
-<!--ORGANIZACAO-->
+<!--COMECE-->
   <!--SECTIONS-->
+<!--ORGANIZACAO-->
 
   <section id="imagens">
-    <div class="section-head"><h2>Imagens para redes e site</h2><p>Feitas com os 5 prints reais, sem gastar crédito: carrosséis, posts, frases, stories, capas, destaques, thumbnails do YouTube e as imagens do site. Clique numa imagem para abrir no tamanho original.</p>
+    <div class="section-head"><h2>Imagens para redes e site</h2><p>Feitas com os prints reais, sem gastar crédito: carrosséis, posts, frases, stories, capas, destaques, thumbnails do YouTube e as imagens do site. Clique numa imagem para abrir no tamanho original.</p>
     <div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="all-img">Baixar todas as imagens (ZIP)</button></div></div>
   </section>
 <!--IMAGES-->
@@ -216,7 +270,7 @@ Não precisa falar de valores ganhos ou perdidos: o foco é o processo (contexto
   </section>
 
   <section id="prints">
-    <div class="section-head"><h2>Prints em uso</h2><p>Os 13 prints que geraram os vídeos desta página. Clique para abrir no tamanho original.</p></div>
+    <div class="section-head"><h2>Prints em uso</h2><p>Os 21 prints que geraram os vídeos desta página. Clique para abrir no tamanho original.</p></div>
     <div class="prints">
       <div class="print"><a href="prints/1.png" target="_blank" rel="noopener"><img src="prints/1.png" alt="Print 1: ES em duas telas no TradingView" loading="lazy"></a><p><b>Print 1 · ES, duas telas.</b> VWAPs W e 3M, marcas Y e o aviso "Correção contra W/M".</p></div>
       <div class="print"><a href="prints/2.png" target="_blank" rel="noopener"><img src="prints/2.png" alt="Print 2: MES com VAH D e Zero Gamma" loading="lazy"></a><p><b>Print 2 · MES.</b> VAH D, VAL D e W, Zero Gamma e as setas do nível respeitado.</p></div>
@@ -467,5 +521,77 @@ Rascunhos de origem: 16:9 cb1397cd-73e7-495e-b7bf-62a7661a01a3 · 9:16 bf568a70-
 
   // um vídeo por vez
   document.addEventListener('play', function (e) { document.querySelectorAll('video').forEach(function (v) { if (v !== e.target) v.pause(); }); }, true);
+})();
+</script>
+<script>
+// Comece por aqui: o post do dia (pela data de quem abre a página) e as marcações das tarefas
+(function () {
+  var dados = document.getElementById('serie-dados'), box = document.getElementById('hoje');
+  var eps = [];
+  try { eps = dados ? JSON.parse(dados.textContent) : []; } catch (err) { eps = []; }
+  if (box && eps.length) {
+    var d = new Date(), hoje = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    var i = 0; while (i < eps.length - 1 && eps[i].data < hoje) i++;
+    var proximo = i;
+    var el = function (tag, attrs, txt) {
+      var x = document.createElement(tag);
+      Object.keys(attrs || {}).forEach(function (k) { x.setAttribute(k, attrs[k]); });
+      if (txt != null) x.textContent = txt;
+      return x;
+    };
+    var render = function () {
+      var e = eps[i];
+      var rot = e.data === hoje ? 'Postar hoje · ' : e.data < hoje ? 'Já passou · ' : (i === proximo ? 'Próximo post · ' : 'Agendado · ');
+      box.textContent = '';
+      box.appendChild(el('img', { src: e.capa, alt: 'Capa do episódio ' + e.ep }));
+      var info = el('div', { class: 'info' });
+      info.appendChild(el('p', { class: 'quando' }, rot + e.quando));
+      info.appendChild(el('h3', {}, 'Ep. ' + e.ep + ' · ' + e.gancho));
+      // cada passo com os botões dele: baixar, Instagram, YouTube e os comentários
+      var passos = el('ol', { class: 'steps' });
+      [['Baixe o vídeo e a capa.', [['Baixar vídeo', { class: 'btn btn-gold', 'data-dl': e.video }], ['Baixar capa', { class: 'btn', 'data-dl': e.capa }]]],
+       ['Instagram: novo Reels com o vídeo. Em "Editar capa", toque em "Adicionar da galeria", cole a legenda e publique às 19h.',
+        [['Copiar legenda', { class: 'btn', 'data-copy': 'hoje-leg', 'data-label': 'Copiar legenda', 'data-done': 'Legenda copiada' }]]],
+       ['YouTube: novo Short com o mesmo vídeo. Cole o título e a descrição e escolha a capa.',
+        [['Copiar título', { class: 'btn', 'data-copy': 'hoje-yt', 'data-label': 'Copiar título', 'data-done': 'Título copiado' }],
+         ['Copiar descrição', { class: 'btn', 'data-copy': 'hoje-ytd', 'data-label': 'Copiar descrição', 'data-done': 'Descrição copiada' }]]],
+       ['Na primeira hora, responda os comentários com a pergunta do episódio.', []]
+      ].forEach(function (p) {
+        var li = el('li', {}); li.appendChild(el('span', {}, p[0]));
+        if (p[1].length) {
+          var acoes = el('div', { class: 'acoes' });
+          p[1].forEach(function (b) { b[1].type = 'button'; acoes.appendChild(el('button', b[1], b[0])); });
+          li.appendChild(acoes);
+        }
+        passos.appendChild(li);
+      });
+      info.appendChild(passos);
+      var nav = el('div', { class: 'navega' });
+      var ant = el('button', { type: 'button', class: 'btn' }, '← Anterior'), prox = el('button', { type: 'button', class: 'btn' }, 'Próximo →');
+      ant.disabled = i === 0; prox.disabled = i === eps.length - 1;
+      ant.addEventListener('click', function () { i--; render(); });
+      prox.addEventListener('click', function () { i++; render(); });
+      nav.appendChild(ant); nav.appendChild(el('span', {}, 'Ep. ' + e.ep + ' de ' + eps.length)); nav.appendChild(prox);
+      nav.appendChild(el('a', { href: '#card-' + e.vid }, 'Ver na série'));
+      info.appendChild(nav);
+      [['hoje-leg', e.legenda], ['hoje-yt', e.titulo_yt], ['hoje-ytd', e.descricao_yt]].forEach(function (p) {
+        var pre = el('pre', { id: p[0] }, p[1]); pre.hidden = true; info.appendChild(pre);
+      });
+      box.appendChild(info);
+    };
+    render();
+  }
+  // guia no celular: só a primeira parte aberta, as outras abrem com um toque
+  try { if (window.matchMedia('(max-width: 700px)').matches) document.querySelectorAll('#guia details.guia-parte').forEach(function (d, k) { if (k) d.open = false; }); } catch (err) {}
+  // tarefas: a marcação fica só no navegador de quem marcou
+  var CHAVE = 'gl-biblioteca-tarefas-v1', feitas = {};
+  try { feitas = JSON.parse(localStorage.getItem(CHAVE) || '{}') || {}; } catch (err) { feitas = {}; }
+  document.querySelectorAll('[data-tarefa]').forEach(function (c) {
+    c.checked = !!feitas[c.dataset.tarefa];
+    c.addEventListener('change', function () {
+      feitas[c.dataset.tarefa] = c.checked;
+      try { localStorage.setItem(CHAVE, JSON.stringify(feitas)); } catch (err) {}
+    });
+  });
 })();
 </script>

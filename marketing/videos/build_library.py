@@ -4,6 +4,7 @@ import html, os, re, subprocess, json
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, 'out')
 LIB = os.path.join(ROOT, 'biblioteca')
+MKT = os.environ.get('GL_MARKETING') or os.path.dirname(ROOT)  # textos do repositório (mentoria, execução)
 IMAGEIO_FF = '/usr/local/lib/python3.11/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2'
 FF = os.environ.get('FFMPEG') or (IMAGEIO_FF if os.path.exists(IMAGEIO_FF) else 'ffmpeg')
 os.makedirs(os.path.join(LIB, 'videos'), exist_ok=True)
@@ -193,6 +194,15 @@ GROUPS = [
 # série vertical "Operacional na prática": legendas e datas saem de social_operacional.py
 import social_operacional
 GROUPS.insert([g[0] for g in GROUPS].index('mentoria') + 1, social_operacional.grupo())
+SERIE = {e['vid']: e for e in social_operacional.episodios()}
+# capas da série vertical: os quadros "capa-op..." (QUALIDADE=92 SPECS=./specs-social.js node stills.js capa-op01-... )
+os.makedirs(os.path.join(OUT, 'capas-social'), exist_ok=True)
+for f in os.listdir(os.path.join(OUT, 'check')):
+    mc = re.match(r'(capa-op\d\d-.+)-0\.5\.jpg$', f)
+    if mc:
+        src, dst = os.path.join(OUT, 'check', f), os.path.join(OUT, 'capas-social', mc.group(1) + '.jpg')
+        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
+            subprocess.run(['cp', src, dst], check=True)
 
 def dur(path):
     r = subprocess.run([FF, '-i', path], capture_output=True, text=True).stderr
@@ -207,7 +217,7 @@ def size(path):
     m = re.search(r'Video: .*?, (\d{3,4})x(\d{3,4})', r)
     return int(m.group(1)), int(m.group(2))
 
-cards_html, manifest = [], []
+cards_html, manifest, contagem = [], [], {}
 for gid, gtitle, gdesc, items in GROUPS:
     cards = []
     for vid, title, desc, use, cap in items:
@@ -239,6 +249,8 @@ for gid, gtitle, gdesc, items in GROUPS:
             # capa com o quadriculado de transparência (quadro de conferência)
             qa = sorted(f for f in os.listdir(os.path.join(OUT, 'check')) if f.startswith(vid + '-'))
             subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', os.path.join(OUT, 'check', qa[-1]), '-vf', 'scale=540:-2', '-q:v', '5', poster], check=True)
+        elif vid in SERIE and os.path.exists(os.path.join(OUT, 'capas-social', f'capa-{vid}.jpg')):
+            subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-i', os.path.join(OUT, 'capas-social', f'capa-{vid}.jpg'), '-vf', 'scale=540:-2', '-q:v', '4', poster], check=True)
         else:
             t = 0 if vid.startswith(('site-loop', 'site-circulo')) else max(1, d * 0.62)
             subprocess.run([FF, '-nostdin', '-y', '-loglevel', 'error', '-ss', str(t), '-i', src, '-frames:v', '1', '-vf', 'scale=540:-2', '-q:v', '5', poster], check=True)
@@ -249,19 +261,35 @@ for gid, gtitle, gdesc, items in GROUPS:
         if cap:
             cid = 'cap-' + vid
             cap_html = f'<div class="cap"><p class="label">Legenda pronta</p><p class="cap-text" id="{cid}">{html.escape(cap)}</p><button type="button" class="btn" data-copy="{cid}">Copiar legenda</button></div>'
-        cards.append(f'''<article class="vcard {kind}" data-vid="{vid}" data-src="{rel}" data-group="{gid}" data-title="{html.escape(title)}" data-fmt="{fmt}" data-dur="{d}" data-use="{html.escape(use)}">
+        ep = SERIE.get(vid)
+        art_id = when = btn_capa = yt_html = ''
+        if ep:
+            art_id = f' id="card-{vid}"'
+            when = f'<p class="when">Postar {html.escape(social_operacional.quando(ep))}</p>'
+            btn_capa = f'<button type="button" class="btn btn-dl" data-dl="{social_operacional.capa(vid)}">Baixar a capa</button>'
+            cap_html = cap_html.replace('Legenda pronta', 'Legenda do Instagram')
+            yt_html = (f'<div class="cap yt"><p class="label">YouTube Shorts</p><p class="cap-text" id="yt-{vid}">{html.escape(ep["titulo_yt"])}</p>'
+                       f'<pre hidden id="ytd-{vid}">{html.escape(ep["descricao_yt"])}</pre>'
+                       f'<button type="button" class="btn" data-copy="yt-{vid}" data-label="Copiar o título" data-done="Título copiado">Copiar o título</button>'
+                       f'<button type="button" class="btn" data-copy="ytd-{vid}" data-label="Copiar a descrição" data-done="Descrição copiada">Copiar a descrição</button></div>')
+        cards.append(f'''<article class="vcard {kind}"{art_id} data-vid="{vid}" data-src="{rel}" data-group="{gid}" data-title="{html.escape(title)}" data-fmt="{fmt}" data-dur="{d}" data-use="{html.escape(use)}">
   <div class="frame"><video controls playsinline preload="none" {'loop ' if vid.startswith(('site-loop', 'site-circulo', 'live-selo')) else ''}poster="capas/{vid}.jpg" src="{rel}"></video></div>
   <div class="meta">
-    <p class="tags"><span class="tag">{fmt}</span><span class="tag">{d} s</span><span class="tag tag-use">{html.escape(use)}</span></p>
+    {when}<p class="tags"><span class="tag">{fmt}</span><span class="tag">{d} s</span><span class="tag tag-use">{html.escape(use)}</span></p>
     <h3>{html.escape(title)}</h3>
     <p class="desc">{html.escape(desc)}</p>
     <p class="file">{os.path.basename(rel)}</p>
-    <button type="button" class="btn btn-dl" data-dl="{rel}">Baixar {ext.upper()}</button>
-    {cap_html}
+    <button type="button" class="btn btn-dl" data-dl="{rel}">Baixar {ext.upper()}</button>{btn_capa}
+    {cap_html}{yt_html}
   </div>
 </article>''')
     if cards:
+        contagem[gid] = len(cards)
         zipb = f'<button type="button" class="btn" data-zip="{gid}">Baixar este grupo (ZIP, {len(cards)} vídeos)</button>'
+        if gid == 'operacional-social':
+            zipb = (f'<div class="dl-bar"><button type="button" class="btn btn-gold" data-zip="{gid}">Baixar os {len(cards)} vídeos (ZIP)</button>'
+                    '<button type="button" class="btn" data-dl="calendario-operacional-na-pratica.csv">Baixar o calendário (planilha)</button>'
+                    '<span class="dl-status" role="status" aria-live="polite">A planilha abre no Excel e no Google Planilhas.</span></div>')
         cards_html.append(f'<section id="{gid}"><div class="section-head"><h2>{gtitle}</h2><p>{gdesc}</p>{zipb}</div><div class="grid">{"".join(cards)}</div></section>')
 
 open(os.path.join(LIB, 'sections.html'), 'w', encoding='utf-8').write('\n'.join(cards_html))
@@ -306,14 +334,6 @@ IMG_GROUPS = [
   ('img-site-galeria', 'Galeria do site', 'imagens/site-galeria', '16:9', 'Para a seção "Veja os sistemas em uso": gráfico real com o selo da plataforma e as marcações. O site já tem a legenda.', {}),
   ('img-site-og', 'Imagens de compartilhamento do site', 'imagens/site-compartilhamento', '16:9', 'A imagem que aparece quando alguém compartilha o link da página no WhatsApp, Instagram ou LinkedIn. 1200x630, no estilo do site. Vai na meta og:image de cada página.', {}),
 ]
-# capas da série vertical: os quadros "capa-op..." (QUALIDADE=92 SPECS=./specs-social.js node stills.js capa-op01-... )
-os.makedirs(os.path.join(OUT, 'capas-social'), exist_ok=True)
-for f in os.listdir(os.path.join(OUT, 'check')):
-    mc = re.match(r'(capa-op\d\d-.+)-0\.5\.jpg$', f)
-    if mc:
-        src, dst = os.path.join(OUT, 'check', f), os.path.join(OUT, 'capas-social', mc.group(1) + '.jpg')
-        if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(src):
-            subprocess.run(['cp', src, dst], check=True)
 img_html, img_files = [], []
 for gid, title, folder, ratio, cap, caps in IMG_GROUPS:
     src_dir = os.path.join(OUT, folder)
@@ -350,8 +370,14 @@ for i, c in enumerate(cards_html):
     if c.startswith('<section id="site">'):
         cards_html[i] = c[:-len('</section>')] + site_map + f'<script type="application/json" id="kit-site-files">{json.dumps(site_files)}</script></section>'
 
+import biblioteca_topo
+por_id = {re.match(r'<section id="([^"]+)"', c).group(1): c for c in cards_html}
+md_of = os.path.join(MKT, 'mentoria', 'orderflow-trechos-e-prints.md')
+extras = {'orderflow': biblioteca_topo.secao_orderflow(open(md_of, encoding='utf-8').read())} if os.path.exists(md_of) else {}
+topo = biblioteca_topo.secao_comece(social_operacional.dados_pagina(), 'calendario-outubro.csv') + biblioteca_topo.secao_guia(contagem)
 page = open(os.path.join(LIB, 'template.html'), encoding='utf-8').read()
-page = page.replace('<!--SECTIONS-->', '\n'.join(cards_html)).replace('<!--IMAGES-->', '\n'.join(img_html))
+page = (page.replace('<!--COMECE-->', topo).replace('<!--SECTIONS-->', biblioteca_topo.partes_html(por_id, extras))
+        .replace('<!--IMAGES-->', '\n'.join(img_html)))
 open(os.path.join(LIB, 'index.html'), 'w', encoding='utf-8').write(page)
 print(len(img_files), 'imagens;', len(site_files), 'arquivos no kit do site')
 
