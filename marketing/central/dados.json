@@ -1,0 +1,204 @@
+{
+  "atualizado": "2026-10-05",
+  "repo": "https://github.com/glacademytrading/gl-academy/blob/claude/gl-academy-marketing-awwnj0/marketing/",
+  "paginas": [
+    {"id": "pauta", "nome": "Pauta GL", "url": "https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba", "para": "Os 5 roteiros de cada dia útil (prontos às 6h40), com fontes e status, e o calendário do dia.", "quando": "Todo dia útil de manhã"},
+    {"id": "biblioteca", "nome": "Biblioteca de Vídeos GL", "url": "https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm", "para": "Os vídeos e imagens feitos com os prints reais, com legenda, download e o ZIP organizado.", "quando": "Para baixar o que vai postar"},
+    {"id": "campanha", "nome": "Campanha GL Risk Auto", "url": "https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1", "para": "Os 43 vídeos e 98 imagens da campanha, os anúncios, os 2 vídeos do site e as peças extras.", "quando": "Até 25/11, no @glacademybr"},
+    {"id": "carrosseis", "nome": "Carrosséis e Stories GL", "url": "https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp", "para": "Os carrosséis e stories dos 19 episódios da série Operacional na prática.", "quando": "Junto com cada episódio"},
+    {"id": "sistema", "nome": "Sistema de Marketing GL", "url": "https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns", "para": "Os 6 pilares do ciclo, o status de cada ação, a calculadora do funil e o kit de textos.", "quando": "Na reunião de segunda"},
+    {"id": "plano", "nome": "Plano de Marketing GL Academy", "url": "https://claude.ai/artifact/7A6YMsf9t1Wyqs57G2LEHc", "para": "O plano do ciclo até 31/12, com os desenhos do funil e dos pilares.", "quando": "Para consultar"},
+    {"id": "financas", "nome": "Finanças GL Academy", "url": "https://claude.ai/artifact/Xztaxnfk7hFUzcib21CNYf", "para": "A página de finanças da empresa.", "quando": "Outra área", "outra": true}
+  ],
+  "documentos": [
+    {"grupo": "Planos", "itens": [
+      ["Plano de Marketing 2026-27", "plano-de-marketing-2026-27.md", "Marcas, canais, conteúdo diário, YouTube, IA, as 13 semanas"],
+      ["Plano do ciclo", "plano-de-marketing.md", "Meta de calls, funil e os 6 pilares até 31/12"],
+      ["Campanha GL Risk Auto", "execucao/campanha-gl-risk-auto.md", "Formatos, calendário e anúncios da campanha"],
+      ["Plano da Mentoria GL", "mentoria/plano-da-mentoria.md", "Trilha de estudos e os 8 encontros"],
+      ["Mapa da pasta de marketing", "README.md", "Onde está cada arquivo e os comandos"]
+    ]},
+    {"grupo": "Conteúdo", "itens": [
+      ["Calendário mestre", "canais/calendario-mestre.csv", "Dia a dia, por conta e horário, de 05/10 a 03/01"],
+      ["Perfis e bios", "canais/perfis-e-bios.md", "Nomes, bios, destaques, fixados e o canal do YouTube"],
+      ["Roteiros iniciais", "canais/roteiros-iniciais.md", "Os 14 primeiros Reels e os vídeos longos 1 e 2"],
+      ["Banco de ideias", "canais/banco-de-ideias.md", "120 ideias por pilar, com gancho"],
+      ["Modelos e checklists", "canais/modelos-e-checklists.md", "Moldes de cada formato e os checklists de regras"],
+      ["Série Operacional na prática", "execucao/serie-operacional-na-pratica.md", "Os 19 episódios, legendas e calendário"],
+      ["Roteiros para gravar", "roteiros-e-depoimentos.md", "Roteiros com rosto e o guia de depoimentos"],
+      ["Roteiros do GL Risk Auto", "roteiros-gl-risk-auto.md", "Seis roteiros para gravar sobre o GL Risk Auto"]
+    ]},
+    {"grupo": "Operação", "itens": [
+      ["Rotina da pauta diária", "automacao/rotina-pauta-diaria.md", "O texto da rotina das 6h40 e como mudar"],
+      ["Vendas e follow-up", "execucao/vendas-follow-up.md", "Mensagens de 1, 3 e 7 dias depois da call"],
+      ["Kit de imprensa", "execucao/kit-de-imprensa.md", "Release, pautas e mailing"],
+      ["Manual de crise", "execucao/manual-de-crise.md", "O que fazer quando algo dá errado em público"],
+      ["Programa de parceiros", "execucao/programa-de-parceiros.md", "Criadores, comissão e o passo a passo"],
+      ["Prompt do site (Codex)", "site/prompt-codex-gl-risk-auto.md", "Os 2 vídeos do GL Risk Auto no site"],
+      ["Glossário", "glossario.md", "Os nomes dos produtos e sistemas"],
+      ["Prompt de continuidade", "PROMPT-continuidade.md", "Para continuar o projeto numa conversa nova"]
+    ]}
+  ],
+  "decisoes": [
+    {"id": "meta", "texto": "A meta do ciclo: quantos clientes e qual ticket médio", "ajuda": "O exemplo do painel é de 60 clientes a R$ 3.500, cerca de 18 calls realizadas por semana."},
+    {"id": "verba", "texto": "A verba mensal de anúncios", "ajuda": "Para o teste de anúncios e para impulsionar os Reels que vencem."},
+    {"id": "equipe", "texto": "Quem edita, quem agenda e quem responde os directs", "ajuda": "E um dono para cada pilar do ciclo."},
+    {"id": "conversa", "texto": "A conversa gratuita: 30 ou 60 minutos, e o nome dela", "ajuda": "\"Call 1x1\" ou \"mentoria gratuita\". Até decidir, nenhuma peça cita a duração."},
+    {"id": "perfis", "texto": "O papel dos perfis da marca", "ajuda": "Proposta: @glacademybr para o Brasil e @glacademytrading para o exterior, em inglês."},
+    {"id": "youtube", "texto": "O @ do YouTube", "ajuda": "Manter @giovanelazaro ou unificar com @lazarotrades."},
+    {"id": "live", "texto": "A live no pregão: conta real ou simulada", "ajuda": "Sempre mostrando em R e pontos, nunca em dólar."},
+    {"id": "newsletter", "texto": "O nome e a ferramenta da newsletter", "ajuda": "Sugestões: Processo à Vista, Carta do Lázaro ou Radar GL; Beehiiv, Substack ou Kit."},
+    {"id": "ia", "texto": "A linha de IA: marca, preço do workshop e data do piloto", "ajuda": "A página da lista de espera precisa estar no ar até 16/10, para o vídeo longo 1."},
+    {"id": "ofertas", "texto": "Os pacotes e preços que seguem à venda", "ajuda": "E se os produtos antigos continuam: GL Risk Auto avulso, Gamepad Trader Pro, Mentoria Gestão de Risco e Sala de Análise."},
+    {"id": "parceiros", "texto": "A comissão dos parceiros", "ajuda": "R$ 200 por venda, como os captadores, ou outro modelo."},
+    {"id": "blackfriday", "texto": "A condição de Black Friday (27/11)", "ajuda": "Qual, por quanto tempo e com preço verdadeiro."},
+    {"id": "cnpi", "texto": "Os estudos de ativos e a CVM", "ajuda": "Certificação CNPI-T ou parceria com analista, e o advogado revisando a Sexta do estudo e a Sala de Análise."},
+    {"id": "higgsfield", "texto": "Aprovar o uso dos 1.200 créditos da Higgsfield", "ajuda": "Usar até 30/10: identidade das séries, cobertura e cenas de anúncio."},
+    {"id": "fotos", "texto": "A sessão de fotos de 30 minutos", "ajuda": "Para as thumbnails do YouTube e a foto oficial."},
+    {"id": "funil", "texto": "O merge do funil, o Pixel da Meta e o GA4", "ajuda": "Com a política de privacidade publicada antes do Pixel."},
+    {"id": "nomes", "texto": "GL Model ou GL Professional Trade System, e os termos do site", "ajuda": "Quando usar cada nome e os termos técnicos que ainda estão para confirmar."},
+    {"id": "tiktok", "texto": "TikTok e X: ligar já ou só em janeiro", "ajuda": "O TikTok repetiria os Shorts; o X ou Threads receberia notas do Radar IA."}
+  ],
+  "entregas": [
+    {"id": "cerebro", "texto": "O Second Brain atual", "como": "A parte de marketing e todas as ideias de negócio e projetos. No Obsidian: botão direito na pasta, \"Mostrar no explorador\", compacte em ZIP e me mande no chat."},
+    {"id": "curso", "texto": "O material do curso de marketing viral", "como": "PDFs, slides, resumos ou as transcrições das aulas (texto funciona melhor que vídeo), o nome do curso e de quem ensina e as 3 ideias que você mais quer aplicar."},
+    {"id": "redes", "texto": "Os links das redes", "como": "Preencha os campos abaixo: ficam salvos aqui e eu leio daqui.", "nota": "Na Central (seção Pendências), nos campos de cada rede, ou no chat. Instagram dos 3 perfis, YouTube, LinkedIn, TikTok, site e a página de links da bio."},
+    {"id": "prints", "texto": "Prints de cada perfil", "como": "O topo (bio e destaques), as 3 primeiras linhas do feed, os 3 posts que mais deram resultado e os 3 que menos deram, com os números, e os insights de 30 dias (alcance, não seguidores, público). No YouTube, a visão geral de 28 dias e o público. O Instagram não abre perfis sem login para mim, então os prints é que permitem avaliar de verdade."},
+    {"id": "numeros", "texto": "Os números de hoje", "como": "Seguidores de cada perfil, alcance de 30 dias, inscritos e horas no YouTube, tamanho da lista de e-mail e da comunidade, e leads, calls e vendas dos últimos 30 dias por origem."},
+    {"id": "produtos", "texto": "A tabela de produtos e preços", "como": "O que está à venda hoje, o que cada um inclui, preço, forma de pagamento, garantia e o que sai de linha."},
+    {"id": "marca", "texto": "Materiais da marca", "como": "O logo (vetor ou PNG sem fundo), fotos suas e as credenciais que podemos citar (anos de mercado, formação, alunos)."},
+    {"id": "respostas", "texto": "As respostas da entrevista", "como": "Aqui na Central, na seção Entrevista, ou por áudio no chat. Comece pelas essenciais.", "nota": "Na Central (seção Entrevista) ou por áudio no chat, citando o número da pergunta. Comece pelas 14 essenciais."}
+  ],
+  "redes": [
+    {"id": "glacademybr", "rotulo": "Instagram @glacademybr", "dica": "https://instagram.com/glacademybr"},
+    {"id": "glacademytrading", "rotulo": "Instagram @glacademytrading", "dica": "https://instagram.com/glacademytrading"},
+    {"id": "lazarotrades", "rotulo": "Instagram @lazarotrades", "dica": "https://instagram.com/lazarotrades"},
+    {"id": "youtube", "rotulo": "YouTube", "dica": "https://youtube.com/@..."},
+    {"id": "linkedin", "rotulo": "LinkedIn", "dica": "https://linkedin.com/in/..."},
+    {"id": "tiktok", "rotulo": "TikTok", "dica": "Se houver"},
+    {"id": "site", "rotulo": "Site", "dica": "https://..."},
+    {"id": "outros", "rotulo": "Outros", "dica": "Página de links da bio, TradingView, X, comunidade"}
+  ],
+  "entrevista": [
+    {"id": "a", "bloco": "Visão, metas e tempo", "perguntas": [
+      {"id": "a1", "e": true, "q": "Daqui a 12 meses, o que precisa ser verdade para você dizer que o marketing deu certo?", "h": "Faturamento, clientes, audiência, reconhecimento. O que pesa mais."},
+      {"id": "a2", "e": true, "q": "Qual é o faturamento por mês hoje e qual a meta em 12 meses? Quanto deve vir de cada fonte?", "h": "Trading, IA, outros negócios. Uma faixa já ajuda."},
+      {"id": "a3", "e": true, "q": "Quantas horas por semana você consegue dedicar a gravar, aparecer e responder? Quais horários são intocáveis?", "h": "Pregão, treino, família, reuniões."},
+      {"id": "a4", "e": false, "q": "Qual é a verba mensal possível para anúncios, ferramentas e pessoas?", "h": "Editor de vídeo, social media, tráfego."},
+      {"id": "a5", "e": false, "q": "O que você não quer fazer de jeito nenhum no marketing?", "h": "Temas, formatos, exposições."},
+      {"id": "a6", "e": false, "q": "Se tivesse que escolher uma frente só para os próximos 90 dias (trading, IA ou marca pessoal), qual seria e por quê?", "h": ""}
+    ]},
+    {"id": "b", "bloco": "O que a GL vende hoje", "perguntas": [
+      {"id": "b1", "e": true, "q": "Quais produtos estão à venda hoje, com preço, o que inclui e a forma de pagamento de cada um? Quais saem de linha?", "h": "Operacional Completo, Pacote TradingView, Pacote Completo, APP, Mentoria 1:1, GL Gamma, GL Risk Auto avulso, Gamepad Trader Pro, Mentoria Gestão de Risco, Sala de Análise."},
+      {"id": "b2", "e": true, "q": "Qual produto você mais quer vender nos próximos 90 dias e qual dá mais margem?", "h": ""},
+      {"id": "b3", "e": false, "q": "Como é a entrega depois da compra? Quanto tempo até o cliente usar de verdade?", "h": "Acesso, instalação, suporte, comunidade, onboarding."},
+      {"id": "b4", "e": false, "q": "Quais são as 5 objeções que mais aparecem nas calls, e o que costuma fechar a venda?", "h": ""},
+      {"id": "b5", "e": false, "q": "Quantos clientes ativos a GL tem hoje, por produto? O que disso pode ser dito em público?", "h": ""},
+      {"id": "b6", "e": true, "q": "Quais são os números reais do funil e quem faz as calls?", "h": "Leads por semana, agendamentos, comparecimento, fechamento e ticket médio."},
+      {"id": "b7", "e": false, "q": "Quais são a garantia, a política de reembolso e o suporte de cada produto?", "h": "O Código de Defesa do Consumidor dá 7 dias de arrependimento nas vendas online."}
+    ]},
+    {"id": "c", "bloco": "Clientes", "perguntas": [
+      {"id": "c1", "e": true, "q": "Descreva os seus 3 melhores clientes, sem nomes: perfil, por que compraram e o que mudou para eles.", "h": "Idade, profissão, experiência, capital, mesa proprietária ou conta própria."},
+      {"id": "c2", "e": false, "q": "Quem não é cliente ideal? Que perfil costuma dar problema?", "h": ""},
+      {"id": "c3", "e": false, "q": "De onde vêm os clientes hoje?", "h": "Indicação, Instagram, YouTube, anúncios, mesas, comunidade."},
+      {"id": "c4", "e": false, "q": "Quais dúvidas mais aparecem no direct e nos comentários?", "h": ""},
+      {"id": "c5", "e": false, "q": "Existe uma base de alunos e clientes antigos para reativar? De que tamanho, e com consentimento para contato?", "h": "E-mail, WhatsApp. A LGPD pede o consentimento."}
+    ]},
+    {"id": "d", "bloco": "Novas fontes de renda e projetos", "perguntas": [
+      {"id": "d1", "e": true, "q": "Liste todos os projetos e negócios que estão na sua cabeça ou que já discutimos, mesmo os soltos.", "h": "Para cada um: nome, a ideia numa frase, para quem é e o estágio (ideia, validando, pronto)."},
+      {"id": "d2", "e": true, "q": "Na linha de IA, qual é o primeiro produto? Preço pensado, data e quem entrega com você?", "h": "Workshop, formação, consultoria, implantação do GL OS em empresas, assinatura."},
+      {"id": "d3", "e": false, "q": "O GL Risk Auto e as outras tecnologias podem ser vendidos como software?", "h": "Assinatura, licença para mesas proprietárias, versão com outra marca, venda para empresas. Já houve conversa com mesa, corretora ou plataforma?"},
+      {"id": "d4", "e": false, "q": "Com quais mesas, corretoras, plataformas e ligas universitárias você já tem relação? Topa um programa de afiliados?", "h": ""},
+      {"id": "d5", "e": false, "q": "Conteúdo como receita: você aceita patrocínio e publi no seu canal? De quais marcas não?", "h": ""},
+      {"id": "d6", "e": false, "q": "Tem interesse em comunidade paga ou assinatura (sala, pré-mercado, revisão de trades)?", "h": "Com os limites da CVM para recomendação de ativos."},
+      {"id": "d7", "e": false, "q": "Eventos, imersões e palestras presenciais estão nos planos?", "h": ""},
+      {"id": "d8", "e": false, "q": "Quais investimentos e negócios para renda de longo prazo você quer mostrar, e o que fica privado?", "h": "Empresas, imóveis, participações."},
+      {"id": "d9", "e": false, "q": "Para cada projeto, quanto do seu tempo ele consome e quem mais pode tocar?", "h": ""}
+    ]},
+    {"id": "e", "bloco": "Marca pessoal", "perguntas": [
+      {"id": "e1", "e": true, "q": "Conte a sua história em 5 marcos.", "h": "Como começou no mercado, a virada, a criação da GL, o momento mais difícil e onde quer chegar."},
+      {"id": "e2", "e": true, "q": "Quais credenciais e fatos verificáveis podemos citar?", "h": "Anos de mercado, formação, certificações, número de alunos, países, prêmios."},
+      {"id": "e3", "e": false, "q": "Quais são 3 opiniões fortes que você defende e de que muita gente do mercado discorda?", "h": ""},
+      {"id": "e4", "e": false, "q": "Quais criadores, empresários ou marcas você admira, aqui e fora? E com quais você não quer parecer?", "h": ""},
+      {"id": "e5", "e": false, "q": "O que você topa mostrar e o que fica fora?", "h": "Rotina, treino, alimentação, família, casa, viagens, bastidores, números da empresa."},
+      {"id": "e6", "e": false, "q": "Na live operando: conta real ou simulada, e como você quer lidar com um dia de stop ao vivo?", "h": "Sempre em R e pontos."},
+      {"id": "e7", "e": false, "q": "Como você quer ser lembrado na indústria do trading daqui a 3 anos?", "h": ""},
+      {"id": "e8", "e": false, "q": "Você grava em inglês, ou pretende?", "h": "A dublagem automática cobre o YouTube; o perfil internacional pede legendas revisadas."},
+      {"id": "e9", "e": false, "q": "Quais mercados você estuda para swing e position? Já tem CNPI ou um analista parceiro?", "h": "Índices, ações, cripto, commodities."}
+    ]},
+    {"id": "f", "bloco": "Redes e conteúdo hoje", "perguntas": [
+      {"id": "f1", "e": true, "q": "Quem cuida hoje de cada perfil? Quem posta, quem edita e quem responde?", "h": "@glacademybr, @glacademytrading, @lazarotrades e o YouTube."},
+      {"id": "f2", "e": true, "q": "Você concorda com @glacademybr no Brasil e @glacademytrading no exterior, em inglês? Quem segue o @glacademytrading hoje é brasileiro?", "h": ""},
+      {"id": "f3", "e": false, "q": "Qual post ou vídeo já deu mais resultado, e por que você acha que funcionou?", "h": "Alcance, seguidores, vendas."},
+      {"id": "f4", "e": false, "q": "O que você mais odeia nas suas redes hoje?", "h": ""},
+      {"id": "f5", "e": false, "q": "Quais formatos você gosta de fazer, e em quais trava?", "h": "Falar para a câmera, tela gravada, podcast, live, bastidor."},
+      {"id": "f6", "e": false, "q": "Que equipamento e que lugar de gravação você tem?", "h": "Câmera, luz, microfone, teleprompter."},
+      {"id": "f7", "e": false, "q": "Quais ferramentas a equipe usa hoje?", "h": "Edição, agendamento, CRM, automação de direct, newsletter."}
+    ]},
+    {"id": "g", "bloco": "Viralização e conexão", "perguntas": [
+      {"id": "g1", "e": true, "q": "Qual é o curso de marketing viral, quem ensina, e quais 3 ideias dele mais fizeram sentido para você?", "h": ""},
+      {"id": "g2", "e": false, "q": "Que conteúdo você consome e compartilha? O que faz você mandar algo para alguém?", "h": ""},
+      {"id": "g3", "e": false, "q": "Quais histórias pessoais você topa contar?", "h": "Perdas, erros, viradas, bastidores difíceis."},
+      {"id": "g4", "e": false, "q": "Até onde ir na polêmica?", "h": "Críticas a gurus, às promessas do mercado, às mesas proprietárias."},
+      {"id": "g5", "e": false, "q": "Você topa trends, humor e memes, ou prefere manter o tom sério?", "h": ""},
+      {"id": "g6", "e": false, "q": "Como você quer que os seguidores se sintam e se chamem?", "h": "O nome da comunidade, rituais, frases da casa."}
+    ]},
+    {"id": "h", "bloco": "Organização e Second Brain", "perguntas": [
+      {"id": "h1", "e": false, "q": "Como o Second Brain está organizado hoje, e qual é a fonte da verdade da empresa?", "h": "GL OS, Obsidian, Notion, Drive. Pastas, tags, padrão de nomes."},
+      {"id": "h2", "e": false, "q": "O que deve morar no Obsidian e o que deve morar no GL OS?", "h": ""},
+      {"id": "h3", "e": false, "q": "Quem mais da equipe usa o Second Brain?", "h": ""},
+      {"id": "h4", "e": false, "q": "Além da pauta das 6h40, que rotinas automáticas ajudariam?", "h": "Relatório da semana, resumo de comentários, ideias de vídeo, radar de concorrentes."}
+    ]},
+    {"id": "i", "bloco": "Jurídico e limites", "perguntas": [
+      {"id": "i1", "e": false, "q": "Algum advogado revisa o marketing (CVM, CONAR, Código de Defesa do Consumidor, LGPD)?", "h": "Em especial a Sexta do estudo e a Sala de Análise."},
+      {"id": "i2", "e": false, "q": "A GL vende para fora do Brasil? Em que moeda, com que checkout e com que impostos?", "h": ""},
+      {"id": "i3", "e": false, "q": "A política de privacidade e os termos de uso estão publicados no site?", "h": ""}
+    ]}
+  ],
+  "semanas": [
+    {"n": 0, "ini": "2026-10-05", "fim": "2026-10-11", "tema": "O plano", "marcos": "Perfis novos; manifesto em 09/10; campanha GL Risk Auto a partir de 10/10"},
+    {"n": 1, "ini": "2026-10-12", "fim": "2026-10-18", "tema": "Risco primeiro", "marcos": "Séries no ar; live no pregão em 15/10; vídeo longo 1 e newsletter 1 em 18/10; lista de espera da IA aberta"},
+    {"n": 2, "ini": "2026-10-19", "fim": "2026-10-25", "tema": "IA na empresa", "marcos": "Pauta 1 na imprensa em 19/10; convites a podcasts; live de perguntas em 22/10"},
+    {"n": 3, "ini": "2026-10-26", "fim": "2026-11-01", "tema": "Processo", "marcos": "Live no pregão em 29/10; fim do teste de anúncios; Higgsfield até 30/10; muda o horário de NY"},
+    {"n": 4, "ini": "2026-11-02", "fim": "2026-11-08", "tema": "Rotina", "marcos": "NY abre às 11h30; revisão das séries com 4 semanas de dados"},
+    {"n": 5, "ini": "2026-11-09", "fim": "2026-11-15", "tema": "Vibe coding", "marcos": "Live no pregão em 12/11; versões em inglês no ritmo de 4 por semana"},
+    {"n": 6, "ini": "2026-11-16", "fim": "2026-11-22", "tema": "Mesa proprietária", "marcos": "Live de perguntas em 19/11; aquecimento da Black Friday"},
+    {"n": 7, "ini": "2026-11-23", "fim": "2026-11-29", "tema": "Black Friday", "marcos": "Live no pregão em 24/11 (26/11 é Thanksgiving); oferta real em 27/11"},
+    {"n": 8, "ini": "2026-11-30", "fim": "2026-12-06", "tema": "IA na prática", "marcos": "Campanha da lista de espera da IA a partir de 01/12; Collabs nos EUA"},
+    {"n": 9, "ini": "2026-12-07", "fim": "2026-12-13", "tema": "Planejar 2027", "marcos": "Live no pregão em 10/12; podcasts"},
+    {"n": 10, "ini": "2026-12-14", "fim": "2026-12-20", "tema": "Retrospectiva", "marcos": "Live de perguntas em 17/12; depoimentos com autorização"},
+    {"n": 11, "ini": "2026-12-21", "fim": "2026-12-27", "tema": "Ferramentas", "marcos": "Ritmo reduzido, conteúdo gravado antes (25/12 é Natal)"},
+    {"n": 12, "ini": "2026-12-28", "fim": "2027-01-03", "tema": "O plano de 2027", "marcos": "Vídeo longo 12 em 03/01; data do workshop-piloto anunciada"}
+  ],
+  "datas": [
+    ["2026-10-09", "Manifesto e carrossel \"Comece aqui\" no @lazarotrades"],
+    ["2026-10-10", "Começa a campanha GL Risk Auto no @glacademybr"],
+    ["2026-10-12", "Séries no ar (feriado no Brasil)"],
+    ["2026-10-14", "Gravação do vídeo longo 1 (bloco B)"],
+    ["2026-10-15", "Live no pregão"],
+    ["2026-10-16", "Página da lista de espera da IA no ar"],
+    ["2026-10-18", "Vídeo longo 1: Como eu uso IA para tocar uma empresa de trading"],
+    ["2026-10-19", "Pauta 1 na imprensa"],
+    ["2026-10-22", "Live de perguntas"],
+    ["2026-10-25", "Vídeo longo 2: O trade que o meu sistema não me deixou fazer"],
+    ["2026-10-29", "Live no pregão"],
+    ["2026-10-30", "Prazo para usar os créditos da Higgsfield"],
+    ["2026-11-01", "Vídeo longo 3; fim do horário de verão dos EUA (NY abre às 11h30 a partir de 02/11)"],
+    ["2026-11-08", "Vídeo longo 4: Minha rotina de trader e CEO"],
+    ["2026-11-12", "Live no pregão"],
+    ["2026-11-15", "Vídeo longo 5: Vibe coding"],
+    ["2026-11-19", "Live de perguntas"],
+    ["2026-11-22", "Vídeo longo 6: Mesa proprietária"],
+    ["2026-11-24", "Live no pregão"],
+    ["2026-11-27", "Black Friday"],
+    ["2026-11-29", "Vídeo longo 7: Vibe marketing"],
+    ["2026-12-01", "Campanha da lista de espera da IA"],
+    ["2026-12-06", "Vídeo longo 8: Swing trade com processo"],
+    ["2026-12-10", "Live no pregão"],
+    ["2026-12-13", "Vídeo longo 9: Como planejar 2027 com IA"],
+    ["2026-12-17", "Live de perguntas"],
+    ["2026-12-20", "Vídeo longo 10: O que eu aprendi construindo a GL"],
+    ["2026-12-27", "Vídeo longo 11: As ferramentas de IA que eu uso"],
+    ["2027-01-03", "Vídeo longo 12: O plano de 2027"]
+  ]
+}

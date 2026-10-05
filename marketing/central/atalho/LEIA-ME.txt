@@ -1,0 +1,23 @@
+﻿Central de Marketing GL no seu PC
+
+A Central é a porta de entrada do marketing: o que fazer hoje, todas as páginas, as pendências, a entrevista e os arquivos.
+Link: https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR
+
+Antes de tudo: faça o login no claude.ai no navegador que você vai usar.
+
+JEITO 1 (recomendado): instalar como aplicativo
+- Edge: abra o link acima e clique no menu "..." > Aplicativos > Instalar este site como um aplicativo.
+- Chrome: abra o link e clique no menu de três pontos > Transmitir, salvar e compartilhar > Instalar página como app.
+- Pronto: a Central ganha ícone no menu Iniciar. Para fixar na barra de tarefas, clique com o botão direito no ícone > Fixar na barra de tarefas.
+
+JEITO 2: atalho na Área de Trabalho
+- Copie "Central de Marketing GL.url" para a Área de Trabalho. Dois cliques abrem a Central no navegador padrão.
+
+JEITO 3: janela de aplicativo pelo arquivo
+- Dois cliques em "Abrir como aplicativo (Edge).bat" (ou na versão do Chrome) abrem a Central numa janela própria, sem barra de endereço.
+- Para ter na Área de Trabalho: botão direito no arquivo > Enviar para > Área de trabalho (criar atalho).
+
+Bom saber
+- Abrir a Central e as outras páginas não usa a sua cota do Claude. Só as conversas usam.
+- A Pauta GL, a Biblioteca, a Campanha GL Risk Auto e o Sistema de Marketing abrem pelos botões dentro da Central.
+- A Central também fica fixada na barra lateral do claude.ai, e todas as páginas ficam em claude.ai/code/artifacts.

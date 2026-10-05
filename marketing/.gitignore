@@ -4,3 +4,4 @@ __pycache__/
 # saídas geradas (o radar e a página montada da pauta)
 automacao/radar/saida/
 pauta/index.html
+central/index.html

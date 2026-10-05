@@ -1,0 +1,688 @@
+<title>Central de Marketing GL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabine de comando numa coluna larga (até 1080px): o placar no topo, depois Hoje, Páginas, Pendências, Entrevista, Arquivos e Atalho no PC. */
+:root {
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1d1a15; --line: #2f2a22; --text: #f3eee4; --muted: #b5ac9c;
+  --gold: #d8ae55; --gold-2: #f6d991; --on-gold: #14100a; --ok: #4fe3a8; --alerta: #ff7a72; --link: #8fbcff; --chip: #26221b;
+  --display: Montserrat, Inter, system-ui, sans-serif; --body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f6f1e7; --surface: #fffdf8; --surface-2: #f1eadc; --line: #e1d7c3; --text: #1d1a14; --muted: #675e4f;
+    --gold: #8a6420; --gold-2: #a87a2c; --on-gold: #fffaf0; --ok: #0f7a50; --alerta: #b3261e; --link: #1f5fbf; --chip: #efe6d4;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f6f1e7; --surface: #fffdf8; --surface-2: #f1eadc; --line: #e1d7c3; --text: #1d1a14; --muted: #675e4f;
+  --gold: #8a6420; --gold-2: #a87a2c; --on-gold: #fffaf0; --ok: #0f7a50; --alerta: #b3261e; --link: #1f5fbf; --chip: #efe6d4;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.55 var(--body); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-inline: 16px; padding-block: 0 64px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 5.5vw, 2.7rem); font-weight: 800; letter-spacing: -.01em; }
+h2 { font-size: 1.3rem; font-weight: 800; }
+h3 { font-size: 1.02rem; font-weight: 800; line-height: 1.3; }
+p { margin: 0; }
+a { color: var(--link); }
+.eyebrow { font: 600 .74rem/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+.lede { color: var(--muted); max-width: 68ch; margin-top: 10px; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+button, .btn { font: 600 .9rem/1 var(--body); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+button:hover, .btn:hover { border-color: var(--gold); }
+button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 2px; }
+button[disabled] { opacity: .45; cursor: default; }
+.btn.ouro, button.ouro { background: linear-gradient(90deg, var(--gold), var(--gold-2)); color: var(--on-gold); border-color: transparent; }
+
+/* barra fixa com as seções */
+.barra { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; background: var(--bg); border-bottom: 1px solid var(--line); }
+.barra nav { max-width: 1080px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.barra a { flex: none; font: 600 .84rem/1 var(--body); color: var(--muted); text-decoration: none; padding: 8px 12px; border-radius: 999px; border: 1px solid transparent; }
+.barra a:hover { color: var(--text); border-color: var(--line); }
+.barra a.marca { color: var(--gold); font-family: var(--display); font-weight: 800; }
+
+header.topo { padding-top: 28px; display: grid; gap: 18px; }
+.placar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.placar a { text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px; min-width: 0; }
+.placar a:hover { border-color: var(--gold); }
+.placar b { font: 800 1.35rem/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.placar span { font-size: .84rem; color: var(--muted); }
+.barrinha { height: 4px; border-radius: 4px; background: var(--chip); overflow: hidden; }
+.barrinha i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
+
+section { margin-top: 38px; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 14px; }
+.head p { color: var(--muted); font-size: .9rem; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; min-width: 0; }
+.aviso { border-left: 3px solid var(--gold); padding: 12px 14px; background: var(--surface); border-radius: 0 12px 12px 0; color: var(--muted); font-size: .92rem; }
+.vazio { color: var(--muted); }
+
+/* hoje */
+.hoje { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 14px; }
+.nav-dia { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.nav-dia .dia { margin-right: auto; font: 800 1.05rem/1.2 var(--display); }
+.nav-dia .dia small { display: block; font: 500 .8rem/1.3 var(--body); color: var(--muted); }
+.nav-dia button { padding: 8px 10px; font-size: .82rem; }
+.semana { display: grid; gap: 4px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); margin-bottom: 12px; }
+.semana b { font: 800 .95rem/1.3 var(--display); color: var(--gold-2); }
+.semana span { font-size: .88rem; color: var(--muted); }
+.conta { margin-top: 10px; }
+.conta h3 { font-size: .9rem; color: var(--gold); margin-bottom: 4px; }
+.linha { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); }
+.linha .hora { color: var(--muted); font-size: .82rem; padding-top: 2px; }
+.linha .t { font-weight: 600; font-size: .94rem; overflow-wrap: anywhere; }
+.linha .m { color: var(--muted); font-size: .82rem; overflow-wrap: anywhere; }
+.proximas { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.proximas li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.proximas li:first-child { border-top: 0; }
+.proximas .q { font: 600 .8rem/1.3 var(--mono); color: var(--gold); }
+.proximas .q small { display: block; color: var(--muted); font-weight: 500; }
+.proximas .t { font-size: .92rem; }
+
+/* páginas */
+.paginas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pag { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.pag.destaque { border-color: color-mix(in srgb, var(--gold) 60%, var(--line)); }
+.pag p { color: var(--muted); font-size: .92rem; }
+.pag .quando { font: 500 .76rem/1.3 var(--mono); color: var(--gold); letter-spacing: .02em; }
+.pag .btn { justify-self: start; margin-top: 4px; }
+.outras { margin-top: 12px; font-size: .9rem; color: var(--muted); }
+
+/* pendências */
+.duas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.lista { display: grid; gap: 0; }
+.pend { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); }
+.pend:first-child { border-top: 0; padding-top: 2px; }
+.pend input[type="checkbox"] { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--gold); cursor: pointer; }
+.pend .t { font-weight: 600; }
+.pend.feito .t { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--gold); }
+.pend .ajuda { color: var(--muted); font-size: .86rem; margin-top: 2px; }
+.pend input[type="text"], .redes input { width: 100%; margin-top: 8px; font: 400 .92rem/1.3 var(--body); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; }
+.redes { display: grid; gap: 8px; margin-top: 10px; }
+.redes label { display: grid; gap: 2px; font: 600 .8rem/1.3 var(--body); color: var(--muted); }
+.redes input { margin-top: 0; }
+.st { font: 500 .74rem/1.2 var(--mono); color: var(--muted); margin-top: 4px; min-height: 1em; }
+.st.erro { color: var(--alerta); }
+
+/* entrevista */
+.ent-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 12px; }
+.filtro { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; }
+.filtro button { border: 0; background: transparent; padding: 8px 12px; font-size: .84rem; }
+.filtro button[aria-pressed="true"] { background: var(--chip); color: var(--gold-2); }
+.progresso { flex: 1 1 220px; display: grid; gap: 6px; font-size: .86rem; color: var(--muted); }
+.blocos { display: grid; gap: 10px; }
+.bloco { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 0 16px; }
+.bloco > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 0; font: 800 1rem/1.3 var(--display); }
+.bloco > summary::-webkit-details-marker { display: none; }
+.bloco > summary::before { content: "+"; font: 700 1.1rem/1 var(--mono); color: var(--gold); width: 14px; }
+.bloco[open] > summary::before { content: "−"; }
+.bloco > summary .cont { margin-left: auto; font: 600 .78rem/1 var(--mono); color: var(--muted); }
+.perg { display: grid; gap: 6px; padding: 14px 0; border-top: 1px solid var(--line); }
+.perg label { font-weight: 600; display: block; }
+.perg .num { font: 600 .78rem/1 var(--mono); color: var(--gold); margin-right: 8px; }
+.perg .essencial { font: 700 .66rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--on-gold); background: var(--gold); padding: 4px 6px; border-radius: 6px; margin-left: 8px; vertical-align: 2px; }
+.perg .ajuda { color: var(--muted); font-size: .86rem; }
+.perg textarea { width: 100%; min-height: 84px; resize: vertical; font: 400 .95rem/1.5 var(--body); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.perg.respondida textarea { border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+.so-essenciais .perg:not(.e) { display: none; }
+
+/* arquivos */
+.docs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.docs ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
+.docs li a { font-weight: 600; text-decoration: none; }
+.docs li a:hover { text-decoration: underline; }
+.docs li span { display: block; color: var(--muted); font-size: .84rem; }
+.arte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.arte button { padding: 0; display: grid; gap: 0; overflow: hidden; border-radius: 12px; background: var(--surface); text-align: left; }
+.arte img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 1587 / 1123; object-fit: cover; background: var(--surface-2); }
+.arte span { padding: 10px 12px; font-size: .88rem; }
+.baixar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+.baixar button { justify-content: space-between; text-align: left; line-height: 1.35; padding: 12px 14px; }
+.baixar button small { display: block; font-weight: 500; color: var(--muted); font-size: .8rem; }
+dialog { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--text); padding: 12px; max-width: min(1400px, calc(100vw - 32px)); width: 100%; }
+dialog::backdrop { background: rgba(0, 0, 0, .7); }
+dialog img { display: block; width: 100%; height: auto; border-radius: 8px; }
+dialog .fechar { margin-top: 10px; }
+
+/* atalho */
+.passos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.passo { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.passo ol { margin: 0; padding-left: 18px; color: var(--muted); font-size: .92rem; display: grid; gap: 4px; }
+.passo .rec { font: 700 .66rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--ok); }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: .9rem; max-width: calc(100% - 32px); z-index: 6; }
+footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
+
+@media (max-width: 900px) {
+  .paginas, .docs, .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .hoje, .duas { grid-template-columns: minmax(0, 1fr); }
+  .placar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .paginas, .docs, .passos, .arte, .baixar { grid-template-columns: minmax(0, 1fr); }
+  .panel, .pag, .passo { padding: 14px; }
+  .linha { grid-template-columns: 58px minmax(0, 1fr); }
+}
+</style>
+
+<div class="barra">
+  <nav aria-label="Seções">
+    <a class="marca" href="#topo">Central GL</a>
+    <a href="#hoje">Hoje</a>
+    <a href="#paginas">Páginas</a>
+    <a href="#pendencias">Pendências</a>
+    <a href="#entrevista">Entrevista</a>
+    <a href="#arquivos">Arquivos</a>
+    <a href="#atalho">Atalho no PC</a>
+  </nav>
+</div>
+
+<div class="wrap">
+  <header class="topo" id="topo">
+    <div>
+      <p class="eyebrow">GL Academy · marketing</p>
+      <h1>Central de Marketing GL</h1>
+      <p class="lede">Tudo do marketing num lugar só: o que fazer hoje, as páginas, o que falta decidir, a entrevista e os arquivos. Abrir as páginas não usa a sua cota do Claude; só as conversas usam.</p>
+    </div>
+    <div class="placar" aria-label="Resumo">
+      <a href="#hoje"><b id="pl-hoje">—</b><span>itens no calendário hoje</span></a>
+      <a href="#pendencias"><b id="pl-dec">—</b><span>decisões tomadas</span><div class="barrinha"><i id="pl-dec-b"></i></div></a>
+      <a href="#pendencias"><b id="pl-ent">—</b><span>materiais enviados</span><div class="barrinha"><i id="pl-ent-b"></i></div></a>
+      <a href="#entrevista"><b id="pl-perg">—</b><span>perguntas respondidas</span><div class="barrinha"><i id="pl-perg-b"></i></div></a>
+    </div>
+    <p class="aviso" id="aviso-db">Carregando o que já foi salvo…</p>
+  </header>
+
+  <section id="hoje">
+    <div class="head"><h2>Hoje e os próximos marcos</h2><p>Do calendário mestre do plano, em horário de Brasília.</p></div>
+    <div class="hoje">
+      <div class="panel">
+        <div class="nav-dia">
+          <div class="dia"><span id="dia-titulo">—</span><small id="dia-sub"></small></div>
+          <button type="button" id="ant" aria-label="Dia anterior">←</button>
+          <button type="button" id="hoje-btn">Hoje</button>
+          <button type="button" id="prox" aria-label="Próximo dia">→</button>
+        </div>
+        <div class="semana" id="semana"></div>
+        <div id="cal"></div>
+        <p style="margin-top:14px"><a class="btn ouro" id="abrir-pauta" href="#" target="_blank" rel="noopener">Abrir os roteiros do dia na Pauta GL ↗</a></p>
+      </div>
+      <div class="panel">
+        <h3>Próximas datas</h3>
+        <ul class="proximas" id="proximas"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="paginas">
+    <div class="head"><h2>As páginas</h2><p>Cada uma abre numa aba nova, com o seu login do claude.ai.</p></div>
+    <div class="paginas" id="lista-paginas"></div>
+    <p class="outras" id="outras"></p>
+  </section>
+
+  <section id="pendencias">
+    <div class="head"><h2>Pendências</h2><p>Marque aqui: fica salvo, e eu leio daqui antes da próxima rodada.</p></div>
+    <div class="duas">
+      <div class="panel">
+        <h3>Decisões que dependem de você</h3>
+        <p class="muted" style="font-size:.88rem;margin:4px 0 10px">Escreva a decisão no campo de cada item.</p>
+        <div class="lista" id="decisoes"></div>
+      </div>
+      <div class="panel">
+        <h3>O que me mandar para o upgrade do plano</h3>
+        <p class="muted" style="font-size:.88rem;margin:4px 0 10px">Os arquivos vão pelo chat; os links podem ficar aqui.</p>
+        <div class="lista" id="entregas"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="entrevista">
+    <div class="head"><h2>Entrevista de marketing</h2><p>Escreva ou dite (no Windows: tecla Windows + H). Salva sozinho.</p></div>
+    <div class="ent-topo">
+      <div class="filtro" role="group" aria-label="Quais perguntas mostrar">
+        <button type="button" id="f-ess" aria-pressed="true">Só as essenciais</button>
+        <button type="button" id="f-todas" aria-pressed="false">Todas</button>
+      </div>
+      <div class="progresso"><span id="prog-txt">—</span><div class="barrinha"><i id="prog-b"></i></div></div>
+    </div>
+    <div class="blocos so-essenciais" id="blocos"></div>
+    <p class="aviso" style="margin-top:14px">Quando terminar, me avise no chat: eu leio as respostas daqui. Se preferir falar, mande áudio no chat respondendo pelo número da pergunta (por exemplo, "B1").</p>
+  </section>
+
+  <section id="arquivos">
+    <div class="head"><h2>Documentos e arquivos</h2><p>Os documentos abrem no GitHub; os arquivos baixam daqui.</p></div>
+    <div class="docs" id="docs"></div>
+    <h3 style="margin-top:22px">A arte do plano</h3>
+    <div class="arte" id="arte"></div>
+    <h3 style="margin-top:22px">Baixar</h3>
+    <div class="baixar" id="baixar"></div>
+    <p class="muted" id="baixar-aviso" style="font-size:.86rem;margin-top:8px" hidden>Os downloads funcionam com a Central aberta no claude.ai.</p>
+  </section>
+
+  <section id="atalho">
+    <div class="head"><h2>A Central no seu PC</h2><p>Precisa estar com o login do claude.ai feito no navegador.</p></div>
+    <div class="passos">
+      <div class="passo">
+        <span class="rec">Recomendado</span>
+        <h3>Instalar como aplicativo</h3>
+        <ol>
+          <li>Abra a Central no Edge ou no Chrome.</li>
+          <li>Edge: menu ⋯ → Aplicativos → Instalar este site como um aplicativo.</li>
+          <li>Chrome: menu ⋮ → Transmitir, salvar e compartilhar → Instalar página como app.</li>
+          <li>Ela ganha ícone no Iniciar e na barra de tarefas e abre numa janela própria.</li>
+        </ol>
+      </div>
+      <div class="passo">
+        <h3>Atalho na Área de Trabalho</h3>
+        <ol>
+          <li>Baixe o "Atalho para o PC" em Arquivos.</li>
+          <li>Copie "Central de Marketing GL.url" para a Área de Trabalho: dois cliques abrem a Central.</li>
+          <li>Ou use "Abrir como aplicativo (Edge).bat" para abrir numa janela sem barra de endereço.</li>
+        </ol>
+      </div>
+      <div class="passo">
+        <h3>No claude.ai</h3>
+        <ol>
+          <li>A Central fica fixada na barra lateral do claude.ai.</li>
+          <li>Todas as páginas ficam na galeria: claude.ai/code/artifacts.</li>
+          <li>Para a equipe: compartilhe pelo menu de compartilhar. Quem só vê não altera nada.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>Conteúdo educacional; trading envolve risco financeiro real. Atualizada em <span id="atualizado"></span>. Fonte: repositório gl-academy, pasta marketing.</footer>
+</div>
+
+<dialog id="zoom" aria-label="Arte do plano">
+  <img id="zoom-img" alt="">
+  <button type="button" class="fechar" id="zoom-fechar">Fechar</button>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="application/json" id="dados"><!--DADOS--></script>
+<script type="application/json" id="cal-dados"><!--CAL--></script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('dados').textContent);
+  var CAL = JSON.parse(document.getElementById('cal-dados').textContent || '[]');
+  var DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  var PAUTA = (D.paginas.filter(function (p) { return p.id === 'pauta'; })[0] || {}).url;
+  var BAIXAR = [
+    { arq: 'baixar/nota-obsidian.md', nome: 'Marketing GL Academy.md', rotulo: 'A nota do Obsidian', sub: 'O resumo completo do marketing, num arquivo .md' },
+    { manifesto: 'cofre/manifesto.json', nome: 'Marketing GL - Obsidian.zip', rotulo: 'O cofre do Obsidian (ZIP)', sub: 'A nota, as notas detalhadas, a arte e os calendários' },
+    { arq: 'baixar/arte-do-plano.pdf', nome: 'Plano de Marketing GL - arte.pdf', rotulo: 'A arte do plano (PDF)', sub: '3 pôsteres A3: mapa, semana-tipo e linha do tempo' },
+    { manifesto: 'atalho/manifesto.json', nome: 'Central de Marketing GL - atalho no PC.zip', rotulo: 'O atalho para o PC (ZIP)', sub: 'Atalho .url e abridores em modo aplicativo' }
+  ];
+  var ARTE = [['arte/1-mapa-do-plano.png', 'O mapa do plano'], ['arte/2-semana-tipo.png', 'A semana-tipo'], ['arte/3-linha-do-tempo.png', 'As 13 semanas']];
+  var PERGUNTAS = [];
+  D.entrevista.forEach(function (b) { b.perguntas.forEach(function (q) { PERGUNTAS.push(q); }); });
+
+  var db = null, dl = null, dbPronto = false, somenteLeitura = false;
+  var st = { decisoes: {}, entregas: {}, redes: {}, entrevista: {} };
+  var sujo = {}, timers = {}, fila = {};
+
+  function el(tag, attrs, txt) {
+    var e = document.createElement(tag);
+    for (var k in (attrs || {})) { if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function deIso(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function br(s) { return s.slice(8, 10) + '/' + s.slice(5, 7); }
+  function hora(isoStr) { try { return new Date(isoStr).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } }
+  function toast(t) { var x = document.getElementById('toast'); x.textContent = t; x.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { x.hidden = true; }, 2600); }
+  var hoje = iso(new Date()), sel = hoje;
+  document.getElementById('atualizado').textContent = br(D.atualizado) + '/' + D.atualizado.slice(0, 4);
+
+  // ---------- hoje
+  function desenharDia() {
+    var d = deIso(sel);
+    document.getElementById('dia-titulo').textContent = DIAS[d.getDay()] + ', ' + br(sel);
+    document.getElementById('dia-sub').textContent = sel === hoje ? 'Hoje' : (sel < hoje ? 'Dia que já passou' : 'Dia que ainda vem');
+    var sem = D.semanas.filter(function (s) { return sel >= s.ini && sel <= s.fim; })[0];
+    var box = document.getElementById('semana'); box.textContent = '';
+    if (sem) { box.appendChild(el('b', null, 'Semana ' + sem.n + ' · ' + sem.tema + ' (' + br(sem.ini) + ' a ' + br(sem.fim) + ')')); box.appendChild(el('span', null, sem.marcos)); }
+    else box.appendChild(el('span', null, 'Fora das 13 semanas do plano (05/10/2026 a 03/01/2027).'));
+    var cal = document.getElementById('cal'); cal.textContent = '';
+    var linhas = CAL.filter(function (r) { return r.d === sel; });
+    if (sel === hoje) document.getElementById('pl-hoje').textContent = linhas.length;
+    if (!linhas.length) { cal.appendChild(el('p', { class: 'vazio' }, 'Nada no calendário para este dia.')); }
+    var contas = {};
+    linhas.forEach(function (r) { (contas[r.c] = contas[r.c] || []).push(r); });
+    Object.keys(contas).sort().forEach(function (c) {
+      var g = el('div', { class: 'conta' }); g.appendChild(el('h3', null, c));
+      contas[c].sort(function (a, b) { return a.h.localeCompare(b.h); }).forEach(function (r) {
+        var l = el('div', { class: 'linha' });
+        l.appendChild(el('div', { class: 'hora mono' }, r.h));
+        var o = el('div'); o.appendChild(el('div', { class: 't' }, r.t || r.s));
+        o.appendChild(el('div', { class: 'm' }, [r.f, r.s, r.cta ? 'chamada: ' + r.cta : ''].filter(Boolean).join(' · ')));
+        l.appendChild(o); g.appendChild(l);
+      });
+      cal.appendChild(g);
+    });
+    var a = document.getElementById('abrir-pauta');
+    if (PAUTA) a.href = PAUTA + '#' + sel;
+  }
+  function mover(n) { var d = deIso(sel); d.setDate(d.getDate() + n); sel = iso(d); desenharDia(); }
+  document.getElementById('ant').addEventListener('click', function () { mover(-1); });
+  document.getElementById('prox').addEventListener('click', function () { mover(1); });
+  document.getElementById('hoje-btn').addEventListener('click', function () { sel = hoje; desenharDia(); });
+
+  function desenharProximas() {
+    var ul = document.getElementById('proximas'); ul.textContent = '';
+    var prox = D.datas.filter(function (x) { return x[0] >= hoje; }).slice(0, 7);
+    if (!prox.length) { ul.appendChild(el('li', null, 'O plano de 13 semanas terminou em 03/01/2027.')); return; }
+    prox.forEach(function (x) {
+      var dias = Math.round((deIso(x[0]) - deIso(hoje)) / 864e5);
+      var li = el('li'); var q = el('div', { class: 'q' }, br(x[0]));
+      q.appendChild(el('small', null, dias === 0 ? 'hoje' : dias === 1 ? 'amanhã' : 'em ' + dias + ' dias'));
+      li.appendChild(q); li.appendChild(el('div', { class: 't' }, x[1])); ul.appendChild(li);
+    });
+  }
+
+  // ---------- páginas
+  function desenharPaginas() {
+    var box = document.getElementById('lista-paginas');
+    D.paginas.filter(function (p) { return !p.outra; }).forEach(function (p, i) {
+      var c = el('article', { class: 'pag' + (i < 2 ? ' destaque' : '') });
+      c.appendChild(el('span', { class: 'quando' }, p.quando));
+      c.appendChild(el('h3', null, p.nome));
+      c.appendChild(el('p', null, p.para));
+      var a = el('a', { class: 'btn' + (i === 0 ? ' ouro' : ''), href: p.url, target: '_blank', rel: 'noopener' }, 'Abrir ↗');
+      c.appendChild(a); box.appendChild(c);
+    });
+    var outras = D.paginas.filter(function (p) { return p.outra; });
+    var o = document.getElementById('outras');
+    if (outras.length) {
+      o.appendChild(document.createTextNode('Outras áreas: '));
+      outras.forEach(function (p, i) { if (i) o.appendChild(document.createTextNode(' · ')); o.appendChild(el('a', { href: p.url, target: '_blank', rel: 'noopener' }, p.nome)); });
+      o.appendChild(document.createTextNode('. A galeria com todas as páginas fica em claude.ai/code/artifacts.'));
+    }
+  }
+
+  // ---------- gravação (uma escrita por vez em cada documento, só quando muda)
+  function marcarEstado(chave, txt, erro) {
+    var s = document.querySelector('[data-st="' + chave + '"]');
+    if (s) { s.textContent = txt; s.classList.toggle('erro', !!erro); }
+  }
+  function gravar(chave, colecao, id, dados) {
+    if (!db || somenteLeitura) return;
+    var f = fila[chave] || (fila[chave] = { voo: false, prox: null });
+    if (f.voo) { f.prox = dados; return; }
+    f.voo = true; marcarEstado(chave, 'Salvando…');
+    db.collection(colecao).doc(id).set(dados).then(function () {
+      marcarEstado(chave, 'Salvo às ' + hora(dados.em));
+    }, function (err) {
+      if (err && err.code === 'invalid_argument') { somenteLeitura = true; travar(); marcarEstado(chave, 'Não salvo: só quem edita a Central pode alterar', true); }
+      else { marcarEstado(chave, 'Não salvou. Tente de novo em instantes.', true); }
+    }).then(function () {
+      f.voo = false;
+      if (f.prox) { var p = f.prox; f.prox = null; gravar(chave, colecao, id, p); }
+    });
+  }
+  function adiar(chave, ms, fn) { clearTimeout(timers[chave]); timers[chave] = setTimeout(fn, ms); }
+  function travar() {
+    document.querySelectorAll('[data-grava]').forEach(function (x) { x.disabled = true; });
+    var av = document.getElementById('aviso-db');
+    av.hidden = false;
+    av.textContent = !db ? 'As marcações e respostas ficam salvas quando a Central é aberta no claude.ai. Aqui dá para ler tudo e usar os links.'
+      : 'Você pode ver tudo, mas só quem edita a Central pode marcar e responder.';
+  }
+
+  // ---------- pendências
+  function desenharDecisoes() {
+    var box = document.getElementById('decisoes');
+    D.decisoes.forEach(function (x) {
+      var chave = 'dec-' + x.id;
+      var item = el('div', { class: 'pend', id: chave });
+      var cb = el('input', { type: 'checkbox', id: chave + '-cb', 'data-grava': '1', 'aria-describedby': chave + '-aj' });
+      var corpo = el('div');
+      var lb = el('label', { for: chave + '-cb', class: 't' }, x.texto);
+      corpo.appendChild(lb);
+      corpo.appendChild(el('p', { class: 'ajuda', id: chave + '-aj' }, x.ajuda));
+      var nota = el('input', { type: 'text', id: chave + '-nota', 'data-grava': '1', placeholder: 'O que foi decidido', 'aria-label': 'Decisão: ' + x.texto });
+      corpo.appendChild(nota);
+      corpo.appendChild(el('div', { class: 'st', 'data-st': chave }));
+      item.appendChild(cb); item.appendChild(corpo); box.appendChild(item);
+      function salvar() { sujo[chave] = false; var v = { feito: cb.checked, nota: nota.value.trim(), em: new Date().toISOString() }; st.decisoes[x.id] = v; gravar(chave, 'decisoes', x.id, v); }
+      cb.addEventListener('change', function () { item.classList.toggle('feito', cb.checked); clearTimeout(timers[chave]); salvar(); resumo(); });
+      nota.addEventListener('input', function () { sujo[chave] = true; adiar(chave, 1200, salvar); });
+      nota.addEventListener('blur', function () { if (sujo[chave]) { clearTimeout(timers[chave]); salvar(); } });
+    });
+  }
+  function aplicarDecisoes() {
+    D.decisoes.forEach(function (x) {
+      var chave = 'dec-' + x.id, v = st.decisoes[x.id] || {};
+      var cb = document.getElementById(chave + '-cb'), nota = document.getElementById(chave + '-nota');
+      cb.checked = !!v.feito; document.getElementById(chave).classList.toggle('feito', !!v.feito);
+      if (!sujo[chave] && document.activeElement !== nota) nota.value = v.nota || '';
+      if (v.em && !fila[chave]) marcarEstado(chave, 'Salvo em ' + new Date(v.em).toLocaleDateString('pt-BR') + ' às ' + hora(v.em));
+    });
+  }
+  function desenharEntregas() {
+    var box = document.getElementById('entregas');
+    D.entregas.forEach(function (x) {
+      var chave = 'ent-' + x.id;
+      var item = el('div', { class: 'pend', id: chave });
+      var cb = el('input', { type: 'checkbox', id: chave + '-cb', 'data-grava': '1', 'aria-describedby': chave + '-aj' });
+      var corpo = el('div');
+      corpo.appendChild(el('label', { for: chave + '-cb', class: 't' }, x.texto));
+      corpo.appendChild(el('p', { class: 'ajuda', id: chave + '-aj' }, x.como));
+      if (x.id === 'redes') corpo.appendChild(formRedes());
+      corpo.appendChild(el('div', { class: 'st', 'data-st': chave }));
+      item.appendChild(cb); item.appendChild(corpo); box.appendChild(item);
+      cb.addEventListener('change', function () {
+        item.classList.toggle('feito', cb.checked);
+        var v = { feito: cb.checked, em: new Date().toISOString() }; st.entregas[x.id] = v; gravar(chave, 'entregas', x.id, v); resumo();
+      });
+    });
+  }
+  function formRedes() {
+    var f = el('div', { class: 'redes' });
+    D.redes.forEach(function (r) {
+      var lb = el('label', { for: 'rede-' + r.id }, r.rotulo);
+      var inp = el('input', { type: 'text', id: 'rede-' + r.id, 'data-grava': '1', placeholder: r.dica, inputmode: 'url', autocomplete: 'off' });
+      inp.addEventListener('input', function () { sujo.redes = true; adiar('redes', 1200, salvarRedes); });
+      inp.addEventListener('blur', function () { if (sujo.redes) { clearTimeout(timers.redes); salvarRedes(); } });
+      lb.appendChild(inp); f.appendChild(lb);
+    });
+    f.appendChild(el('div', { class: 'st', 'data-st': 'redes' }));
+    return f;
+  }
+  function salvarRedes() {
+    sujo.redes = false;
+    var v = { em: new Date().toISOString() };
+    D.redes.forEach(function (r) { v[r.id] = document.getElementById('rede-' + r.id).value.trim(); });
+    st.redes = v; gravar('redes', 'redes', 'links', v);
+  }
+  function aplicarEntregas() {
+    D.entregas.forEach(function (x) {
+      var chave = 'ent-' + x.id, v = st.entregas[x.id] || {};
+      document.getElementById(chave + '-cb').checked = !!v.feito; document.getElementById(chave).classList.toggle('feito', !!v.feito);
+    });
+    if (!sujo.redes) D.redes.forEach(function (r) { var i = document.getElementById('rede-' + r.id); if (document.activeElement !== i) i.value = st.redes[r.id] || ''; });
+  }
+
+  // ---------- entrevista
+  function desenharEntrevista() {
+    var box = document.getElementById('blocos');
+    D.entrevista.forEach(function (b, bi) {
+      var det = el('details', { class: 'bloco', id: 'bloco-' + b.id });
+      if (bi === 0) det.open = true;
+      var sm = el('summary'); sm.appendChild(el('span', null, b.id.toUpperCase() + ' · ' + b.bloco)); sm.appendChild(el('span', { class: 'cont', id: 'cont-' + b.id }, ''));
+      det.appendChild(sm);
+      b.perguntas.forEach(function (q) {
+        var chave = 'q-' + q.id;
+        var p = el('div', { class: 'perg' + (q.e ? ' e' : ''), id: chave });
+        var lb = el('label', { for: chave + '-t' });
+        lb.appendChild(el('span', { class: 'num' }, q.id.toUpperCase()));
+        lb.appendChild(document.createTextNode(q.q));
+        if (q.e) lb.appendChild(el('span', { class: 'essencial' }, 'Essencial'));
+        p.appendChild(lb);
+        if (q.h) p.appendChild(el('p', { class: 'ajuda' }, q.h));
+        var t = el('textarea', { id: chave + '-t', 'data-grava': '1', rows: '3', placeholder: 'Sua resposta' });
+        function salvar() { sujo[chave] = false; var v = { resposta: t.value, em: new Date().toISOString() }; st.entrevista[q.id] = v; gravar(chave, 'entrevista', q.id, v); progresso(); }
+        t.addEventListener('input', function () { sujo[chave] = true; adiar(chave, 1500, salvar); });
+        t.addEventListener('blur', function () { if (sujo[chave]) { clearTimeout(timers[chave]); salvar(); } });
+        p.appendChild(t); p.appendChild(el('div', { class: 'st', 'data-st': chave }));
+        det.appendChild(p);
+      });
+      box.appendChild(det);
+    });
+  }
+  function aplicarEntrevista() {
+    PERGUNTAS.forEach(function (q) {
+      var chave = 'q-' + q.id, v = st.entrevista[q.id] || {}, t = document.getElementById(chave + '-t');
+      if (!sujo[chave] && document.activeElement !== t) t.value = v.resposta || '';
+      document.getElementById(chave).classList.toggle('respondida', !!(v.resposta || '').trim());
+      if (v.em && !fila[chave] && (v.resposta || '').trim()) marcarEstado(chave, 'Salvo em ' + new Date(v.em).toLocaleDateString('pt-BR') + ' às ' + hora(v.em));
+    });
+    progresso();
+  }
+  function respondida(q) { var t = document.getElementById('q-' + q.id + '-t'); return !!((t && t.value) || '').trim(); }
+  function progresso() {
+    var ess = document.getElementById('blocos').classList.contains('so-essenciais');
+    var lista = PERGUNTAS.filter(function (q) { return !ess || q.e; });
+    var feitas = lista.filter(respondida).length;
+    document.getElementById('prog-txt').textContent = feitas + ' de ' + lista.length + (ess ? ' essenciais respondidas' : ' respondidas');
+    document.getElementById('prog-b').style.width = (lista.length ? feitas / lista.length * 100 : 0) + '%';
+    D.entrevista.forEach(function (b) {
+      var ps = b.perguntas.filter(function (q) { return !ess || q.e; });
+      document.getElementById('cont-' + b.id).textContent = ps.length ? ps.filter(respondida).length + '/' + ps.length : 'sem essenciais';
+      document.getElementById('bloco-' + b.id).hidden = ess && !ps.length;
+    });
+    resumo();
+  }
+  function filtrar(ess) {
+    document.getElementById('blocos').classList.toggle('so-essenciais', ess);
+    document.getElementById('f-ess').setAttribute('aria-pressed', String(ess));
+    document.getElementById('f-todas').setAttribute('aria-pressed', String(!ess));
+    try { localStorage.setItem('central-filtro', ess ? 'ess' : 'todas'); } catch (e) {}
+    progresso();
+  }
+  document.getElementById('f-ess').addEventListener('click', function () { filtrar(true); });
+  document.getElementById('f-todas').addEventListener('click', function () { filtrar(false); });
+
+  function resumo() {
+    var dec = D.decisoes.filter(function (x) { return (st.decisoes[x.id] || {}).feito; }).length;
+    var ent = D.entregas.filter(function (x) { return (st.entregas[x.id] || {}).feito; }).length;
+    var perg = PERGUNTAS.filter(respondida).length;
+    document.getElementById('pl-dec').textContent = dec + '/' + D.decisoes.length;
+    document.getElementById('pl-ent').textContent = ent + '/' + D.entregas.length;
+    document.getElementById('pl-perg').textContent = perg + '/' + PERGUNTAS.length;
+    document.getElementById('pl-dec-b').style.width = dec / D.decisoes.length * 100 + '%';
+    document.getElementById('pl-ent-b').style.width = ent / D.entregas.length * 100 + '%';
+    document.getElementById('pl-perg-b').style.width = perg / PERGUNTAS.length * 100 + '%';
+  }
+
+  // ---------- arquivos
+  function desenharArquivos() {
+    var docs = document.getElementById('docs');
+    D.documentos.forEach(function (g) {
+      var c = el('div', { class: 'panel' }); c.appendChild(el('h3', null, g.grupo));
+      var ul = el('ul');
+      g.itens.forEach(function (it) {
+        var li = el('li'); li.appendChild(el('a', { href: D.repo + it[1], target: '_blank', rel: 'noopener' }, it[0] + ' ↗'));
+        li.appendChild(el('span', null, it[2])); ul.appendChild(li);
+      });
+      c.appendChild(ul); docs.appendChild(c);
+    });
+    var arte = document.getElementById('arte');
+    ARTE.forEach(function (a) {
+      var b = el('button', { type: 'button', 'aria-label': 'Ampliar: ' + a[1] });
+      b.appendChild(el('img', { src: a[0], alt: a[1], loading: 'lazy', width: '1587', height: '1123' }));
+      b.appendChild(el('span', null, a[1]));
+      b.addEventListener('click', function () { var z = document.getElementById('zoom'); document.getElementById('zoom-img').src = a[0]; document.getElementById('zoom-img').alt = a[1]; try { z.showModal(); } catch (e) { z.setAttribute('open', ''); } });
+      arte.appendChild(b);
+    });
+    var bx = document.getElementById('baixar');
+    BAIXAR.forEach(function (f) {
+      var b = el('button', { type: 'button', 'data-baixar': '1' });
+      var s = el('span'); s.appendChild(document.createTextNode(f.rotulo)); s.appendChild(el('small', null, f.sub));
+      b.appendChild(s); b.appendChild(el('span', { 'aria-hidden': 'true' }, '↓'));
+      b.addEventListener('click', function () { baixar(f, b); });
+      bx.appendChild(b);
+    });
+  }
+  var jszip = null;
+  function carregarZip() {
+    if (!jszip) jszip = new Promise(function (ok, no) {
+      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      sc.onload = function () { ok(window.JSZip); }; sc.onerror = function () { jszip = null; no(new Error('JSZip')); };
+      document.head.appendChild(sc);
+    });
+    return jszip;
+  }
+  function buscar(arq) { return fetch(arq).then(function (r) { if (!r.ok) throw new Error('http'); return r.arrayBuffer(); }); }
+  function montarZip(f) {
+    // as páginas do claude.ai não servem .zip: o ZIP é montado aqui, a partir dos arquivos publicados com a Central
+    return Promise.all([carregarZip(), fetch(f.manifesto).then(function (r) { if (!r.ok) throw new Error('http'); return r.json(); })]).then(function (x) {
+      var JSZip = x[0], lista = x[1], zip = new JSZip();
+      return Promise.all(lista.map(function (it) { return buscar(it.arq).then(function (buf) { zip.file(it.zip, buf); }); }))
+        .then(function () { return zip.generateAsync({ type: 'blob', compression: 'DEFLATE' }); });
+    });
+  }
+  function baixar(f, b) {
+    if (!dl) { toast('Os downloads funcionam com a Central aberta no claude.ai'); return; }
+    b.disabled = true;
+    if (f.manifesto) toast('Montando o ZIP…');
+    (f.manifesto ? montarZip(f) : buscar(f.arq).then(function (buf) { return new Blob([buf]); }))
+      .then(function (blob) { return dl.save({ filename: f.nome, data: blob }); })
+      .then(function () { toast('Arquivo salvo'); }, function (err) {
+        var c = err && err.code;
+        if (c === 'declined') return;
+        if (c === 'rate_limited') toast('Já há um download aberto. Tente de novo em instantes.');
+        else toast('Não deu para baixar agora.');
+      }).then(function () { b.disabled = false; });
+  }
+  document.getElementById('zoom-fechar').addEventListener('click', function () { var z = document.getElementById('zoom'); try { z.close(); } catch (e) { z.removeAttribute('open'); } });
+  document.getElementById('zoom').addEventListener('click', function (ev) { if (ev.target.id === 'zoom') { try { ev.target.close(); } catch (e) {} } });
+
+  // ---------- início
+  desenharDia(); desenharProximas(); desenharPaginas(); desenharDecisoes(); desenharEntregas(); desenharEntrevista(); desenharArquivos();
+  var filtroSalvo = null; try { filtroSalvo = localStorage.getItem('central-filtro'); } catch (e) {}
+  filtrar(filtroSalvo !== 'todas');
+  document.querySelectorAll('[data-grava]').forEach(function (x) { x.disabled = true; });
+
+  var temClaude = window.claude && window.claude.use;
+  var usoDl = temClaude ? window.claude.use('downloads') : Promise.resolve(null);
+  Promise.resolve(usoDl).then(function (x) { dl = x || null; }, function () { dl = null; }).then(function () {
+    document.getElementById('baixar-aviso').hidden = !!dl;
+  });
+  var usoDb = temClaude ? window.claude.use('db') : Promise.resolve(null);
+  Promise.resolve(usoDb).then(function (x) { db = x || null; }, function () { db = null; }).then(function () {
+    dbPronto = true;
+    var av = document.getElementById('aviso-db');
+    if (!db) { travar(); return; }
+    av.hidden = true;
+    document.querySelectorAll('[data-grava]').forEach(function (x) { x.disabled = false; });
+    var erroLeitura = function () { toast('Não deu para carregar o que foi salvo. Recarregue a página.'); };
+    db.collection('decisoes').limit(200).onSnapshot(function (snap) {
+      st.decisoes = {}; snap.docs.forEach(function (d) { st.decisoes[d.id] = d.data() || {}; }); aplicarDecisoes(); resumo();
+    }, erroLeitura);
+    db.collection('entregas').limit(200).onSnapshot(function (snap) {
+      st.entregas = {}; snap.docs.forEach(function (d) { st.entregas[d.id] = d.data() || {}; }); aplicarEntregas(); resumo();
+    }, erroLeitura);
+    db.collection('redes').doc('links').onSnapshot(function (d) {
+      st.redes = (d.exists && d.data()) || {}; aplicarEntregas();
+    }, erroLeitura);
+    db.collection('entrevista').limit(500).onSnapshot(function (snap) {
+      st.entrevista = {}; snap.docs.forEach(function (d) { st.entrevista[d.id] = d.data() || {}; }); aplicarEntrevista();
+    }, erroLeitura);
+  });
+  resumo();
+})();
+</script>

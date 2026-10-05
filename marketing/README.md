@@ -1,6 +1,6 @@
 # Marketing GL Academy
 
-O mapa desta pasta. Comece pelos dois planos: o de 2026–27 diz o que publicar, onde e quando; o do ciclo diz como cada canal vira call e cliente.
+O mapa desta pasta. Para o dia a dia, comece pela [Central de Marketing GL](https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR). Nos documentos, comece pelos dois planos: o de 2026–27 diz o que publicar, onde e quando; o do ciclo diz como cada canal vira call e cliente. O resumo de tudo, para o Obsidian, está em `segundo-cerebro/Marketing GL Academy.md`.
 
 ## Os planos
 
@@ -15,6 +15,8 @@ O mapa desta pasta. Comece pelos dois planos: o de 2026–27 diz o que publicar,
 
 | Pasta | O que tem |
 | --- | --- |
+| `central/` | A Central de Marketing GL: os dados (páginas, decisões, entregas e a entrevista), o modelo e os atalhos para o PC |
+| `segundo-cerebro/` | A nota mestre para o Obsidian, a entrevista e o script que monta o cofre |
 | `canais/` | Perfis e bios, os primeiros roteiros, o banco de 120 ideias, os modelos e checklists, o calendário mestre dia a dia (`gerar_calendario.py`), a semana-tipo e a arte do plano (`arte/`) |
 | `automacao/` | A rotina da pauta diária (o texto completo) e o radar de fontes RSS |
 | `pauta/` | A página Pauta GL: o modelo e o script que põe o calendário dentro dela |
@@ -31,11 +33,13 @@ São privadas: só abre quem recebeu acesso pelo menu de compartilhar de cada p�
 
 | Página | Para quê |
 | --- | --- |
+| [Central de Marketing GL](https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR) | A porta de entrada: hoje, páginas, pendências, entrevista e arquivos para baixar |
 | [Pauta GL](https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba) | Os roteiros de cada dia útil, com fontes e status, e o calendário do dia |
 | [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns) | O status de cada ação do plano do ciclo e a meta oficial |
 | [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm) | Todos os vídeos e imagens feitos com os prints, para baixar e postar |
 | [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1) | Os vídeos, imagens, legendas e anúncios do GL Risk Auto, os 2 vídeos do site e as peças extras |
 | [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) | Os carrosséis e stories da série Operacional na prática |
+| [Plano de Marketing GL Academy](https://claude.ai/artifact/7A6YMsf9t1Wyqs57G2LEHc) | O plano do ciclo em página, com os desenhos |
 
 ## O que roda sozinho
 
@@ -49,6 +53,8 @@ python3 canais/gerar_calendario.py               # calendário mestre e semana-t
 python3 pauta/montar_pauta.py /tmp/pauta.html    # a página Pauta GL com o calendário novo (depois, republicar no mesmo link)
 node canais/arte/render.js /tmp/arte             # os 3 pôsteres em PNG e o PDF
 python3 automacao/radar/radar.py --teste         # o radar com os feeds de exemplo
+python3 segundo-cerebro/montar_cofre.py /tmp/cofre /tmp/central   # a nota e a entrevista em dia e o ZIP do Obsidian
+python3 central/montar_central.py /tmp/central/index.html /tmp/central   # a Central (depois, republicar no mesmo link)
 ```
 
 O motor de vídeo tem os próprios comandos em `videos/README.md`.
