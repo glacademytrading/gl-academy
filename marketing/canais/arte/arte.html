@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Plano de Marketing GL · arte</title>
+<!-- Os 3 pôsteres do plano (A3 deitado). render.js tira um PNG de cada e junta os 3 num PDF. Fontes locais do motor de vídeo. -->
+<link rel="stylesheet" href="../../videos/fonts/local.css">
+<style>
+@page { size: 1587px 1123px; margin: 0; }
+:root {
+  --bg: #0b0a08; --surface: #13110d; --surface-2: #1b1813; --line: #2c271e; --line-2: #3f382a;
+  --fg: #f1ece1; --muted: #a69d8b; --dim: #6f6757;
+  --gold: #d8ae55; --gold-2: #f6d991; --gold-ink: #1a1408;
+  --p1: #d8ae55; --p2: #5db3c8; --p3: #cf8a5a; --p4: #92bb6c; --p5: #e6dcc6;
+  --live: #e0695f; --ok: #45b98a;
+  --display: "Montserrat", "Inter", system-ui, sans-serif;
+  --body: "Inter", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #050504; }
+body { font-family: var(--body); color: var(--fg); -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+h1, h2, h3, p { margin: 0; }
+.poster { width: 1587px; height: 1123px; background: var(--bg); position: relative; overflow: hidden; padding: 40px 52px 30px;
+  display: flex; flex-direction: column; gap: 22px; break-after: page; }
+.poster::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(900px 420px at 88% -8%, rgba(216, 174, 85, .13), transparent 70%); }
+.poster > * { position: relative; flex-shrink: 0; }
+
+/* cabeçalho */
+.topo { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+.marca { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.marca img { width: 40px; height: 40px; }
+.eyebrow { font: 700 12.5px/1 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+h1 { font: 900 60px/1 var(--display); letter-spacing: -.01em; color: var(--fg); }
+h1 em { font-style: normal; color: var(--gold-2); }
+.sub { margin-top: 12px; font: 500 17px/1.45 var(--body); color: var(--muted); max-width: 900px; text-wrap: pretty; }
+.sub b { color: var(--fg); font-weight: 700; }
+.selo { text-align: right; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex: none; }
+.selo .n { font: 800 13px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--gold-ink); background: var(--gold); padding: 7px 12px; border-radius: 4px; }
+.selo .d { font: 500 14px/1.3 var(--body); color: var(--muted); }
+h2 { font: 800 19px/1.15 var(--display); color: var(--fg); display: flex; align-items: baseline; gap: 10px; }
+h2 small { font: 500 13px/1.3 var(--body); color: var(--dim); }
+.bloco { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.rodape { margin-top: auto; display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding-top: 12px;
+  font: 500 12.5px/1.3 var(--body); color: var(--dim); }
+.rodape b { color: var(--muted); font-weight: 700; }
+
+/* ---------- 1 · mapa ---------- */
+.linhaB { display: grid; grid-template-columns: 1fr 452px; gap: 30px; }
+.funil { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.etapa { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 12px 12px; display: flex; flex-direction: column; gap: 9px; position: relative; }
+.etapa:not(:last-child)::after { content: ""; position: absolute; right: -10px; top: 26px; width: 10px; height: 2px; background: var(--gold); }
+.etapa .num { font: 800 12px/1 var(--display); color: var(--gold); letter-spacing: .08em; }
+.etapa h3 { font: 800 17px/1.1 var(--display); }
+.etapa .papel { font: 500 12.5px/1.35 var(--body); color: var(--muted); min-height: 34px; }
+.etapa { gap: 8px; }
+.canal { border-top: 1px solid var(--line); padding-top: 7px; font: 700 13px/1.25 var(--body); }
+.canal span { display: block; font: 500 11.5px/1.3 var(--body); color: var(--muted); margin-top: 2px; }
+.etapa.alvo { border-color: var(--gold); background: linear-gradient(180deg, rgba(216, 174, 85, .12), var(--surface) 60%); }
+.metas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.meta { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.meta b { display: block; font: 900 38px/1 var(--display); color: var(--gold-2); }
+.meta span { display: block; margin-top: 6px; font: 600 12.5px/1.3 var(--body); color: var(--muted); }
+.manda { grid-column: span 3; display: flex; gap: 14px; align-items: center; background: var(--gold); color: var(--gold-ink); border-radius: 10px; padding: 12px 16px; }
+.manda b { font: 900 15px/1.2 var(--display); text-transform: uppercase; letter-spacing: .04em; flex: none; }
+.manda span { font: 600 13.5px/1.35 var(--body); }
+.linhaC { display: grid; grid-template-columns: 1.2fr 1fr .95fr; gap: 30px; flex: 1; min-height: 0; }
+.barras { display: flex; flex-direction: column; gap: 12px; }
+.barra { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 12px; }
+.barra .nome { font: 700 13.5px/1.2 var(--body); }
+.barra .nome span { display: block; font: 500 11.5px/1.2 var(--body); color: var(--dim); }
+.pista { display: flex; height: 30px; border-radius: 6px; overflow: hidden; background: var(--surface-2); }
+.pista i { display: flex; align-items: center; justify-content: center; font: 800 12px/1 var(--display); color: #0b0a08; font-style: normal; border-right: 2px solid var(--bg); }
+.pista i:last-child { border-right: 0; }
+.legenda { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+.leg { display: flex; gap: 9px; align-items: flex-start; font: 700 13px/1.25 var(--body); }
+.leg::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: var(--c); flex: none; margin-top: 2px; }
+.leg span { font: 500 12px/1.3 var(--body); color: var(--muted); margin-left: 6px; }
+.passos { display: flex; flex-direction: column; gap: 0; }
+.passo { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.passo:last-child { border-bottom: 0; }
+.passo .q { font: 800 13.5px/1.25 var(--display); color: var(--gold); }
+.passo .o { font: 700 13.5px/1.3 var(--body); }
+.passo .o span { display: block; font: 500 12px/1.35 var(--body); color: var(--muted); margin-top: 1px; }
+.dez { margin-top: 10px; background: var(--surface); border: 1px dashed var(--line-2); border-radius: 10px; padding: 11px 14px; font: 500 12.5px/1.45 var(--body); color: var(--muted); }
+.dez b { color: var(--gold-2); font-weight: 700; }
+.regras { display: flex; flex-direction: column; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.regras li { display: flex; gap: 10px; font: 700 13.5px/1.3 var(--body); }
+.regras li::before { content: "✕"; flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font: 800 11px/1 var(--body); color: var(--live); border: 1px solid rgba(224, 105, 95, .5); }
+.regras li.sim::before { content: "✓"; color: var(--ok); border-color: rgba(69, 185, 138, .5); }
+.regras li span { display: block; font: 500 12px/1.35 var(--body); color: var(--muted); margin-top: 2px; }
+
+/* ---------- 2 · semana ---------- */
+.grade { display: grid; grid-template-columns: 168px repeat(7, 1fr); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.grade > div { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 8px 10px; min-width: 0; }
+.grade > div:nth-child(8n) { border-right: 0; }
+.grade > .ult { border-bottom: 0; }
+.cab { background: var(--surface-2); }
+.cab b { display: block; font: 800 15px/1.15 var(--display); }
+.cab span { display: block; margin-top: 3px; font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.cab.canto { display: flex; align-items: flex-end; font: 600 12px/1.3 var(--body); color: var(--dim); }
+.rot { background: var(--surface); }
+.rot b { display: block; font: 800 14.5px/1.15 var(--display); }
+.rot span { display: block; margin-top: 4px; font: 500 11.5px/1.3 var(--body); color: var(--muted); }
+.cel { display: flex; flex-direction: column; gap: 5px; }
+.it { font: 600 12.5px/1.25 var(--body); color: var(--fg); padding-left: 9px; border-left: 3px solid var(--c, var(--line-2)); }
+.it em { font-style: normal; font-weight: 800; color: var(--gold-2); margin-right: 3px; }
+.it.grava { background: var(--gold); color: var(--gold-ink); border-left-color: var(--gold); padding: 5px 8px; border-radius: 5px; font-weight: 800; }
+.it.grava em { color: var(--gold-ink); }
+.it.live { --c: var(--live); }
+.it.live::after { content: " ●"; color: var(--live); }
+.vazio { font: 500 12px/1 var(--body); color: var(--dim); }
+.linhaS { display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+.dia { position: relative; height: 148px; }
+.eixo { position: absolute; left: 0; right: 0; top: 91px; height: 2px; background: var(--line-2); }
+.pregao { position: absolute; top: 101px; height: 20px; background: repeating-linear-gradient(135deg, rgba(224, 105, 95, .22) 0 6px, rgba(224, 105, 95, .08) 6px 12px); border: 1px solid rgba(224, 105, 95, .45); border-radius: 4px; }
+.pregao span { position: absolute; left: 8px; top: 2px; font: 700 11px/1.3 var(--body); color: #f0a49c; white-space: nowrap; }
+.hora { position: absolute; top: 132px; transform: translateX(-50%); font: 600 11px/1 var(--body); color: var(--dim); }
+.marco { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 2px; width: 150px; text-align: center; }
+.marco .haste { flex: 1; width: 1px; background: var(--c, var(--gold)); opacity: .55; margin-top: 3px; }
+.marco .pt { width: 12px; height: 12px; border-radius: 50%; background: var(--c, var(--gold)); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--c, var(--gold)); }
+.marco b { font: 800 12.5px/1.2 var(--display); color: var(--c, var(--gold-2)); }
+.marco span { font: 500 11.5px/1.3 var(--body); color: var(--muted); }
+.marco.alto { top: 0; height: 98px; }
+.marco.baixo { top: 42px; height: 56px; }
+.prop { display: flex; flex-direction: column; gap: 12px; }
+.series { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.serie { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--c); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.serie b { display: block; font: 800 13px/1.2 var(--display); }
+.serie span { display: block; margin-top: 3px; font: 500 11.5px/1.3 var(--body); color: var(--muted); }
+.quad { display: flex; gap: 8px; }
+.quad i { flex: 1; height: 50px; border-radius: 8px; border: 2px solid var(--gold); display: grid; place-items: center; font: 800 12px/1 var(--body); color: var(--gold); font-style: normal; }
+.quad i.pr { border-color: var(--ok); color: var(--ok); }
+.quad i.cv { background: var(--gold); color: var(--gold-ink); }
+.prop p { font: 500 13px/1.45 var(--body); color: var(--muted); }
+.prop p b { color: var(--fg); }
+
+/* ---------- 3 · 13 semanas ---------- */
+.fases { display: grid; grid-template-columns: 1.5fr 4fr 4fr 4fr; gap: 6px; }
+.fase { border-radius: 8px; padding: 10px 12px; background: var(--surface); border-top: 4px solid var(--c); }
+.fase b { display: block; font: 800 15px/1.15 var(--display); color: var(--fg); }
+.fase span { display: block; margin-top: 4px; font: 500 12px/1.35 var(--body); color: var(--muted); }
+.lanes { position: relative; height: 142px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.lane { position: absolute; left: 118px; right: 18px; height: 2px; background: var(--line-2); }
+.lane-n { position: absolute; left: 14px; font: 700 11.5px/1 var(--body); color: var(--muted); letter-spacing: .04em; }
+.dot { position: absolute; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; background: var(--c); border: 2px solid var(--surface); }
+.dot.q { border-radius: 2px; transform: translate(-50%, -50%) rotate(45deg); width: 11px; height: 11px; }
+.dot.vazado { background: var(--surface); box-shadow: inset 0 0 0 2px var(--c); }
+.etq { position: absolute; transform: translateX(-50%); font: 700 11px/1.15 var(--body); color: var(--muted); white-space: nowrap; text-align: center; }
+.etq b { color: var(--fg); font-weight: 800; }
+.tick { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, .04); }
+.tab { display: grid; grid-template-columns: 54px 120px 168px 1fr 1fr; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.tab > div { padding: 5px 10px; border-bottom: 1px solid var(--line); font: 500 12.5px/1.3 var(--body); color: var(--muted); display: flex; align-items: center; min-width: 0; }
+.tab > .th { background: var(--surface-2); font: 700 11px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); padding: 9px 10px; }
+.tab > .s { font: 900 18px/1 var(--display); color: var(--c); border-left: 4px solid var(--c); }
+.tab > .t { color: var(--fg); font: 800 13.5px/1.2 var(--display); }
+.tab > .v { color: var(--fg); font-weight: 600; }
+.tab > .v em { font-style: normal; color: var(--gold-2); font-weight: 800; margin-right: 6px; }
+.tab > .ult { border-bottom: 0; }
+.anos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.ano { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font: 500 12.5px/1.4 var(--body); color: var(--muted); }
+.ano b { display: block; font: 800 14px/1.2 var(--display); color: var(--fg); margin-bottom: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ===================== 1 · O MAPA DO PLANO ===================== -->
+<section class="poster" id="mapa">
+  <div class="topo">
+    <div>
+      <div class="marca"><img src="../../videos/emblem.png" alt=""><span class="eyebrow">GL Academy · Plano de Marketing 2026–27</span></div>
+      <h1>Processo <em>à vista.</em></h1>
+      <p class="sub">A GL constrói a tecnologia para traders operarem com processo. <b>Giovane, CEO da GL,</b> mostra em público como sistemas, IA e disciplina servem para operar, empreender e viver melhor.</p>
+    </div>
+    <div class="selo"><span class="n">1/3 · O mapa do plano</span><span class="d">05/10/2026 a 03/01/2027</span></div>
+  </div>
+
+  <div class="linhaB">
+    <div class="bloco">
+      <h2>O caminho <small>cada canal tem um papel no funil; nada é repostado igual em dois perfis</small></h2>
+      <div class="funil">
+        <div class="etapa">
+          <span class="num">01</span><h3>Atenção</h3><p class="papel">Quem ainda não conhece a GL</p>
+          <div class="canal">@lazarotrades<span>7 Reels e stories diários</span></div>
+          <div class="canal">YouTube Shorts<span>7 a 10 por semana</span></div>
+          <div class="canal">@glacademybr<span>Produto em ação</span></div>
+          <div class="canal">@glacademytrading<span>A marca em inglês</span></div>
+        </div>
+        <div class="etapa">
+          <span class="num">02</span><h3>Relação</h3><p class="papel">Quem quer profundidade e bastidor</p>
+          <div class="canal">Vídeo longo<span>Domingo, 10h, dublado</span></div>
+          <div class="canal">Lives<span>Pregão e perguntas</span></div>
+          <div class="canal">Newsletter<span>Domingo, 8h</span></div>
+          <div class="canal">Comunidade<span>Pré-mercado diário</span></div>
+        </div>
+        <div class="etapa alvo">
+          <span class="num">03</span><h3>Conversão</h3><p class="papel">Quem está pronto para decidir</p>
+          <div class="canal">Conversa gratuita<span>Mercado e produto</span></div>
+          <div class="canal">Produtos GL<span>GL Risk Auto, Operacional</span></div>
+          <div class="canal">Lista de espera da IA<span>Workshop IA na prática</span></div>
+        </div>
+        <div class="etapa">
+          <span class="num">04</span><h3>Retenção</h3><p class="papel">Quem já é aluno ou cliente</p>
+          <div class="canal">Onboarding<span>Os primeiros passos</span></div>
+          <div class="canal">Comunidade e mentoria<span>Relação diária</span></div>
+          <div class="canal">GL Gamma<span>Assinatura à parte</span></div>
+        </div>
+        <div class="etapa">
+          <span class="num">05</span><h3>Indicação</h3><p class="papel">Quem traz o próximo trader</p>
+          <div class="canal">"Traga um trader"<span>A indicação como canal</span></div>
+          <div class="canal">LinkedIn e imprensa<span>Podcasts e eventos</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bloco">
+      <h2>Em 90 dias <small>o que depende só da gente</small></h2>
+      <div class="metas">
+        <div class="meta"><b>90</b><span>Reels e Shorts pessoais</span></div>
+        <div class="meta"><b>12</b><span>vídeos longos no YouTube</span></div>
+        <div class="meta"><b>9</b><span>lives: 6 no pregão e 3 de perguntas</span></div>
+        <div class="meta"><b>12</b><span>newsletters</span></div>
+        <div class="meta"><b>36</b><span>posts no LinkedIn</span></div>
+        <div class="meta"><b>3</b><span>podcasts como convidado</span></div>
+        <div class="manda"><b>O número que manda</b><span>Calls 1x1 realizadas por semana. A audiência existe para servir a ele.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="linhaC">
+    <div class="bloco">
+      <h2>Os 5 pilares em cada canal <small>a fatia de cada pilar nas peças</small></h2>
+      <div class="barras" id="barras"></div>
+      <div class="legenda">
+        <div class="leg" style="--c: var(--p1)"><div>P1 · Mercado com processo<span>leitura, risco, trade comentado, live</span></div></div>
+        <div class="leg" style="--c: var(--p2)"><div>P2 · IA na prática<span>novidades, agentes, automações, vibe coding</span></div></div>
+        <div class="leg" style="--c: var(--p3)"><div>P3 · Empresa em construção<span>bastidores, decisões, o GL OS</span></div></div>
+        <div class="leg" style="--c: var(--p4)"><div>P4 · Vida funcional<span>rotina, treino, organização</span></div></div>
+        <div class="leg" style="--c: var(--p5)"><div>P5 · Produtos GL<span>demonstrações, tutoriais, ofertas</span></div></div>
+      </div>
+    </div>
+    <div class="bloco">
+      <h2>A máquina da semana</h2>
+      <div class="passos">
+        <div class="passo"><span class="q">6h40</span><div class="o">A pauta chega sozinha<span>5 roteiros com fontes, de segunda a sexta</span></div></div>
+        <div class="passo"><span class="q">10 min</span><div class="o">Giovane escolhe e confere<span>Nada vai ao ar sem conferir a fonte</span></div></div>
+        <div class="passo"><span class="q">Seg e qua</span><div class="o">Gravação em bloco, às 14h<span>Cerca de 8 horas de câmera por semana</span></div></div>
+        <div class="passo"><span class="q">Ter a qui</span><div class="o">Edição e agendamento<span>Roteiro 2 dias antes, agenda até a véspera</span></div></div>
+        <div class="passo"><span class="q">1ª hora</span><div class="o">Responder comentários e directs<span>20 minutos à noite</span></div></div>
+        <div class="passo"><span class="q">Segunda</span><div class="o">O placar da semana<span>O que vira anúncio, vídeo longo ou sai</span></div></div>
+      </div>
+      <p class="dez"><b>Uma gravação, dez peças:</b> o vídeo longo de domingo vira 5 Shorts e Reels, 2 carrosséis, a newsletter, 3 posts no LinkedIn e os stories de segunda.</p>
+    </div>
+    <div class="bloco">
+      <h2>As regras que não mudam</h2>
+      <ul class="regras">
+        <li><div>Promessa de lucro, renda ou aprovação em mesa<span>Aprovação depende da pessoa e das regras de cada mesa</span></div></li>
+        <li><div>Recomendação de compra, venda ou alvo<span>CVM, Resolução 20/2021: estudo é estudo</span></div></li>
+        <li><div>Saldo ou resultado em dólar<span>Resultado só em R ou pontos, e passado não garante futuro</span></div></li>
+        <li class="sim"><div>Replay com o selo educacional<span>"Replay · exemplo educacional" e o aviso de risco</span></div></li>
+        <li class="sim"><div>Fonte conferida antes de gravar<span>A pauta automática sugere; Giovane decide</span></div></li>
+        <li class="sim"><div>Rótulo de IA em peça realista<span>Gráfico nunca é gerado por IA</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rodape"><span>Conteúdo educacional. Trading envolve risco financeiro real.</span><span>O plano completo: <b>plano-de-marketing-2026-27.md</b> no GL OS</span><span>05/10/2026</span></div>
+</section>
+
+<!-- ===================== 2 · A SEMANA-TIPO ===================== -->
+<section class="poster" id="semana">
+  <div class="topo">
+    <div>
+      <div class="marca"><img src="../../videos/emblem.png" alt=""><span class="eyebrow">GL Academy · Plano de Marketing 2026–27</span></div>
+      <h1>A semana-<em>tipo.</em></h1>
+      <p class="sub">Horários de Brasília. Cada dia tem um papel no caminho de confiança; a oferta da marca sai de terça a quinta. <b>Durante o pregão Giovane opera e não posta:</b> os posts saem agendados.</p>
+    </div>
+    <div class="selo"><span class="n">2/3 · A semana-tipo</span><span class="d">Nova York abre às 10h30 até 30/10<br>e às 11h30 a partir de 02/11</span></div>
+  </div>
+
+  <div class="grade">
+    <div class="cab canto">Conta</div>
+    <div class="cab"><b>Segunda</b><span>Autoridade</span></div>
+    <div class="cab"><b>Terça</b><span>Prova</span></div>
+    <div class="cab"><b>Quarta</b><span>Utilidade</span></div>
+    <div class="cab"><b>Quinta</b><span>Proximidade</span></div>
+    <div class="cab"><b>Sexta</b><span>Profundidade</span></div>
+    <div class="cab"><b>Sábado</b><span>Pessoa</span></div>
+    <div class="cab"><b>Domingo</b><span>O vídeo e o plano</span></div>
+
+    <div class="rot"><b>@lazarotrades</b><span>Giovane · Instagram</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p2)"><em>12h</em>Radar IA</span><span class="it" style="--c: var(--p1)"><em>19h</em>O mercado da semana</span><span class="it" style="--c: var(--p1)">Stories do pré-mercado</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p1)"><em>19h</em>Trade comentado, em Collab</span><span class="it" style="--c: var(--p4)">Stories da rotina</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p2)"><em>12h</em>Radar IA</span><span class="it" style="--c: var(--p2)"><em>19h</em>IA na prática</span><span class="it" style="--c: var(--p4)">Stories</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p3)"><em>19h</em>Construindo a GL</span><span class="it live">Live no pregão, a cada 2 semanas</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p2)"><em>12h</em>Radar IA</span><span class="it" style="--c: var(--p1)"><em>19h</em>Sexta do estudo</span><span class="it" style="--c: var(--p1)">Carrossel</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p4)"><em>11h</em>Sistema de vida</span><span class="it" style="--c: var(--p4)">Stories do treino</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p3)"><em>18h</em>Carrossel "o plano da semana"</span><span class="it" style="--c: var(--p4)">Stories</span></div>
+
+    <div class="rot"><b>YouTube</b><span>@giovanelazaro</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p2)"><em>12h</em>Short</span><span class="it" style="--c: var(--p1)"><em>19h</em>Short</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p1)"><em>19h</em>Short</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p2)"><em>12h</em>Short</span><span class="it" style="--c: var(--p2)"><em>19h</em>Short</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p3)"><em>19h</em>Short</span><span class="it live">Live quinzenal</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p2)"><em>12h</em>Short</span><span class="it" style="--c: var(--p1)"><em>19h</em>Short</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p4)"><em>11h</em>Short</span></div>
+    <div class="cel"><span class="it" style="--c: var(--gold)"><em>10h</em>Vídeo longo</span><span class="it" style="--c: var(--gold)">Dublagem em inglês</span></div>
+
+    <div class="rot"><b>@glacademybr</b><span>Marca · Brasil</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>12h</em>Carrossel</span><span class="it" style="--c: var(--p5)"><em>19h</em>Reel da programação</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p1)"><em>19h</em>O trade, em Collab</span><span class="it" style="--c: var(--p5)">Stories</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>12h</em>Carrossel</span><span class="it" style="--c: var(--p5)"><em>19h</em>Reel</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>19h</em>Reel</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>12h</em>Carrossel</span><span class="it" style="--c: var(--p5)"><em>19h</em>Reel</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>11h</em>Carrossel-resumo</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)">Story da semana</span></div>
+
+    <div class="rot"><b>@glacademytrading</b><span>Marca · exterior, em inglês</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>9h NY</em>Reel</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>9h NY</em>Reel</span></div>
+    <div class="cel"><span class="vazio">—</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>9h NY</em>Reel</span><span class="it" style="--c: var(--p5)">Carrossel</span></div>
+    <div class="cel"><span class="vazio">—</span></div>
+    <div class="cel"><span class="it" style="--c: var(--p5)"><em>10h NY</em>Reel</span></div>
+    <div class="cel"><span class="vazio">—</span></div>
+
+    <div class="rot ult"><b>Bastidor</b><span>LinkedIn, newsletter, gravação e números</span></div>
+    <div class="cel ult"><span class="it" style="--c: var(--p3)"><em>8h</em>LinkedIn, o CEO</span><span class="it grava"><em>14h</em>Gravação, bloco A</span><span class="it" style="--c: var(--line-2)">Placar da semana</span></div>
+    <div class="cel ult"><span class="it" style="--c: var(--line-2)">Edição e agenda</span></div>
+    <div class="cel ult"><span class="it" style="--c: var(--p2)"><em>8h</em>LinkedIn, IA</span><span class="it grava"><em>14h</em>Gravação, bloco B</span></div>
+    <div class="cel ult"><span class="it" style="--c: var(--line-2)">Edição e agenda</span></div>
+    <div class="cel ult"><span class="it" style="--c: var(--p3)"><em>8h</em>LinkedIn, semana da GL</span><span class="it" style="--c: var(--line-2)">Retrospectiva, 30 min</span></div>
+    <div class="cel ult"><span class="vazio">—</span></div>
+    <div class="cel ult"><span class="it" style="--c: var(--gold)"><em>8h</em>Newsletter</span><span class="it" style="--c: var(--line-2)">Plano da semana, 30 min</span></div>
+  </div>
+
+  <div class="bloco">
+    <h2>As séries <small>formatos fixos que o público aprende a esperar</small></h2>
+    <div class="series">
+      <div class="serie" style="--c: var(--p1)"><b>Pré-mercado em 60 s</b><span>Stories e comunidade · dias úteis, 10h (11h a partir de 02/11)</span></div>
+      <div class="serie" style="--c: var(--p2)"><b>Radar IA</b><span>Reel e Short · seg, qua e sex, 12h</span></div>
+      <div class="serie" style="--c: var(--p1)"><b>Trade comentado</b><span>Reel em Collab · terça, 19h</span></div>
+      <div class="serie" style="--c: var(--p2)"><b>IA na prática</b><span>Tela gravada · quarta, 19h</span></div>
+      <div class="serie" style="--c: var(--p3)"><b>Construindo a GL</b><span>Reel e LinkedIn · quinta, 19h</span></div>
+      <div class="serie" style="--c: var(--p1)"><b>Sexta do estudo</b><span>Reel e carrossel · sexta, 19h</span></div>
+      <div class="serie" style="--c: var(--p4)"><b>Sistema de vida</b><span>Reel e stories do treino · sábado, 11h</span></div>
+      <div class="serie" style="--c: var(--gold)"><b>Domingo de planejamento</b><span>Vídeo longo, carrossel e newsletter</span></div>
+      <div class="serie" style="--c: var(--live)"><b>Ao vivo no pregão</b><span>Quinta, a cada 2 semanas, na abertura</span></div>
+      <div class="serie" style="--c: var(--live)"><b>Perguntas da comunidade</b><span>Live mensal · quinta, 20h</span></div>
+      <div class="serie" style="--c: var(--p5)"><b>GL na prática</b><span>@glacademybr · todo dia</span></div>
+      <div class="serie" style="--c: var(--p5)"><b>Risk first</b><span>@glacademytrading · seg, ter, qui e sáb</span></div>
+    </div>
+  </div>
+
+  <div class="linhaS">
+    <div class="bloco">
+      <h2>A ordem do dia <small>dia útil, das 6h às 22h</small></h2>
+      <div class="dia" id="dia"></div>
+    </div>
+    <div class="bloco prop">
+      <h2>A proporção</h2>
+      <div class="quad"><i>valor</i><i>valor</i><i>valor</i><i>valor</i><i class="pr">prova</i><i class="cv">convite</i></div>
+      <p>De cada 6 posts, <b>4 entregam valor, 1 mostra prova e 1 faz convite.</b> Cada Reel termina com um motivo para enviar ou salvar. Em lançamento, a rampa de 7 dias: aviso, prova, oferta e prazo.</p>
+    </div>
+  </div>
+
+  <div class="rodape"><span>As cores das linhas seguem os pilares: <b style="color: var(--p1)">mercado</b> · <b style="color: var(--p2)">IA</b> · <b style="color: var(--p3)">empresa</b> · <b style="color: var(--p4)">vida</b> · <b style="color: var(--p5)">produtos</b> · <b style="color: var(--live)">ao vivo</b></span><span>Dia a dia, por conta: <b>canais/calendario-mestre.csv</b></span><span>05/10/2026</span></div>
+</section>
+
+<!-- ===================== 3 · AS 13 SEMANAS ===================== -->
+<section class="poster" id="semanas">
+  <div class="topo">
+    <div>
+      <div class="marca"><img src="../../videos/emblem.png" alt=""><span class="eyebrow">GL Academy · Plano de Marketing 2026–27</span></div>
+      <h1>As 13 <em>semanas.</em></h1>
+      <p class="sub">Um tema por semana, um vídeo longo por domingo e os marcos que não podem escorregar. <b>Na semana 4 as metas são recalibradas</b> com os dados reais do placar.</p>
+    </div>
+    <div class="selo"><span class="n">3/3 · A linha do tempo</span><span class="d">05/10/2026 a 03/01/2027</span></div>
+  </div>
+
+  <div class="fases">
+    <div class="fase" style="--c: var(--dim)"><b>Semana 0</b><span>A casa em ordem</span></div>
+    <div class="fase" style="--c: var(--gold)"><b>Lançamento · semanas 1 a 4</b><span>Séries no ar, primeiro vídeo longo, primeiras lives, newsletter, versões em inglês</span></div>
+    <div class="fase" style="--c: var(--p3)"><b>Tração · semanas 5 a 8</b><span>Dobrar o que funcionou, Black Friday, podcasts, campanha da lista da IA</span></div>
+    <div class="fase" style="--c: var(--p2)"><b>Colheita e ano novo · semanas 9 a 12</b><span>Planejamento 2027, retrospectiva, depoimentos, workshop-piloto anunciado</span></div>
+  </div>
+
+  <div class="lanes" id="lanes"></div>
+
+  <div class="tab" id="tab">
+    <div class="th">Sem.</div><div class="th">Datas</div><div class="th">Tema</div><div class="th">Marcos</div><div class="th">Vídeo longo de domingo</div>
+  </div>
+
+  <div class="anos">
+    <div class="ano"><b>2027 · 1º trimestre: "ano novo, sistema novo"</b>Workshop de IA em janeiro, formação em março, 2 vídeos longos por semana e o estudo público.</div>
+    <div class="ano"><b>2º trimestre: o exterior</b>Anúncio e Collabs nos EUA, a primeira palestra e a assinatura de IA na prática.</div>
+    <div class="ano"><b>3º trimestre: a autoridade</b>Relatório anual, eventos e a implantação do GL OS para empresas, se houver 3 casos.</div>
+  </div>
+
+  <div class="rodape"><span>Feriados no Brasil: 12/10, 02/11, 15/11, 20/11, 25/12 e 01/01 · Bolsa americana fechada: 26/11, 25/12 e 01/01</span><span>Detalhe por dia: <b>canais/calendario-mestre.csv</b></span><span>05/10/2026</span></div>
+</section>
+
+<script>
+// 1 · barras dos pilares (em escala: a largura de cada fatia é o percentual)
+const MIX = [
+  ['@lazarotrades', 'Giovane', [30, 25, 20, 15, 10]],
+  ['YouTube', 'produto entra como chamada', [35, 30, 20, 15, 0]],
+  ['@glacademybr', 'marca no Brasil', [45, 5, 10, 0, 40]],
+  ['@glacademytrading', 'marca no exterior', [40, 0, 15, 0, 45]],
+];
+const CORES = ['var(--p1)', 'var(--p2)', 'var(--p3)', 'var(--p4)', 'var(--p5)'];
+const barras = document.getElementById('barras');
+MIX.forEach(([nome, sub, v]) => {
+  const linha = document.createElement('div'); linha.className = 'barra';
+  linha.innerHTML = `<div class="nome">${nome}<span>${sub}</span></div>`;
+  const pista = document.createElement('div'); pista.className = 'pista';
+  v.forEach((x, i) => { if (!x) return; const s = document.createElement('i'); s.style.width = x + '%'; s.style.background = CORES[i]; s.textContent = x >= 10 ? x + '%' : ''; pista.appendChild(s); });
+  linha.appendChild(pista); barras.appendChild(linha);
+});
+
+// 2 · a ordem do dia, em escala de 6h a 22h
+(function () {
+  const box = document.getElementById('dia'), W = box.clientWidth, h0 = 6, h1 = 22;
+  const x = h => (h - h0) / (h1 - h0) * W;
+  box.insertAdjacentHTML('beforeend', '<div class="eixo"></div>');
+  const p = document.createElement('div'); p.className = 'pregao'; p.style.left = x(10.5) + 'px'; p.style.width = (x(17) - x(10.5)) + 'px';
+  p.innerHTML = '<span>Pregão de NY: só posts agendados</span>'; box.appendChild(p);
+  for (let h = 6; h <= 22; h += 2) box.insertAdjacentHTML('beforeend', `<span class="hora" style="left:${x(h)}px">${h}h</span>`);
+  const M = [
+    [6 + 40 / 60, 'alto', '6h40', 'A pauta chega', 'var(--p2)'],
+    [8, 'baixo', 'Manhã', 'Stories da rotina', 'var(--p4)'],
+    [10, 'alto', '10h (11h a partir de 02/11)', 'Pré-mercado nos stories', 'var(--p1)'],
+    [12, 'baixo', '12h', 'Reel do almoço', 'var(--gold)'],
+    [15, 'alto', '15h', 'Stories de bastidor', 'var(--p3)'],
+    [19, 'baixo', '19h', 'Reel principal', 'var(--gold)'],
+    [20.5, 'alto', '20h', 'Enquete e 20 min de respostas', 'var(--p4)'],
+  ];
+  M.forEach(([h, lado, t, d, c], i) => box.insertAdjacentHTML('beforeend',
+    `<div class="marco ${lado}" style="left:${x(h)}px;--c:${c}${i === 0 ? ';transform:translateX(-22%)' : ''}"><b>${t}</b><span>${d}</span><i class="haste"></i><span class="pt"></span></div>`));
+})();
+
+// 3 · trilhas da linha do tempo, em escala por dia (05/10/2026 a 03/01/2027)
+(function () {
+  const box = document.getElementById('lanes');
+  const L = 118, R = 18, W = box.clientWidth - L - R;
+  const ini = Date.UTC(2026, 9, 5), fim = Date.UTC(2027, 0, 3), dias = (fim - ini) / 864e5;
+  const x = s => { const [d, m] = s.split('/').map(Number); const y = m < 6 ? 2027 : 2026; return L + (Date.UTC(y, m - 1, d) - ini) / 864e5 / dias * W; };
+  for (let k = 0; k <= 13; k++) { const t = new Date(ini + k * 7 * 864e5); const s = t.getUTCDate() + '/' + (t.getUTCMonth() + 1); box.insertAdjacentHTML('beforeend', `<span class="tick" style="left:${L + k * 7 / dias * W}px"></span>`); }
+  const lane = (y, nome) => box.insertAdjacentHTML('beforeend', `<span class="lane-n" style="top:${y - 5}px">${nome}</span><span class="lane" style="top:${y}px"></span>`);
+  lane(22, 'Lives'); lane(60, 'Vídeos longos'); lane(108, 'Marcos');
+  [['15/10', 'pregão'], ['22/10', 'perguntas'], ['29/10', 'pregão'], ['12/11', 'pregão'], ['19/11', 'perguntas'], ['24/11', 'pregão'], ['10/12', 'pregão'], ['17/12', 'perguntas']].forEach(([d, t]) => {
+    box.insertAdjacentHTML('beforeend', `<span class="dot ${t === 'perguntas' ? 'vazado' : ''}" style="left:${x(d)}px;top:23px;--c:var(--live)"></span><span class="etq" style="left:${x(d)}px;top:31px">${d}</span>`);
+  });
+  box.insertAdjacentHTML('beforeend', `<span class="etq" style="left:${L + W - 120}px;top:6px;color:var(--dim)">● pregão  ○ perguntas</span>`);
+  ['18/10', '25/10', '01/11', '08/11', '15/11', '22/11', '29/11', '06/12', '13/12', '20/12', '27/12', '03/01'].forEach((d, i) => {
+    box.insertAdjacentHTML('beforeend', `<span class="dot" style="left:${x(d)}px;top:61px;--c:var(--gold)"></span><span class="etq" style="left:${x(d)}px;top:69px">${i + 1}</span>`);
+  });
+  [['09/10', 'Manifesto', -1], ['10/10', 'GL Risk Auto', 1], ['30/10', 'Prazo da Higgsfield', -1], ['01/11', 'NY muda o horário', 1], ['27/11', 'Black Friday', -1], ['01/12', 'Campanha da lista da IA', 1], ['25/12', 'Natal', -1], ['03/01', 'Plano 2027', 1]].forEach(([d, t, lado]) => {
+    const top = lado < 0 ? 89 : 117;
+    let left = x(d); if (d === '03/01') left -= 34;
+    box.insertAdjacentHTML('beforeend', `<span class="dot q" style="left:${x(d)}px;top:109px;--c:var(--p2)"></span><span class="etq" style="left:${left}px;top:${top}px"><b>${d}</b> ${t}</span>`);
+  });
+})();
+
+// 3 · a tabela das 13 semanas
+(function () {
+  const S = [
+    [0, '05 a 11/10', 'O plano', 'Perfis novos · manifesto em 09/10 · campanha GL Risk Auto a partir de 10/10', '', 'var(--dim)'],
+    [1, '12 a 18/10', 'Risco primeiro', 'Séries no ar · live no pregão 15/10 · newsletter 1 · lista de espera da IA abre', 'Como eu uso IA para tocar uma empresa de trading', 'var(--gold)'],
+    [2, '19 a 25/10', 'IA na empresa', 'Pauta 1 na imprensa · convites a podcasts · live de perguntas 22/10', 'O trade que o meu sistema não me deixou fazer', 'var(--gold)'],
+    [3, '26/10 a 01/11', 'Processo', 'Live no pregão 29/10 · fim do teste de anúncios · Higgsfield até 30/10', 'Montei um agente de IA que me entrega a pauta às 6h40', 'var(--gold)'],
+    [4, '02 a 08/11', 'Rotina', 'NY abre às 11h30 · revisão das séries com 4 semanas de dados', 'Minha rotina de trader e CEO, do treino ao pré-mercado', 'var(--gold)'],
+    [5, '09 a 15/11', 'Vibe coding', 'Live no pregão 12/11 · inglês no ritmo de 4 peças por semana', 'Vibe coding: criei uma ferramenta para traders', 'var(--p3)'],
+    [6, '16 a 22/11', 'Mesa proprietária', 'Live de perguntas 19/11 · aquecimento da Black Friday', 'Mesa proprietária: as regras que reprovam', 'var(--p3)'],
+    [7, '23 a 29/11', 'Black Friday', 'Live no pregão 24/11 (26/11 é Thanksgiving) · oferta real em 27/11', 'Vibe marketing: 150 peças por mês com IA', 'var(--p3)'],
+    [8, '30/11 a 06/12', 'IA na prática', 'Campanha da lista de espera da IA a partir de 01/12 · Collabs nos EUA', 'Swing trade com processo: como eu estudo uma ideia', 'var(--p3)'],
+    [9, '07 a 13/12', 'Planejar 2027', 'Live no pregão 10/12 · podcasts', 'Como planejar 2027 com IA, na empresa e na vida', 'var(--p2)'],
+    [10, '14 a 20/12', 'Retrospectiva', 'Live de perguntas 17/12 · depoimentos com autorização', 'O que eu aprendi construindo a GL em público', 'var(--p2)'],
+    [11, '21 a 27/12', 'Ferramentas', 'Ritmo reduzido, conteúdo gravado antes', 'As ferramentas de IA que eu uso todo dia', 'var(--p2)'],
+    [12, '28/12 a 03/01', 'O plano de 2027', 'Data do workshop-piloto anunciada', 'O plano de 2027: metas, sistema e o que vem por aí', 'var(--p2)'],
+  ];
+  const tab = document.getElementById('tab');
+  S.forEach(([n, d, t, m, v, c], i) => {
+    const u = i === S.length - 1 ? ' ult' : '';
+    const dom = n ? d.split(' a ')[1] : '';
+    tab.insertAdjacentHTML('beforeend',
+      `<div class="s${u}" style="--c:${c}">${n}</div><div class="${u}">${d}</div><div class="t${u}">${t}</div><div class="${u}">${m}</div>` +
+      `<div class="v${u}">${v ? `<em>${dom}</em>${v}` : '<span style="color:var(--dim)">Sem vídeo longo: o manifesto sai em 09/10</span>'}</div>`);
+  });
+})();
+</script>
+</body>
+</html>

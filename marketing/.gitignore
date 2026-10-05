@@ -1,3 +1,6 @@
 # ZIPs gerados pelo mentoria_pacote.py --zip (grandes demais para o git)
 entregas/
 __pycache__/
+# saídas geradas (o radar e a página montada da pauta)
+automacao/radar/saida/
+pauta/index.html

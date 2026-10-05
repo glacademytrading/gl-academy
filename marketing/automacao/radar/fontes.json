@@ -1,0 +1,79 @@
+{
+  "atualizado": "2026-10-05",
+  "sobre": "Fontes do radar de pauta da GL. Cada pilar tem feeds RSS ou Atom, buscas para a rotina do Claude (que pesquisa na web) e as palavras que dão nota a cada notícia. Fonte oficial (empresa, órgão, documento) vale mais que portal.",
+  "pilares": {
+    "IA": {
+      "rss": [
+        {"nome": "OpenAI", "url": "https://openai.com/news/rss.xml", "oficial": true},
+        {"nome": "Google AI", "url": "https://blog.google/technology/ai/rss/", "oficial": true},
+        {"nome": "Google DeepMind", "url": "https://deepmind.google/blog/rss.xml", "oficial": true},
+        {"nome": "Microsoft AI", "url": "https://blogs.microsoft.com/ai/feed/", "oficial": true},
+        {"nome": "NVIDIA", "url": "https://blogs.nvidia.com/feed/", "oficial": true},
+        {"nome": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml", "oficial": true},
+        {"nome": "GitHub", "url": "https://github.blog/feed/", "oficial": true},
+        {"nome": "The Verge (IA)", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"},
+        {"nome": "TechCrunch (IA)", "url": "https://techcrunch.com/category/artificial-intelligence/feed/"},
+        {"nome": "MIT Technology Review (IA)", "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed"},
+        {"nome": "Simon Willison", "url": "https://simonwillison.net/atom/everything/"},
+        {"nome": "Hacker News (IA)", "url": "https://hnrss.org/frontpage?q=AI"},
+        {"nome": "Tecnoblog", "url": "https://tecnoblog.net/feed/"},
+        {"nome": "Canaltech", "url": "https://canaltech.com.br/rss/"},
+        {"nome": "Olhar Digital", "url": "https://olhardigital.com.br/feed/"},
+        {"nome": "Google Notícias: inteligência artificial", "url": "https://news.google.com/rss/search?q=intelig%C3%AAncia+artificial&hl=pt-BR&gl=BR&ceid=BR:pt-419"}
+      ],
+      "buscas": [
+        "lançamento novo modelo de IA esta semana",
+        "AI model release this week",
+        "AI agents new feature launch",
+        "Anthropic Claude news",
+        "OpenAI announcement",
+        "Google Gemini update",
+        "inteligência artificial empresas Brasil novidade",
+        "vibe coding tool launch",
+        "regulação inteligência artificial Brasil"
+      ],
+      "palavras": ["ia", "ai", "inteligência artificial", "artificial intelligence", "modelo", "model", "llm", "agente", "agent", "agentic", "claude", "anthropic", "openai", "chatgpt", "gpt", "gemini", "llama", "mistral", "copilot", "codex", "automação", "automation", "vibe coding", "prompt", "open source", "lançamento", "launch", "release"]
+    },
+    "Mercado": {
+      "rss": [
+        {"nome": "Federal Reserve", "url": "https://www.federalreserve.gov/feeds/press_all.xml", "oficial": true},
+        {"nome": "BLS (dados de emprego e inflação)", "url": "https://www.bls.gov/feed/bls_latest.rss", "oficial": true},
+        {"nome": "Agenda econômica da semana (Forex Factory)", "url": "https://nfs.faireconomy.media/ff_calendar_thisweek.xml"},
+        {"nome": "InfoMoney", "url": "https://www.infomoney.com.br/feed/"},
+        {"nome": "Google News: S&P 500 futures", "url": "https://news.google.com/rss/search?q=S%26P+500+futures&hl=en-US&gl=US&ceid=US:en"}
+      ],
+      "buscas": [
+        "agenda econômica EUA esta semana CPI payroll FOMC",
+        "S&P 500 futures week ahead",
+        "Nasdaq 100 futures volatility this week",
+        "Fed decisão juros data",
+        "prop firm rules change futures traders"
+      ],
+      "palavras": ["fed", "fomc", "cpi", "pce", "payroll", "nfp", "juros", "rates", "inflação", "inflation", "s&p", "nasdaq", "es", "nq", "futuros", "futures", "volatilidade", "volatility", "vix", "treasury", "mesa proprietária", "prop firm", "ninjatrader", "tradingview", "cme"]
+    },
+    "Empresa": {
+      "rss": [
+        {"nome": "Startupi", "url": "https://startupi.com.br/feed/"},
+        {"nome": "Exame", "url": "https://exame.com/feed/"},
+        {"nome": "Google Notícias: empreendedorismo e IA", "url": "https://news.google.com/rss/search?q=empreendedorismo+intelig%C3%AAncia+artificial&hl=pt-BR&gl=BR&ceid=BR:pt-419"}
+      ],
+      "buscas": [
+        "pequenas empresas usando IA produtividade caso",
+        "empreendedorismo tecnologia Brasil tendência",
+        "creator economy business model 2026",
+        "SaaS recorrência pequenas empresas"
+      ],
+      "palavras": ["empreend", "startup", "pequena empresa", "negócio", "business", "receita", "recorrente", "assinatura", "saas", "marketing", "vendas", "produtividade", "processo", "gestão", "creator", "founder", "ceo"]
+    },
+    "Vida": {
+      "rss": [],
+      "buscas": [
+        "estudo científico sono produtividade 2026",
+        "rotina de treino e desempenho cognitivo estudo",
+        "hábitos organização pessoal pesquisa"
+      ],
+      "palavras": ["sono", "sleep", "treino", "exercício", "exercise", "hábito", "habit", "foco", "focus", "rotina", "routine", "produtividade", "estresse", "ansiedade"]
+    }
+  },
+  "cotas_da_pauta": {"IA": 3, "Mercado": 1, "Empresa ou Vida": 1}
+}

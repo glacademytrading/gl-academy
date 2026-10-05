@@ -1,0 +1,316 @@
+<title>Pauta GL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1d1a15; --line: #2f2a22; --text: #f3eee4; --muted: #b5ac9c;
+  --gold: #d8ae55; --gold-2: #f6d991; --on-gold: #14100a; --green: #4fe3a8; --red: #ff7a72; --blue: #8fbcff;
+  --chip: #26221b; color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f6f1e7; --surface: #fffdf8; --surface-2: #f1eadc; --line: #e1d7c3; --text: #1d1a14; --muted: #675e4f;
+    --gold: #8a6420; --gold-2: #a87a2c; --on-gold: #fffaf0; --green: #0f7a50; --red: #b3261e; --blue: #1f5fbf;
+    --chip: #efe6d4; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f6f1e7; --surface: #fffdf8; --surface-2: #f1eadc; --line: #e1d7c3; --text: #1d1a14; --muted: #675e4f;
+  --gold: #8a6420; --gold-2: #a87a2c; --on-gold: #fffaf0; --green: #0f7a50; --red: #b3261e; --blue: #1f5fbf;
+  --chip: #efe6d4; color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 16px/1.55 Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 64px; }
+h1, h2, h3 { font-family: Montserrat, Inter, system-ui, sans-serif; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 6vw, 2.8rem); font-weight: 800; letter-spacing: -.01em; }
+h2 { font-size: 1.25rem; font-weight: 800; }
+h3 { font-size: 1.12rem; font-weight: 800; line-height: 1.3; }
+.eyebrow { font: 600 .74rem/1 Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+.lede { color: var(--muted); max-width: 64ch; margin: 10px 0 0; }
+.mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+header.top { display: grid; gap: 18px; }
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.nav .dia { font: 800 1.1rem/1.2 Montserrat, sans-serif; min-width: 0; margin-right: auto; }
+.nav .dia small { display: block; font: 500 .8rem/1.3 Inter, sans-serif; color: var(--muted); }
+button { font: 600 .9rem/1 Inter, sans-serif; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+button:hover { border-color: var(--gold); }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 2px; }
+button[disabled] { opacity: .45; cursor: default; }
+button.ouro { background: linear-gradient(90deg, var(--gold), var(--gold-2)); color: var(--on-gold); border-color: transparent; }
+section { margin-top: 34px; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 12px; }
+.head p { margin: 0; color: var(--muted); font-size: .9rem; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.aviso { border-left: 3px solid var(--gold); padding: 12px 14px; background: var(--surface); border-radius: 0 12px 12px 0; color: var(--muted); font-size: .92rem; }
+.vazio { color: var(--muted); margin: 0; }
+/* calendário do dia */
+.cal { display: grid; gap: 14px; }
+.conta h3 { font-size: .95rem; margin-bottom: 6px; color: var(--gold); }
+.linha { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.linha:first-of-type { border-top: 0; }
+.linha .hora { color: var(--muted); font-size: .85rem; padding-top: 2px; }
+.linha .o { min-width: 0; }
+.linha .t { font-weight: 600; overflow-wrap: anywhere; }
+.linha .m { color: var(--muted); font-size: .84rem; }
+.tag { display: inline-block; font: 600 .7rem/1 Inter, sans-serif; letter-spacing: .06em; text-transform: uppercase; padding: 5px 8px; border-radius: 999px; background: var(--chip); color: var(--muted); margin-right: 6px; vertical-align: 1px; }
+.tag.pronto { color: var(--green); }
+/* itens da pauta */
+.itens { display: grid; gap: 16px; }
+.item { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 10px; }
+.item.gravado { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); }
+.item.postado { border-color: color-mix(in srgb, var(--green) 60%, var(--line)); }
+.item.descartado { opacity: .55; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 .74rem/1 Inter, sans-serif; padding: 6px 9px; border-radius: 999px; background: var(--chip); color: var(--text); }
+.chip.p { background: linear-gradient(90deg, var(--gold), var(--gold-2)); color: var(--on-gold); }
+.gancho { font: 700 1.05rem/1.45 Inter, sans-serif; margin: 0; padding-left: 12px; border-left: 3px solid var(--gold); }
+.pq { margin: 0; color: var(--muted); font-size: .94rem; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.estado { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; }
+.estado button { padding: 8px 10px; border: 0; background: transparent; font-size: .82rem; }
+.estado button[aria-pressed="true"] { background: var(--chip); color: var(--gold-2); }
+details { border-top: 1px solid var(--line); padding-top: 8px; }
+summary { cursor: pointer; font-weight: 600; font-size: .92rem; color: var(--text); }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 400 .92rem/1.55 Inter, sans-serif; background: var(--surface-2); border-radius: 10px; padding: 12px; margin: 8px 0 0; max-width: 72ch; }
+.fontes { margin: 8px 0 0; padding-left: 18px; }
+.fontes a { color: var(--blue); overflow-wrap: anywhere; }
+.regra { color: var(--red); font-size: .88rem; margin: 6px 0 0; }
+.historico { display: flex; flex-wrap: wrap; gap: 8px; }
+.historico button { font-size: .82rem; }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: .9rem; max-width: calc(100% - 32px); }
+footer { margin-top: 40px; color: var(--muted); font-size: .84rem; }
+@media (max-width: 560px) { .linha { grid-template-columns: 60px minmax(0, 1fr); } .item, .panel { padding: 14px; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">GL Academy · conteúdo do dia</p>
+      <h1>Pauta GL</h1>
+      <p class="lede">O que postar hoje em cada conta e os roteiros que a rotina de pesquisa escreve de segunda a sexta, às 6h40: novidades de IA, mercado e empresa, com fontes. Confira as fontes, marque o que vai gravar e copie o roteiro.</p>
+    </div>
+    <div class="nav">
+      <div class="dia"><span id="dia-titulo">—</span><small id="dia-sub"></small></div>
+      <button type="button" id="ant" aria-label="Dia anterior">← Dia anterior</button>
+      <button type="button" id="hoje">Hoje</button>
+      <button type="button" id="prox" aria-label="Próximo dia">Próximo dia →</button>
+    </div>
+  </header>
+
+  <section id="pauta" aria-live="polite">
+    <div class="head"><h2>Roteiros do dia</h2><p id="pauta-info"></p></div>
+    <div class="itens" id="itens"><p class="vazio">Carregando a pauta…</p></div>
+  </section>
+
+  <section id="longo" hidden>
+    <div class="head"><h2>Vídeo longo de domingo</h2><p>Às sextas, a rotina já entrega o roteiro do vídeo de domingo.</p></div>
+    <div class="item" id="longo-card"></div>
+  </section>
+
+  <section id="calendario">
+    <div class="head"><h2>Hoje no calendário</h2><p>Do calendário mestre do plano, por conta e horário de Brasília.</p></div>
+    <div class="panel"><div class="cal" id="cal"></div></div>
+  </section>
+
+  <section id="ultimas">
+    <div class="head"><h2>Últimas pautas</h2></div>
+    <div class="historico" id="historico"><p class="vazio">Nenhuma ainda.</p></div>
+  </section>
+
+  <section id="como">
+    <details class="panel">
+      <summary>Como funciona</summary>
+      <ol>
+        <li>De segunda a sexta, às 6h40, uma rotina agendada do Claude pesquisa as novidades das últimas 24 a 48 horas de IA, de mercado e de empresa.</li>
+        <li>Ela escolhe 5 temas (3 de IA, 1 de mercado e 1 de empresa ou vida), escreve o roteiro, a legenda e a chamada e lista as fontes e o que conferir. Às sextas vem também o vídeo longo de domingo.</li>
+        <li>A pauta aparece aqui e chega uma notificação. Giovane confere as fontes, marca o que vai gravar e copia o roteiro.</li>
+        <li>Nada é postado sozinho. Notícia de IA é conferida na fonte original antes de gravar.</li>
+      </ol>
+      <p class="aviso">Regras de toda peça: nada de promessa de lucro ou renda, nenhum resultado em dólar, nenhuma recomendação de compra ou venda de ativo, replays com o selo "Replay · exemplo educacional" e o aviso de risco.</p>
+    </details>
+  </section>
+
+  <footer>Conteúdo educacional; trading envolve risco financeiro real. Planos e calendário: repositório gl-academy, pasta marketing.</footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="application/json" id="cal-dados"><!--CAL--></script>
+<script>
+(function () {
+  var CAL = JSON.parse(document.getElementById('cal-dados').textContent || '[]');
+  var DIAS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  var ESTADOS = [['gravar', 'Gravar'], ['gravado', 'Gravado'], ['postado', 'Postado'], ['descartado', 'Descartar']];
+  var pautas = {}, status = {}, db = null, dbPronto = false, semEscrita = false;
+
+  function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function deIso(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  var hoje = iso(new Date());
+  var sel = /^#\d{4}-\d{2}-\d{2}$/.test(location.hash) ? location.hash.slice(1) : hoje;
+
+  function el(tag, attrs, txt) {
+    var e = document.createElement(tag);
+    for (var k in (attrs || {})) { if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    if (txt != null) e.textContent = txt;
+    return e;
+  }
+  function toast(t) { var x = document.getElementById('toast'); x.textContent = t; x.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { x.hidden = true; }, 2200); }
+  function copiar(texto, alvo) {
+    var feito = function () { toast('Copiado'); };
+    var falhou = function () {
+      if (!alvo) { toast('Não deu para copiar'); return; }
+      var r = document.createRange(); r.selectNodeContents(alvo); var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      toast('Texto selecionado: copie com Ctrl+C');
+    };
+    try { navigator.clipboard.writeText(texto).then(feito, falhou); } catch (e) { falhou(); }
+  }
+
+  function desenharCabecalho() {
+    var d = deIso(sel);
+    document.getElementById('dia-titulo').textContent = DIAS[d.getDay()] + ', ' + String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0');
+    document.getElementById('dia-sub').textContent = sel === hoje ? 'Hoje' : (sel < hoje ? 'Dia que já passou' : 'Dia que ainda vem');
+  }
+
+  function desenharCalendario() {
+    var box = document.getElementById('cal'); box.textContent = '';
+    var linhas = CAL.filter(function (r) { return r.d === sel; });
+    if (!linhas.length) { box.appendChild(el('p', { class: 'vazio' }, 'Nada no calendário mestre para este dia (o plano vai de 05/10/2026 a 03/01/2027).')); return; }
+    var contas = {};
+    linhas.forEach(function (r) { (contas[r.c] = contas[r.c] || []).push(r); });
+    Object.keys(contas).sort().forEach(function (c) {
+      var g = el('div', { class: 'conta' }); g.appendChild(el('h3', null, c));
+      contas[c].sort(function (a, b) { return a.h.localeCompare(b.h); }).forEach(function (r) {
+        var l = el('div', { class: 'linha' });
+        l.appendChild(el('div', { class: 'hora mono' }, r.h));
+        var o = el('div', { class: 'o' });
+        var t = el('div', { class: 't' });
+        if (r.o && r.o.indexOf('pronto') === 0) t.appendChild(el('span', { class: 'tag pronto' }, 'pronto'));
+        t.appendChild(document.createTextNode(r.t || r.s));
+        o.appendChild(t);
+        o.appendChild(el('div', { class: 'm' }, [r.f, r.s, r.cta ? 'chamada: ' + r.cta : '', r.obs].filter(Boolean).join(' · ')));
+        l.appendChild(o); g.appendChild(l);
+      });
+      box.appendChild(g);
+    });
+  }
+
+  function botaoEstado(chave, data, id, atual) {
+    var grupo = el('div', { class: 'estado', role: 'group', 'aria-label': 'Status do roteiro' });
+    ESTADOS.forEach(function (e) {
+      var b = el('button', { type: 'button', 'aria-pressed': String(atual === e[0]) }, e[1]);
+      if (!db || semEscrita) b.disabled = true;
+      b.addEventListener('click', function () {
+        if (!db) return;
+        var novo = atual === e[0] ? 'gravar' : e[0];
+        db.collection('status').doc(chave).set({ data: data, item: id, estado: novo, em: new Date().toISOString() })
+          .then(function () { toast('Status: ' + novo); })
+          .catch(function (err) {
+            if (err && err.code === 'invalid_argument') { semEscrita = true; toast('Você pode ver, mas não alterar esta pauta'); desenharPauta(); }
+            else toast('Não deu para salvar. Tente de novo.');
+          });
+      });
+      grupo.appendChild(b);
+    });
+    return grupo;
+  }
+
+  function cartao(item, data) {
+    var chave = data + '_' + item.id, st = (status[chave] || {}).estado || '';
+    var c = el('article', { class: 'item' + (st ? ' ' + st : '') });
+    var chips = el('div', { class: 'chips' });
+    [item.pilar, item.serie, item.conta, item.horario, item.formato].filter(Boolean).forEach(function (x, i) { chips.appendChild(el('span', { class: 'chip' + (i === 0 ? ' p' : '') }, x)); });
+    c.appendChild(chips);
+    c.appendChild(el('h3', null, item.titulo || 'Sem título'));
+    if (item.gancho) c.appendChild(el('p', { class: 'gancho' }, item.gancho));
+    if (item.por_que_importa) c.appendChild(el('p', { class: 'pq' }, item.por_que_importa));
+    var preR = el('pre', null, item.roteiro || ''), preL = el('pre', null, [item.legenda, item.chamada, item.hashtags].filter(Boolean).join('\n\n'));
+    var ac = el('div', { class: 'acoes' });
+    var b1 = el('button', { type: 'button', class: 'ouro' }, 'Copiar o roteiro'); b1.addEventListener('click', function () { copiar(item.roteiro || '', preR); });
+    var b2 = el('button', { type: 'button' }, 'Copiar a legenda'); b2.addEventListener('click', function () { copiar(preL.textContent, preL); });
+    ac.appendChild(b1); ac.appendChild(b2); ac.appendChild(botaoEstado(chave, data, item.id, st));
+    c.appendChild(ac);
+    var d1 = el('details', { 'data-k': chave + '-r' }); d1.appendChild(el('summary', null, 'Roteiro')); d1.appendChild(preR); c.appendChild(d1);
+    var d2 = el('details', { 'data-k': chave + '-l' }); d2.appendChild(el('summary', null, 'Legenda, chamada e hashtags')); d2.appendChild(preL); c.appendChild(d2);
+    var d3 = el('details', { 'data-k': chave + '-f' }); d3.appendChild(el('summary', null, 'Fontes e o que conferir'));
+    var ul = el('ul', { class: 'fontes' });
+    (item.fontes || []).forEach(function (f) {
+      var li = el('li'); var a = el('a', { href: f.url, target: '_blank', rel: 'noopener' }, f.titulo || f.url);
+      li.appendChild(a); if (f.data) li.appendChild(document.createTextNode(' · ' + f.data)); ul.appendChild(li);
+    });
+    if (!(item.fontes || []).length) ul.appendChild(el('li', null, 'Sem fonte listada: confira antes de gravar.'));
+    d3.appendChild(ul);
+    if (item.conferir) d3.appendChild(el('p', { class: 'pq' }, 'Conferir: ' + item.conferir));
+    if (item.regras) d3.appendChild(el('p', { class: 'regra' }, item.regras));
+    c.appendChild(d3);
+    return c;
+  }
+
+  function desenharPauta() {
+    var box = document.getElementById('itens'), info = document.getElementById('pauta-info');
+    var abertos = {}; box.querySelectorAll('details[open]').forEach(function (x) { abertos[x.getAttribute('data-k')] = 1; });
+    box.textContent = '';
+    var p = pautas[sel];
+    if (!db) {
+      info.textContent = '';
+      box.appendChild(el('p', { class: 'vazio' }, dbPronto ? 'A pauta automática aparece quando esta página é aberta no claude.ai.' : 'Carregando a pauta…'));
+    } else if (!p) {
+      var d = deIso(sel).getDay();
+      info.textContent = '';
+      box.appendChild(el('p', { class: 'vazio' }, (d === 0 || d === 6) ? 'Fim de semana não tem pauta automática. Use o banco de ideias do plano ou repita a melhor peça da semana.'
+        : (sel > hoje ? 'A pauta deste dia chega às 6h40.' : (sel === hoje ? 'A pauta de hoje chega às 6h40 (segunda a sexta). Se passou desse horário, a rotina ainda está escrevendo.' : 'Não houve pauta neste dia.'))));
+    } else {
+      var feitos = (p.itens || []).filter(function (it) { var s = (status[sel + '_' + it.id] || {}).estado; return s === 'gravado' || s === 'postado'; }).length;
+      info.textContent = (p.itens || []).length + ' roteiros · ' + feitos + ' gravados ou postados' + (p.gerada_em ? ' · gerada às ' + new Date(p.gerada_em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '');
+      if (p.resumo) box.appendChild(el('p', { class: 'aviso' }, p.resumo));
+      (p.itens || []).forEach(function (it) { box.appendChild(cartao(it, sel)); });
+      box.querySelectorAll('details').forEach(function (x) { if (abertos[x.getAttribute('data-k')]) x.open = true; });
+    }
+    var lg = document.getElementById('longo'), lc = document.getElementById('longo-card');
+    if (p && p.longo && p.longo.titulo) {
+      lg.hidden = false; lc.textContent = '';
+      lc.appendChild(el('h3', null, p.longo.titulo));
+      if (p.longo.titulos_teste) lc.appendChild(el('p', { class: 'pq' }, 'Títulos para o teste: ' + p.longo.titulos_teste.join(' · ')));
+      if (p.longo.thumbnail) lc.appendChild(el('p', { class: 'pq' }, 'Thumbnail: ' + p.longo.thumbnail));
+      var pre = el('pre', null, p.longo.roteiro || '');
+      var b = el('button', { type: 'button', class: 'ouro' }, 'Copiar o roteiro do vídeo'); b.addEventListener('click', function () { copiar(p.longo.roteiro || '', pre); });
+      lc.appendChild(el('div', { class: 'acoes' })).appendChild(b);
+      var dd = el('details'); dd.appendChild(el('summary', null, 'Roteiro do vídeo')); dd.appendChild(pre); lc.appendChild(dd);
+    } else lg.hidden = true;
+  }
+
+  function desenharHistorico() {
+    var box = document.getElementById('historico'), datas = Object.keys(pautas).sort().reverse().slice(0, 14);
+    box.textContent = '';
+    if (!datas.length) { box.appendChild(el('p', { class: 'vazio' }, db ? 'Nenhuma ainda: a primeira chega às 6h40 de um dia útil.' : 'Abra no claude.ai para ver as pautas.')); return; }
+    datas.forEach(function (d) {
+      var p = pautas[d], dt = deIso(d);
+      var b = el('button', { type: 'button' }, DIAS[dt.getDay()].slice(0, 3) + ' ' + d.slice(8, 10) + '/' + d.slice(5, 7) + ' · ' + (p.itens || []).length);
+      b.addEventListener('click', function () { ir(d); });
+      box.appendChild(b);
+    });
+  }
+
+  function desenhar() { desenharCabecalho(); desenharPauta(); desenharCalendario(); desenharHistorico(); }
+  function ir(d) { sel = d; try { history.replaceState(null, '', '#' + d); } catch (e) {} desenhar(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function mover(n) { var d = deIso(sel); d.setDate(d.getDate() + n); ir(iso(d)); }
+  document.getElementById('ant').addEventListener('click', function () { mover(-1); });
+  document.getElementById('prox').addEventListener('click', function () { mover(1); });
+  document.getElementById('hoje').addEventListener('click', function () { ir(hoje); });
+  desenhar();
+
+  var uso = window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null);
+  Promise.resolve(uso).then(function (d) {
+    db = d || null; dbPronto = true;
+    if (!db) { desenhar(); return; }
+    db.collection('pauta').orderBy('data', 'desc').limit(60).onSnapshot(function (snap) {
+      pautas = {}; snap.docs.forEach(function (doc) { var v = doc.data(); if (v && v.data) pautas[v.data] = v; });
+      desenhar();
+    }, function () { toast('A pauta não carregou. Recarregue a página.'); });
+    db.collection('status').orderBy('em', 'desc').limit(1000).onSnapshot(function (snap) {
+      status = {}; snap.docs.forEach(function (doc) { status[doc.id] = doc.data() || {}; });
+      desenharPauta();
+    }, function () {});
+  }, function () { dbPronto = true; desenhar(); });
+})();
+</script>

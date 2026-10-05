@@ -4,6 +4,8 @@
 
 Versão viva, com os desenhos e os comentários: https://claude.ai/code/artifact/31dbf0c1-fd5f-4372-88c6-e5beaadd3a7f
 
+**Complemento de 05/10/2026:** o plano de marcas, canais e conteúdo diário está em `plano-de-marketing-2026-27.md`: os perfis no Brasil e no exterior, o @lazarotrades, o YouTube, a nova linha de educação em IA, a autoridade na indústria, as 13 semanas até 03/01/2027 e a pauta automática. Ele detalha o pilar Conteúdo deste plano e liga todos os canais ao mesmo funil; a meta de calls continua a mesma.
+
 ## Resumo
 
 O marketing da GL Academy trabalha para um número só: novos clientes fechados na call 1x1 gratuita até 31/12/2026. A métrica guia de toda segunda-feira é o número de calls 1x1 realizadas na semana.
@@ -102,12 +104,12 @@ O mix de exemplo põe o tráfego pago (40% dos leads) e o conteúdo (30%) como o
 
 ## Pilar 1 · Conteúdo
 
-Conteúdo gera confiança e demanda: educa o trader até ele querer o que a GL entrega. É o pilar com mais peças prontas hoje, e o que mais depende do Giovane gravar.
+Conteúdo gera confiança e demanda: educa o trader até ele querer o que a GL entrega. É o pilar com mais peças prontas hoje, e o que mais depende de Giovane gravar.
 
 | Item | Definição |
 | --- | --- |
-| Dono | Líder de conteúdo (roteiro e edição), com o Giovane como rosto |
-| Cadência | 4 Reels e 2 carrosséis por semana na marca, 3 Reels no @lazarotrades, 1 vídeo longo no YouTube com cortes, 2 posts no LinkedIn e 1 ideia no TradingView |
+| Dono | Líder de conteúdo (roteiro e edição), com Giovane como rosto |
+| Cadência | A partir de 12/10, a do plano 2026–27 (seção 7): 7 Reels e 2 carrosséis por semana no @lazarotrades; 5 a 10 Reels e 3 carrosséis na marca (até novembro, a programação pronta); 4 Reels em inglês no @glacademytrading; 1 vídeo longo e 7 a 10 Shorts no YouTube; 3 posts no LinkedIn; 1 newsletter; 1 ideia no TradingView |
 | Indicadores | Retenção nos 3 primeiros segundos, salvamentos e compartilhamentos, cliques no link, leads e vendas com utm\_medium=conteudo |
 | Passa o bastão | Os conteúdos que mais retêm na semana viram anúncio. As objeções ouvidas nas calls voltam como pauta |
 
