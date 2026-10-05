@@ -92,6 +92,15 @@ Cada peça abre com uma dor real e mostra o que o painel faz com ela.
 
 **Imagens:** carrosséis, stories de enquete e resposta, capas de Reels, thumbnails do YouTube, frases e a capa de destaque, listados na página.
 
+**Vídeos do site (5/10):** dois vídeos completos em 16:9, para o site que já está no ar, com o prompt do Codex (`../site/prompt-codex-gl-risk-auto.md`):
+
+- **Um trade do começo ao fim (47 s):** a leitura (VAH D e bloco vermelho, compra na resistência), o plano desenhado com um botão e o risco x retorno na hora (2 para 1, 3 para 1, 5 para 1), a entrada autorizada dentro do teto, com stop e alvo na plataforma, a gestão e o sinal verde acima de 1,5 para 1.
+- **Como ele protege a sua conta (45 s):** o teto por trade, o limite do dia, o bloqueio do plano acima do teto, os contratos que cabem no stop e o controle ou o teclado.
+
+Os dois também servem de anúncio in-stream no YouTube (pulável) e de remarketing: o primeiro para quem já viu algum Reel do GL Risk Auto, o segundo para o público de mesa proprietária, sempre com a frase da mesa.
+
+**Peças extras para Reels, stories e anúncios:** 5 loops de 8 s (plano pronto, bloqueio, sinal verde, sistema completo e o redondo), 2 histórias (bloqueio e trade) e o antes e depois em 2 imagens. Sem som e sem legenda: o texto entra no editor, em cima e embaixo, para virar 9:16. A página traz o "Como usar" de cada uma.
+
 ## Calendário sugerido
 
 Até 29/10 a série "Operacional na prática" ocupa as 19h dos dias úteis. O GL Risk Auto entra nos fins de semana às 19h, com carrossel na quarta às 12h e o YouTube no domingo às 10h. De novembro em diante, ganha também os dias úteis. A planilha "Calendário GL Risk Auto" tem cada post com a legenda.
@@ -147,7 +156,7 @@ Os seis roteiros estão em `../roteiros-gl-risk-auto.md`, cada um com a duraçã
 
 ## O que depende de Giovane
 
-- [ ] **O primeiro sinal verde:** no print 30 o painel diz "buscando 2R" e calcula o primeiro sinal verde em 2R do teto; a regra combinada foi 1,5R. Os textos não citam o número até essa confirmação.
+- [x] **O primeiro sinal verde:** Giovane confirmou em 5/10 que o painel fica verde acima de 1,5 para 1. Os vídeos do site já usam esse número. (No print 30 o painel mostra "buscando 2R"; conferir se é outra configuração.)
 - [ ] **O GL Risk Auto é vendido avulso** ou só no Operacional Completo? Os textos dizem "no Operacional Completo, para NinjaTrader".
 - [ ] **Validar as regras** das aulas 20 e 21 e dos tutoriais antes de liberar para os alunos.
 - [ ] **Verba para o YouTube Ads** e a data do teste.
