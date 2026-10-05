@@ -748,6 +748,33 @@ def gerar():
         linhas_ads.append(f'''<tr><td><b>riskauto_{esc(y['id'].replace('yt-', ''))}_v1</b></td><td>YouTube · {esc(y['fase'])}</td><td>{esc(y['fmt'])}</td>
   <td><b>Título:</b> {esc(y['curto'])}<br><b>Título longo:</b> {esc(y['longo'])}<br><b>Descrição:</b> {esc(y['desc'])}<div class="acoes">{botao_copia('Copiar os textos', tid, 'Textos copiados')}</div><pre id="{tid}" hidden>{esc(txt)}</pre></td></tr>''')
 
+    # kit do site (loops e histórias novos, antes e depois e o prompt do Codex), com o ZIP próprio
+    import kit_site_risk
+    SITE = kit_site_risk.montar_site()
+    K['grupos']['site'] = SITE['grupo']
+    novos = [c for c in SITE['catalogo'] if c['arquivo'].split('/')[0] in ('loops', 'historias')]
+
+    def card_site(c):
+        nome = c['arquivo'].split('/')[-1][:-4]
+        pst = 'site/' + (nome + '-fim.jpg' if 'capa_fim' in c else nome + '.jpg')
+        cls = 'r11' if c['formato'] == '1:1' else 'r169'
+        return f'''<article class="vcard">
+  {video_tag('site/' + nome + '.mp4', pst, cls, c['titulo'])}
+  <div class="info"><p class="tipo">{'Loop' if c['arquivo'].startswith('loops') else 'História'} {esc(c['formato'])} · {c['duracao_s']:g} s</p><h3>{esc(c['titulo'])}</h3><p class="sub">{esc(c['descricao'])}</p>
+    <p class="sub">media/risk/{esc(c['arquivo'])}</p></div>
+</article>'''
+    ad = ''.join(img_tag("site/" + n, alt) for n, alt in (('risk-antes.jpg', 'Antes: o gráfico sem o plano'), ('risk-depois.jpg', 'Depois: o mesmo gráfico com o plano do GL Risk Auto')))
+    site_html = f'''<div class="panel">
+  <div class="bloco-top"><h3>O kit</h3><span class="pill">{SITE['n_mp4']} vídeos · {SITE['n_jpg']} imagens · {SITE['total'] / 1e6:.0f} MB</span></div>
+  <p class="muted">Os loops e as histórias abaixo foram feitos para o site; os filmes, reels, tutoriais e aulas são os desta página, com nomes simples. O ZIP traz a pasta media/risk, o catálogo com título e duração de cada vídeo, o LEIA-ME e o prompt.</p>
+  <div class="acoes">{botao('Baixar o kit do site (ZIP)', True, zipg='site')}{botao_copia('Copiar o prompt do Codex', 'prompt-codex', 'Prompt copiado')}</div>
+  <details><summary>Ver o prompt</summary><pre id="prompt-codex">{esc(SITE['prompt'])}</pre></details>
+</div>
+<div class="panel"><div class="bloco-top"><h3>Antes e depois com arrasto</h3><span class="pill">2 imagens 1920x1080</span></div>
+  <p class="muted">O mesmo gráfico de 5 minutos, antes e depois de desenhar o plano. No site, a pessoa arrasta a alça para comparar.</p>
+  <div class="ad2">{ad}</div></div>
+<div class="vgrid wide">{''.join(card_site(c) for c in novos)}</div>'''
+
     n_vid = len(K['reels']) + len(K['feed']) + len(K['yts']) + 2 * len(K['aulas']) + len(K['coringas'])
     n_img = len({x['p'] for x in K['arquivos'] if x['p'].startswith('img/')})
     rep = {
@@ -764,6 +791,7 @@ def gerar():
         '<!--ANUNCIOS-->': '\n'.join(linhas_ads),
         '<!--ROTEIROS-->': md_paineis(K['roteiros_md'], 'Como usar os roteiros'),
         '<!--CORINGAS-->': '\n'.join(card_coringa(c) for c in K['coringas']),
+        '<!--SITE-->': site_html,
         '<!--DADOS-->': json.dumps({'agenda': K['agenda'], 'zip': {'nome': NOME_ZIP, 'arquivos': K['arquivos'], 'textos': K['textos']}, 'grupos': K['grupos']},
                                    ensure_ascii=False).replace('</', '<' + chr(92) + '/'),
     }
