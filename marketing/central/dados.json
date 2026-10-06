@@ -17,6 +17,13 @@
       "quando": "Para baixar o que vai postar"
     },
     {
+      "id": "leitura",
+      "nome": "Leitura de Mercado GL",
+      "url": "https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW",
+      "para": "Os prints novos do dia viram vídeos de leitura de mercado: Reels, feed, YouTube e coringa, com legenda e ZIP.",
+      "quando": "Na semana de cada rodada de prints"
+    },
+    {
       "id": "campanha",
       "nome": "Campanha GL Risk Auto",
       "url": "https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1",

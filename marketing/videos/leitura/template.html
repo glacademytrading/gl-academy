@@ -1,0 +1,158 @@
+<title>Leitura de Mercado GL</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Página irmã da Biblioteca de Vídeos GL (que chegou ao limite de tamanho de uma página): os prints do dia viram
+   vídeos de leitura de mercado. Uma seção por rodada, da mais nova para a mais antiga; mesma identidade da Biblioteca. */
+:root {
+  color-scheme: dark;
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1f1c15; --line: #322d22;
+  --fg: #f1ece1; --muted: #a69d8b; --gold: #d8ae55; --gold-2: #f6d991; --gold-ink: #1a1408;
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; } }
+:root[data-theme="light"] {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: max(16px, 4vw); padding-block: 48px 80px; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.05; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+h3 { font-size: 1.1rem; font-weight: 800; }
+p { margin: 0; }
+a { color: var(--gold); }
+.eyebrow { font-family: var(--font-data); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.lede { max-width: 66ch; font-size: 1.08rem; }
+.muted { color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 22px; scroll-margin-top: 20px; }
+.head { display: flex; flex-direction: column; gap: 8px; }
+.head p { color: var(--muted); max-width: 72ch; }
+.hero { display: flex; flex-direction: column; gap: 16px; }
+.frase { font: 800 clamp(1.2rem, 2.6vw, 1.6rem)/1.2 var(--font-display); color: var(--gold-2); max-width: 32ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px; }
+.stat { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; background: var(--surface); }
+.stat b { font-family: var(--font-data); color: var(--gold); }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { text-decoration: none; font-size: .88rem; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--fg); }
+.toc a:hover, .toc a:focus-visible { border-color: var(--gold); }
+.btn { font: 600 .9rem/1.2 var(--font-body); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; cursor: pointer; }
+.btn:hover { border-color: var(--gold); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible, video:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn.ouro { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+.btn.mini { padding: 6px 10px; font-size: .8rem; }
+.btn[disabled] { opacity: .45; cursor: default; }
+.acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.status { font-size: .85rem; color: var(--muted); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pill { font-family: var(--font-data); font-size: .7rem; letter-spacing: .05em; text-transform: uppercase; border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; color: var(--muted); white-space: nowrap; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+details { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--surface-2); }
+summary { cursor: pointer; font-weight: 600; font-size: .9rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: .88rem; line-height: 1.5; margin: 10px 0 0; color: var(--fg); }
+.aviso { font-size: .85rem; color: var(--muted); max-width: 80ch; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; z-index: 5; }
+/* a rodada: o que os prints mostram, quando postar e os vídeos por formato */
+.rodada { border-top: 1px solid var(--line); padding-top: 40px; }
+.resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; align-items: start; }
+.resumo ol, .resumo ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.resumo li { max-width: 70ch; }
+.quando { font-variant-numeric: tabular-nums; }
+.formato { display: flex; flex-direction: column; gap: 14px; }
+.formato > h3 { font-size: 1rem; }
+.formato > p { color: var(--muted); max-width: 72ch; font-size: .92rem; }
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 18px; }
+.vgrid.wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
+.vcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; scroll-margin-top: 20px; }
+.vcard video { width: 100%; border-radius: 10px; background: #000; display: block; }
+.r916 { aspect-ratio: 9 / 16; } .r45 { aspect-ratio: 4 / 5; } .r169 { aspect-ratio: 16 / 9; }
+.vcard .info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.vcard .sub { color: var(--muted); font-size: .9rem; }
+.vcard .uso { font-size: .85rem; }
+.vcard .uso b { font-family: var(--font-data); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+</style>
+
+<div class="page">
+  <header class="hero">
+    <p class="eyebrow">GL Academy · os prints do dia viram vídeo · página irmã da Biblioteca</p>
+    <h1>Leitura de Mercado GL</h1>
+    <p class="frase">O que o mercado fez, o que o painel mostrou e a lição, com o gráfico real.</p>
+    <p class="lede">Cada rodada de prints novos vira vídeos de leitura de mercado sem gastar crédito: o gráfico se constrói na tela, cada nível e cada painel é destacado e a lição fecha o vídeo. Cada rodada traz os verticais para Reels e Shorts, o 4:5 do feed, o 16:9 do YouTube e um coringa sem texto, com a legenda pronta. A Biblioteca de Vídeos GL chegou ao limite de tamanho de uma página, então as rodadas novas ficam aqui.</p>
+    <div class="stats"><span class="stat"><b><!--N-VID--></b> vídeos</span><span class="stat"><b><!--N-ROD--></b> rodada<!--S-ROD--></span><span class="stat"><b>0</b> crédito gasto</span></div>
+    <div class="acoes"><button type="button" class="btn ouro" id="zip-tudo">Baixar tudo organizado (ZIP)</button><span class="status" id="st-tudo" role="status" aria-live="polite">As pastas são as mesmas do pacote da Biblioteca: extraia na pasta "Marketing de trading" e tudo se junta.</span></div>
+    <nav class="toc" aria-label="Seções"><!--TOC--><a href="<!--BIBLIOTECA-->" target="_blank" rel="noopener">Biblioteca de Vídeos GL</a><a href="<!--RISK-->" target="_blank" rel="noopener">Campanha GL Risk Auto</a></nav>
+    <p class="aviso">Todos os vídeos são replays educacionais, com o selo na tela e o aviso de risco no fim. Resultado só em pontos; resultado passado não garante resultado futuro. Onde aparece Gamma: GL Gamma é uma assinatura à parte. Regras de entrada e de stop mostradas nos vídeos são propostas a partir dos prints: Giovane valida antes de virar regra da Mentoria.</p>
+  </header>
+
+<!--RODADAS-->
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script type="application/json" id="dados"><!--DADOS--></script>
+<script>
+(function () {
+  var D = {}; try { D = JSON.parse(document.getElementById('dados').textContent); } catch (e) { D = {}; }
+  var timer;
+  function toast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(timer); timer = setTimeout(function () { t.hidden = true; }, 2600); }
+
+  // copiar
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var alvo = document.getElementById(b.dataset.copy); if (!alvo) return;
+    var txt = alvo.textContent, label = b.dataset.label || b.textContent, feito = b.dataset.done || 'Copiado';
+    var ok = function () { b.textContent = feito; setTimeout(function () { b.textContent = label; }, 1600); };
+    var falha = function () { var r = document.createRange(); r.selectNodeContents(alvo); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Texto selecionado. Use o comando de copiar.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, falha); else falha();
+  });
+
+  // downloads pela capacidade do Claude; fora dele, link comum
+  var dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+  async function salvar(nome, blob) {
+    var d = await dlCap;
+    if (d) {
+      try { await d.save({ filename: nome, data: blob }); return true; }
+      catch (err) { var c = err && err.code; if (c === 'declined') return false; toast(c === 'too_large' ? 'Arquivo grande demais para este aparelho. Baixe por rodada.' : c === 'rate_limited' ? 'Já tem um download esperando confirmação.' : 'O download não está disponível nesta visualização.'); return false; }
+    }
+    var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 120000); return true;
+  }
+  async function buscar(p) { var r = await fetch(p); if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); }
+  var jszip;
+  function carregarZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (!jszip) jszip = new Promise(function (ok, no) { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = function () { ok(window.JSZip); }; s.onerror = function () { jszip = null; no(new Error('JSZip')); }; document.head.appendChild(s); });
+    return jszip;
+  }
+  // itens: [{p, z}] (z = caminho dentro do ZIP); textos: [{z, t}]
+  async function zipar(nome, itens, textos, status) {
+    status('Carregando o compactador…');
+    var JSZip = await carregarZip(), zip = new JSZip(), prox = 0, feitos = 0;
+    async function trabalhar() { while (prox < itens.length) { var it = itens[prox++]; zip.file(it.z, await buscar(it.p)); feitos++; status('Juntando ' + feitos + ' de ' + itens.length + '…'); } }
+    await Promise.all([trabalhar(), trabalhar(), trabalhar(), trabalhar()]);
+    (textos || []).forEach(function (t) { zip.file(t.z, t.t); });
+    var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (m) { status('Montando o ZIP: ' + Math.round(m.percent) + '%'); });
+    status('Confirme o download.');
+    if (await salvar(nome, out)) toast('ZIP pronto: ' + itens.length + ' arquivos.');
+  }
+  var ocupado = false;
+  async function acao(btn, fn) {
+    if (ocupado) { toast('Espere o download atual terminar.'); return; }
+    ocupado = true; var rot = btn.textContent; btn.disabled = true;
+    var st = btn.dataset.status ? document.getElementById(btn.dataset.status) : null, idle = st ? st.textContent : '';
+    var status = function (t) { if (st) st.textContent = t; else btn.textContent = t; };
+    try { await fn(status); } catch (err) { toast('Não deu para baixar. Tente de novo.'); }
+    finally { ocupado = false; btn.disabled = false; btn.textContent = rot; if (st) st.textContent = idle; }
+  }
+  function soNome(p) { return p.split('/').pop(); }
+  document.getElementById('zip-tudo').dataset.status = 'st-tudo';
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('#zip-tudo, [data-dl], [data-zipr]'); if (!b) return;
+    if (b.id === 'zip-tudo') return acao(b, function (st) { return zipar(D.zip.nome, D.zip.arquivos, D.zip.textos, st); });
+    if (b.dataset.dl) { var nome = b.dataset.nome || soNome(b.dataset.dl); return acao(b, async function (st) { st('Preparando…'); if (await salvar(nome, await buscar(b.dataset.dl))) toast('Download enviado: ' + nome); }); }
+    if (b.dataset.zipr) { var r = (D.rodadas || {})[b.dataset.zipr]; if (!r) return; return acao(b, function (st) { return zipar(r.nome, r.arquivos, r.textos, st); }); }
+  });
+})();
+</script>

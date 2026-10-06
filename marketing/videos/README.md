@@ -40,6 +40,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-feed.js` | versões 4:5 para o feed, geradas a partir dos vídeos 9:16 |
 | `specs-r4.js` | sequência da call, comunidade, parceiro, kit de live 2.0 (WebM transparente), contagem regressiva, YouTube e kit do site |
 | `specs-r5.js` | o operacional por dentro (prints 6 a 13): Estado de Mercado, Gamma no 1 minuto, Zero Gamma perdido, o antes e depois dos alvos de volatilidade, de volume e do GL Gamma, o rompimento e o retorno à média; com coringas limpos, versões 4:5 e uma horizontal |
+| `specs-expansao.js` | a expansão de 05 e 06/10 no ES (prints 35 a 38): x01 do lateral à expansão, x02 força não é entrada, x03 o painel de risco pedindo cautela depois do topo e x04 a história completa em 16:9 para o YouTube; versões 4:5 e o coringa c17. Publicados na página Leitura de Mercado GL (`leitura_mercado.py`) |
 | `specs-mentoria.js` | Mentoria GL: 19 aulas 16:9 (prints 1 a 21). O gráfico para no ponto de decisão, pausa para o aluno e mostra região de atuação, gatilho, invalidação, alvos e resultado. Plano em `marketing/mentoria/plano-da-mentoria.md` |
 | `specs-social.js` | série "Operacional na prática" (9:16, Reels e Shorts): as aulas da mentoria no vertical, com o gancho sobre o gráfico, o painel fora das áreas de botões e legenda e a capa de cada episódio (`capa-op...`, pelo `stills.js` com `QUALIDADE=92`). Legendas, títulos do YouTube e datas em `social_operacional.py`; o calendário sai em `../execucao/calendario-operacional-na-pratica.csv` |
 | `specs-carrosseis.js` | carrosséis 4:5 e capas de Reels (imagens, com `slides.js`) |
@@ -54,6 +55,7 @@ python3 build_library.py                       # monta biblioteca/index.html, v�
 | `specs-risk-aulas.js` | Mentoria GL, Módulo 8 · Gestão de risco (aulas 20 e 21) e os tutoriais 1 a 4 do GL Risk Auto, em 16:9 (formato da Mentoria) e 9:16 (formato da série). Usa o `aula()` exportado pelo `specs-mentoria.js` |
 | `specs-risk-posts.js` | imagens do GL Risk Auto: 7 carrosséis, stories de enquete e resposta, capas de Reels, thumbnails, frases e a capa de destaque. Render: `SPECS=./specs-risk-posts.js node posts.js` (sai em `out/posts-risk/`) |
 | `kit_risk.py` | página Campanha GL Risk Auto (`risk/`): o que postar em cada dia, o plano (`../execucao/campanha-gl-risk-auto.md`), os vídeos leves com legenda e título do YouTube, as imagens, os textos dos anúncios, os roteiros (`../roteiros-gl-risk-auto.md`) e o ZIP nas pastas do pacote. Grava `../execucao/calendario-gl-risk-auto.csv` e `../execucao/anuncios-gl-risk-auto.csv` |
+| `leitura_mercado.py` | página Leitura de Mercado GL (`leitura/`): uma seção por rodada de prints do dia, com o que os prints mostram, quando postar, os vídeos por formato (9:16, 4:5, 16:9 e coringa), a legenda pronta, o download e o ZIP nas mesmas pastas do pacote da Biblioteca (`02 - Vídeos (feitos pelo Claude)/18 - Leitura de mercado`) |
 | `organizacao.py` | pacote "Baixar tudo organizado": pasta de cada arquivo, nomes legíveis, LEIA-ME, legendas, catálogo e o organizador do Windows (o `build_library.py` chama no fim) |
 | `kit_site.py` | kit do site: o melhor vídeo para cada espaço do site novo, capas em tamanho cheio, catálogo e o prompt para o Codex (o `build_library.py` chama depois do `organizacao.py`) |
 | `mentoria_pacote.py` | ZIP da Mentoria GL: as aulas por módulo, o plano para o GL OS com o roteiro de cada aula e os prints que faltam, o cronograma de 4 semanas, o diário, a ficha, o checklist, os prints e as capas. Grava `../mentoria/roteiros-das-aulas.md` e o botão "Baixar a mentoria completa" na Biblioteca (o `build_library.py` chama antes do `organizacao.py`); com `--zip`, grava também o ZIP com os vídeos em qualidade cheia em `../entregas` (84 MB), e com `--zip --leve`, o mesmo ZIP com os vídeos da Biblioteca (45 MB) em `../entregas/leve` |
@@ -118,6 +120,17 @@ python3 kit_risk.py                           # página em risk/index.html, víd
 
 Os prints 22 a 34 não ficam no git, como os outros: 22 a 31 chegaram pelo chat e 32 a 34 pela pasta do Google Drive de 04/10. Copie-os para esta pasta como `22.png` a `34.png`; o que cada um mostra está em `risk-prints.js`.
 
+## Leitura de Mercado GL (página irmã)
+
+Página (privada): [Leitura de Mercado GL](https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW), ligada na Biblioteca (atalho no topo e a linha "Leitura de mercado" no guia). A Biblioteca chegou ao limite de 256 MB por página em 06/10, então as rodadas novas de prints do dia ficam nesta página. Rodada nova: renderize com um specs próprio, acrescente a rodada no começo de `RODADAS` em `leitura_mercado.py`, rode o script e publique `leitura/index.html` no mesmo link com os arquivos novos de `leitura/v` e `leitura/p` (e os prints em `leitura/prints`).
+
+```bash
+SPECS=./specs-expansao.js node render.js   # x01 a x04, as versões 4:5 e o coringa c17
+python3 leitura_mercado.py                # página em leitura/index.html, vídeos leves (CRF 25) em leitura/v e capas em leitura/p
+```
+
+**Rodada de 06/10 (prints 35 a 38).** Os prints chegaram pelo chat e não ficam no git; estão publicados na página, na pasta `prints/`. 38 é o 5 minutos de 05/10 (a alta da tarde e o painel de risco às 15:29), 37 e 36 são o 15 minutos de 06/10 (7871,25 e 7879) e 35 é o 5 minutos de 06/10 (7884). A ordem 37, 36, 35 segue o preço, o VAH D (7869, 7881, 7883,50) e a extensão do Estado de Mercado (40%, 47%, 58%). O que cada vídeo mostra e as coordenadas estão no começo de `specs-expansao.js`.
+
 ## Rótulos internos dos prints
 
-Alguns prints mostram o nome de versão do indicador ("INTERNA 1.1.1" no print 3, "Interna Teste" nos prints 7, 14 e 15). O `stage.html` esconde esses rótulos em qualquer peça que use esses prints (`INTERNOS`), então nenhuma caixa ou enquadramento deve apontar para eles. Print novo com rótulo interno: acrescente o retângulo em `INTERNOS`.
+Alguns prints mostram o nome de versão do indicador ("INTERNA 1.1.1" no print 3, "Interna Teste" nos prints 7, 14 e 15) ou a linha de cabeçalho com os nomes, as versões e a licença dos indicadores (prints 35, 36 e 38). O `stage.html` esconde esses rótulos em qualquer peça que use esses prints (`INTERNOS`), então nenhuma caixa ou enquadramento deve apontar para eles. Print novo com rótulo interno: acrescente o retângulo em `INTERNOS`.

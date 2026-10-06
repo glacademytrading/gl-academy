@@ -653,7 +653,7 @@ O calendário dia a dia, por conta e horário, está em `canais/calendario-mestr
 | `execucao/campanha-gl-risk-auto.md` | A campanha do GL Risk Auto |
 | `site/prompt-codex-gl-risk-auto.md` | Os dois vídeos do GL Risk Auto no site |
 
-Páginas: [Central de Marketing GL](https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR) (a porta de entrada), [Pauta GL](https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba) (a pauta do dia), [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1), [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm), [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) e [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns).
+Páginas: [Central de Marketing GL](https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR) (a porta de entrada), [Pauta GL](https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba) (a pauta do dia), [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1), [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm), [Leitura de Mercado GL](https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW), [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) e [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns).
 
 Fontes consultadas em 05/10/2026 para as regras das plataformas e o contexto regulatório:
 

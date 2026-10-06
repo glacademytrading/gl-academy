@@ -6,15 +6,17 @@ import html, json, re
 esc = lambda s: html.escape(str(s), quote=True)
 KIT = 'https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp'   # Carrosséis e Stories GL (página irmã, kit_posts.py)
 RISK = 'https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1'   # Campanha GL Risk Auto (página irmã, kit_risk.py)
+LEITURA = 'https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW'   # Leitura de Mercado GL (página irmã, leitura_mercado.py)
 # tipos que ficam na página de carrosséis e stories: (link, o que mostrar em "Prontos")
 EXTERNOS = {'kit-serie': (KIT + '#serie', '<b>19</b> carrosséis e <b>38</b> stories'), 'kit-conv': (KIT + '#converter', '<b>2</b> carrosséis e <b>4</b> stories'),
-            'risk-auto': (RISK + '#hoje', '<b>43</b> vídeos e <b>98</b> imagens')}
+            'risk-auto': (RISK + '#hoje', '<b>43</b> vídeos e <b>98</b> imagens'),
+            'leitura': (LEITURA, '<b>8</b> vídeos (rodada de 06/10)')}
 
 # ---------------------------------------------------------------------------
 # As partes da página, na ordem do funil. Cada grupo da Biblioteca entra numa parte só.
 PARTES = [
   ('atrair', 'Atrair e ensinar', 'Conteúdo orgânico que traz seguidor novo e mostra como o operacional funciona de verdade. É o que se posta todo dia.',
-   ['operacional-social', 'kit-serie', 'orderflow', 'aulas', 'operacional', 'coringas', 'horizontais']),
+   ['operacional-social', 'kit-serie', 'orderflow', 'aulas', 'operacional', 'leitura', 'coringas', 'horizontais']),
   ('vender', 'Anunciar e vender', 'Para os anúncios e os posts de venda: cada vídeo prova uma coisa que a tecnologia GL faz e chama para a call 1x1.',
    ['vendem', 'risk-auto', 'ganchos', 'feed', 'comerciais', 'objecoes']),
   ('converter', 'Converter e cuidar de quem chegou', 'Depois do agendamento e depois da compra: a pessoa aparece na call, o aluno aprende e a comunidade recebe bem.',
@@ -38,6 +40,8 @@ GUIA = {
   'aulas': ('Aulas rápidas', 'Um conceito em 15 segundos (VWAP, Value Area) com o gráfico real.', 'Reels, Shorts e TikTok', 'Uma por semana'),
   'operacional': ('Operacional por dentro', 'O gráfico se construindo e cada parte do operacional destacada: painel, alvos, VWAPs e Gamma.',
                   'Reels, Shorts e anúncios', 'Uma por semana, alternando com a série'),
+  'leitura': ('Leitura de mercado', 'Os prints novos do dia viram vídeos de leitura de mercado: o gráfico real, o painel e a lição. A Biblioteca chegou ao limite de tamanho, então as rodadas novas ficam na página Leitura de Mercado GL.',
+              'Reels, Shorts, TikTok, feed (4:5) e YouTube (16:9)', 'Na semana dos prints, enquanto o assunto está fresco'),
   'coringas': ('Coringas verticais', 'O movimento do setup sem texto, para pôr narração, música ou um gancho por cima.', 'Reels, Shorts e TikTok',
                'Quando quiser postar algo novo sem esperar vídeo pronto'),
   'horizontais': ('Coringas horizontais', 'O mesmo movimento, em 16:9.', 'YouTube, VSL, boas-vindas do funil e trechos de live', 'Na edição de vídeos longos'),

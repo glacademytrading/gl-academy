@@ -76,6 +76,7 @@ Do mais antigo para o mais recente. Tudo está no repositório `glacademytrading
 | 02/10 | **Rodada 5:** o operacional por dentro (prints 6 a 12) e o retorno à média com GL Gamma. **Mentoria GL:** 19 videoaulas com os prints 1 a 21, a trilha de estudos e os 8 encontros, num ZIP próprio | Biblioteca; [[Plano da Mentoria GL]] |
 | 04/10 | **Série Operacional na prática:** 19 Reels e Shorts, com carrosséis, stories e calendário. **Biblioteca reorganizada** por objetivo, com "Comece por aqui" e o post do dia. **Campanha GL Risk Auto** "Risco primeiro": 43 vídeos, 98 imagens, anúncios, as aulas 20 e 21 da Mentoria, 4 tutoriais, 6 roteiros para gravar e o calendário até 25/11 | [[Série Operacional na prática]]; Carrosséis e Stories; [[Campanha GL Risk Auto]] |
 | 05/10 | **Site do GL Risk Auto:** 2 vídeos completos (o trade do começo ao fim e a proteção) e o prompt curto para o Codex; as outras peças viraram extras para Reels e anúncios. **Plano de Marketing 2026-27**, com o calendário mestre de 473 linhas, perfis e bios, os primeiros roteiros, o banco de 120 ideias e os modelos e checklists. **Pauta GL** e a rotina diária, testada no mesmo dia. **Arte do plano** em 3 pôsteres. **Central de Marketing GL** e esta nota | [[Plano de Marketing 2026-27]]; Central; Pauta |
+| 06/10 | **Série O Efeito Dominó** (macroeconomia: 9 aulas e 24 Reels, com os números conferidos), o mapa das fontes de renda, a pré-auditoria das redes e a estrutura do guia de viralização. **A expansão de 05 e 06/10:** 4 prints novos (35 a 38) viraram 8 vídeos sem crédito: do lateral à expansão, força não é entrada, o painel de risco pedindo cautela depois do topo e a história completa em 16:9, com versões 4:5 e um coringa, na página nova **Leitura de Mercado GL** (a Biblioteca chegou ao limite de tamanho) | [[Série O Efeito Dominó]]; [[Mapa das fontes de renda]]; [Leitura de Mercado GL](https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW) |
 
 ## 3. O que a GL entrega e vende
 
@@ -223,6 +224,7 @@ O plano completo, com as 25 seções, está em [[Plano de Marketing 2026-27]].
 | [Central de Marketing GL](https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR) | A porta de entrada: hoje, páginas, pendências, entrevista e arquivos |
 | [Pauta GL](https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba) | Os roteiros de cada dia útil, com fontes e status |
 | [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm) | Os vídeos e imagens feitos com os prints, com legenda e download |
+| [Leitura de Mercado GL](https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW) | Os prints novos do dia em vídeo, rodada por rodada (página irmã da Biblioteca) |
 | [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1) | A campanha, os 2 vídeos do site e as peças extras |
 | [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) | Os carrosséis e stories da série Operacional na prática |
 | [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns) | Os 6 pilares do ciclo e o status de cada ação |
@@ -347,4 +349,4 @@ O objetivo é um plano concreto, em que Giovane só precise aplicar: o marketing
 **Histórico desta nota**
 
 - 05/10/2026: criada a partir de todo o trabalho de 29/09 a 05/10. Substitui o pacote do GL OS como resumo oficial do marketing.
-- 06/10/2026: entraram a série de macroeconomia "O Efeito Dominó" (9 aulas e 24 Reels, com os números conferidos), o rascunho do mapa das fontes de renda, a pré-auditoria das redes, a estrutura do guia de viralização e uma sugestão para cada decisão em aberto.
+- 06/10/2026: entraram a série de macroeconomia "O Efeito Dominó" (9 aulas e 24 Reels, com os números conferidos), o rascunho do mapa das fontes de renda, a pré-auditoria das redes, a estrutura do guia de viralização e uma sugestão para cada decisão em aberto. No fim do dia, os vídeos da expansão de 05 e 06/10 (prints 35 a 38).

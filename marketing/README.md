@@ -37,6 +37,7 @@ São privadas: só abre quem recebeu acesso pelo menu de compartilhar de cada p�
 | [Pauta GL](https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba) | Os roteiros de cada dia útil, com fontes e status, e o calendário do dia |
 | [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns) | O status de cada ação do plano do ciclo e a meta oficial |
 | [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm) | Todos os vídeos e imagens feitos com os prints, para baixar e postar |
+| [Leitura de Mercado GL](https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW) | Os prints novos do dia em vídeo (página irmã da Biblioteca, que ficou cheia), com legenda, download e ZIP |
 | [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1) | Os vídeos, imagens, legendas e anúncios do GL Risk Auto, os 2 vídeos do site e as peças extras |
 | [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) | Os carrosséis e stories da série Operacional na prática |
 | [Plano de Marketing GL Academy](https://claude.ai/artifact/7A6YMsf9t1Wyqs57G2LEHc) | O plano do ciclo em página, com os desenhos |

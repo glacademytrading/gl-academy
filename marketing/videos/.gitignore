@@ -12,3 +12,8 @@ biblioteca/sections.html
 biblioteca/manifest.json
 biblioteca/site/
 biblioteca/imagens/
+# páginas irmãs montadas (vídeos, capas e prints ficam nos artifacts)
+leitura/index.html
+leitura/v/
+leitura/p/
+leitura/prints/
