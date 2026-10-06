@@ -4,10 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GL Academy | Modelo de Negociação</title>
+    <meta name="description" content="Conheça o GL Model, o modelo de negociação da GL Academy com leitura institucional de fluxo, volume e risco. Agende sua call 1x1 gratuita.">
+    <meta name="theme-color" content="#0d0d0d">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GL Academy | Agende sua call 1x1">
+    <meta property="og:description" content="Conheça o GL Model: leitura institucional de fluxo, volume e risco. Call estratégica gratuita de 30 minutos.">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- FUNDO EM VÍDEO (loop) -->
+    <div class="bg-video-wrap" aria-hidden="true">
+        <video class="bg-video" id="bgVideo" autoplay muted loop playsinline preload="auto" poster="assets/bg-poster.jpg">
+            <source src="assets/bg-loop.mp4" type="video/mp4">
+            <!-- Fallback: vídeo original gerado no Higgsfield (Seedance 2.5) -->
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_39DmkekHgr8q6UfGgeMFIzfzuuy/hf_20260928_230502_5028f369-b43c-442b-a21f-3d6dadf9db5e.mp4" type="video/mp4">
+        </video>
+        <div class="bg-video-overlay"></div>
+    </div>
+
     <div class="progress-bar-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
@@ -45,6 +60,7 @@
                 <input type="tel" id="whatsapp" placeholder="(11) 99999-9999">
             </div>
             <button class="btn-main" onclick="validateStep2()">Continuar</button>
+            <p class="consent-note">Ao continuar, você concorda em ser contatado pela GL Academy por WhatsApp e e-mail sobre a sua call e conteúdos educacionais. Você pode pedir a exclusão dos seus dados a qualquer momento.</p>
         </div>
 
         <!-- PASSO 3: DECISÃO -->
@@ -88,6 +104,7 @@
                 <button class="btn-option" onclick="selectOption('capital', 'Menos de R$ 3.000')">menos de R$ 3.000</button>
                 <button class="btn-option" onclick="selectOption('capital', 'R$ 3.000-R$ 5.000')">R$ 3.000-R$ 5.000</button>
                 <button class="btn-option" onclick="selectOption('capital', 'R$ 5.000-R$ 20.000')">R$ 5.000-R$ 20.000</button>
+                <button class="btn-option" onclick="selectOption('capital', 'R$ 20.000-R$ 50.000')">R$ 20.000-R$ 50.000</button>
                 <button class="btn-option" onclick="selectOption('capital', 'Acima de R$ 50.000')">Acima de R$ 50.000</button>
             </div>
         </div>
@@ -166,7 +183,7 @@
                     </a>
                 </div>
 
-                <button class="btn-secondary" onclick="window.location.href='https://glacademytrading.com/'">
+                <button class="btn-secondary" onclick="shareInvite()">
                     Convidar um amigo para conhecer a GL Academy
                 </button>
             </div>
@@ -175,6 +192,7 @@
         <!-- LOGO RODAPÉ -->
         <footer class="footer-logo">
             <img src="logo-gl.png" alt="GL Academy Logo">
+            <p class="risk-note">Trading envolve risco financeiro real. A GL Academy oferece educação e tecnologia: não prometemos lucro e não fazemos recomendação individual de investimento.</p>
         </footer>
     </div>
 
