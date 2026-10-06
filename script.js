@@ -2,6 +2,138 @@ let currentStep = 1;
 const totalSteps = 9;
 const leadData = {};
 
+// RASTREAMENTO DE ANÚNCIOS (preencha os IDs para ativar; vazio = desligado)
+const TRACKING = {
+    META_PIXEL_ID: '', // ex: '123456789012345'
+    GA4_ID: ''         // ex: 'G-XXXXXXXXXX'
+};
+
+// ATRIBUIÇÃO: DE QUAL PILAR DE MARKETING VEIO O LEAD
+// Convenção: utm_medium = pilar. Ex: ?utm_source=instagram&utm_medium=conteudo&utm_campaign=q4-2026
+const PILARES = {
+    conteudo: 'Conteúdo', organico: 'Conteúdo', social: 'Conteúdo', bio: 'Conteúdo',
+    pago: 'Tráfego pago', cpc: 'Tráfego pago', paid: 'Tráfego pago', ads: 'Tráfego pago',
+    influenciador: 'Divulgação', afiliado: 'Divulgação',
+    imprensa: 'Imprensa', press: 'Imprensa',
+    rp: 'Relações públicas', comunidade: 'Relações públicas', parceria: 'Relações públicas',
+    evento: 'Relações públicas', indicacao: 'Relações públicas',
+    vendas: 'Vendas', prospeccao: 'Vendas'
+};
+const ATTR_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref'];
+const ATTR_WINDOW_DAYS = 30;
+
+// O acesso ao storage fica dentro do try: com cookies bloqueados até ler window.localStorage lança erro
+function readStore(storageName, key) {
+    try { return JSON.parse(window[storageName].getItem(key)); } catch (e) { return null; }
+}
+
+function writeStore(storageName, key, value) {
+    try { window[storageName].setItem(key, JSON.stringify(value)); } catch (e) { /* navegação privada */ }
+}
+
+function normalize(text) {
+    return (text || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
+}
+
+function derivePilar(touch) {
+    const medium = normalize(touch.utm_medium);
+    if (PILARES[medium]) return PILARES[medium];
+    if (medium) return `Outro (${touch.utm_medium})`;
+    if (touch.ref) return 'Relações públicas';
+    if (/instagram|youtube|youtu\.be|tiktok|linkedin|tradingview|linktr\.ee|google|bing/.test(touch.referrer)) return 'Conteúdo';
+    return 'Não identificado';
+}
+
+function captureAttribution() {
+    const params = new URLSearchParams(window.location.search);
+    const touch = { date: new Date().toISOString(), referrer: '' };
+    ATTR_PARAMS.forEach(p => {
+        const value = params.get(p);
+        if (value) touch[p] = value.trim().slice(0, 120);
+    });
+    try {
+        const host = document.referrer ? new URL(document.referrer).hostname : '';
+        if (host !== window.location.hostname) touch.referrer = host;
+    } catch (e) { /* referrer inválido */ }
+
+    // Primeiro contato nunca é sobrescrito; último contato vale por 30 dias
+    const isNewTouch = ATTR_PARAMS.some(p => touch[p]) || touch.referrer;
+    if (!readStore('localStorage', 'gl_first_touch')) writeStore('localStorage', 'gl_first_touch', touch);
+    let active = touch;
+    if (isNewTouch) {
+        writeStore('localStorage', 'gl_last_touch', touch);
+    } else {
+        const last = readStore('localStorage', 'gl_last_touch');
+        const ageDays = last ? (Date.now() - new Date(last.date).getTime()) / 86400000 : Infinity;
+        if (ageDays <= ATTR_WINDOW_DAYS) active = last;
+    }
+    active.pilar = derivePilar(active);
+
+    const first = readStore('localStorage', 'gl_first_touch') || touch;
+    active.firstTouch = `${derivePilar(first)} | ${first.utm_source || first.referrer || 'direto'} | ${(first.date || '').slice(0, 10)}`;
+    return active;
+}
+
+const attribution = captureAttribution();
+
+// ID ÚNICO DO LEAD: agrupa os e-mails parciais da mesma pessoa e vira o código de indicação
+function getLeadId() {
+    const saved = readStore('sessionStorage', 'gl_lead_id');
+    if (saved) return saved;
+    const id = `GL-${Date.now().toString(36).slice(-4)}${Math.random().toString(36).slice(2, 5)}`.toUpperCase();
+    writeStore('sessionStorage', 'gl_lead_id', id);
+    return id;
+}
+
+leadData.lead_id = getLeadId();
+
+// PRIORIDADE PARA O VENDEDOR TÉCNICO (A = contatar primeiro, C = nutrir com conteúdo)
+const SCORE = {
+    experience: { 'Menos de 6 meses': 0, '6 meses a 1 ano': 1, '1 a 3 anos': 2, 'Mais de 3 anos': 2 },
+    capital: { 'Menos de R$ 3.000': 0, 'R$ 3.000-R$ 5.000': 1, 'R$ 5.000-R$ 20.000': 2, 'R$ 20.000-R$ 50.000': 3, 'Acima de R$ 50.000': 3 },
+    goal: { 'Já vivo de trading': 1 }
+};
+
+function qualifyLead() {
+    if (!leadData.experience) return { tier: 'Novo', label: 'Em qualificação' };
+    const score = (SCORE.experience[leadData.experience] || 0)
+        + (SCORE.capital[leadData.capital] || 0)
+        + (SCORE.goal[leadData.goal] || 0)
+        + (leadData.appointment_time ? 2 : 0);
+    const tier = score >= 5 ? 'A' : score >= 3 ? 'B' : 'C';
+    return { tier, label: `${tier} (${score} de 8 pts)` };
+}
+
+function loadTracking() {
+    if (TRACKING.META_PIXEL_ID) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', TRACKING.META_PIXEL_ID);
+        fbq('track', 'PageView');
+    }
+    if (TRACKING.GA4_ID) {
+        const tag = document.createElement('script');
+        tag.async = true;
+        tag.src = `https://www.googletagmanager.com/gtag/js?id=${TRACKING.GA4_ID}`;
+        document.head.appendChild(tag);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', TRACKING.GA4_ID);
+    }
+}
+
+// Eventos: Lead (dados enviados), Schedule (call agendada), QuizStep (etapa vista)
+const GA4_EVENTS = { Lead: 'generate_lead', Schedule: 'agendamento_call', QuizStep: 'quiz_etapa' };
+
+function trackEvent(name, params = {}) {
+    if (window.fbq && name !== 'QuizStep') fbq('track', name);
+    if (window.gtag) gtag('event', GA4_EVENTS[name], { pilar: attribution.pilar, ...params });
+}
+
 function updateProgress() {
     const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
     document.getElementById('progressBar').style.width = pct + '%';
@@ -20,6 +152,7 @@ function showStep(step) {
 
     updateProgress();
     window.scrollTo(0, 0);
+    trackEvent('QuizStep', { etapa: step });
 }
 
 function nextStep() {
@@ -44,24 +177,36 @@ whatsappInput.addEventListener('input', (e) => {
 
 // ENVIO REAL DE LEADS POR E-MAIL (FORMSUBMIT)
 function notifyLead(status = "Parcial") {
+    const qualification = qualifyLead();
     fetch("https://formsubmit.co/ajax/glacademytrading@glacademytrading.com", {
         method: "POST",
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            _subject: `NOVO LEAD GL ACADEMY - ${leadData.name || 'Contato Inicial'} (${status})`,
+            _subject: `NOVO LEAD GL ACADEMY - ${leadData.name || 'Contato Inicial'} (${status}) · ${qualification.tier} · ${attribution.pilar} · ${leadData.lead_id}`,
+            LeadID: leadData.lead_id,
             Nome: leadData.name,
             Email: leadData.email,
             WhatsApp: leadData.whatsapp,
             Experiencia: leadData.experience || 'Não preenchido',
             Desafio: leadData.challenge || 'Não preenchido',
             Capital: leadData.capital || 'Não preenchido',
-            ObjetivoRenda: leadData.income_goal || 'Não preenchido',
+            ObjetivoRenda: leadData.goal || 'Não preenchido',
             DataAgendamento: leadData.appointment_date || 'Não agendado',
             HoraAgendamento: leadData.appointment_time || 'Não agendado',
-            StatusDoLead: status
+            FusoHorario: leadData.timezone || 'Não informado',
+            StatusDoLead: status,
+            Prioridade: qualification.label,
+            Pilar: attribution.pilar,
+            Origem: attribution.utm_source || attribution.referrer || 'direto',
+            Midia: attribution.utm_medium || '-',
+            Campanha: attribution.utm_campaign || '-',
+            Peca: attribution.utm_content || '-',
+            Termo: attribution.utm_term || '-',
+            CodigoIndicacao: attribution.ref || '-',
+            PrimeiroContato: attribution.firstTouch
         })
     })
     .then(response => response.json())
@@ -100,7 +245,8 @@ function validateStep2() {
     
     // ENVIAR IMEDIATAMENTE (Passo 2 concluído)
     notifyLead("Inicial/Contato");
-    
+    trackEvent('Lead');
+
     nextStep();
 }
 
@@ -200,10 +346,14 @@ function formatUTC(date, time) {
 }
 
 function finishBooking() {
-    leadData.appointment_date = selectedDate.toLocaleDateString();
+    leadData.appointment_date = selectedDate.toLocaleDateString('pt-BR');
     leadData.appointment_time = selectedTime;
-    
+    try {
+        leadData.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch (e) { /* navegador antigo */ }
+
     notifyLead("Concluído/Agendado");
+    trackEvent('Schedule');
     setupCalendarButtons();
     nextStep();
 }
@@ -227,5 +377,17 @@ function setupCalendarButtons() {
     appleBtn.download = "agendamento-gl.ics";
 }
 
+// INDICAÇÃO: o lead convida um amigo com link rastreado (ref = LeadID de quem indicou)
+function shareInvite() {
+    const url = `${window.location.origin}${window.location.pathname}?utm_source=convite&utm_medium=indicacao&utm_campaign=convite-amigo&ref=${encodeURIComponent(leadData.lead_id)}`;
+    const message = 'Conheça o GL Model, o modelo de negociação da GL Academy. Dá para agendar uma call 1x1 gratuita por aqui:';
+    if (navigator.share) {
+        navigator.share({ title: 'GL Academy', text: message, url }).catch(() => {});
+        return;
+    }
+    window.open(`https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`, '_blank');
+}
+
 renderCalendar();
 updateProgress();
+loadTracking();
