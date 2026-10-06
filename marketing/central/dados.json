@@ -202,6 +202,465 @@
       ]
     }
   ],
+  "tarefas": [
+    {
+      "id": "repos",
+      "prazo": "2026-10-06",
+      "texto": "Tirar o marketing do acesso público no GitHub",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Planos, comissões e links de checkout fora do acesso público",
+      "como": "O gl-academy publica o funil pelo GitHub Pages, e no plano gratuito um repositório privado não publica site: fechar o repositório tira o funil do ar. Crie um repositório privado e vazio, gl-academy-marketing, e libere o acesso do Claude a ele: eu levo a pasta de marketing e, com o seu ok, apago a branch do repositório público. O gl-academy-vendedores-app pode ser fechado em Settings → General → Change visibility, depois de conferir em Settings → Pages se ele publica algum site."
+    },
+    {
+      "id": "entrevista",
+      "prazo": "2026-10-07",
+      "texto": "Responder as 14 perguntas essenciais da entrevista",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "O plano v2, a auditoria das redes e o mapa de ofertas",
+      "como": "Na seção Entrevista, com o filtro \"Só as essenciais\", ou por áudio no chat, citando o número da pergunta."
+    },
+    {
+      "id": "bloco1",
+      "prazo": "2026-10-07",
+      "texto": "Gravar o bloco 1 (manifesto, \"Comece aqui\" e os Reels da semana 1) e fazer a sessão de fotos de 30 minutos",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "O relançamento de 09/10 e as thumbnails",
+      "como": "Roteiros em canais/roteiros-iniciais.md e na Pauta GL do dia."
+    },
+    {
+      "id": "bios",
+      "prazo": "2026-10-07",
+      "texto": "Bios, nomes, links e capas de destaques nos 3 perfis (era 06/10)",
+      "dono": "Social media",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "O relançamento",
+      "como": "Textos prontos em canais/perfis-e-bios.md."
+    },
+    {
+      "id": "decisoes-semana",
+      "prazo": "2026-10-08",
+      "texto": "Decidir os papéis dos perfis, o @ do YouTube, a conversa gratuita (duração e nome), a newsletter e a live real ou simulada",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Bios, canal, newsletter e a live de 15/10",
+      "como": "Na seção Pendências, cada uma com a minha sugestão: marque e escreva o que decidiu."
+    },
+    {
+      "id": "compartilhar",
+      "prazo": "2026-10-08",
+      "texto": "Compartilhar as páginas com a equipe",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "A equipe trabalhar sem pedir link",
+      "como": "Menu Compartilhar de cada página: a Central, a Pauta, a Biblioteca, a Leitura de Mercado, a Campanha, os Carrosséis e o Plano."
+    },
+    {
+      "id": "banner",
+      "prazo": "2026-10-08",
+      "texto": "Banner do YouTube e slides do carrossel \"Comece aqui\"",
+      "dono": "Claude",
+      "quem": [
+        "claude"
+      ],
+      "destrava": "O canal e o post fixado de 11/10",
+      "como": "Saem na próxima conversa, com o @ do YouTube já decidido."
+    },
+    {
+      "id": "youtube",
+      "prazo": "2026-10-08",
+      "texto": "YouTube com banner, descrição, playlists e trailer; newsletter criada",
+      "dono": "Social media",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "O vídeo longo 1 e a newsletter de 18/10",
+      "como": "Descrição e playlists em canais/perfis-e-bios.md."
+    },
+    {
+      "id": "links",
+      "prazo": "2026-10-09",
+      "texto": "Página de links com UTM",
+      "dono": "Equipe ou Codex",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "Medir o que vem da bio",
+      "como": "Botões e UTMs em canais/perfis-e-bios.md."
+    },
+    {
+      "id": "merge",
+      "prazo": "2026-10-09",
+      "texto": "Ok para o merge do funil, só com os arquivos do site; depois, política de privacidade, Pixel e GA4",
+      "dono": "Giovane aprova; Claude prepara; tráfego e jurídico",
+      "quem": [
+        "giovane",
+        "claude",
+        "equipe"
+      ],
+      "destrava": "O teste de anúncios medido por pilar",
+      "como": "Diga \"pode abrir o PR do funil\" no chat. A branch inteira não pode entrar no main: o GitHub Pages publicaria a pasta de marketing junto com o site."
+    },
+    {
+      "id": "manifesto",
+      "prazo": "2026-10-09",
+      "texto": "Publicar o manifesto (09/10) e o carrossel \"Comece aqui\" (11/10)",
+      "dono": "Social media",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "O relançamento",
+      "como": "Horários e legendas na seção Hoje e na Pauta GL."
+    },
+    {
+      "id": "codex",
+      "prazo": "2026-10-09",
+      "texto": "Conferir com o Codex os 2 vídeos do GL Risk Auto no site",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "A página do produto completa",
+      "como": "Prompt em site/prompt-codex-gl-risk-auto.md."
+    },
+    {
+      "id": "glos",
+      "prazo": "2026-10-09",
+      "texto": "Levar o plano ao GL OS e colar a resposta no chat",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Achar o que ainda falta no plano",
+      "como": "As perguntas para o GL OS estão no Plano de Marketing GL Academy, em Decisões em aberto."
+    },
+    {
+      "id": "campanha",
+      "prazo": "2026-10-10",
+      "texto": "Começar a Campanha GL Risk Auto no @glacademybr",
+      "dono": "Social media",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "O calendário da campanha até 25/11",
+      "como": "Peças, legendas e datas na página Campanha GL Risk Auto."
+    },
+    {
+      "id": "teste",
+      "prazo": "2026-10-11",
+      "texto": "Definir a verba e subir o teste de anúncios de 12 a 25/10",
+      "dono": "Giovane e tráfego",
+      "quem": [
+        "giovane",
+        "equipe"
+      ],
+      "destrava": "O custo por call de cada criativo",
+      "como": "Planilha em execucao/teste-de-anuncios.csv; as versões 4:5 estão na Biblioteca."
+    },
+    {
+      "id": "whatsapp",
+      "prazo": "2026-10-12",
+      "texto": "Ligar a sequência da call no WhatsApp e o follow-up de 1, 3 e 7 dias",
+      "dono": "Vendas",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "Menos faltas e mais fechamento",
+      "como": "Mensagens em execucao/vendas-follow-up.md."
+    },
+    {
+      "id": "placar",
+      "prazo": "2026-10-12",
+      "texto": "Definir quem preenche o placar de segunda e anotar a base de 05/10",
+      "dono": "Giovane define; equipe preenche",
+      "quem": [
+        "giovane",
+        "equipe"
+      ],
+      "destrava": "As metas de resultado",
+      "como": "Modelo em execucao/placar-semanal.csv."
+    },
+    {
+      "id": "materiais",
+      "prazo": "2026-10-12",
+      "texto": "Mandar o Second Brain, o curso de marketing viral, os links e prints das redes, os números de hoje, a tabela de preços e os materiais da marca",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "A auditoria das redes, o playbook viral e o plano v2",
+      "como": "A lista está na seção Pendências, em \"O que me mandar\"."
+    },
+    {
+      "id": "macro",
+      "prazo": "2026-10-12",
+      "texto": "Aprovar ou ajustar a série O Efeito Dominó",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Os Reels a partir de 13/10",
+      "como": "Roteiros em canais/serie-macro-efeito-domino.md."
+    },
+    {
+      "id": "macro-numeros",
+      "prazo": "2026-10-12",
+      "texto": "Conferir os 2 números da série ainda sem fonte (produtividade 78 de 131; P&D de 1,2% do PIB)",
+      "dono": "Claude",
+      "quem": [
+        "claude"
+      ],
+      "destrava": "Gravar sem erro de fato"
+    },
+    {
+      "id": "longo1",
+      "prazo": "2026-10-14",
+      "texto": "Gravar o vídeo longo 1",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "O YouTube de 18/10",
+      "como": "Roteiro em canais/roteiros-iniciais.md."
+    },
+    {
+      "id": "live",
+      "prazo": "2026-10-15",
+      "texto": "Live no pregão",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "As lives quinzenais",
+      "como": "Kit de live na Biblioteca; resultado só em R e pontos."
+    },
+    {
+      "id": "ia",
+      "prazo": "2026-10-16",
+      "texto": "Decidir a linha de IA (marca, preço e piloto) e pôr no ar a página da lista de espera",
+      "dono": "Giovane decide; Claude monta",
+      "quem": [
+        "giovane",
+        "claude"
+      ],
+      "destrava": "A chamada do vídeo longo 1"
+    },
+    {
+      "id": "imprensa",
+      "prazo": "2026-10-16",
+      "texto": "Completar o kit de imprensa: fotos, número real de alunos, a sua citação e o contato",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "A pauta 1 de 19/10",
+      "como": "execucao/kit-de-imprensa.md."
+    },
+    {
+      "id": "termos",
+      "prazo": "2026-10-18",
+      "texto": "Validar os termos técnicos, as regras das aulas da Mentoria e o stop do vídeo \"Força não é entrada\"",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Liberar aulas e anúncios",
+      "como": "Os termos estão na decisão \"Os nomes e os termos técnicos\"; as regras, em mentoria/plano-da-mentoria.md."
+    },
+    {
+      "id": "media",
+      "prazo": "2026-10-18",
+      "texto": "Media training: mensagens-chave e o que nunca dizer",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Imprensa e podcasts",
+      "como": "execucao/kit-de-imprensa.md."
+    },
+    {
+      "id": "ingles",
+      "prazo": "2026-10-19",
+      "texto": "Versões em inglês para o @glacademytrading",
+      "dono": "Claude, depois da decisão dos perfis",
+      "quem": [
+        "claude"
+      ],
+      "destrava": "O perfil internacional"
+    },
+    {
+      "id": "parceiros",
+      "prazo": "2026-10-25",
+      "texto": "Comissão e contrato dos parceiros; lista de 30 criadores",
+      "dono": "Giovane e parcerias",
+      "quem": [
+        "giovane",
+        "equipe"
+      ],
+      "destrava": "O programa de parceiros",
+      "como": "execucao/programa-de-parceiros.md e execucao/parceiros.csv."
+    },
+    {
+      "id": "higgsfield",
+      "prazo": "2026-10-30",
+      "texto": "Aprovar o uso dos 1.200 créditos da Higgsfield e os 2 rascunhos do logo de 30/09",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "A identidade das séries e as cenas de anúncio",
+      "como": "A primeira leva (cerca de 270 créditos) pode sair nesta semana. O prazo de 30/10 vem antes da renovação de novembro, que zera o saldo."
+    },
+    {
+      "id": "juridico",
+      "prazo": "2026-10-30",
+      "texto": "Revisões jurídicas: contrato de parceiros, manual de crise, estudos de ativos (CVM) e avisos dos EUA",
+      "dono": "Jurídico",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "Parcerias, crise e o perfil em inglês"
+    },
+    {
+      "id": "blackfriday",
+      "prazo": "2026-10-30",
+      "texto": "Decidir a condição de Black Friday (27/11)",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "As peças de novembro"
+    },
+    {
+      "id": "depoimentos",
+      "prazo": "2026-11-08",
+      "texto": "Colher 3 depoimentos de processo, com autorização por escrito",
+      "dono": "Comunidade",
+      "quem": [
+        "equipe"
+      ],
+      "destrava": "Remarketing e prova social",
+      "quando": "Semanas 4 a 6",
+      "como": "Guia em roteiros-e-depoimentos.md; nunca com valores ganhos."
+    },
+    {
+      "id": "prints",
+      "prazo": null,
+      "texto": "Prints da Mentoria de Order Flow (T04, T02, T05, T06, T09, T14, T15 e \"O mercado em uma frase\") e das situações que faltam na Mentoria GL",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Novas aulas e Reels",
+      "quando": "Quando puder",
+      "como": "Listas em mentoria/orderflow-trechos-e-prints.md e mentoria/prints-que-faltam.md. Pelo chat ou por uma pasta no Drive."
+    },
+    {
+      "id": "gravacoes",
+      "prazo": null,
+      "texto": "Gravar os vídeos do funil (boas-vindas de 90 s e pós-agendamento de 45 s), os 6 roteiros de 01/10, os roteiros 1 e 5 do GL Risk Auto e a tela do painel do GL Risk Auto e do APP",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "O funil completo, as séries e os tutoriais",
+      "quando": "Quando puder",
+      "como": "Roteiros em roteiros-e-depoimentos.md e roteiros-gl-risk-auto.md."
+    },
+    {
+      "id": "planov2",
+      "prazo": null,
+      "texto": "Diagnóstico (Second Brain, redes, viralização e ofertas) e o plano 2026-27 versão 2",
+      "dono": "Claude",
+      "quem": [
+        "claude"
+      ],
+      "destrava": "O plano pronto para só aplicar",
+      "quando": "Depois dos materiais",
+      "como": "Começa quando chegarem os materiais e as respostas da entrevista."
+    },
+    {
+      "id": "pauta",
+      "prazo": null,
+      "texto": "Abrir a Pauta GL de manhã e marcar o que vai gravar; se não for usar, pausar a rotina",
+      "dono": "Giovane",
+      "quem": [
+        "giovane"
+      ],
+      "destrava": "Conteúdo diário sem custo à toa",
+      "quando": "Todo dia útil",
+      "rotina": true
+    },
+    {
+      "id": "segunda",
+      "prazo": null,
+      "texto": "Reunião de 45 minutos: o placar, as tarefas desta lista e o status das 10 ações no Sistema de Marketing",
+      "dono": "Giovane e equipe",
+      "quem": [
+        "giovane",
+        "equipe"
+      ],
+      "destrava": "O ciclo andar pelos números",
+      "quando": "Toda segunda",
+      "rotina": true
+    }
+  ],
+  "feito": [
+    {
+      "d": "2026-10-06",
+      "t": "Revisão geral e tarefas com prazo",
+      "x": "Releitura de toda a conversa de 29/09 a 06/10: 11 pontos que ficaram para trás e as tarefas com dono e prazo, aqui e no Plano de Marketing GL Academy."
+    },
+    {
+      "d": "2026-10-06",
+      "t": "Leitura de Mercado, macroeconomia e estratégia",
+      "x": "8 vídeos da expansão de 05 e 06/10 na página nova Leitura de Mercado GL; a série O Efeito Dominó (9 aulas e 24 Reels); o mapa das fontes de renda; a pré-auditoria das redes; o guia de viralização; uma sugestão para cada decisão."
+    },
+    {
+      "d": "2026-10-05",
+      "t": "Plano 2026-27, Pauta GL e esta Central",
+      "x": "Calendário mestre de 473 linhas, perfis e bios, roteiros, banco de 120 ideias e a arte do plano; a pauta automática às 6h40 dos dias úteis; a entrevista de 56 perguntas; a nota do Obsidian; os 2 vídeos do GL Risk Auto para o site."
+    },
+    {
+      "d": "2026-10-04",
+      "t": "Série Operacional na prática e Campanha GL Risk Auto",
+      "x": "19 Reels e Shorts com carrosséis e stories; a Biblioteca reorganizada por objetivo; a campanha com 43 vídeos, 98 imagens, anúncios, as aulas 20 e 21 da Mentoria e 4 tutoriais."
+    },
+    {
+      "d": "2026-10-02",
+      "t": "Rodada 5 e Mentoria GL",
+      "x": "O operacional por dentro (prints 6 a 13) e o retorno à média; 19 videoaulas da Mentoria, com a trilha de estudos, os 8 encontros e o ZIP."
+    },
+    {
+      "d": "2026-10-01",
+      "t": "Rodada 4, pacote, kit do site e plano do ciclo",
+      "x": "Sequência da call no WhatsApp, kit de live, YouTube, comunidade, parceiros e 82 imagens; o ZIP de 136 MB e o organizador do Windows; 28 vídeos para o site e o prompt do Codex; o plano do ciclo e as peças da Fundação (calendário, teste de anúncios, placar, imprensa, crise, parceiros e follow-up)."
+    },
+    {
+      "d": "2026-09-30",
+      "t": "Biblioteca de Vídeos GL, rodadas 1 a 3",
+      "x": "Vídeos que vendem, coringas, ganchos, versões 4:5, logo e vinheta, aulas, respostas às objeções, lives e comerciais; o motor de vídeo guardado no repositório; a rodada premium da Higgsfield pausada depois de 64,5 créditos."
+    },
+    {
+      "d": "2026-09-29",
+      "t": "Funil e Sistema de Marketing GL",
+      "x": "O funil passou a gravar o pilar, a origem e o parceiro de cada lead e ganhou correções de vendas (falta o merge); o painel dos 6 pilares foi publicado."
+    }
+  ],
   "decisoes": [
     {
       "id": "meta",
@@ -296,14 +755,14 @@
     {
       "id": "funil",
       "texto": "O merge do funil, o Pixel da Meta e o GA4",
-      "ajuda": "Com a política de privacidade publicada antes do Pixel.",
-      "sugestao": "Fazer o merge agora e testar um lead de ponta a ponta; o Pixel e o GA4 entram junto com a política de privacidade."
+      "ajuda": "Com a política de privacidade publicada antes do Pixel. Só os arquivos do site entram no main: a branch inteira levaria a pasta de marketing para o site público.",
+      "sugestao": "Abrir o pull request só com o funil e testar um lead de ponta a ponta; o Pixel e o GA4 entram junto com a política de privacidade."
     },
     {
       "id": "nomes",
-      "texto": "GL Model ou GL Professional Trade System, e os termos do site",
-      "ajuda": "Quando usar cada nome e os termos técnicos que ainda estão para confirmar.",
-      "sugestao": "\"GL Model\" no conteúdo e nas redes (é o nome que o público já conhece); \"GL Professional Trade System\" na página de vendas e no contrato."
+      "texto": "Os nomes e os termos técnicos",
+      "ajuda": "Quando usar GL Model e GL Professional Trade System; o nome do recurso do GL Risk Auto que mostra stop e alvo (nos vídeos, \"Plano Visual\"; você citou \"Trade Visualizer\"); e os termos a confirmar: Y +8%, D -0,3%, VWAP 3M, Calor 4%, \"cerca de 70%\" na Value Area, zona de defesa, valor do dia, \"o alvo aparece antes do preço chegar\", NinjaTrader com TradingView, a grafia \"Giovane Lázaro\" e \"resultados eficientes\" no site.",
+      "sugestao": "\"GL Model\" no conteúdo e nas redes (é o nome que o público já conhece); \"GL Professional Trade System\" na página de vendas e no contrato. Para o recurso, o nome que aparece no produto: se for \"Trade Visualizer\", eu troco nos vídeos."
     },
     {
       "id": "tiktok",
@@ -360,6 +819,21 @@
       "texto": "As respostas da entrevista",
       "como": "Aqui na Central, na seção Entrevista, ou por áudio no chat. Comece pelas essenciais.",
       "nota": "Na Central (seção Entrevista) ou por áudio no chat, citando o número da pergunta. Comece pelas 14 essenciais."
+    },
+    {
+      "id": "glos",
+      "texto": "A resposta do GL OS",
+      "como": "Leve o Plano de Marketing GL Academy ao GL OS e cole a resposta no chat. As perguntas para ele estão em Decisões em aberto."
+    },
+    {
+      "id": "prints-mentoria",
+      "texto": "Os prints das mentorias",
+      "como": "Mentoria de Order Flow: T04, T02, T05, T06, T09, T14, T15 e \"O mercado em uma frase\". Mentoria GL: as situações de mentoria/prints-que-faltam.md. Pelo chat ou por uma pasta no Drive."
+    },
+    {
+      "id": "telas",
+      "texto": "As gravações de tela",
+      "como": "O painel do GL Risk Auto e o APP em uso, para os tutoriais. Por uma pasta no Drive, com o link no chat."
     }
   ],
   "redes": [
@@ -891,12 +1365,24 @@
   ],
   "datas": [
     [
+      "2026-10-07",
+      "Entrevista: as 14 perguntas essenciais"
+    ],
+    [
+      "2026-10-08",
+      "Decidir perfis, YouTube, conversa gratuita, newsletter e live"
+    ],
+    [
       "2026-10-09",
-      "Manifesto e carrossel \"Comece aqui\" no @lazarotrades"
+      "Manifesto no @lazarotrades (post fixado)"
     ],
     [
       "2026-10-10",
       "Começa a campanha GL Risk Auto no @glacademybr"
+    ],
+    [
+      "2026-10-11",
+      "Carrossel \"Comece aqui\" no @lazarotrades (post fixado)"
     ],
     [
       "2026-10-12",

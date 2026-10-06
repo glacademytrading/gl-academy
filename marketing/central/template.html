@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 <style>
-/* Layout: cabine de comando numa coluna larga (até 1080px): o placar no topo, depois Hoje, Páginas, Pendências, Entrevista, Arquivos e Atalho no PC. */
+/* Layout: cabine de comando numa coluna larga (até 1080px): o placar no topo, depois Tarefas, Hoje, Páginas, Pendências, Entrevista, Feito, Arquivos e Atalho no PC. */
 :root {
   --bg: #0b0a08; --surface: #15130f; --surface-2: #1d1a15; --line: #2f2a22; --text: #f3eee4; --muted: #b5ac9c;
   --gold: #d8ae55; --gold-2: #f6d991; --on-gold: #14100a; --ok: #4fe3a8; --alerta: #ff7a72; --link: #8fbcff; --chip: #26221b;
@@ -52,11 +52,12 @@ button[disabled] { opacity: .45; cursor: default; }
 .barra a.marca { color: var(--gold); font-family: var(--display); font-weight: 800; }
 
 header.topo { padding-top: 28px; display: grid; gap: 18px; }
-.placar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.placar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
 .placar a { text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 4px; min-width: 0; }
 .placar a:hover { border-color: var(--gold); }
 .placar b { font: 800 1.35rem/1.1 var(--display); font-variant-numeric: tabular-nums; }
 .placar span { font-size: .84rem; color: var(--muted); }
+.placar span .alerta { color: var(--alerta); font-weight: 600; }
 .barrinha { height: 4px; border-radius: 4px; background: var(--chip); overflow: hidden; }
 .barrinha i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
 
@@ -116,6 +117,36 @@ section { margin-top: 38px; }
 .st { font: 500 .74rem/1.2 var(--mono); color: var(--muted); margin-top: 4px; min-height: 1em; }
 .st.erro { color: var(--alerta); }
 
+/* tarefas */
+.tar-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 14px; }
+.tar-grupos { display: grid; gap: 14px; }
+.tar-grupo > h3 { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.tar-grupo > h3 .n { font: 600 .78rem/1 var(--mono); color: var(--muted); }
+.tar-grupo.g-atrasadas { border-color: color-mix(in srgb, var(--alerta) 55%, var(--line)); }
+.tar-grupo.g-atrasadas > h3 { color: var(--alerta); }
+.tar-grupo .sub { color: var(--muted); font-size: .86rem; margin: -2px 0 6px; }
+.tar { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 4px 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.tar-lista > .tar:first-child { border-top: 0; padding-top: 4px; }
+.tar input[type="checkbox"] { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--gold); cursor: pointer; }
+.tar .giro { font: 700 1rem/1.2 var(--mono); color: var(--gold); text-align: center; }
+.tar .t { font-weight: 600; overflow-wrap: anywhere; }
+.tar .meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin-top: 4px; color: var(--muted); font-size: .84rem; }
+.tar .dono { font: 600 .72rem/1 var(--body); padding: 4px 7px; border-radius: 6px; background: var(--chip); color: var(--gold-2); }
+.tar .como { color: var(--muted); font-size: .84rem; margin-top: 6px; overflow-wrap: anywhere; }
+.tar .prazo { font: 600 .8rem/1.3 var(--mono); color: var(--gold); text-align: right; white-space: nowrap; }
+.tar .prazo small { display: block; font-weight: 500; color: var(--muted); }
+.tar .prazo.vencida, .tar .prazo.vencida small { color: var(--alerta); }
+.tar.feito .t { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--gold); }
+.tar .st:empty { display: none; }
+
+/* o que já fizemos */
+.feito-lista { list-style: none; margin: 0; padding: 0; display: grid; }
+.feito-lista li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); }
+.feito-lista li:first-child { border-top: 0; padding-top: 2px; }
+.feito-lista .q { font: 600 .8rem/1.4 var(--mono); color: var(--gold); }
+.feito-lista .t { font-weight: 700; }
+.feito-lista .x { color: var(--muted); font-size: .9rem; margin-top: 2px; }
+
 /* entrevista */
 .ent-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 12px; }
 .filtro { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; }
@@ -170,21 +201,30 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
 @media (max-width: 720px) {
   .hoje, .duas { grid-template-columns: minmax(0, 1fr); }
   .placar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .placar a:first-child { grid-column: 1 / -1; }
 }
 @media (max-width: 560px) {
   .paginas, .docs, .passos, .arte, .baixar { grid-template-columns: minmax(0, 1fr); }
   .panel, .pag, .passo { padding: 14px; }
   .linha { grid-template-columns: 58px minmax(0, 1fr); }
+  .tar { grid-template-columns: 26px minmax(0, 1fr); row-gap: 2px; }
+  .tar .prazo { grid-column: 2; grid-row: 1; text-align: left; }
+  .tar .prazo small { display: inline; margin-left: 6px; }
+  .tar .corpo { grid-column: 2; grid-row: 2; }
+  .tar > input, .tar > .giro { grid-column: 1; grid-row: 2; }
+  .feito-lista li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 }
 </style>
 
 <div class="barra">
   <nav aria-label="Seções">
     <a class="marca" href="#topo">Central GL</a>
+    <a href="#tarefas">Tarefas</a>
     <a href="#hoje">Hoje</a>
     <a href="#paginas">Páginas</a>
     <a href="#pendencias">Pendências</a>
     <a href="#entrevista">Entrevista</a>
+    <a href="#feito">Feito</a>
     <a href="#arquivos">Arquivos</a>
     <a href="#atalho">Atalho no PC</a>
   </nav>
@@ -195,9 +235,10 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
     <div>
       <p class="eyebrow">GL Academy · marketing</p>
       <h1>Central de Marketing GL</h1>
-      <p class="lede">Tudo do marketing num lugar só: o que fazer hoje, as páginas, o que falta decidir, a entrevista e os arquivos. Abrir as páginas não usa a sua cota do Claude; só as conversas usam.</p>
+      <p class="lede">Tudo do marketing num lugar só: as tarefas com dono e prazo, o que sai hoje, as páginas, o que falta decidir, a entrevista e o que já fizemos. Abrir as páginas não usa a sua cota do Claude; só as conversas usam.</p>
     </div>
     <div class="placar" aria-label="Resumo">
+      <a href="#tarefas"><b id="pl-tar">—</b><span id="pl-tar-s">tarefas feitas</span><div class="barrinha"><i id="pl-tar-b"></i></div></a>
       <a href="#hoje"><b id="pl-hoje">—</b><span>itens no calendário hoje</span></a>
       <a href="#pendencias"><b id="pl-dec">—</b><span>decisões tomadas</span><div class="barrinha"><i id="pl-dec-b"></i></div></a>
       <a href="#pendencias"><b id="pl-ent">—</b><span>materiais enviados</span><div class="barrinha"><i id="pl-ent-b"></i></div></a>
@@ -205,6 +246,20 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
     </div>
     <p class="aviso" id="aviso-db">Carregando o que já foi salvo…</p>
   </header>
+
+  <section id="tarefas">
+    <div class="head"><h2>Tarefas</h2><p>Marque o que for feito: fica salvo, e eu leio daqui antes de cada rodada.</p></div>
+    <div class="tar-topo">
+      <div class="filtro" role="group" aria-label="De quem são as tarefas">
+        <button type="button" data-quem="todas" aria-pressed="true">Todas</button>
+        <button type="button" data-quem="giovane" aria-pressed="false">Suas</button>
+        <button type="button" data-quem="equipe" aria-pressed="false">Equipe</button>
+        <button type="button" data-quem="claude" aria-pressed="false">Claude</button>
+      </div>
+      <div class="progresso"><span id="tar-txt">—</span><div class="barrinha"><i id="tar-b"></i></div></div>
+    </div>
+    <div class="tar-grupos" id="tar-grupos"></div>
+  </section>
 
   <section id="hoje">
     <div class="head"><h2>Hoje e os próximos marcos</h2><p>Do calendário mestre do plano, em horário de Brasília.</p></div>
@@ -242,8 +297,8 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
         <div class="lista" id="decisoes"></div>
       </div>
       <div class="panel">
-        <h3>O que me mandar para o upgrade do plano</h3>
-        <p class="muted" style="font-size:.88rem;margin:4px 0 10px">Os arquivos vão pelo chat; os links podem ficar aqui.</p>
+        <h3>O que me mandar</h3>
+        <p class="muted" style="font-size:.88rem;margin:4px 0 10px">Para o upgrade do plano e os próximos vídeos. Os arquivos vão pelo chat; os links podem ficar aqui.</p>
         <div class="lista" id="entregas"></div>
       </div>
     </div>
@@ -260,6 +315,11 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
     </div>
     <div class="blocos so-essenciais" id="blocos"></div>
     <p class="aviso" style="margin-top:14px">Quando terminar, me avise no chat: eu leio as respostas daqui. Se preferir falar, mande áudio no chat respondendo pelo número da pergunta (por exemplo, "B1").</p>
+  </section>
+
+  <section id="feito">
+    <div class="head"><h2>O que já fizemos</h2><p>Do mais recente para o mais antigo. O detalhe de cada entrega está nos planos e na nota do Obsidian.</p></div>
+    <div class="panel"><ol class="feito-lista" id="feito-lista"></ol></div>
   </section>
 
   <section id="arquivos">
@@ -332,7 +392,8 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
   D.entrevista.forEach(function (b) { b.perguntas.forEach(function (q) { PERGUNTAS.push(q); }); });
 
   var db = null, dl = null, dbPronto = false, somenteLeitura = false;
-  var st = { decisoes: {}, entregas: {}, redes: {}, entrevista: {} };
+  var st = { tarefas: {}, decisoes: {}, entregas: {}, redes: {}, entrevista: {} };
+  var TAREFAS = D.tarefas || [], CHECAVEIS = TAREFAS.filter(function (x) { return !x.rotina; });
   var sujo = {}, timers = {}, fila = {};
 
   function el(tag, attrs, txt) {
@@ -442,6 +503,100 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
     av.hidden = false;
     av.textContent = !db ? 'As marcações e respostas ficam salvas quando a Central é aberta no claude.ai. Aqui dá para ler tudo e usar os links.'
       : 'Você pode ver tudo, mas só quem edita a Central pode marcar e responder.';
+  }
+
+  // ---------- tarefas
+  var filtroTar = 'todas';
+  try { var fq = localStorage.getItem('central-tar-filtro'); if (fq) filtroTar = fq; } catch (e) {}
+  function fimDaSemana(s) { var d = deIso(s); d.setDate(d.getDate() + (7 - d.getDay()) % 7); return iso(d); }
+  function feita(x) { return !!(st.tarefas[x.id] || {}).feito; }
+  function grupoDe(x) {
+    if (x.rotina) return 'rotina';
+    if (feita(x)) return 'feitas';
+    if (!x.prazo) return 'livre';
+    if (x.prazo < hoje) return 'atrasadas';
+    if (x.prazo === hoje) return 'hoje';
+    if (x.prazo <= fimDaSemana(hoje)) return 'semana';
+    return 'proximas';
+  }
+  var GRUPOS = [
+    ['atrasadas', 'Atrasadas', 'O prazo passou e a tarefa segue aberta.'],
+    ['hoje', 'Hoje', ''],
+    ['semana', 'Até domingo', ''],
+    ['proximas', 'Próximas', ''],
+    ['livre', 'Sem data fixa', ''],
+    ['rotina', 'Rotina', 'Não se marca: é o que se repete.'],
+    ['feitas', 'Feitas', '']
+  ];
+  function rotuloPrazo(x) {
+    if (!x.prazo) return [x.quando || '', ''];
+    var dias = Math.round((deIso(x.prazo) - deIso(hoje)) / 864e5);
+    var sub = dias === 0 ? 'hoje' : dias === 1 ? 'amanhã' : dias > 1 ? 'em ' + dias + ' dias' : dias === -1 ? 'venceu ontem' : 'venceu há ' + (-dias) + ' dias';
+    return [br(x.prazo), feita(x) ? '' : sub];
+  }
+  function desenharTarefas() {
+    var box = document.getElementById('tar-grupos'); box.textContent = '';
+    var visiveis = TAREFAS.filter(function (x) { return filtroTar === 'todas' || (x.quem || []).indexOf(filtroTar) >= 0; });
+    GRUPOS.forEach(function (g) {
+      var itens = visiveis.filter(function (x) { return grupoDe(x) === g[0]; });
+      if (!itens.length) return;
+      itens.sort(function (a, b) { return (a.prazo || '9999').localeCompare(b.prazo || '9999'); });
+      var p = el('div', { class: 'panel tar-grupo g-' + g[0] });
+      var h = el('h3', null, g[1]); h.appendChild(el('span', { class: 'n' }, String(itens.length))); p.appendChild(h);
+      if (g[2]) p.appendChild(el('p', { class: 'sub' }, g[2]));
+      var lista = el('div', { class: 'tar-lista' });
+      itens.forEach(function (x) { lista.appendChild(linhaTarefa(x)); });
+      p.appendChild(lista); box.appendChild(p);
+    });
+    if (!box.childNodes.length) box.appendChild(el('p', { class: 'vazio' }, 'Nenhuma tarefa neste filtro.'));
+    if (db && !somenteLeitura) box.querySelectorAll('[data-grava]').forEach(function (i) { i.disabled = false; });
+    resumo();
+  }
+  function linhaTarefa(x) {
+    var chave = 'tar-' + x.id, f = feita(x);
+    var item = el('div', { class: 'tar' + (f ? ' feito' : ''), id: chave });
+    if (x.rotina) item.appendChild(el('span', { class: 'giro', 'aria-hidden': 'true' }, '↻'));
+    else {
+      var cb = el('input', { type: 'checkbox', id: chave + '-cb', 'data-grava': '1' });
+      cb.checked = f; cb.disabled = !db || somenteLeitura;
+      cb.addEventListener('change', function () {
+        var v = { feito: cb.checked, em: new Date().toISOString() };
+        st.tarefas[x.id] = v; gravar(chave, 'tarefas', x.id, v);
+        toast(cb.checked ? 'Feita: ' + x.texto.slice(0, 60) + (x.texto.length > 60 ? '…' : '') : 'Voltou para a lista');
+        desenharTarefas();
+      });
+      item.appendChild(cb);
+    }
+    var corpo = el('div', { class: 'corpo' });
+    corpo.appendChild(x.rotina ? el('div', { class: 't' }, x.texto) : el('label', { for: chave + '-cb', class: 't' }, x.texto));
+    var meta = el('div', { class: 'meta' });
+    meta.appendChild(el('span', { class: 'dono' }, x.dono));
+    meta.appendChild(el('span', null, 'Destrava: ' + x.destrava));
+    corpo.appendChild(meta);
+    if (x.como) corpo.appendChild(el('p', { class: 'como' }, x.como));
+    corpo.appendChild(el('div', { class: 'st', 'data-st': chave }));
+    item.appendChild(corpo);
+    var r = rotuloPrazo(x), pz = el('div', { class: 'prazo' + (!f && x.prazo && x.prazo < hoje && !x.rotina ? ' vencida' : '') }, r[0]);
+    if (r[1]) pz.appendChild(el('small', null, r[1]));
+    item.appendChild(pz);
+    return item;
+  }
+  function filtrarTarefas(q) {
+    filtroTar = q;
+    document.querySelectorAll('[data-quem]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-quem') === q)); });
+    try { localStorage.setItem('central-tar-filtro', q); } catch (e) {}
+    desenharTarefas();
+  }
+  document.querySelectorAll('[data-quem]').forEach(function (b) { b.addEventListener('click', function () { filtrarTarefas(b.getAttribute('data-quem')); }); });
+
+  // ---------- o que já fizemos
+  function desenharFeito() {
+    var ol = document.getElementById('feito-lista');
+    (D.feito || []).forEach(function (x) {
+      var li = el('li'); li.appendChild(el('div', { class: 'q' }, br(x.d)));
+      var o = el('div'); o.appendChild(el('div', { class: 't' }, x.t)); o.appendChild(el('p', { class: 'x' }, x.x));
+      li.appendChild(o); ol.appendChild(li);
+    });
   }
 
   // ---------- pendências
@@ -580,6 +735,16 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
   document.getElementById('f-todas').addEventListener('click', function () { filtrar(false); });
 
   function resumo() {
+    var tf = CHECAVEIS.filter(feita).length;
+    var atr = CHECAVEIS.filter(function (x) { return !feita(x) && x.prazo && x.prazo < hoje; }).length;
+    document.getElementById('pl-tar').textContent = tf + '/' + CHECAVEIS.length;
+    document.getElementById('pl-tar-b').style.width = (CHECAVEIS.length ? tf / CHECAVEIS.length * 100 : 0) + '%';
+    var pls = document.getElementById('pl-tar-s'); pls.textContent = 'tarefas feitas';
+    if (atr) { pls.appendChild(document.createTextNode(' · ')); pls.appendChild(el('span', { class: 'alerta' }, atr + (atr === 1 ? ' atrasada' : ' atrasadas'))); }
+    var vis = CHECAVEIS.filter(function (x) { return filtroTar === 'todas' || (x.quem || []).indexOf(filtroTar) >= 0; });
+    var vf = vis.filter(feita).length;
+    document.getElementById('tar-txt').textContent = vf + ' de ' + vis.length + ' feitas' + (filtroTar === 'todas' ? '' : ' neste filtro') + '; as rotinas não contam';
+    document.getElementById('tar-b').style.width = (vis.length ? vf / vis.length * 100 : 0) + '%';
     var dec = D.decisoes.filter(function (x) { return (st.decisoes[x.id] || {}).feito; }).length;
     var ent = D.entregas.filter(function (x) { return (st.entregas[x.id] || {}).feito; }).length;
     var perg = PERGUNTAS.filter(respondida).length;
@@ -655,7 +820,8 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
   document.getElementById('zoom').addEventListener('click', function (ev) { if (ev.target.id === 'zoom') { try { ev.target.close(); } catch (e) {} } });
 
   // ---------- início
-  desenharDia(); desenharProximas(); desenharPaginas(); desenharDecisoes(); desenharEntregas(); desenharEntrevista(); desenharArquivos();
+  desenharDia(); desenharProximas(); desenharPaginas(); desenharDecisoes(); desenharEntregas(); desenharEntrevista(); desenharFeito(); desenharArquivos();
+  filtrarTarefas(['todas', 'giovane', 'equipe', 'claude'].indexOf(filtroTar) >= 0 ? filtroTar : 'todas');
   var filtroSalvo = null; try { filtroSalvo = localStorage.getItem('central-filtro'); } catch (e) {}
   filtrar(filtroSalvo !== 'todas');
   document.querySelectorAll('[data-grava]').forEach(function (x) { x.disabled = true; });
@@ -673,6 +839,9 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
     av.hidden = true;
     document.querySelectorAll('[data-grava]').forEach(function (x) { x.disabled = false; });
     var erroLeitura = function () { toast('Não deu para carregar o que foi salvo. Recarregue a página.'); };
+    db.collection('tarefas').limit(200).onSnapshot(function (snap) {
+      st.tarefas = {}; snap.docs.forEach(function (d) { st.tarefas[d.id] = d.data() || {}; }); desenharTarefas();
+    }, erroLeitura);
     db.collection('decisoes').limit(200).onSnapshot(function (snap) {
       st.decisoes = {}; snap.docs.forEach(function (d) { st.decisoes[d.id] = d.data() || {}; }); aplicarDecisoes(); resumo();
     }, erroLeitura);

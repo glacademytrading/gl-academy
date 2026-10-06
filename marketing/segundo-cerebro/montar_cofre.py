@@ -1,9 +1,9 @@
-# Segundo cérebro (Obsidian): mantém a nota "Marketing GL Academy.md" e a "Entrevista de marketing.md" em dia com
-# ../central/dados.json e monta o ZIP com a pasta "Marketing GL" pronta para copiar para dentro do cofre do Obsidian.
+# Segundo cérebro (Obsidian): mantém a nota "Marketing GL Academy.md", a "Entrevista de marketing.md" e a tabela de tarefas
+# do plano 2026-27 (seção 23) em dia com ../central/dados.json e monta o ZIP com a pasta "Marketing GL" pronta para copiar para dentro do cofre do Obsidian.
 # Uso: python3 montar_cofre.py [pasta de saída] [pasta da Central]   (padrão: ../entregas, que não vai para o git)
 # Com a pasta da Central, grava também cofre/ nela: os arquivos com nomes simples e o manifesto.json que a Central usa
 # para montar o mesmo ZIP no navegador (as páginas do claude.ai não servem arquivos .zip).
-import json, os, re, sys, zipfile
+import datetime as dt, json, os, re, sys, zipfile
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 MKT = os.path.dirname(AQUI)
@@ -11,6 +11,7 @@ PASTA = 'Marketing GL'
 saida = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(MKT, 'entregas'))
 NOTA = os.path.join(AQUI, 'Marketing GL Academy.md')
 ENTREVISTA = os.path.join(AQUI, 'Entrevista de marketing.md')
+PLANO = os.path.join(MKT, 'plano-de-marketing-2026-27.md')
 dados = json.load(open(os.path.join(MKT, 'central', 'dados.json'), encoding='utf-8'))
 DATA = dados['atualizado']
 
@@ -59,13 +60,51 @@ def trocar_bloco(texto, nome, conteudo):
     return texto[:a + len(ini)] + '\n' + conteudo.rstrip() + '\n' + texto[b:]
 
 
+def bloco_tarefas():
+    # As tarefas da Central, agrupadas pela data da atualização: até o domingo daquela semana, depois, sem data fixa e rotina.
+    hoje = dt.date.fromisoformat(DATA)
+    domingo = (hoje + dt.timedelta(days=6 - hoje.weekday())).isoformat()
+    br = lambda s: f'{s[8:10]}/{s[5:7]}'
+    def item(t):
+        quando = br(t['prazo']) if t.get('prazo') else t.get('quando', '')
+        return f"- [ ] **{quando}** · {t['texto']} · *{t['dono']}*"
+    tarefas = sorted(dados.get('tarefas', []), key=lambda t: t.get('prazo') or '9999')
+    grupos = [
+        (f'Até domingo, {br(domingo)}', [t for t in tarefas if not t.get('rotina') and t.get('prazo') and t['prazo'] <= domingo]),
+        ('Depois', [t for t in tarefas if not t.get('rotina') and t.get('prazo') and t['prazo'] > domingo]),
+        ('Sem data fixa', [t for t in tarefas if not t.get('rotina') and not t.get('prazo')]),
+    ]
+    linhas = []
+    for titulo, itens in grupos:
+        if itens:
+            linhas += [f'**{titulo}**', ''] + [item(t) for t in itens] + ['']
+    rotina = [t for t in tarefas if t.get('rotina')]
+    if rotina:
+        linhas += ['**Rotina**', ''] + [f"- **{t['quando']}** · {t['texto']} · *{t['dono']}*" for t in rotina]
+    return '\n'.join(linhas)
+
+
+def tabela_tarefas():
+    # A mesma lista, em tabela, para a seção 23 do plano 2026-27.
+    br = lambda s: f'{s[8:10]}/{s[5:7]}'
+    tarefas = sorted(dados.get('tarefas', []), key=lambda t: (bool(t.get('rotina')), t.get('prazo') or '9999'))
+    linhas = ['| Prazo | Tarefa | Dono | Destrava |', '| --- | --- | --- | --- |']
+    for t in tarefas:
+        quando = br(t['prazo']) if t.get('prazo') else t.get('quando', '')
+        linhas.append(f"| {quando} | {t['texto']} | {t['dono']} | {t['destrava']} |")
+    return '\n'.join(linhas)
+
+
 def blocos_da_nota():
     dec = '\n'.join(f"- [ ] **{d['texto']}.** {d['ajuda']}" + (f" *Sugestão:* {d['sugestao']}" if d.get('sugestao') else '') for d in dados['decisoes'])
     ent = '\n'.join(f"- [ ] **{e['texto']}.** {e.get('nota', e['como'])}" for e in dados['entregas'])
     nota = open(NOTA, encoding='utf-8').read()
+    nota = trocar_bloco(nota, 'tarefas', bloco_tarefas())
     nota = trocar_bloco(nota, 'decisoes', dec)
     nota = trocar_bloco(nota, 'entregas', ent)
     open(NOTA, 'w', encoding='utf-8').write(nota)
+    plano = open(PLANO, encoding='utf-8').read()
+    open(PLANO, 'w', encoding='utf-8').write(trocar_bloco(plano, 'tarefas', tabela_tarefas()))
 
 
 def nota_entrevista():

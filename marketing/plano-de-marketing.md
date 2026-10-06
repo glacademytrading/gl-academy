@@ -1,6 +1,6 @@
 # Plano de Marketing GL Academy
 
-1º de outubro de 2026 · Giovane Lázaro
+1º de outubro de 2026 · atualizado em 6 de outubro · Giovane Lázaro
 
 Versão viva, com os desenhos e os comentários: https://claude.ai/code/artifact/31dbf0c1-fd5f-4372-88c6-e5beaadd3a7f
 
@@ -14,21 +14,38 @@ A meta oficial ainda não foi definida. O exemplo do painel é de 60 clientes no
 
 Os seis pilares (Conteúdo, Tráfego pago, Divulgação, Assessoria de imprensa, Relações públicas e Vendas) trabalham juntos, e cada um passa o bastão para o próximo. Uma ação só entra no plano se completar a Frase Central do marketing: "Neste ciclo, este pilar, com esta ação, entrega este número e passa o bastão para o próximo pilar."
 
-**Onde estamos em 1º de outubro (semana 1 de 13, fase Fundação):**
+**Onde estamos em 6 de outubro (semana 2 de 13, fase Fundação):**
 
-- O funil de agendamento já registra de qual pilar vem cada lead. Falta fazer o merge e colocar os IDs do Pixel da Meta e do GA4.
-- A Biblioteca tem 70 vídeos e 82 imagens prontos, feitos com os prints reais do operacional, sem gastar crédito de IA.
-- A pasta "Marketing de trading" ganhou uma organização por objetivo e um organizador que roda no Windows.
-- O site novo está sendo feito no Codex, com um kit de vídeos e imagens para cada página.
-- A rodada premium na Higgsfield está pausada. O saldo é de 2 créditos depois do que o Codex gerou.
+- O funil que grava o pilar, a origem e o parceiro de cada lead está pronto desde 29/09, mas só na branch: faltam o merge e os IDs do Pixel da Meta e do GA4.
+- O site novo está no ar desde 05/10, com o kit de vídeos; os 2 vídeos do GL Risk Auto foram entregues para o Codex colocar.
+- Cerca de 180 vídeos e 460 imagens estão prontos, feitos com os prints reais e sem crédito de IA: a Biblioteca (com as 19 aulas da Mentoria), a Campanha GL Risk Auto, a Leitura de Mercado e os Carrosséis e Stories.
+- O plano 2026-27 (marcas, canais e conteúdo), a Pauta GL automática dos dias úteis e a Central de Marketing GL estão no ar desde 05/10.
+- A pasta "Marketing de trading" está organizada por objetivo, com o organizador do Windows.
+- A Higgsfield tem 1.200 créditos para usar até 30/10.
 
 **Os próximos cinco passos:**
 
 1. Decidir a meta, a verba de mídia, o dono de cada pilar e se a conversa gratuita tem 30 ou 60 minutos.
-2. Fazer o merge do funil, ligar o Pixel e o GA4 e publicar a política de privacidade.
-3. Gravar os dois vídeos do Giovane para o funil e começar a publicação diária com a Biblioteca.
-4. Subir as campanhas de teste com os ganchos e as versões 4:5.
-5. Colocar os vídeos no site novo, seguindo o prompt para o Codex.
+2. Tirar o marketing do repositório público hoje, sem fechar o repositório do funil (isso tiraria o site do ar), e aprovar o merge do funil só com os arquivos do site; o Pixel e o GA4 entram depois da política de privacidade.
+3. Responder as 14 perguntas essenciais da entrevista e mandar os materiais: o Second Brain, o curso de marketing viral, os links e prints das redes, os números de hoje e a tabela de preços.
+4. Gravar o bloco 1 (manifesto, "Comece aqui" e os Reels da semana 1) e os dois vídeos do funil; a publicação diária segue o calendário mestre do plano 2026-27.
+5. Subir o teste de anúncios de 12 a 25/10, com os ganchos e as versões 4:5.
+
+## Revisão de 06/10: o que ficou para trás
+
+Reli a conversa inteira (29/09 a 06/10), as páginas e o repositório: 11 pontos ficaram para trás, e os 3 primeiros são urgentes. As tarefas com dono e prazo estão na seção "O que falta" e na Central de Marketing GL, onde dá para marcar cada uma.
+
+1. **Dois repositórios continuam públicos no GitHub.** O `gl-academy` guarda toda a pasta de marketing na branch do Claude (planos, roteiros, decisões, a entrevista e os caminhos do seu computador); o `gl-academy-vendedores-app` tem comissões, playbooks e links de checkout. Estava na lista de 01/10. Cuidado: o `gl-academy` publica o funil pelo GitHub Pages, e no plano gratuito do GitHub um repositório privado não publica site, então fechá-lo tiraria o funil do ar. O caminho sem custo: você cria um repositório privado e vazio (`gl-academy-marketing`) e me dá acesso; eu levo a pasta de marketing para lá e, com o seu ok, apago a branch do repositório público. A outra saída é assinar o GitHub Team, que publica site a partir de repositório privado. No app dos vendedores, confira Settings > Pages antes de fechar. **Giovane, hoje.**
+2. **A entrevista não começou.** São 0 de 56 respostas na Central, com 14 essenciais. Era para hoje; os lembretes de amanhã, às 8h55 e às 18h55, vão cobrar. **Giovane, 07/10.**
+3. **O funil de 29/09 não está no ar.** As mudanças (pilar, origem e parceiro de cada lead e as correções de vendas) estão só na branch, sem pull request. Sem o merge, o Pixel, o GA4 e o teste de anúncios de 12/10 não medem por pilar. O pull request leva só os 4 arquivos do site: se a branch inteira entrasse no `main`, o GitHub Pages publicaria a pasta de marketing junto com o funil. **Giovane aprova; Claude abre o pull request.**
+4. **Nada foi marcado nas páginas.** Na Central, 0 de 19 decisões e 0 de 8 materiais; no Sistema de Marketing, as 10 ações seguem "em andamento" desde 01/10; na Pauta GL, nenhum roteiro de 05 e 06/10 foi marcado como gravado. **Giovane e equipe.**
+5. **Gravações que saíram da lista.** Os vídeos do funil (boas-vindas de 90 s e pós-agendamento de 45 s), os 6 roteiros de 01/10, os roteiros do GL Risk Auto (o 1 e o 5 primeiro) e a gravação de tela do painel do GL Risk Auto e do APP. **Giovane.**
+6. **Prints prometidos.** Os da Mentoria de Order Flow (T04, T02, T05, T06, T09, T14, T15 e "O mercado em uma frase") e as situações que faltam na Mentoria GL. **Giovane, quando puder.**
+7. **Validações técnicas pendentes desde 01/10.** Os termos das legendas (Y +8%, D -0,3%, VWAP 3M, Calor 4%, "cerca de 70%" na Value Area, zona de defesa, valor do dia, "o alvo aparece antes do preço chegar", NinjaTrader com TradingView), as regras das 21 aulas da Mentoria e o stop do vídeo "Força não é entrada". **Giovane, antes de liberar aulas e anúncios.**
+8. **A resposta do GL OS não voltou.** Você ia levar o plano de 01/10 para o GL OS conferir (as perguntas estão em "Decisões em aberto"). **Giovane.**
+9. **Peças da semana 0 que só existem em texto.** O banner do YouTube, os slides do carrossel "Comece aqui" (sai em 11/10) e a página de links com UTM. **Claude faz o banner e os slides até 08/10; a página de links fica com a equipe ou o Codex.**
+10. **As páginas são privadas.** A social media e o editor não abrem a Central, a Pauta, a Biblioteca, a Leitura de Mercado e a Campanha sem o compartilhamento (menu Compartilhar de cada página). **Giovane.**
+11. **A Higgsfield tem 1.200 créditos parados.** O prazo para usar é 30/10, e os dois rascunhos do logo de 30/09 nunca foram aprovados. **Giovane decide; Claude executa.**
 
 ## O que levamos em consideração
 
@@ -53,7 +70,7 @@ A GL vende método e tecnologia de leitura de mercado, com risco em primeiro lug
 
 Os sete sistemas são GL Estrutura de Mercado, GL Estado de Mercado, GL Complementum, GL Risk Auto, GL Orderflow Dominância, GL Trend Quant (Multi Fractal Model) e GL Volume Profile Expert. O app dos vendedores ainda lista outros produtos e preços, de 18/06/2026: Gamepad Trader Pro, Mentoria Gestão de Risco e Sala de Análise e Investimentos.
 
-**Canais.** @glacademytrading (marca e conversão), @lazarotrades (o Giovane, bastidores), @glacademybr (alunos e comunidade), YouTube @giovanelazaro, LinkedIn do Giovane, TradingView e a comunidade no WhatsApp.
+**Canais.** @glacademytrading (marca e conversão), @lazarotrades (Giovane, bastidores), @glacademybr (alunos e comunidade), YouTube @giovanelazaro, LinkedIn de Giovane, TradingView e a comunidade no WhatsApp.
 
 **Regras que valem para tudo:**
 
@@ -70,6 +87,8 @@ Os sete sistemas são GL Estrutura de Mercado, GL Estado de Mercado, GL Compleme
 
 Toda venda passa por uma call 1x1, e o número que o time olha primeiro toda segunda é o de calls realizadas na semana. Os seis pilares trazem visitantes e leads; Vendas cuida das calls e do fechamento.
 
+*(Na versão viva, este trecho é um desenho: funil da call 1x1 · 5 etapas, com as taxas de exemplo. Em texto:)*
+
 | Etapa (exemplo do painel) | No ciclo | Passam para a próxima |
 | --- | --- | --- |
 | Visitantes | 5.714 | 20% respondem o quiz |
@@ -77,8 +96,6 @@ Toda venda passa por uma call 1x1, e o número que o time olha primeiro toda seg
 | Calls agendadas | 400 | 60% comparecem |
 | **Calls realizadas (métrica guia)** | **240, cerca de 18 por semana** | 25% fecham |
 | Clientes | 60 (meta de exemplo) | |
-
-Os 6 pilares atraem visitantes e leads; Vendas conduz as calls e o fechamento.
 
 Com as taxas de exemplo, 60 clientes pedem cerca de 240 calls realizadas no ciclo. As taxas reais substituem as de exemplo depois de duas semanas de dados do funil.
 
@@ -109,7 +126,7 @@ Conteúdo gera confiança e demanda: educa o trader até ele querer o que a GL e
 | Item | Definição |
 | --- | --- |
 | Dono | Líder de conteúdo (roteiro e edição), com Giovane como rosto |
-| Cadência | A partir de 12/10, a do plano 2026–27 (seção 7): 7 Reels e 2 carrosséis por semana no @lazarotrades; 5 a 10 Reels e 3 carrosséis na marca (até novembro, a programação pronta); 4 Reels em inglês no @glacademytrading; 1 vídeo longo e 7 a 10 Shorts no YouTube; 3 posts no LinkedIn; 1 newsletter; 1 ideia no TradingView |
+| Cadência | 4 Reels e 2 carrosséis por semana na marca, 3 Reels no @lazarotrades, 1 vídeo longo no YouTube com cortes, 2 posts no LinkedIn e 1 ideia no TradingView |
 | Indicadores | Retenção nos 3 primeiros segundos, salvamentos e compartilhamentos, cliques no link, leads e vendas com utm\_medium=conteudo |
 | Passa o bastão | Os conteúdos que mais retêm na semana viram anúncio. As objeções ouvidas nas calls voltam como pauta |
 
@@ -117,13 +134,13 @@ Conteúdo gera confiança e demanda: educa o trader até ele querer o que a GL e
 
 | Série | Papel | Peças prontas | O que falta |
 | --- | --- | --- | --- |
-| Pare de ser a liquidez | Alcance | Nem toda queda é venda, Setup acontecendo (varredura na mínima), carrossel e post da varredura | Reels do Giovane sobre stop óbvio e agressor preso |
-| A Frase Central | Autoridade | As 3 perguntas antes do trade, carrossel e ganchos de teste | O trade comentado da semana, com o Giovane |
+| Pare de ser a liquidez | Alcance | Nem toda queda é venda, Setup acontecendo (varredura na mínima), carrossel e post da varredura | Reels de Giovane sobre stop óbvio e agressor preso |
+| A Frase Central | Autoridade | As 3 perguntas antes do trade, carrossel e ganchos de teste | O trade comentado da semana, com Giovane |
 | Mapa institucional | Autoridade | Aulas de VWAP e Value Area, Escada de valor, Gamma Exposure, Defesa na VWAP 3M, carrosséis de VWAP, Value Area e GL Gamma | Prints de Multi Fractal, Order Flow e mapa de liquidez |
-| Risco primeiro | Dor e solução | Campanha GL Risk Auto: 12 Reels, 5 versões 4:5, 7 anúncios do YouTube, as aulas 20 e 21 da Mentoria, 4 tutoriais, 7 carrosséis, 13 stories, capas e thumbnails (`execucao/campanha-gl-risk-auto.md`) | Gravar os 6 roteiros de `roteiros-gl-risk-auto.md` e a tela do painel em uso |
-| Bastidores e prova | Confiança | Kit de live, comunidade e o guia de depoimentos | Depoimentos de processo e a rotina do Giovane |
+| Risco primeiro | Dor e solução | Frase "Risco definido antes do clique" | Vídeo do GL Risk Auto travando a plataforma |
+| Bastidores e prova | Confiança | Kit de live, comunidade e o guia de depoimentos | Depoimentos de processo e a rotina de Giovane |
 
-**O que já existe:** 70 vídeos e 82 imagens na Biblioteca, com a legenda pronta de cada um. São 11 vídeos que vendem o operacional, 6 testes de gancho, 4 versões para o feed, 2 aulas, 13 coringas sem texto, 5 carrosséis, 10 posts, 5 frases, 5 stories, 10 capas de Reels, 6 capas de destaques e 6 thumbnails. Também há 6 roteiros para o Giovane gravar e o guia de depoimentos.
+**O que já existe:** 70 vídeos e 82 imagens na Biblioteca, com a legenda pronta de cada um. São 11 vídeos que vendem o operacional, 6 testes de gancho, 4 versões para o feed, 2 aulas, 13 coringas sem texto, 5 carrosséis, 10 posts, 5 frases, 5 stories, 10 capas de Reels, 6 capas de destaques e 6 thumbnails. Também há 6 roteiros para Giovane gravar e o guia de depoimentos.
 
 **Próximas ações:**
 
@@ -214,8 +231,8 @@ A imprensa dá à GL uma autoridade de terceiros que anúncio não compra. A met
 
 | Item | Definição |
 | --- | --- |
-| Dono | Assessor de imprensa (freelancer por pauta), com o Giovane como porta-voz |
-| Cadência | 1 pauta forte por mês; o Giovane disponível como fonte em dias de notícia de mercado |
+| Dono | Assessor de imprensa (freelancer por pauta), com Giovane como porta-voz |
+| Cadência | 1 pauta forte por mês; Giovane disponível como fonte em dias de notícia de mercado |
 | Indicadores | Pautas enviadas, respostas, matérias publicadas, tráfego e leads com utm\_medium=imprensa |
 | Passa o bastão | Cada matéria vira o selo "Visto em" no site, na bio, nos anúncios e nas conversas de venda |
 
@@ -231,15 +248,15 @@ A imprensa dá à GL uma autoridade de terceiros que anúncio não compra. A met
 
 O Raio-X só usa dados agregados e anônimos, e precisa estar previsto na política de privacidade antes de ser divulgado.
 
-**O que já existe:** o release da pauta 1, o pitch curto para jornalista e o e-mail de fonte para dias de volatilidade, no kit do Sistema de Marketing. A citação do Giovane e os números reais do release ainda precisam ser confirmados.
+**O que já existe:** o release da pauta 1, o pitch curto para jornalista e o e-mail de fonte para dias de volatilidade, no kit do Sistema de Marketing. A citação de Giovane e os números reais do release ainda precisam ser confirmados.
 
 **Próximas ações:**
 
-- [ ] Montar o press kit: release institucional, bio e fotos do Giovane, logos, fatos e números, contato. Semana 2.
+- [ ] Montar o press kit: release institucional, bio e fotos de Giovane, logos, fatos e números, contato. Semana 2.
 - [ ] Montar o mailing com 40 jornalistas: cidade, finanças, tecnologia, games e empreendedorismo. Semanas 2 e 3.
-- [ ] Media training do Giovane: mensagens-chave e o que nunca dizer. Semana 3.
+- [ ] Media training de Giovane: mensagens-chave e o que nunca dizer. Semana 3.
 - [ ] Enviar a pauta 1, do controle de videogame. Semana 4.
-- [ ] Oferecer o Giovane como fonte em dias de Payroll, CPI, FOMC e Copom. Contínuo.
+- [ ] Oferecer Giovane como fonte em dias de Payroll, CPI, FOMC e Copom. Contínuo.
 - [ ] Enviar a pauta 2, o Raio-X do Trader Brasileiro. Semanas 8 e 9.
 - [ ] Enviar a pauta 3, a aula para universitários. Semana 10.
 - [ ] Criar a página de imprensa e o selo "Visto em". Depois da primeira matéria.
@@ -267,7 +284,7 @@ Relações públicas cuidam da reputação e do relacionamento com clientes, com
 - [ ] Assumir os perfis no Reclame Aqui e no Google e responder tudo em até 48 horas. Semana 2.
 - [ ] Ligar os rituais da comunidade: pré-mercado, Frase Central da semana e live mensal. Semana 3.
 - [ ] Rodar o onboarding do cliente nos dias 0, 3, 7 e 30, com NPS. Semana 3.
-- [ ] Escrever o manual de crise: gatilhos, porta-voz, primeiras 2 horas e modelos de resposta. Semana 3.
+- [x] Escrever o manual de crise: gatilhos, porta-voz, primeiras 2 horas e modelos de resposta. Feito em 01/10 (execucao/manual-de-crise.md); falta a revisão jurídica.
 - [ ] Lançar o programa "Traga um trader", com benefício não financeiro para quem indica. Semana 5.
 - [ ] Fechar parcerias com 3 ligas universitárias de mercado financeiro e 2 mesas proprietárias. Semanas 4 a 9.
 - [ ] Revisar toda semana uma amostra das conversas do time comercial. Contínuo.
@@ -388,8 +405,6 @@ Cada pasta de vídeos tem um arquivo "Legendas e usos.txt". A pasta 02 tem um ca
 | Lugar | O que tem |
 | --- | --- |
 | [Biblioteca de Vídeos GL](https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm) | Os 70 vídeos e 82 imagens com legenda e botão de copiar, o ZIP organizado, o kit do site com o prompt do Codex, roteiros e o plano da Higgsfield |
-| [Campanha GL Risk Auto](https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1) | Os 43 vídeos e 98 imagens da campanha "Risco primeiro" (Reels, feed 4:5, anúncios do YouTube, aulas 20 e 21 da Mentoria, 4 tutoriais), o que postar em cada dia, legendas, textos dos anúncios, roteiros e o ZIP organizado |
-| [Carrosséis e Stories GL](https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) | Os carrosséis e stories da série Operacional na prática e as peças de dúvidas e call |
 | [Sistema de Marketing GL](https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns) | Objetivo, calculadora do funil, os 6 pilares com ações e status compartilhado, kit de textos (anúncios, release, roteiro da call, mensagens), calendário do trimestre, medição e regras |
 | Repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0 | O funil com atribuição por pilar (falta o merge), o motor de vídeo, o organizador, os prompts e o glossário |
 | Projeto "GL Academy · Marketing" na Higgsfield | Imagens base, rascunhos do logo e o que o Codex gerou |
@@ -399,15 +414,18 @@ Cada pasta de vídeos tem um arquivo "Legendas e usos.txt". A pasta 02 tem um ca
 
 - **Claude:** vídeos e imagens a partir dos prints (sem crédito), textos, organização, plano e acompanhamento.
 - **Codex:** o site novo. Os vídeos que ele fez ficam separados, na pasta 04.
-- **Equipe GL:** gravações do Giovane, publicação, anúncios, parcerias, imprensa, comunidade e vendas.
+- **Equipe GL:** gravações de Giovane, publicação, anúncios, parcerias, imprensa, comunidade e vendas.
 
 ## O que foi feito até agora
 
-Em três dias, o marketing ganhou um plano com objetivo único, um funil que mede cada pilar e 152 peças prontas, sem gastar crédito de IA nelas. Horários de Brasília, do mais recente para o mais antigo:
+Em nove dias (29/09 a 06/10), o marketing ganhou dois planos (o do ciclo e o 2026-27), um funil que mede cada pilar, a Pauta GL automática, a Central de Marketing GL e cerca de 180 vídeos e 460 imagens prontos, sem gastar crédito de IA neles. Do mais recente para o mais antigo:
 
 | Quando | O que foi feito | Detalhe |
 | --- | --- | --- |
-| 04/10 | Campanha GL Risk Auto | Com os prints 22 a 34: 43 vídeos (Reels, feed 4:5, anúncios do YouTube, aulas 20 e 21 da Mentoria, tutoriais e coringas), 98 imagens, o plano da campanha, o calendário até 25/11, os textos dos anúncios e 6 roteiros para gravar, na página Campanha GL Risk Auto |
+| 06/10 | Leitura de Mercado, macroeconomia e estratégia | 8 vídeos da expansão de 05 e 06/10 na página nova Leitura de Mercado GL (a Biblioteca chegou ao limite de tamanho); série O Efeito Dominó, com 9 aulas e 24 Reels de macroeconomia e os números conferidos; mapa das fontes de renda; pré-auditoria das redes; esqueleto do guia de viralização; uma sugestão para cada decisão em aberto |
+| 05/10 | Plano 2026-27, Pauta GL e Central de Marketing GL | Plano de marcas, canais e conteúdo, com o calendário mestre de 473 linhas, perfis e bios, roteiros, banco de 120 ideias e a arte do plano; pauta automática às 6h40 dos dias úteis; Central com a entrevista de 56 perguntas e o atalho no PC; nota mestre do Obsidian; os 2 vídeos completos do GL Risk Auto para o site |
+| 04/10 | Série Operacional na prática e Campanha GL Risk Auto | 19 Reels e Shorts com carrosséis e stories; Biblioteca reorganizada por objetivo; campanha com 43 vídeos, 98 imagens, anúncios, as aulas 20 e 21 da Mentoria e 4 tutoriais |
+| 02/10 | Rodada 5 e Mentoria GL | O operacional por dentro com os prints 6 a 13 e o retorno à média; 19 videoaulas da Mentoria, com a trilha de estudos, os 8 encontros e o ZIP |
 | 01/10, tarde | Kit do site completo e prompt para o Codex | 28 vídeos escolhidos para cada espaço do site, capas em tamanho cheio, catálogo e o prompt. Este plano para o GL OS |
 | 01/10, 08h | Pacote organizado e organizador da pasta | ZIP de 136 MB com pastas por objetivo, legendas, catálogo e índice por tema; organizador para o Windows testado em 8 cenários |
 | 01/10, 07h | Rodada 4 | Sequência da call no WhatsApp, kit de live para o OBS, YouTube, comunidade, parceiros, loops do site e 82 imagens (carrosséis, posts, frases, stories, capas, thumbnails) |
@@ -416,35 +434,57 @@ Em três dias, o marketing ganhou um plano com objetivo único, um funil que med
 | 30/09 | Biblioteca de Vídeos GL, rodadas 1 a 3 | Vídeos que vendem, coringas, ganchos, versões 4:5, logo e vinheta, aulas, respostas às objeções, lives e comerciais; rodada premium na Higgsfield pausada depois de 64,5 créditos |
 | 29/09 | Funil e Sistema de Marketing GL | O funil passou a gravar o pilar, a origem e o parceiro de cada lead e ganhou correções de vendas; o painel dos 6 pilares foi publicado |
 
-Também em 01/10 saíram as peças de execução da Fundação: o calendário de outubro, a planilha do teste de anúncios, o placar semanal, o kit de imprensa, o manual de crise, o programa de parceiros e o follow-up de vendas (pastas 01 e 05 do pacote). No painel do Sistema de Marketing, 10 ações estão em andamento: o merge do funil e 9 com o material pronto, esperando o time. Nenhuma está marcada como feita.
+Também em 01/10 saíram as peças de execução da Fundação: o calendário de outubro, a planilha do teste de anúncios, o placar semanal, o kit de imprensa, o manual de crise, o programa de parceiros e o follow-up de vendas. Até 06/10, as 10 ações do Sistema de Marketing seguem em andamento (o merge do funil e 9 com o material pronto, esperando o time), e nenhuma foi marcada como feita.
 
 ## O que falta fazer
 
-O que trava o plano hoje são decisões e gravações, não peças: as 6 primeiras linhas destravam todos os pilares. As ações de cada pilar estão nas seções acima; aqui ficam as que cruzam pilares.
+O que trava hoje são decisões, gravações e acessos, não peças. São 37 tarefas com dono e prazo, das urgentes às de novembro; marque o que for feito na Central de Marketing GL (seção Tarefas), onde eu leio antes de cada rodada. As ações de cada pilar seguem nas seções acima.
 
-| O que falta | Responsável | Quando | Destrava |
+| Prazo | Tarefa | Dono | Destrava |
 | --- | --- | --- | --- |
-| Definir a meta do ciclo (vendas e ticket) e salvar no Sistema de Marketing | Giovane | Semana 1 | O placar e as metas de cada pilar |
-| Definir a verba mensal de mídia | Giovane | Semana 1 | O teste de anúncios |
-| Nomear um dono para cada pilar | Giovane | Semana 1 | A reunião de segunda |
-| Decidir a conversa gratuita: 30 ou 60 minutos, "call 1x1" ou "mentoria gratuita" | Giovane | Semana 1 | Site, roteiro da call, anúncios e o vídeo "Não sei por onde começar" |
-| Fazer o merge do funil, publicar e testar um lead de ponta a ponta | Giovane aprova; Claude prepara | Semana 1 | A medição por pilar |
-| Criar o Pixel da Meta e o GA4 e publicar a política de privacidade | Gestor de tráfego e jurídico | Semana 1 | Tráfego pago e o Raio-X para a imprensa |
-| Tornar privados os repositórios do funil e do app dos vendedores | Giovane | Semana 1 | Tira do ar comissões, playbooks e links de checkout |
-| Rodar o organizador novo na pasta "Marketing de trading" | Giovane | Hoje | Pasta organizada e a conferência dos repetidos |
-| Atualizar a matriz de oferta para os pacotes e preços do site novo | Giovane e gestora de equipes | Semana 2 | Treino do time e Black Friday |
-| Gravar os vídeos de boas-vindas (90 s) e pós-agendamento (45 s) do funil | Giovane | Semanas 1 e 2 | Os dois espaços vazios do funil e o anúncio do fundador |
-| Gravar os 6 roteiros prontos e a tela do APP | Giovane | Semanas 2 e 3 | As séries de conteúdo e os espaços do APP e da mentoria no site |
-| Mandar uma foto do Giovane, os prints novos e o @ dos parceiros | Giovane | Semana 2 | Thumbnails com rosto, vídeos novos e cartelas de parceiro |
-| Colher 3 depoimentos de processo com autorização | Comunidade e sucesso do cliente | Semanas 4 a 6 | Remarketing e prova social |
-| Colocar os vídeos no site com o kit e o prompt | Codex, com o ok do Giovane | Semana 2 | O site premium |
-| Recarregar a Higgsfield, se quiser a rodada premium | Giovane | Quando houver prints novos | Cenas de estúdio e o antes e depois real |
-| Editar as gravações e fazer os vídeos com os prints novos | Claude | Assim que chegarem | Conteúdo das semanas seguintes |
-| Entrevista para o plano 2026/2027 | Giovane e Claude | Semanas 11 a 13 | O próximo ciclo |
+| 06/10 | Tirar o marketing do acesso público: criar o repositório privado `gl-academy-marketing` para eu levar a pasta (fechar o `gl-academy` tira o funil do ar no plano gratuito) e fechar o `gl-academy-vendedores-app`, conferindo antes o GitHub Pages dele | Giovane | Planos, comissões e links de checkout fora do acesso público |
+| 07/10 | Responder as 14 perguntas essenciais da entrevista (Central, seção Entrevista) | Giovane | O plano v2, a auditoria das redes e o mapa de ofertas |
+| 07/10 | Gravar o bloco 1 (manifesto, "Comece aqui" e os Reels da semana 1) e a sessão de fotos de 30 minutos | Giovane | O relançamento de 09/10 e as thumbnails |
+| 07/10 | Bios, nomes, links e capas de destaques nos 3 perfis (era 06/10) | Social media | O relançamento |
+| 08/10 | Decidir os papéis dos perfis, o @ do YouTube, a conversa gratuita (duração e nome), a newsletter e a live real ou simulada | Giovane | Bios, canal, newsletter e a live de 15/10 |
+| 08/10 | Compartilhar as páginas com a equipe (menu Compartilhar) | Giovane | A equipe trabalhar sem pedir link |
+| 08/10 | Banner do YouTube e slides do carrossel "Comece aqui" | Claude | O canal e o post fixado de 11/10 |
+| 08/10 | YouTube com banner, descrição, playlists e trailer; newsletter criada | Social media | O vídeo longo 1 e a newsletter de 18/10 |
+| 09/10 | Página de links com UTM (botões e UTMs em `canais/perfis-e-bios.md`) | Equipe ou Codex | Medir o que vem da bio |
+| 09/10 | Ok para o merge do funil (só os 4 arquivos do site, sem a pasta de marketing); depois, política de privacidade, Pixel e GA4 | Giovane aprova; Claude prepara; tráfego e jurídico | O teste de anúncios medido por pilar |
+| 09/10 | Publicar o manifesto (09/10) e o carrossel "Comece aqui" (11/10) | Social media | O relançamento |
+| 09/10 | Conferir com o Codex os 2 vídeos do GL Risk Auto no site | Giovane | A página do produto completa |
+| 09/10 | Levar o plano ao GL OS e colar a resposta no chat | Giovane | Achar o que ainda falta no plano |
+| 10/10 | Começar a Campanha GL Risk Auto no @glacademybr | Social media | O calendário da campanha até 25/11 |
+| 11/10 | Definir a verba e subir o teste de anúncios de 12 a 25/10 | Giovane e tráfego | O custo por call de cada criativo |
+| 12/10 | Ligar a sequência da call no WhatsApp e o follow-up de 1, 3 e 7 dias | Vendas | Menos faltas e mais fechamento |
+| 12/10 | Definir quem preenche o placar de segunda e anotar a base de 05/10 | Giovane define; equipe preenche | As metas de resultado |
+| 12/10 | Mandar o Second Brain, o curso de marketing viral, os links e prints das redes, os números de hoje, a tabela de preços e os materiais da marca | Giovane | Auditoria das redes, playbook viral e plano v2 |
+| 12/10 | Aprovar ou ajustar a série O Efeito Dominó | Giovane | Os Reels a partir de 13/10 |
+| 12/10 | Conferir os 2 números da série ainda sem fonte (produtividade 78 de 131; P&D de 1,2% do PIB) | Claude | Gravar sem erro de fato |
+| 14/10 | Gravar o vídeo longo 1 | Giovane | O YouTube de 18/10 |
+| 15/10 | Live no pregão | Giovane | As lives quinzenais |
+| 16/10 | Decidir a linha de IA (marca, preço e piloto) e pôr no ar a página da lista de espera | Giovane decide; Claude monta | A chamada do vídeo longo 1 |
+| 16/10 | Completar o kit de imprensa: fotos, número real de alunos, a sua citação e o contato | Giovane | A pauta 1 de 19/10 |
+| 18/10 | Validar os termos técnicos, as regras das aulas da Mentoria e o stop do vídeo "Força não é entrada" | Giovane | Liberar aulas e anúncios |
+| 18/10 | Media training: mensagens-chave e o que nunca dizer | Giovane | Imprensa e podcasts |
+| 19/10 | Versões em inglês para o @glacademytrading | Claude, depois da decisão dos perfis | O perfil internacional |
+| 25/10 | Comissão e contrato dos parceiros; lista de 30 criadores | Giovane e parcerias | O programa de parceiros |
+| 30/10 | Aprovar o uso dos 1.200 créditos da Higgsfield e os 2 rascunhos do logo de 30/09 | Giovane | Identidade das séries e cenas de anúncio |
+| 30/10 | Revisões jurídicas: contrato de parceiros, manual de crise, estudos de ativos (CVM) e avisos dos EUA | Jurídico | Parcerias, crise e o perfil em inglês |
+| 30/10 | Decidir a condição de Black Friday (27/11) | Giovane | As peças de novembro |
+| Quando puder | Prints da Mentoria de Order Flow e das situações que faltam na Mentoria GL | Giovane | Novas aulas e Reels |
+| Quando puder | Gravar os vídeos do funil (90 s e 45 s), os 6 roteiros de 01/10 e a tela do GL Risk Auto e do APP | Giovane | Funil completo, séries e tutoriais |
+| Depois dos materiais | Diagnóstico (Second Brain, redes, viralização e ofertas) e o plano 2026-27 versão 2 | Claude | O plano pronto para só aplicar |
+| Semanas 4 a 6 | Colher 3 depoimentos de processo com autorização | Comunidade | Remarketing e prova social |
+| Todo dia útil | Abrir a Pauta GL de manhã e marcar o que vai gravar; se não for usar, pausar a rotina | Giovane | Conteúdo diário sem custo à toa |
+| Toda segunda | Reunião de 45 minutos: o placar, as tarefas da Central e o status das 10 ações no Sistema de Marketing | Giovane e equipe | O ciclo andar pelos números |
 
 ## Plano das próximas semanas
 
 O ciclo tem quatro fases, e cada uma prepara a seguinte: outubro testa e descobre o que traz calls, novembro põe verba e parceiros no que funcionou, e dezembro fecha as vendas em aberto e revisa o ciclo.
+
+*(Na versão viva, este trecho é um desenho: ciclo de marketing · 4 fases, o teste de anúncios e 3 datas. Em texto:)*
 
 | Fase ou data | Quando |
 | --- | --- |
@@ -462,34 +502,42 @@ O ciclo tem quatro fases, e cada uma prepara a seguinte: outubro testa e descobr
 - **Escala (semanas 7 a 10):** pôr verba e parceiros no que funcionou: criativos vencedores, anúncios de parceria, remarketing com depoimentos e a Black Friday em 27/11.
 - **Colheita e revisão (semanas 11 a 13):** fechar as vendas em aberto, colher depoimentos, medir o ciclo contra a meta e fazer a entrevista para o plano 2026/2027.
 
-**As próximas quatro semanas.** O calendário de outubro, dia a dia, já está na pasta 01, com a peça, a capa e a legenda de cada post.
+**As próximas quatro semanas.** O calendário dia a dia está em `canais/calendario-mestre.csv` e na Central, com a peça, o horário e a legenda de cada post. A semana 2 do ciclo é a semana 0 do plano 2026-27.
 
 | Semana | Tema do conteúdo | Foco | Entregas |
 | --- | --- | --- | --- |
-| 2 · 05/10 a 11/10 | Contexto: a favor ou contra | Fechar a Fundação | Publicação diária pelo calendário; capas de destaques; vídeo pós-agendamento gravado; campanhas e públicos montados com UTMs; 30 criadores listados e programa de parceiros; press kit e mailing; Compromisso GL publicado; Reclame Aqui e Google assumidos; matriz de oferta nova e time treinado; follow-up de 1, 3 e 7 dias; vídeos no site novo |
-| 3 · 12/10 a 18/10 (12/10 é feriado) | Valor e níveis | Começar a Tração | Teste de anúncios no ar (5 criativos, 2 públicos, 14 dias); séries "Pare de ser a liquidez" e "A Frase Central"; 1ª ideia no TradingView; primeiros microcriadores com acesso; media training do Giovane; rituais da comunidade e onboarding de clientes; manual de crise aprovado |
-| 4 · 19/10 a 25/10 | Plataformas e GL Gamma | Primeira leitura do teste | Pauta 1 enviada em 19/10; fim do teste em 25/10, com o custo por call de cada criativo; primeiros depoimentos de processo; primeiras conversas com ligas universitárias e mesas proprietárias |
-| 5 · 26/10 a 01/11 | Alvos e processo | Pôr verba no que venceu | Mais 20% de verba a cada 3 dias nos vencedores, enquanto o custo por call realizada estiver abaixo do alvo; "Traga um trader"; ação com criador de games ou setup; live "Replay com Giovane" em 29/10; calendário de novembro pronto |
+| 2 · 05/10 a 11/10 | Contexto: a favor ou contra | Arrumar a casa e fechar a Fundação | Feito: Pauta GL, Central e Leitura de Mercado no ar. Falta: tirar o marketing do repositório público, entrevista, bios e destaques, bloco 1 gravado, manifesto em 09/10, "Comece aqui" em 11/10, Campanha GL Risk Auto a partir de 10/10, merge do funil e verba do teste |
+| 3 · 12/10 a 18/10 (12/10 é feriado) | Valor e níveis | Começar a Tração | Teste de anúncios no ar (12 a 25/10); séries do plano 2026-27; vídeo longo 1 gravado em 14/10 e publicado em 18/10; live no pregão em 15/10; lista de espera da IA em 16/10; newsletter 1; media training; Reels do Efeito Dominó a partir de 13/10, se aprovados |
+| 4 · 19/10 a 25/10 | Plataformas e GL Gamma | Primeira leitura do teste | Pauta 1 na imprensa em 19/10; versões em inglês no @glacademytrading; live de perguntas em 22/10; fim do teste em 25/10, com o custo por call de cada criativo; primeiros depoimentos |
+| 5 · 26/10 a 01/11 | Alvos e processo | Pôr verba no que venceu | Mais 20% de verba a cada 3 dias nos vencedores; live no pregão em 29/10; créditos da Higgsfield usados até 30/10; condição de Black Friday decidida; calendário de novembro pronto; Nova York muda o horário em 02/11 |
 
-Toda segunda, a reunião de 45 minutos confere a semana contra esta tabela e o placar. Na semana 5, o Claude monta o calendário de novembro e a tabela das semanas 6 a 9.
+Toda segunda, a reunião de 45 minutos confere a semana contra esta tabela, o placar e as tarefas da Central. Na semana 5, o Claude monta o calendário de novembro e a tabela das semanas 6 a 9.
 
 ## Decisões em aberto e perguntas para o GL OS
 
-Onze decisões dependem do Giovane. Abaixo delas, as perguntas que o GL OS deve fazer para achar o que está faltando no plano.
+São 19 decisões que só você pode tomar. Até 06/10, nenhuma foi marcada. Cada uma tem uma sugestão na Central de Marketing GL (seção Pendências): marque lá e escreva o que decidiu, que eu atualizo os planos na rodada seguinte. As 5 primeiras destravam o relançamento desta semana.
 
 **Decisões em aberto:**
 
-- [ ] Meta do ciclo: quantos clientes e qual ticket médio. O exemplo do painel é de 60 clientes a R$ 3.500.
-- [ ] Verba mensal de mídia para o tráfego pago.
-- [ ] Um dono para cada pilar. Uma pessoa pode ter mais de um pilar, mas cada pilar tem um dono só.
-- [ ] A conversa gratuita: 30 ou 60 minutos, e se ela se chama "call 1x1" ou "mentoria gratuita".
-- [ ] O papel dos três perfis de Instagram: manter os três com funções diferentes ou juntar o @glacademybr ao @glacademytrading.
-- [ ] A comissão dos parceiros: R$ 200 por venda, como os captadores, ou outro modelo.
-- [ ] Os pacotes e preços do site novo na matriz de oferta, e se os produtos antigos continuam à venda (GL Risk Auto avulso, Gamepad Trader Pro, Mentoria Gestão de Risco e Sala de Análise).
-- [ ] Quando usar "GL Model" e quando usar "GL Professional Trade System" no marketing.
-- [ ] Se haverá condição de Black Friday em 27/11, qual e por quanto tempo. Precisa ser real, com preço verdadeiro.
-- [ ] Os termos técnicos dos vídeos e o texto do site a confirmar: Y +8%, D -0,3%, VWAP 3M, Calor 4%, "cerca de 70%" na Value Area, "zona de defesa", "valor do dia", "o alvo aparece antes do preço chegar", se os planos NinjaTrader incluem o TradingView, a grafia "Giovane Lázaro" e a frase "resultados eficientes" no site.
-- [ ] O formato da Sala de Análise e do pré-mercado da comunidade, diante da Resolução 20/2021 da CVM, revisado com o advogado.
+- [ ] Os papéis dos perfis: @glacademybr para o Brasil e @glacademytrading para o exterior, em inglês. Sugestão: sim, com a transição avisada nos stories. Prazo: 08/10.
+- [ ] O @ do YouTube: manter @giovanelazaro ou unificar como @lazarotrades. Sugestão: unificar como @lazarotrades. Prazo: 08/10.
+- [ ] A conversa gratuita: 30 ou 60 minutos e o nome. Sugestão: 30 minutos, "conversa gratuita". Até decidir, nenhuma peça cita a duração. Prazo: 08/10.
+- [ ] A newsletter: nome e ferramenta. Sugestão: "Processo à Vista", no Beehiiv. Prazo: 08/10.
+- [ ] A live no pregão: conta real ou simulada. Sugestão: simulada nas 2 primeiras, com aviso na tela; sempre em R e pontos. Prazo: 08/10, para a live de 15/10.
+- [ ] A meta do ciclo: quantos clientes e qual ticket médio. Sugestão: 40 clientes (cerca de 12 calls realizadas por semana), recalibrada em 26/10.
+- [ ] A verba de anúncios. Sugestão: R$ 3 mil a 5 mil no teste de 12 a 25/10; depois, só no que trouxer call abaixo do custo-alvo. Prazo: 12/10.
+- [ ] A equipe: quem edita, quem agenda e quem responde os directs, e um dono para cada pilar.
+- [ ] O merge do funil, o Pixel da Meta e o GA4, com a política de privacidade antes do Pixel. Prazo: 09/10.
+- [ ] A sessão de fotos de 30 minutos, para as thumbnails e a foto oficial. Prazo: esta semana.
+- [ ] A linha de IA: marca, preço do workshop e data do piloto. A página da lista de espera precisa estar no ar até 16/10.
+- [ ] A série O Efeito Dominó: aprovar ou ajustar. Sugestão: Reels a partir de 13/10 e aulas a partir de 21/10. Prazo: 12/10.
+- [ ] Os pacotes e preços que seguem à venda e os produtos antigos (GL Risk Auto avulso, Gamepad Trader Pro, Mentoria Gestão de Risco e Sala de Análise).
+- [ ] A comissão dos parceiros. Sugestão: R$ 200 por venda nos pacotes principais e 10% nas assinaturas do GL Gamma (assinatura à parte) por 6 meses. Prazo: 25/10.
+- [ ] Os estudos de ativos e a CVM (Resolução 20/2021): CNPI-T ou parceria com analista, e o advogado revendo a Sala de Análise e o pré-mercado.
+- [ ] Os 1.200 créditos da Higgsfield. Sugestão: aprovar a primeira leva (cerca de 270 créditos) nesta semana. Prazo final: 30/10.
+- [ ] Os nomes e os termos técnicos: quando usar GL Model, GL Professional Trade System e Trade Visualizer, e os termos a confirmar (Y +8%, D -0,3%, VWAP 3M, Calor 4%, "cerca de 70%" na Value Area, zona de defesa, valor do dia, "o alvo aparece antes do preço chegar", NinjaTrader com TradingView, a grafia "Giovane Lázaro" e "resultados eficientes" no site).
+- [ ] TikTok e X: ligar já ou só em janeiro. Sugestão: TikTok já, repetindo os Shorts; X ou Threads em janeiro.
+- [ ] A condição de Black Friday (27/11), real e com preço verdadeiro. Sugestão: bônus em vez de desconto grande, de 24 a 30/11. Prazo: 30/10.
 
 **Perguntas para o GL OS conferir:**
 
@@ -498,7 +546,7 @@ Onze decisões dependem do Giovane. Abaixo delas, as perguntas que o GL OS deve 
 - O time comercial dá conta de cerca de 18 calls realizadas por semana, com contato em até 5 minutos para leads A?
 - Quem preenche o placar de segunda e onde ele fica?
 - Se a verba de mídia for zero no começo, o que muda nas metas de cada pilar?
-- As datas do trimestre (feriados, Black Friday, férias, viagens, eventos de mercado) batem com a agenda da empresa e do Giovane?
+- As datas do trimestre (feriados, Black Friday, férias, viagens, eventos de mercado) batem com a agenda da empresa e de Giovane?
 - Os pontos legais (CVM, CONAR, Código de Defesa do Consumidor e LGPD) já passaram pelo advogado?
 - Existe algum dado real (número de alunos, anos de mercado, países) que pode entrar no release e no site com segurança?
 
@@ -510,27 +558,42 @@ Para continuar o projeto numa conversa nova do Claude Code: preencha a parte "O 
 Continuar o projeto de marketing da GL Academy.
 
 CONTEXTO
-- Repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Leia antes de tudo: marketing/plano-de-marketing.md (o plano completo), marketing/glossario.md, marketing/execucao/ (calendário, anúncios, placar, imprensa, crise, parceiros e vendas), marketing/roteiros-e-depoimentos.md, marketing/site/prompt-codex-videos-do-site.md e marketing/videos/README.md.
-- Páginas: Biblioteca de Vídeos GL (https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm), Campanha GL Risk Auto (https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1), Carrosséis e Stories GL (https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp) e Sistema de Marketing GL (https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns), que guarda o status de cada ação na coleção "status" e a meta oficial na coleção "config".
-- Objetivo único do ciclo (28/09 a 31/12/2026): clientes fechados na call 1x1 gratuita. Métrica guia: calls realizadas por semana. Os 6 pilares (Conteúdo, Tráfego pago, Divulgação, Assessoria de imprensa, Relações públicas e Vendas) passam o bastão um para o outro.
+- Repositório glacademytrading/gl-academy, branch claude/gl-academy-marketing-awwnj0. Leia antes de tudo:
+  - marketing/README.md (o mapa da pasta);
+  - marketing/segundo-cerebro/Marketing GL Academy.md (o resumo de tudo, a nota do Obsidian);
+  - marketing/plano-de-marketing-2026-27.md (marcas, canais, conteúdo diário, YouTube, educação em IA e as 13 semanas até 03/01/2027);
+  - marketing/plano-de-marketing.md (o plano do ciclo: funil, 6 pilares e meta de calls);
+  - marketing/canais/ (perfis e bios, roteiros, banco de ideias, modelos e checklists, calendário mestre, semana-tipo e a arte do plano);
+  - marketing/automacao/ (a rotina da pauta diária e o radar de fontes);
+  - marketing/execucao/ (calendários prontos, anúncios, placar, imprensa, crise, parceiros, vendas e a campanha GL Risk Auto);
+  - marketing/glossario.md, marketing/roteiros-e-depoimentos.md e marketing/videos/README.md.
+- Páginas:
+  - Central de Marketing GL (https://claude.ai/artifact/5ZT6MjVPqcFQpAK1wJdmAR): as tarefas com dono e prazo na coleção "tarefas" (id da tarefa, como "repos", com "feito" e a data), as decisões em "decisoes", os materiais enviados em "entregas", os links das redes em "redes/links" e as respostas da entrevista em "entrevista" (id da pergunta, como "b1"). A lista das tarefas fica em marketing/central/dados.json. Leia antes de tudo.
+  - Plano de Marketing GL Academy (Claude Docs, https://claude.ai/artifact/7A6YMsf9t1Wyqs57G2LEHc): o plano do ciclo para o GL OS, com a revisão de 06/10 (o que ficou para trás), "O que falta" (as tarefas com prazo) e as decisões em aberto.
+  - Pauta GL (https://claude.ai/artifact/YH7Bzpianz4oLt52Fwi5ba): a pauta de cada dia útil na coleção "pauta" e o status de cada roteiro na coleção "status". A rotina "Pauta GL · radar e roteiros do dia" grava a pauta às 6h40, de segunda a sexta.
+  - Sistema de Marketing GL (https://claude.ai/artifact/7MhNCUVNeDtQACf9euH5Ns): o status de cada ação na coleção "status" e a meta oficial na coleção "config".
+  - Biblioteca de Vídeos GL (https://claude.ai/artifact/BgpMsKZZn2BikAYBcXSDfm, cheia: as rodadas novas de prints vão para a Leitura de Mercado GL, https://claude.ai/artifact/NuHzDmSDSH5JngXwXxCEkW), Campanha GL Risk Auto (https://claude.ai/artifact/YGFyAnt64pTYPbqzFsjhr1) e Carrosséis e Stories GL (https://claude.ai/artifact/AVHWWSnHp4TPyVGiCm2tsp).
+- Objetivo único do ciclo (28/09 a 31/12/2026): clientes fechados na call 1x1 gratuita. Métrica guia: calls realizadas por semana. Os números de audiência do plano 2026–27 servem a ela.
 
 O QUE MUDOU DESDE A ÚLTIMA CONVERSA (preencha)
-- Decisões tomadas: [meta, verba, donos dos pilares, 30 ou 60 minutos, pacotes e preços, Black Friday]
+- Decisões tomadas: [papéis dos perfis, @ do YouTube, live em conta real ou simulada, nome e ferramenta da newsletter, marca e preço da linha de IA, equipe, verba de anúncio, Higgsfield]
 - O que o GL OS apontou: [cole a resposta]
-- Números da semana: [leads, calls agendadas e realizadas, vendas e custo, por pilar]
-- Materiais novos: [prints, gravações do Giovane, depoimentos com autorização, foto, @ dos parceiros, créditos na Higgsfield]
+- Números da semana: [leads, calls agendadas e realizadas, vendas e custo, por pilar; e o placar de conteúdo: seguidores, alcance de quem não segue, envios e salvamentos, inscritos, CTR e retenção]
+- Materiais novos: [prints, gravações de Giovane, depoimentos com autorização, fotos, @ dos parceiros, créditos na Higgsfield]
 
 FAÇA NESTA ORDEM
-1. Leia o status das ações no Sistema de Marketing e me diga, em poucas linhas, onde estamos contra o plano (semana atual, fase e o que atrasou).
-2. Atualize o plano com as decisões e com o que o GL OS apontou: marque o que foi feito, ajuste metas, datas e donos, e registre as decisões. Atualize também marketing/plano-de-marketing.md e o painel do Sistema de Marketing.
-3. Execute a fase atual do calendário (Fundação, Tração, Escala ou Colheita) em tudo o que não depende de mim: textos, calendário do próximo mês, criativos novos, briefings, análises do placar e ajustes de anúncios.
-4. Com materiais novos: prints viram vídeos e imagens no motor de marketing/videos, sem gastar crédito, publicados na Biblioteca no mesmo link; gravações viram vídeos editados com legenda, cortes dos setups e o logo.
+1. Leia a Central (tarefas, decisões, materiais, links e respostas da entrevista), o status das ações no Sistema de Marketing e o que foi gravado e postado na Pauta GL. Diga em poucas linhas onde estamos contra o plano (semana atual, fase, o que atrasou e as tarefas vencidas).
+2. Atualize os planos com as decisões e com o que o GL OS apontou: marque o que foi feito, ajuste metas, datas e donos, registre as decisões. As tarefas ficam em marketing/central/dados.json: depois de mudar, rode segundo-cerebro/montar_cofre.py (ele atualiza a nota do Obsidian e a seção 23 do plano 2026-27), republique a Central no mesmo link (central/montar_central.py) e acerte "O que falta" no Plano de Marketing GL Academy. Se o calendário mudar, rode marketing/canais/gerar_calendario.py e republique a Pauta GL no mesmo link (marketing/pauta/montar_pauta.py).
+3. Execute a semana atual do plano 2026–27 em tudo o que não depende de mim: roteiros, legendas, calendário, criativos, versões em inglês, briefings, análise do placar e ajustes de anúncios.
+4. Com materiais novos: prints viram vídeos e imagens no motor de marketing/videos, sem gastar crédito, publicados na Leitura de Mercado GL no mesmo link (videos/leitura_mercado.py); gravações viram vídeos editados com legenda, cortes e o logo.
 5. Me entregue: o que mudou, o que você fez, o que depende de mim (com prazo) e as 3 prioridades da próxima semana.
 
 REGRAS
-- Nada de promessa de lucro, renda ou aprovação em mesa. Selo "Replay · exemplo educacional" nos replays, aviso de risco no fim de toda peça e "GL Gamma: assinatura à parte" onde aparecer Gamma.
+- Nada de promessa de lucro, renda ou aprovação em mesa. "Aprovação em mesa proprietária depende de você e das regras de cada mesa."
+- Nenhuma recomendação de compra ou venda de ativo (CVM, Resolução 20/2021). Resultado só em R ou pontos, com "resultado passado não garante resultado futuro"; nada de saldo em dólar.
+- Selo "Replay · exemplo educacional" nos replays, aviso de risco no fim de toda peça e "GL Gamma: assinatura à parte" onde aparecer Gamma.
 - Depoimento só com autorização por escrito e sem valores ganhos. Parcerias sempre com #publi.
-- A IA nunca redesenha o gráfico real. Higgsfield só com um teto de créditos que eu definir.
+- A IA nunca redesenha o gráfico real. Notícia de IA é conferida na fonte original antes de gravar. Higgsfield só com um teto de créditos que eu definir.
 - Commit e push só na branch claude/gl-academy-marketing-awwnj0. Não abra pull request sem eu pedir.
 - Escreva para mim em português, curto e direto.
 ```
