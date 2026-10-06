@@ -110,7 +110,7 @@ Do mais antigo para o mais recente. Tudo está no repositório `glacademytrading
 | Premium | Pacote Completo, Mentoria 1:1 | Ticket alto |
 | Recorrente | GL Gamma; depois, uma assinatura de IA na prática | Previsibilidade |
 
-**As novas fontes de renda já discutidas** (a entrevista completa esta lista):
+**As novas fontes de renda já discutidas** (a entrevista completa esta lista; o rascunho com notas e a ordem sugerida está em [[Mapa das fontes de renda]]):
 
 - **Educação em IA,** na ordem de validação: workshop ao vivo "IA na prática para traders e empreendedores" (piloto em janeiro, validação com 300 pessoas na lista e 30 vendas), formação "Agentes e automações" (março), "Vibe coding: do zero à ferramenta", "Vibe marketing" e a implantação do GL OS em empresas (só depois de 3 casos). A recomendação é lançar pela marca pessoal, com o selo "por GL Academy".
 - **Parcerias e afiliados:** criadores, mesas proprietárias, ligas universitárias e corretoras, com comissão a definir.
@@ -156,6 +156,8 @@ Nada é repostado igual em dois perfis: o que serve às duas contas sai em Colla
 
 - **Esforço:** 90 Reels e Shorts pessoais, 12 vídeos longos, 9 lives, 12 newsletters, 36 posts no LinkedIn, 3 podcasts e 2 pautas de imprensa.
 - **Resultado** (referência, recalibrada na semana 4): @lazarotrades com 2 a 3 vezes a base, 1.000 inscritos no YouTube, 500 pessoas na newsletter, 300 na lista da IA e 20% a 30% dos leads vindos de Conteúdo.
+
+**Nova frente: macroeconomia.** A série "O Efeito Dominó" ensina como juros, dívida, orçamento, previdência, infraestrutura, impostos e produtividade se ligam e terminam na fatura do cartão das famílias: 9 aulas longas no YouTube e 24 Reels, apartidária e com fonte em todo número. Os roteiros estão em [[Série O Efeito Dominó]].
 
 O plano completo, com as 25 seções, está em [[Plano de Marketing 2026-27]].
 
@@ -268,24 +270,25 @@ Os checklists completos estão em [[Modelos e checklists]].
 Marque também na Central (seção Pendências): o que for decidido lá fica salvo, e eu leio de lá.
 
 <!-- gerado:decisoes -->
-- [ ] **A meta do ciclo: quantos clientes e qual ticket médio.** O exemplo do painel é de 60 clientes a R$ 3.500, cerca de 18 calls realizadas por semana.
-- [ ] **A verba mensal de anúncios.** Para o teste de anúncios e para impulsionar os Reels que vencem.
-- [ ] **Quem edita, quem agenda e quem responde os directs.** E um dono para cada pilar do ciclo.
-- [ ] **A conversa gratuita: 30 ou 60 minutos, e o nome dela.** "Call 1x1" ou "mentoria gratuita". Até decidir, nenhuma peça cita a duração.
-- [ ] **O papel dos perfis da marca.** Proposta: @glacademybr para o Brasil e @glacademytrading para o exterior, em inglês.
-- [ ] **O @ do YouTube.** Manter @giovanelazaro ou unificar com @lazarotrades.
-- [ ] **A live no pregão: conta real ou simulada.** Sempre mostrando em R e pontos, nunca em dólar.
-- [ ] **O nome e a ferramenta da newsletter.** Sugestões: Processo à Vista, Carta do Lázaro ou Radar GL; Beehiiv, Substack ou Kit.
-- [ ] **A linha de IA: marca, preço do workshop e data do piloto.** A página da lista de espera precisa estar no ar até 16/10, para o vídeo longo 1.
-- [ ] **Os pacotes e preços que seguem à venda.** E se os produtos antigos continuam: GL Risk Auto avulso, Gamepad Trader Pro, Mentoria Gestão de Risco e Sala de Análise.
-- [ ] **A comissão dos parceiros.** R$ 200 por venda, como os captadores, ou outro modelo.
-- [ ] **A condição de Black Friday (27/11).** Qual, por quanto tempo e com preço verdadeiro.
-- [ ] **Os estudos de ativos e a CVM.** Certificação CNPI-T ou parceria com analista, e o advogado revisando a Sexta do estudo e a Sala de Análise.
-- [ ] **Aprovar o uso dos 1.200 créditos da Higgsfield.** Usar até 30/10: identidade das séries, cobertura e cenas de anúncio.
-- [ ] **A sessão de fotos de 30 minutos.** Para as thumbnails do YouTube e a foto oficial.
-- [ ] **O merge do funil, o Pixel da Meta e o GA4.** Com a política de privacidade publicada antes do Pixel.
-- [ ] **GL Model ou GL Professional Trade System, e os termos do site.** Quando usar cada nome e os termos técnicos que ainda estão para confirmar.
-- [ ] **TikTok e X: ligar já ou só em janeiro.** O TikTok repetiria os Shorts; o X ou Threads receberia notas do Radar IA.
+- [ ] **A meta do ciclo: quantos clientes e qual ticket médio.** O exemplo do painel é de 60 clientes a R$ 3.500, cerca de 18 calls realizadas por semana. *Sugestão:* Comece com 40 clientes no ciclo (cerca de 12 calls realizadas por semana) e recalibre em 26/10 com os números reais do funil.
+- [ ] **A verba mensal de anúncios.** Para o teste de anúncios e para impulsionar os Reels que vencem. *Sugestão:* R$ 3 mil a 5 mil por mês no teste de 14 dias (5 criativos, 2 públicos); depois, só no que trouxer call abaixo do custo-alvo.
+- [ ] **Quem edita, quem agenda e quem responde os directs.** E um dono para cada pilar do ciclo. *Sugestão:* Um editor de vídeo (freelancer por pacote de 10 a 15 vídeos por semana) e a social media atual agendando e respondendo; você aprova a pauta em 10 minutos.
+- [ ] **A conversa gratuita: 30 ou 60 minutos, e o nome dela.** "Call 1x1" ou "mentoria gratuita". Até decidir, nenhuma peça cita a duração. *Sugestão:* 30 minutos, com o nome "conversa gratuita". É mais fácil de agendar, e 60 minutos pesa na agenda de quem conduz.
+- [ ] **O papel dos perfis da marca.** Proposta: @glacademybr para o Brasil e @glacademytrading para o exterior, em inglês. *Sugestão:* Sim: @glacademybr no Brasil e @glacademytrading em inglês. Se a maioria de quem segue o @glacademytrading for brasileira, faça a transição em 2 semanas, avisando nos stories.
+- [ ] **O @ do YouTube.** Manter @giovanelazaro ou unificar com @lazarotrades. *Sugestão:* Unificar como @lazarotrades, para a mesma busca achar o Instagram e o canal. O @ antigo continua redirecionando por um tempo.
+- [ ] **A live no pregão: conta real ou simulada.** Sempre mostrando em R e pontos, nunca em dólar. *Sugestão:* Conta simulada nas 2 primeiras lives, com o aviso na tela; conta real depois, sempre em R e pontos.
+- [ ] **O nome e a ferramenta da newsletter.** Sugestões: Processo à Vista, Carta do Lázaro ou Radar GL; Beehiiv, Substack ou Kit. *Sugestão:* "Processo à Vista" no Beehiiv: o plano gratuito comporta o começo e tem página de inscrição pronta.
+- [ ] **A linha de IA: marca, preço do workshop e data do piloto.** A página da lista de espera precisa estar no ar até 16/10, para o vídeo longo 1. *Sugestão:* Lançar pela sua marca pessoal com o selo "por GL Academy"; workshop de 3 horas a cerca de R$ 297 no piloto de janeiro (validar com a lista). A página da lista precisa estar no ar até 16/10.
+- [ ] **Os pacotes e preços que seguem à venda.** E se os produtos antigos continuam: GL Risk Auto avulso, Gamepad Trader Pro, Mentoria Gestão de Risco e Sala de Análise. *Sugestão:* Manter os pacotes do site novo, a Mentoria 1:1 e o GL Gamma; tirar de linha o que não aparece no site; avaliar o GL Risk Auto avulso como teste em novembro.
+- [ ] **A comissão dos parceiros.** R$ 200 por venda, como os captadores, ou outro modelo. *Sugestão:* R$ 200 por venda nos pacotes principais, com cupom e link próprio; 10% nas assinaturas do GL Gamma durante 6 meses.
+- [ ] **A condição de Black Friday (27/11).** Qual, por quanto tempo e com preço verdadeiro. *Sugestão:* Bônus em vez de desconto grande: a Mentoria em grupo ou 3 meses de GL Gamma junto com o pacote, de 24 a 30/11, com o preço normal informado.
+- [ ] **Os estudos de ativos e a CVM.** Certificação CNPI-T ou parceria com analista, e o advogado revisando a Sexta do estudo e a Sala de Análise. *Sugestão:* Parceria com um analista CNPI para revisar os estudos de ativos; enquanto isso, a Sexta do estudo usa só índices e futuros, sem compra, venda ou alvo.
+- [ ] **Aprovar o uso dos 1.200 créditos da Higgsfield.** Usar até 30/10: identidade das séries, cobertura e cenas de anúncio. *Sugestão:* Aprovar a primeira leva (~270 créditos: a identidade das séries e 20 clipes de cobertura) ainda nesta semana; o resto até 30/10.
+- [ ] **A sessão de fotos de 30 minutos.** Para as thumbnails do YouTube e a foto oficial. *Sugestão:* 30 minutos nesta semana, com a mesma roupa das gravações: 40 fotos de rosto e gestos para as miniaturas.
+- [ ] **O merge do funil, o Pixel da Meta e o GA4.** Com a política de privacidade publicada antes do Pixel. *Sugestão:* Fazer o merge agora e testar um lead de ponta a ponta; o Pixel e o GA4 entram junto com a política de privacidade.
+- [ ] **GL Model ou GL Professional Trade System, e os termos do site.** Quando usar cada nome e os termos técnicos que ainda estão para confirmar. *Sugestão:* "GL Model" no conteúdo e nas redes (é o nome que o público já conhece); "GL Professional Trade System" na página de vendas e no contrato.
+- [ ] **TikTok e X: ligar já ou só em janeiro.** O TikTok repetiria os Shorts; o X ou Threads receberia notas do Radar IA. *Sugestão:* TikTok já, repetindo os Shorts sem esforço extra; X ou Threads só em janeiro, com as notas do Radar IA.
+- [ ] **A série "O Efeito Dominó" sobre a economia do Brasil.** 9 aulas longas e 24 Reels (roteiros em canais/serie-macro-efeito-domino.md). Soma cerca de 1 hora por semana de gravação. *Sugestão:* Começar os Reels em 13/10 (terça e quinta, 12h) e as aulas em 21/10, a cada 2 semanas.
 <!-- /gerado:decisoes -->
 
 ## 10. O que mandar para o Claude
@@ -319,7 +322,7 @@ O objetivo é um plano concreto, em que Giovane só precise aplicar: o marketing
 | --- | --- | --- | --- |
 | 1. Base | Este resumo, a Central, a lista do que mandar e a entrevista | Claude | Feito em 05/10 |
 | 2. Materiais | O Second Brain, o curso de marketing viral, os links e prints das redes, os números de hoje, a tabela de produtos e as respostas da entrevista | Giovane | Assim que possível; as essenciais primeiro |
-| 3. Diagnóstico | **a)** O Second Brain conferido: o que está desatualizado, repetido ou em conflito, com as notas corrigidas para devolver. **b)** A auditoria das redes: o que tirar, o que pôr e o que mudar em cada perfil, com as correções da primeira semana. **c)** O playbook de viralização: as ideias do curso adaptadas às regras da GL, em formatos, ganchos e estruturas. **d)** O mapa de ofertas e fontes de renda: cada projeto com impacto, esforço, tempo até o primeiro real, risco e a ordem de lançamento | Claude | Depois da etapa 2 |
+| 3. Diagnóstico | Já adiantado em 06/10: [[Mapa das fontes de renda]], [[Pré-auditoria das redes]] e [[Guia de viralização]], esperando os seus materiais para fechar. **a)** O Second Brain conferido: o que está desatualizado, repetido ou em conflito, com as notas corrigidas para devolver. **b)** A auditoria das redes: o que tirar, o que pôr e o que mudar em cada perfil, com as correções da primeira semana. **c)** O playbook de viralização: as ideias do curso adaptadas às regras da GL, em formatos, ganchos e estruturas. **d)** O mapa de ofertas e fontes de renda: cada projeto com impacto, esforço, tempo até o primeiro real, risco e a ordem de lançamento | Claude | Depois da etapa 2 |
 | 4. Upgrade do plano | O plano 2026-27 versão 2: objetivos por fonte de renda, as séries com os formatos virais, o calendário refeito, a rotina da pauta ajustada, a Central atualizada e as notas do Obsidian para devolver ao segundo cérebro | Claude, com o ok de Giovane | Depois da etapa 3 |
 | 5. Execução | A rotina semanal pela Central: pauta, gravação, publicação, placar de segunda e revisão mensal | Equipe | Contínuo |
 
@@ -329,7 +332,9 @@ O objetivo é um plano concreto, em que Giovane só precise aplicar: o marketing
 
 **Planos:** [[Plano de Marketing 2026-27]] · [[Plano do ciclo (out a dez 2026)]] · [[Campanha GL Risk Auto]] · [[Plano da Mentoria GL]]
 
-**Conteúdo:** [[Perfis e bios]] · [[Roteiros iniciais]] · [[Banco de ideias]] · [[Modelos e checklists]] · [[Série Operacional na prática]] · [[Roteiros para gravar e depoimentos]] · [[Roteiros do GL Risk Auto]]
+**Estratégia:** [[Mapa das fontes de renda]] · [[Pré-auditoria das redes]] · [[Guia de viralização]]
+
+**Conteúdo:** [[Série O Efeito Dominó]] · [[Perfis e bios]] · [[Roteiros iniciais]] · [[Banco de ideias]] · [[Modelos e checklists]] · [[Série Operacional na prática]] · [[Roteiros para gravar e depoimentos]] · [[Roteiros do GL Risk Auto]]
 
 **Operação:** [[Rotina da pauta diária]] · [[Automação da pauta]] · [[Vendas e follow-up]] · [[Kit de imprensa]] · [[Manual de crise]] · [[Programa de parceiros]] · [[Prompt do Codex - GL Risk Auto no site]] · [[Glossário GL]] · [[Prompt de continuidade]] · [[Mapa do repositório]]
 
@@ -342,3 +347,4 @@ O objetivo é um plano concreto, em que Giovane só precise aplicar: o marketing
 **Histórico desta nota**
 
 - 05/10/2026: criada a partir de todo o trabalho de 29/09 a 05/10. Substitui o pacote do GL OS como resumo oficial do marketing.
+- 06/10/2026: entraram a série de macroeconomia "O Efeito Dominó" (9 aulas e 24 Reels, com os números conferidos), o rascunho do mapa das fontes de renda, a pré-auditoria das redes, a estrutura do guia de viralização e uma sugestão para cada decisão em aberto.

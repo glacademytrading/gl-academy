@@ -107,6 +107,8 @@ section { margin-top: 38px; }
 .pend .t { font-weight: 600; }
 .pend.feito .t { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--gold); }
 .pend .ajuda { color: var(--muted); font-size: .86rem; margin-top: 2px; }
+.pend .sugestao { font-size: .86rem; margin-top: 6px; padding: 8px 10px; border-radius: 8px; background: var(--surface-2); border-left: 3px solid var(--gold); }
+.pend .sugestao b { color: var(--gold-2); }
 .pend input[type="text"], .redes input { width: 100%; margin-top: 8px; font: 400 .92rem/1.3 var(--body); color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; }
 .redes { display: grid; gap: 8px; margin-top: 10px; }
 .redes label { display: grid; gap: 2px; font: 600 .8rem/1.3 var(--body); color: var(--muted); }
@@ -453,6 +455,7 @@ footer { margin-top: 44px; color: var(--muted); font-size: .84rem; }
       var lb = el('label', { for: chave + '-cb', class: 't' }, x.texto);
       corpo.appendChild(lb);
       corpo.appendChild(el('p', { class: 'ajuda', id: chave + '-aj' }, x.ajuda));
+      if (x.sugestao) { var sg = el('p', { class: 'sugestao' }); sg.appendChild(el('b', null, 'Sugestão: ')); sg.appendChild(document.createTextNode(x.sugestao)); corpo.appendChild(sg); }
       var nota = el('input', { type: 'text', id: chave + '-nota', 'data-grava': '1', placeholder: 'O que foi decidido', 'aria-label': 'Decisão: ' + x.texto });
       corpo.appendChild(nota);
       corpo.appendChild(el('div', { class: 'st', 'data-st': chave }));

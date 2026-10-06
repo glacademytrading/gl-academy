@@ -20,6 +20,10 @@ NOTAS = [
     ('plano-de-marketing.md', 'Planos/Plano do ciclo (out a dez 2026).md', 'plano'),
     ('execucao/campanha-gl-risk-auto.md', 'Planos/Campanha GL Risk Auto.md', 'plano'),
     ('mentoria/plano-da-mentoria.md', 'Planos/Plano da Mentoria GL.md', 'plano'),
+    ('estrategia/mapa-fontes-de-renda.md', 'Estratégia/Mapa das fontes de renda.md', 'estrategia'),
+    ('estrategia/pre-auditoria-redes.md', 'Estratégia/Pré-auditoria das redes.md', 'estrategia'),
+    ('estrategia/guia-viralizacao.md', 'Estratégia/Guia de viralização.md', 'estrategia'),
+    ('canais/serie-macro-efeito-domino.md', 'Conteúdo/Série O Efeito Dominó.md', 'conteudo'),
     ('canais/perfis-e-bios.md', 'Conteúdo/Perfis e bios.md', 'conteudo'),
     ('canais/roteiros-iniciais.md', 'Conteúdo/Roteiros iniciais.md', 'conteudo'),
     ('canais/banco-de-ideias.md', 'Conteúdo/Banco de ideias.md', 'conteudo'),
@@ -56,7 +60,7 @@ def trocar_bloco(texto, nome, conteudo):
 
 
 def blocos_da_nota():
-    dec = '\n'.join(f"- [ ] **{d['texto']}.** {d['ajuda']}" for d in dados['decisoes'])
+    dec = '\n'.join(f"- [ ] **{d['texto']}.** {d['ajuda']}" + (f" *Sugestão:* {d['sugestao']}" if d.get('sugestao') else '') for d in dados['decisoes'])
     ent = '\n'.join(f"- [ ] **{e['texto']}.** {e.get('nota', e['como'])}" for e in dados['entregas'])
     nota = open(NOTA, encoding='utf-8').read()
     nota = trocar_bloco(nota, 'decisoes', dec)

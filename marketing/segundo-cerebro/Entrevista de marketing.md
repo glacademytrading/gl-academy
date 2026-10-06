@@ -2,7 +2,7 @@
 titulo: Entrevista de marketing
 tipo: entrevista
 area: marketing
-atualizado: 2026-10-05
+atualizado: 2026-10-06
 status: aberta
 tags:
   - marketing
