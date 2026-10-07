@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>GL Academy | Moldura de Gravação</title>
+<!--
+  Moldura dourada para gravações e lives (OBS / Streamlabs) — Fonte de Navegador, 1920x1080.
+
+  Ela é uma camada só: fundo dourado com dois "recortes" transparentes de cantos arredondados
+  (tela e câmera). Coloque-a ACIMA da captura de tela e da câmera no OBS: o dourado esconde
+  tudo que sobrar e deixa os cantos arredondados, sem precisar de filtro de máscara.
+
+  Ordem das fontes no OBS (de cima para baixo):
+    1. parceiros.html (opcional)
+    2. moldura.html   <- esta
+    3. Câmera
+    4. Captura de tela / janela
+
+  Parâmetros de URL:
+    ?guia=1        mostra as áreas e as coordenadas para posicionar as fontes no OBS
+    ?cam=0         sem câmera (só a tela)
+    ?cam=esquerda  câmera no canto inferior esquerdo
+-->
+<style>
+  :root {
+    --gold-1: #7a5c1e;
+    --gold-2: #d4af37;
+    --gold-3: #f6e08f;
+    --gold-4: #b08a2e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; background: transparent; overflow: hidden; font-family: 'Inter', Arial, sans-serif; }
+  svg { position: absolute; inset: 0; }
+  .label {
+    position: absolute; padding: 6px 10px; border-radius: 6px; font-size: 18px; font-weight: 700;
+    background: rgba(0,0,0,0.75); color: #f6e08f; white-space: pre;
+  }
+</style>
+</head>
+<body>
+<svg id="frame" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+
+<script>
+  /* ================= CONFIG ================= */
+  const CONFIG = {
+    margem: 36,            // espessura do fundo dourado ao redor da tela
+    raioTela: 24,          // arredondamento dos cantos da tela
+    camera: { largura: 320, altura: 420, distancia: 28, raio: 22, borda: 10 },  // borda = espessura do contorno dourado
+  };
+  /* ========================================== */
+
+  const W = 1920, H = 1080;
+  const params = new URLSearchParams(location.search);
+  const svg = document.getElementById('frame');
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const tela = { x: CONFIG.margem, y: CONFIG.margem, w: W - 2 * CONFIG.margem, h: H - 2 * CONFIG.margem, r: CONFIG.raioTela };
+
+  const c = CONFIG.camera;
+  const camLado = params.get('cam');
+  const cam = camLado === '0' ? null : {
+    x: camLado === 'esquerda' ? tela.x + c.distancia : tela.x + tela.w - c.distancia - c.largura,
+    y: tela.y + tela.h - c.distancia - c.altura,
+    w: c.largura, h: c.altura, r: c.raio,
+  };
+
+  const el = (tag, attrs, parent = svg) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent.appendChild(n);
+    return n;
+  };
+
+  // Gradientes dourados (fundo metálico e borda da câmera)
+  const defs = el('defs', {});
+  const bg = el('linearGradient', { id: 'ouro', x1: '0', y1: '0', x2: '1', y2: '1' }, defs);
+  [['0%', 'var(--gold-1)'], ['30%', 'var(--gold-2)'], ['50%', 'var(--gold-3)'], ['70%', 'var(--gold-2)'], ['100%', 'var(--gold-4)']]
+    .forEach(([o, col]) => el('stop', { offset: o, style: `stop-color:${col}` }, bg));
+  const brilho = el('radialGradient', { id: 'brilho', cx: '0.5', cy: '0.5', r: '0.75' }, defs);
+  el('stop', { offset: '0%', 'stop-color': '#fff', 'stop-opacity': '0.18' }, brilho);
+  el('stop', { offset: '100%', 'stop-color': '#000', 'stop-opacity': '0.25' }, brilho);
+  const borda = el('linearGradient', { id: 'borda', x1: '0', y1: '0', x2: '1', y2: '1' }, defs);
+  [['0%', 'var(--gold-3)'], ['50%', 'var(--gold-2)'], ['100%', 'var(--gold-3)']]
+    .forEach(([o, col]) => el('stop', { offset: o, style: `stop-color:${col}` }, borda));
+  const sombra = el('filter', { id: 'sombra', x: '-10%', y: '-10%', width: '120%', height: '120%' }, defs);
+  el('feDropShadow', { dx: '0', dy: '6', stdDeviation: '10', 'flood-color': '#000', 'flood-opacity': '0.45' }, sombra);
+
+  // Máscara: branco = dourado visível, preto = recorte transparente
+  const mask = el('mask', { id: 'recortes' }, defs);
+  el('rect', { width: W, height: H, fill: '#fff' }, mask);
+  el('rect', { x: tela.x, y: tela.y, width: tela.w, height: tela.h, rx: tela.r, fill: '#000' }, mask);
+
+  // Fundo dourado com o recorte da tela
+  const g = el('g', { mask: 'url(#recortes)' });
+  el('rect', { width: W, height: H, fill: 'url(#ouro)' }, g);
+  el('rect', { width: W, height: H, fill: 'url(#brilho)' }, g);
+
+  // Câmera: anel dourado arredondado. A fonte de câmera do OBS é retangular, então o anel
+  // avança para fora dela o suficiente para cobrir os cantos retos, e o recorte interno
+  // (transparente) deixa a câmera aparecer com cantos arredondados.
+  if (cam) {
+    const R = cam.r;                                   // raio externo do anel
+    const fora = Math.max(Math.ceil(R / 3.4) + 1, 2);  // quanto o anel passa da borda da câmera
+    const esp = Math.max(c.borda, fora + 2);           // espessura total do anel
+    const dentro = esp - fora;
+    const ext = { x: cam.x - fora, y: cam.y - fora, w: cam.w + 2 * fora, h: cam.h + 2 * fora, r: R };
+    const int = { x: cam.x + dentro, y: cam.y + dentro, w: cam.w - 2 * dentro, h: cam.h - 2 * dentro, r: Math.max(R - esp, 4) };
+    const anel = el('mask', { id: 'anelCam' }, defs);
+    el('rect', { x: ext.x, y: ext.y, width: ext.w, height: ext.h, rx: ext.r, fill: '#fff' }, anel);
+    el('rect', { x: int.x, y: int.y, width: int.w, height: int.h, rx: int.r, fill: '#000' }, anel);
+    const gc = el('g', { filter: 'url(#sombra)' });
+    el('rect', { x: ext.x, y: ext.y, width: ext.w, height: ext.h, fill: 'url(#borda)', mask: 'url(#anelCam)' }, gc);
+  }
+
+  // Modo guia: mostra onde encaixar cada fonte no OBS
+  if (params.get('guia') === '1') {
+    document.body.style.background = '#2b2b2b';
+    const label = (txt, x, y) => {
+      const d = document.createElement('div');
+      d.className = 'label'; d.textContent = txt;
+      d.style.left = x + 'px'; d.style.top = y + 'px';
+      document.body.appendChild(d);
+    };
+    label(`TELA\nposição ${tela.x}, ${tela.y}\ntamanho ${tela.w} x ${tela.h}`, tela.x + 40, tela.y + 40);
+    if (cam) {
+      el('rect', { x: cam.x, y: cam.y, width: cam.w, height: cam.h, rx: cam.r, fill: 'rgba(212,175,55,0.15)' });
+      label(`CÂMERA\nposição ${cam.x}, ${cam.y}\ntamanho ${cam.w} x ${cam.h}`, cam.x + 16, cam.y + 16);
+    }
+  }
+</script>
+</body>
+</html>
