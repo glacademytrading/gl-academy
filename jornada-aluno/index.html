@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Jornada do Aluno GL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: clickable prototype of the GL Club post-purchase journey; a flow rail on top, one screen at a time in the stage, cream + gold system shared with the sales pages. Single light look by choice. */
+:root {
+  --bg: #f6f2ea; --bg-2: #efe8da; --card: #fffdf9; --ink: #1d1a14; --ink-2: #4a443a; --muted: #8a857a; --line: #e2dacb;
+  --gold: #c9a227; --gold-deep: #8f7026; --gold-ink: #7a5a12; --gold-soft: #f3d77a; --brown: #6e4a06;
+  --ok: #0f8a5f; --ok-bg: #e8f5ee; --ok-dot: #22c55e; --dark: #1d1a14;
+  --shadow: 0 1px 2px rgba(29,26,20,.05), 0 24px 50px -26px rgba(29,26,20,.3);
+  --f-sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --f-serif: "Fraunces", Georgia, serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-sans); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+button, input, textarea { font: inherit; }
+.it { font-family: var(--f-serif); font-style: italic; font-weight: 500; color: var(--gold-ink); }
+.eyebrow { font-family: var(--f-mono); font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-deep); margin: 0; }
+.muted { color: var(--muted); }
+.fill { background: rgba(201,162,39,.16); outline: 1px dashed var(--gold-deep); border-radius: 4px; padding: 0 4px; }
+
+/* Flow rail */
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--dark); color: #e9e2d2; }
+.rail-in { max-width: 1200px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 14px; align-items: center; }
+.rail-in .ttl { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); white-space: nowrap; }
+.chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; min-width: 0; }
+.chip { flex: none; border: 1px solid #3a3326; background: transparent; color: #cfc6b1; border-radius: 999px; padding: 5px 11px; font-size: .74rem; cursor: pointer; }
+.chip b { font-family: var(--f-mono); font-weight: 600; color: #8d846f; margin-right: 5px; }
+.chip[aria-current="true"] { background: var(--gold-soft); color: var(--ink); border-color: var(--gold-soft); }
+.chip[aria-current="true"] b { color: var(--brown); }
+.chip:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
+.note { max-width: 1200px; margin: 0 auto; padding: 14px 16px 0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; align-items: baseline; }
+.note p { margin: 0; font-size: .86rem; color: var(--ink-2); max-width: 80ch; }
+.note .where { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+.stage { min-height: 720px; display: grid; place-items: center; padding: 28px 16px 64px; }
+.screen { width: 100%; display: grid; place-items: center; }
+.screen[hidden] { display: none !important; }
+
+/* Shared pieces */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; font-weight: 700; font-size: 1rem; color: var(--ink); border: 0; border-radius: 14px; padding: 15px 20px; cursor: pointer; text-decoration: none; background: linear-gradient(100deg, #f0c95e 0%, #f8e3a0 40%, #f0c95e 70%); box-shadow: 0 12px 24px -14px rgba(201,162,39,.8); }
+.btn:disabled { background: var(--bg-2); color: var(--muted); box-shadow: none; cursor: not-allowed; }
+.btn.brown { background: var(--brown); color: #fff; box-shadow: none; }
+.btn.brown:disabled { background: var(--bg-2); color: var(--muted); }
+.btn.ghost { background: transparent; box-shadow: none; color: var(--ink-2); font-weight: 600; padding-inline: 8px; }
+.btn:focus-visible, .opt:focus-within, .link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.link { background: none; border: 0; color: var(--gold-ink); font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 0; }
+label.f { display: grid; gap: 7px; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+input.in, textarea.in { font-size: .98rem; color: var(--ink); background: #f3efe7; border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; width: 100%; letter-spacing: 0; text-transform: none; font-weight: 400; }
+input.in:focus-visible, textarea.in:focus-visible { outline: 2px solid var(--gold); background: #fff; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.brand img { width: 34px; height: 34px; }
+
+/* 1. Pre-checkout modal */
+.modal { width: min(100%, 460px); padding: 26px; display: grid; gap: 16px; }
+.steps2 { display: flex; justify-content: center; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.steps2 i { width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; font-style: normal; border: 1px solid var(--line); margin-right: 6px; }
+.steps2 .on i { background: var(--gold-soft); border-color: var(--gold-soft); color: var(--ink); }
+.steps2 .bar { width: 36px; height: 1px; background: var(--line); }
+.modal h2 { margin: 0; text-align: center; font-size: 1.7rem; letter-spacing: -.03em; font-weight: 800; }
+.modal .sub { text-align: center; color: var(--ink-2); margin: -8px 0 0; font-size: .92rem; }
+.gets { background: #fbf6ea; border: 1px solid #ecdcae; border-radius: 14px; padding: 14px 16px; display: grid; gap: 7px; font-size: .86rem; color: var(--ink-2); }
+.gets .row { display: flex; gap: 9px; }
+.gets .row::before { content: "✓"; flex: none; width: 17px; height: 17px; border-radius: 50%; background: var(--gold-soft); color: var(--brown); font-size: .62rem; display: grid; place-items: center; margin-top: 2px; }
+.gets b { color: var(--ink); }
+.guar { border: 1px dashed #d7bf7c; border-radius: 14px; padding: 12px 14px; font-size: .84rem; color: var(--ink-2); display: flex; gap: 10px; }
+.secure { text-align: center; font-size: .74rem; color: var(--muted); }
+
+/* 2. Order bump */
+.bump-wrap { width: min(100%, 560px); display: grid; gap: 14px; }
+.bump { padding: 20px; border: 2px dashed #d7bf7c; display: grid; grid-template-columns: 74px minmax(0,1fr); gap: 16px; }
+.bump .ic { width: 74px; height: 74px; border-radius: 16px; background: var(--dark); color: var(--gold-soft); display: grid; place-items: center; font-family: var(--f-mono); font-size: .62rem; text-align: center; line-height: 1.3; }
+.bump h3 { margin: 4px 0 6px; font-size: 1.12rem; }
+.bump p { margin: 0; font-size: .88rem; color: var(--ink-2); }
+.price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.price s { color: var(--muted); }
+.price b { font-size: 1.2rem; }
+.price .off { font-family: var(--f-mono); font-size: .66rem; background: var(--ok-bg); color: var(--ok); border-radius: 999px; padding: 2px 8px; }
+.add { margin-top: 12px; display: flex; gap: 10px; align-items: center; font-weight: 600; font-size: .9rem; cursor: pointer; }
+.add input { width: 20px; height: 20px; accent-color: var(--brown); }
+
+/* 3. Thank you */
+.ty { width: min(100%, 620px); padding: clamp(24px, 4vw, 40px); display: grid; gap: 18px; justify-items: center; text-align: center; }
+.ty .ok { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .2em; color: var(--ok); background: var(--ok-bg); border-radius: 999px; padding: 5px 12px; }
+.ty h2 { margin: 0; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; }
+.ty p { margin: 0; color: var(--ink-2); max-width: 48ch; }
+.channels { width: 100%; display: grid; gap: 10px; text-align: left; }
+.chan { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; background: #fbf8f2; }
+.chan b { display: block; font-size: .95rem; }
+.chan small { color: var(--muted); font-size: .82rem; }
+.st { flex: none; font-family: var(--f-mono); font-size: .6rem; letter-spacing: .16em; border-radius: 999px; padding: 4px 10px; }
+.st.sent { background: var(--ok-bg); color: var(--ok); }
+.st.way { background: #fbefd2; color: #8a5a00; }
+
+/* 4-6. Auth */
+.auth { width: min(100%, 440px); padding: 30px 28px; display: grid; gap: 16px; }
+.auth.dark { background: #110f0b; border-color: #2a251c; color: #f3ead2; text-align: center; justify-items: center; }
+.auth h2 { margin: 0; font-family: var(--f-serif); font-weight: 500; font-size: 1.9rem; letter-spacing: -.02em; }
+.auth p { margin: 0; color: var(--ink-2); font-size: .92rem; }
+.auth.dark p { color: #a49b86; }
+.found { background: #fbf6ea; border: 1px solid #ecdcae; border-radius: 14px; padding: 4px 14px; }
+.found .r { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px dashed #e6d5a8; font-size: .88rem; }
+.found .r:last-child { border-bottom: 0; }
+.found .r span:first-child { color: var(--muted); }
+.shield { width: 52px; height: 52px; border-radius: 50%; background: #241f16; display: grid; place-items: center; color: var(--gold-soft); }
+.otp { display: flex; gap: 8px; justify-content: center; }
+.otp input { width: 46px; height: 54px; text-align: center; font-size: 1.3rem; font-weight: 700; border-radius: 12px; border: 1px solid #3a3326; background: #1a1712; color: #fff; }
+.otp input:focus-visible { outline: 2px solid var(--gold-soft); }
+.spin { display: inline-block; width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.err { color: #b3261e; font-size: .84rem; }
+.strength { height: 5px; border-radius: 3px; background: var(--bg-2); overflow: hidden; }
+.strength i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .2s; }
+
+/* 7. Survey */
+.svy { width: min(100%, 600px); overflow: hidden; }
+.svy-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 22px; border-bottom: 1px solid var(--line); position: relative; flex-wrap: wrap; }
+.svy-top small { font-size: .78rem; color: var(--ink-2); }
+.prog { position: absolute; left: 0; bottom: -1px; height: 2px; background: var(--brown); transition: width .3s; }
+.svy-body { padding: 24px 22px; display: grid; gap: 14px; }
+.svy-body h2 { margin: 0; font-size: 1.3rem; letter-spacing: -.02em; }
+.svy-body .help { margin: -6px 0 0; color: var(--ink-2); font-size: .9rem; }
+.kind { font-size: .78rem; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.opts { display: grid; gap: 8px; }
+.opts.two { grid-template-columns: 1fr 1fr; }
+.opt { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; cursor: pointer; background: #fff; }
+.opt:has(input:checked) { border-color: var(--brown); background: #f5efe4; }
+.opt span b { display: block; font-weight: 600; font-size: .93rem; }
+.opt span small { color: var(--muted); font-size: .78rem; }
+.opt input { width: 18px; height: 18px; accent-color: var(--brown); flex: none; }
+.svy-foot { display: flex; justify-content: space-between; padding: 14px 22px; border-top: 1px solid var(--line); }
+.count { text-align: right; font-family: var(--f-mono); font-size: .7rem; color: var(--muted); margin-top: -8px; }
+.intro-list { display: grid; gap: 8px; font-size: .88rem; color: var(--ink-2); }
+.intro-list span::before { content: "·"; color: var(--gold); font-weight: 800; margin-right: 8px; }
+.why { background: #fbf6ea; border-radius: 12px; padding: 12px 14px; font-size: .84rem; color: var(--ink-2); }
+
+/* 8. Partner */
+.partner { width: min(100%, 520px); padding: 30px; display: grid; gap: 16px; text-align: center; justify-items: center; }
+.partner .ic { width: 56px; height: 56px; border-radius: 16px; background: var(--dark); display: grid; place-items: center; color: var(--gold-soft); }
+.partner h2 { margin: 0; font-size: 1.6rem; letter-spacing: -.03em; }
+.partner .box { text-align: left; background: #fbf6ea; border: 1px solid #ecdcae; border-radius: 14px; padding: 14px 16px; font-size: .9rem; color: var(--ink-2); }
+.partner .acts { display: grid; gap: 10px; width: 100%; }
+
+/* 9. Dashboard */
+.dash { width: min(100%, 1120px); display: grid; grid-template-columns: 250px minmax(0, 1fr); overflow: hidden; min-height: 640px; }
+.side { background: #fbf8f2; border-right: 1px solid var(--line); padding: 16px; display: grid; gap: 14px; align-content: start; }
+.me { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 8px; }
+.me .who { display: flex; gap: 10px; align-items: center; }
+.av { width: 34px; height: 34px; border-radius: 50%; background: var(--gold-soft); display: grid; place-items: center; font-weight: 700; font-size: .78rem; flex: none; }
+.me b { font-size: .88rem; line-height: 1.2; display: block; }
+.me small { color: var(--muted); font-size: .74rem; }
+.badge { justify-self: start; font-size: .64rem; font-weight: 700; letter-spacing: .08em; border: 1px solid var(--gold); color: var(--gold-ink); border-radius: 999px; padding: 3px 9px; }
+.xp { display: grid; gap: 4px; font-size: .7rem; color: var(--muted); }
+.xp .b { height: 5px; background: var(--bg-2); border-radius: 3px; overflow: hidden; }
+.xp .b i { display: block; height: 100%; width: 18%; background: var(--brown); }
+.nav { display: grid; gap: 2px; }
+.nav p { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin: 10px 8px 4px; }
+.nav a { display: block; padding: 8px 10px; border-radius: 10px; color: var(--ink-2); text-decoration: none; font-size: .88rem; }
+.nav a.on { background: #f3ead2; color: var(--ink); font-weight: 600; }
+.main { padding: clamp(18px, 3vw, 32px); display: grid; gap: 18px; align-content: start; min-width: 0; }
+.buy { font-size: .84rem; color: var(--ink-2); }
+.buy b { color: var(--ink); }
+.hello h2 { margin: 2px 0 0; font-family: var(--f-serif); font-weight: 500; font-size: clamp(1.8rem, 3.6vw, 2.4rem); letter-spacing: -.02em; }
+.first { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; padding: 16px; align-items: center; }
+.vid { aspect-ratio: 16/10; border-radius: 14px; background: radial-gradient(circle at 60% 40%, #6b3d12, #2b190a 70%); display: grid; place-items: center; color: #fff; max-width: 100%; }
+.vid span { width: 52px; height: 52px; border-radius: 50%; background: rgba(0,0,0,.45); display: grid; place-items: center; }
+.first h3 { margin: 4px 0; font-family: var(--f-serif); font-weight: 500; font-size: 1.5rem; }
+.track4 { padding: 16px 18px; display: grid; gap: 12px; }
+.track4 .segs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.track4 .seg { display: grid; gap: 6px; font-size: .76rem; color: var(--muted); }
+.track4 .seg i { height: 4px; border-radius: 2px; background: var(--bg-2); }
+.track4 .seg.done i { background: var(--brown); }
+.track4 .seg.done { color: var(--ink); }
+.reco { padding: 18px; display: grid; gap: 10px; border-color: #dccb98; }
+.reco ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: .9rem; display: grid; gap: 4px; }
+
+@media (max-width: 860px) {
+  .dash { grid-template-columns: 1fr; }
+  .side { border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav { display: none; }
+  .first { grid-template-columns: 1fr; }
+  .opts.two { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .otp input { width: 40px; height: 48px; }
+  .track4 .segs { grid-template-columns: 1fr 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<nav class="rail" aria-label="Telas da jornada">
+  <div class="rail-in">
+    <span class="ttl">Jornada do aluno</span>
+    <div class="chips" id="chips"></div>
+  </div>
+</nav>
+<div class="note"><p id="note"></p><span class="where" id="where"></span></div>
+
+<main class="stage">
+
+  <!-- 1 PRE-CHECKOUT -->
+  <section class="screen" data-id="checkout">
+    <form class="card modal" id="f-checkout" novalidate>
+      <div class="brand" style="justify-content:center"><img src="../logo-gl.png" alt="">GL Club IA</div>
+      <div class="steps2"><span class="on"><i>1</i>Seus dados</span><span class="bar"></span><span><i>2</i>Pagamento</span></div>
+      <h2>Falta só um passo.</h2>
+      <p class="sub">No próximo passo, seus dados já chegam preenchidos no checkout.</p>
+      <div class="gets">
+        <p class="eyebrow" style="margin-bottom:2px">O que você recebe</p>
+        <span class="row"><span><b>GL Agents:</b> seu time de agentes por função, com você aprovando</span></span>
+        <span class="row"><span><b>Sistemas prontos:</b> CRM, agente de WhatsApp, prospecção e templates</span></span>
+        <span class="row"><span><b>Todas as trilhas:</b> sempre na versão atualizada</span></span>
+        <span class="row"><span><b>Encontros ao vivo:</b> a cada <span class="fill">15 dias</span>, com tira-dúvidas</span></span>
+        <span class="row"><span><b>O que vier depois:</b> todo curso e sistema novo, sem pagar de novo</span></span>
+      </div>
+      <div class="guar"><span>🛡</span><span><b>Garantia incondicional de 7 dias.</b> Entre, teste tudo e, se não for para você, devolvemos o valor integral, sem perguntas.</span></div>
+      <label class="f" for="c-nome">Nome completo<input class="in" id="c-nome" required placeholder="Ex: João da Silva" autocomplete="name"></label>
+      <label class="f" for="c-email">E-mail<input class="in" id="c-email" type="email" required placeholder="seu@email.com" autocomplete="email"></label>
+      <label class="f" for="c-whats">WhatsApp<input class="in" id="c-whats" type="tel" required placeholder="+55 (11) 90000-0000" autocomplete="tel"></label>
+      <button class="btn" type="submit">Continuar para o checkout</button>
+      <p class="secure">🔒 Pagamento 100% seguro · criptografia SSL · <span class="fill">[plataforma]</span></p>
+    </form>
+  </section>
+
+  <!-- 2 ORDER BUMP -->
+  <section class="screen" data-id="bump" hidden>
+    <div class="bump-wrap">
+      <p class="eyebrow" style="text-align:center">Dentro do checkout · oferta adicional</p>
+      <div class="card bump">
+        <div class="ic">SUPORTE<br>PRIORI-<br>TÁRIO</div>
+        <div>
+          <p class="eyebrow">Aproveite e leve junto</p>
+          <h3>Suporte prioritário no WhatsApp</h3>
+          <p>Você já tem suporte completo garantido. O prioritário coloca você no topo da fila: suas mensagens são lidas primeiro, com canal direto e análise do seu caso. Enquanto os outros seguem o fluxo normal, você já está implementando.</p>
+          <div class="price"><s class="fill">R$ 397</s><b class="fill">12x de R$ 00,00</b><span class="off fill">-00%</span></div>
+          <label class="add" for="bump-add"><input type="checkbox" id="bump-add">Sim, quero adicionar o suporte prioritário</label>
+        </div>
+      </div>
+      <p class="muted" style="font-size:.84rem;text-align:center;margin:0">Outras ideias de oferta adicional: implantação feita com você (1 call), pacote de agentes prontos para trading, mentoria em grupo.</p>
+      <button class="btn" type="button" data-go="obrigado" style="justify-self:center">Finalizar compra (simulação)</button>
+    </div>
+  </section>
+
+  <!-- 3 THANK YOU -->
+  <section class="screen" data-id="obrigado" hidden>
+    <div class="card ty">
+      <div class="brand"><img src="../logo-gl.png" alt="">GL Academy</div>
+      <span class="ok">PAGAMENTO CONFIRMADO</span>
+      <h2>Bem-vindo ao <span class="it">GL Club IA.</span></h2>
+      <p>Sua assinatura está ativa. A partir de agora, todos os cursos e sistemas da GL são seus, e tudo que for lançado enquanto você for membro entra junto.</p>
+      <div class="channels">
+        <div class="chan"><span><b>Enviamos o acesso para o seu e-mail</b><small>Não achou? Confira as abas de promoções e spam.</small></span><span class="st sent">ENVIADO</span></div>
+        <div class="chan"><span><b>E também para o seu WhatsApp</b><small>A mensagem chega no número que você informou na compra.</small></span><span class="st way">A CAMINHO</span></div>
+      </div>
+      <button class="btn" type="button" data-go="verificar" style="width:100%">Acessar a área de membros →</button>
+      <p class="muted" style="font-size:.82rem">Na próxima tela, digite o e-mail que você usou na compra.</p>
+    </div>
+  </section>
+
+  <!-- 4 VERIFY -->
+  <section class="screen" data-id="verificar" hidden>
+    <form class="card auth" id="f-verify" novalidate>
+      <div class="brand"><img src="../logo-gl.png" alt="">GL Club IA</div>
+      <h2>Já comprou?</h2>
+      <p>Digite o e-mail usado na compra para liberar o seu acesso.</p>
+      <label class="f" for="v-email">E-mail da compra<input class="in" id="v-email" type="email" required placeholder="seu@email.com"></label>
+      <p class="err" id="v-err" hidden>Digite um e-mail válido.</p>
+      <div id="v-found" hidden>
+        <p style="margin-bottom:10px"><b style="color:var(--ok)">Compra encontrada!</b> Vamos enviar um código de 6 dígitos para confirmar que é você.</p>
+        <div class="found">
+          <div class="r"><span>Plataforma</span><span class="fill">[Hotmart / Kiwify]</span></div>
+          <div class="r"><span>Produto</span><span>GL Club IA</span></div>
+          <div class="r"><span>Plano</span><span>Assinatura anual</span></div>
+        </div>
+      </div>
+      <button class="btn" type="submit" id="v-btn">Verificar acesso</button>
+      <button class="link" type="button" style="justify-self:center">← Voltar ao login</button>
+    </form>
+  </section>
+
+  <!-- 5 OTP -->
+  <section class="screen" data-id="codigo" hidden>
+    <form class="card auth dark" id="f-otp" novalidate>
+      <div class="brand" style="color:var(--gold-soft)"><img src="../logo-gl.png" alt="">GL Club IA</div>
+      <div class="shield"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h2 style="color:#fff">Verificar código</h2>
+      <p>Digite o código de 6 dígitos enviado para <b id="otp-mail" style="color:#e9e2d2">seu e-mail</b>.</p>
+      <div class="otp" id="otp">
+        <input inputmode="numeric" maxlength="1" aria-label="Dígito 1" id="o1"><input inputmode="numeric" maxlength="1" aria-label="Dígito 2" id="o2"><input inputmode="numeric" maxlength="1" aria-label="Dígito 3" id="o3"><input inputmode="numeric" maxlength="1" aria-label="Dígito 4" id="o4"><input inputmode="numeric" maxlength="1" aria-label="Dígito 5" id="o5"><input inputmode="numeric" maxlength="1" aria-label="Dígito 6" id="o6">
+      </div>
+      <button class="btn" type="submit" style="width:100%">Verificar</button>
+      <button class="link" type="button" style="color:var(--gold-soft)">Reenviar código</button>
+      <p style="font-size:.76rem">Protótipo: qualquer combinação de 6 números funciona.</p>
+    </form>
+  </section>
+
+  <!-- 6 PASSWORD -->
+  <section class="screen" data-id="senha" hidden>
+    <form class="card auth" id="f-pass" novalidate>
+      <div class="brand"><img src="../logo-gl.png" alt="">GL Club IA</div>
+      <h2>Crie sua senha</h2>
+      <p>É com ela que você entra na área de membros daqui para frente.</p>
+      <label class="f" for="p1">Senha<input class="in" id="p1" type="password" minlength="8" required autocomplete="new-password" placeholder="Mínimo de 8 caracteres"></label>
+      <div class="strength"><i id="p-str"></i></div>
+      <label class="f" for="p2">Repita a senha<input class="in" id="p2" type="password" required autocomplete="new-password"></label>
+      <p class="err" id="p-err" hidden>As senhas precisam ter 8 caracteres ou mais e ser iguais.</p>
+      <button class="btn" type="submit">Criar senha e entrar</button>
+    </form>
+  </section>
+
+  <!-- 7 SURVEY -->
+  <section class="screen" data-id="perfil" hidden>
+    <div class="card svy">
+      <div class="svy-top"><span class="brand"><img src="../logo-gl.png" alt="">GL Club IA</span><small>Problema com esta tela? <span class="fill">suporte@glacademy.com.br</span></small><span class="prog" id="prog"></span></div>
+      <div class="svy-body" id="svy-body"></div>
+      <div class="svy-foot"><button class="btn ghost" type="button" id="svy-back">← Voltar</button><button class="btn brown" type="button" id="svy-next">Continuar →</button></div>
+    </div>
+  </section>
+
+  <!-- 8 PARTNER -->
+  <section class="screen" data-id="parceiro" hidden>
+    <div class="card partner">
+      <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></div>
+      <h2>Bem-vindo ao <span class="it">GL Club IA!</span></h2>
+      <p class="muted" style="margin:0">Antes de explorar a plataforma, uma recomendação rápida.</p>
+      <div class="box"><b style="color:var(--ink)">Nossa hospedagem recomendada</b><br>Para os seus agentes rodarem 24 horas sem depender do seu computador, um servidor (VPS) facilita a vida. <span class="fill">[Parceiro]</span> é o que usamos: planos enxutos, instalação em 1 clique e suporte em português.</div>
+      <div class="acts">
+        <a class="btn" href="#" style="background:var(--dark);color:#fff;box-shadow:none">Ver os planos do parceiro ↗</a>
+        <button class="btn ghost" type="button" data-go="painel" style="border:1px solid var(--line)">Continuar para o painel →</button>
+      </div>
+      <p class="muted" style="font-size:.78rem;margin:0">Link de afiliado: uma comissão por indicação vira mais uma fonte de receita.</p>
+    </div>
+  </section>
+
+  <!-- 9 DASHBOARD -->
+  <section class="screen" data-id="painel" hidden>
+    <div class="card dash">
+      <aside class="side">
+        <div class="brand"><img src="../logo-gl.png" alt="">GL Club IA</div>
+        <div class="me">
+          <div class="who"><span class="av" id="d-ini">GL</span><span><b id="d-name">Aluno GL</b><small id="d-level">Iniciante</small></span></div>
+          <span class="badge">♛ MEMBRO GL</span>
+          <div class="xp"><span>Nível 1 · Iniciante · 10 XP</span><span class="b"><i></i></span></div>
+        </div>
+        <nav class="nav" aria-label="Menu da área de membros">
+          <p>Aprender</p><a class="on" href="#">Início</a><a href="#">Meus produtos</a><a href="#">Trilhas</a><a href="#">Consultor IA</a><a href="#">Sistemas prontos</a><a href="#">Glossário</a>
+          <p>Comunidade</p><a href="#">Comunidade</a><a href="#">Meus pontos</a><a href="#">Grupos de WhatsApp</a>
+          <p>GL Academy</p><a href="#">Encontros ao vivo</a><a href="#">Mentoria</a><a href="#">GL Model e trading</a>
+        </nav>
+      </aside>
+      <div class="main">
+        <p class="buy"><b>Suas compras:</b> GL Club IA · assinatura ativa. <span class="link" style="text-decoration:underline">Ver tudo</span></p>
+        <div class="hello"><p class="eyebrow" id="d-date"></p><h2 id="d-hello">Boa noite</h2></div>
+        <div class="card first">
+          <div class="vid"><span>▶</span></div>
+          <div><p class="eyebrow">Sua primeira aula</p><p class="muted" style="margin:4px 0 0;font-size:.84rem">Empresa com IA · Introdução</p><h3>Seja bem-vindo!</h3><p class="muted" style="margin:0 0 12px;font-size:.84rem">3 min · <span class="fill">[gravar com o Giovane]</span></p><button class="btn" type="button" style="padding:11px 16px;font-size:.92rem">▶ Assistir à aula 1</button></div>
+        </div>
+        <div class="card track4">
+          <b style="font-size:.92rem">Etapa 1 de 4 feita: conta criada</b>
+          <div class="segs"><div class="seg done"><i></i>✓ Conta criada</div><div class="seg"><i></i>Primeira aula</div><div class="seg"><i></i>Primeiro módulo</div><div class="seg"><i></i>Primeira trilha</div></div>
+        </div>
+        <div class="card reco"><p class="eyebrow">Recomendado para o seu perfil</p><b id="d-reco-t">Comece pela trilha Empresa com IA</b><ul id="d-reco"></ul></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var screens = [
+    { id: "checkout", label: "Pré-checkout", note: "Abre como janela quando a pessoa clica em comprar na página de vendas. Captura nome, e-mail e WhatsApp antes do pagamento, então quem desiste no checkout vira lead para recuperação.", where: "Página de vendas" },
+    { id: "bump", label: "Oferta adicional", note: "Configurada dentro da plataforma de pagamento (order bump). Um produto barato e complementar, marcado com um clique.", where: "Checkout" },
+    { id: "obrigado", label: "Obrigado", note: "Página para onde o checkout redireciona após o pagamento aprovado. Confirma a compra e leva direto para a ativação.", where: "Pós-pagamento" },
+    { id: "verificar", label: "Verificar compra", note: "O aluno digita o e-mail da compra. O sistema consulta a plataforma de pagamento (webhook) e mostra a compra encontrada.", where: "Área de membros" },
+    { id: "codigo", label: "Código", note: "Código de 6 dígitos enviado por e-mail para confirmar a identidade. Evita compartilhamento de acesso.", where: "Área de membros" },
+    { id: "senha", label: "Senha", note: "Criação da senha de acesso.", where: "Área de membros" },
+    { id: "perfil", label: "Perfil do aluno", note: "Pesquisa obrigatória antes da primeira aula. Alimenta o consultor de IA, a recomendação de trilha e a segmentação de ofertas (inclusive trading).", where: "Área de membros" },
+    { id: "parceiro", label: "Parceiro", note: "Recomendação de hospedagem com link de afiliado. Ajuda o aluno e gera receita extra.", where: "Área de membros" },
+    { id: "painel", label: "Painel", note: "Primeira tela do aluno: saudação, primeira aula, progresso em 4 etapas e trilha recomendada a partir do perfil.", where: "Área de membros" }
+  ];
+  var state = { name: "", email: "", answers: {} };
+  var chips = document.getElementById("chips");
+  screens.forEach(function (s, i) {
+    var b = document.createElement("button");
+    b.className = "chip"; b.type = "button"; b.dataset.go = s.id;
+    b.innerHTML = "<b>" + String(i + 1).padStart(2, "0") + "</b>" + s.label;
+    chips.appendChild(b);
+  });
+  function go(id) {
+    document.querySelectorAll(".screen").forEach(function (el) { el.hidden = el.dataset.id !== id; });
+    var s = screens.filter(function (x) { return x.id === id; })[0];
+    document.getElementById("note").textContent = s.note;
+    document.getElementById("where").textContent = s.where;
+    chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-current", c.dataset.go === id ? "true" : "false"); if (c.dataset.go === id) c.scrollIntoView({ block: "nearest", inline: "nearest" }); });
+    if (id === "perfil") renderQ();
+    if (id === "painel") renderDash();
+    if (id === "codigo") { document.getElementById("otp-mail").textContent = state.email || "seu e-mail"; setTimeout(function () { document.getElementById("o1").focus(); }, 30); }
+    window.scrollTo(0, 0);
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-go]");
+    if (t) { e.preventDefault(); go(t.dataset.go); }
+  });
+
+  // 1 checkout
+  document.getElementById("f-checkout").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!this.reportValidity()) return;
+    state.name = document.getElementById("c-nome").value.trim();
+    state.email = document.getElementById("c-email").value.trim();
+    document.getElementById("v-email").value = state.email;
+    go("bump");
+  });
+
+  // 4 verify
+  var vFound = false;
+  document.getElementById("f-verify").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var inp = document.getElementById("v-email"), btn = document.getElementById("v-btn");
+    if (vFound) { go("codigo"); return; }
+    if (!inp.checkValidity() || !inp.value) { document.getElementById("v-err").hidden = false; return; }
+    document.getElementById("v-err").hidden = true;
+    state.email = inp.value.trim();
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Verificando...';
+    setTimeout(function () {
+      vFound = true; btn.disabled = false; btn.textContent = "Enviar código de verificação";
+      document.getElementById("v-found").hidden = false;
+    }, 900);
+  });
+
+  // 5 otp
+  var otp = Array.prototype.slice.call(document.querySelectorAll("#otp input"));
+  otp.forEach(function (inp, i) {
+    inp.addEventListener("input", function () { inp.value = inp.value.replace(/\D/g, "").slice(0, 1); if (inp.value && otp[i + 1]) otp[i + 1].focus(); });
+    inp.addEventListener("keydown", function (e) { if (e.key === "Backspace" && !inp.value && otp[i - 1]) otp[i - 1].focus(); });
+    inp.addEventListener("paste", function (e) {
+      var d = (e.clipboardData.getData("text") || "").replace(/\D/g, "").slice(0, 6);
+      if (!d) return; e.preventDefault();
+      d.split("").forEach(function (c, k) { if (otp[k]) otp[k].value = c; });
+      (otp[d.length] || otp[5]).focus();
+    });
+  });
+  document.getElementById("f-otp").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (otp.every(function (i) { return i.value; })) go("senha"); else (otp.filter(function (i) { return !i.value; })[0]).focus();
+  });
+
+  // 6 password
+  document.getElementById("p1").addEventListener("input", function () {
+    var v = this.value, sc = (v.length >= 8) + /[A-Z]/.test(v) + /\d/.test(v) + /[^\w]/.test(v);
+    document.getElementById("p-str").style.width = (sc * 25) + "%";
+  });
+  document.getElementById("f-pass").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var a = document.getElementById("p1").value, b = document.getElementById("p2").value;
+    var bad = a.length < 8 || a !== b;
+    document.getElementById("p-err").hidden = !bad;
+    if (!bad) go("perfil");
+  });
+
+  // 7 survey
+  var Q = [
+    { id: "intro", intro: true },
+    { id: "atividade", type: "one", title: "Qual é a sua atividade principal hoje?", help: "Se você faz mais de uma coisa, escolha a que ocupa mais o seu tempo.", opts: [
+      ["empresa", "Tenho uma empresa", "o negócio é meu ou tenho sócios: loja, infoproduto, clínica ou escritório com equipe"],
+      ["autonomo", "Sou profissional liberal ou autônomo", "saúde, advocacia, contabilidade, beleza, reformas..."],
+      ["clt", "Trabalho em uma empresa", "CLT, PJ fixo ou servidor público"],
+      ["agencia", "Presto serviço de marketing, tecnologia ou automação", "agência ou freela atendendo outras empresas"],
+      ["trader", "Sou trader ou investidor", "opero no mercado financeiro como atividade principal"],
+      ["zero", "Estou começando do zero ou em transição", "estudando ou entre uma área e outra"] ] },
+    { id: "area", type: "one", two: true, title: "Em que área você atua?", opts: [
+      ["alim", "Alimentação"], ["beleza", "Beleza, estética e fitness"], ["constr", "Construção e engenharia"], ["consult", "Consultoria e serviços"],
+      ["edu", "Educação e infoprodutos"], ["imob", "Imobiliário"], ["jur", "Jurídico"], ["saude", "Saúde"], ["fin", "Finanças e mercado financeiro"],
+      ["ind", "Indústria, agro e logística"], ["mkt", "Marketing e publicidade"], ["tec", "Tecnologia e software"], ["varejo", "Varejo e e-commerce"], ["outro", "Outro"] ] },
+    { id: "profissao", type: "text", title: "Qual a sua profissão e especialidade?", help: "Quanto mais específico, melhor. \"Trabalho com serviços\" não diz nada.", ph: "Ex: advogada trabalhista, dentista ortodontista, day trader de índice" },
+    { id: "equipe", type: "one", title: "Além de você, quantas pessoas trabalham com você?", opts: [["0", "Ninguém, só eu"], ["1-3", "1 a 3"], ["4-10", "4 a 10"], ["10+", "Mais de 10"]] },
+    { id: "fat", type: "one", title: "Quanto você fatura por mês, em média?", help: "Some tudo o que entra, antes de custos e impostos. Só o time da GL vê isso.", opts: [
+      ["10", "Até R$ 10 mil", "até R$ 120 mil por ano"], ["30", "R$ 10 a 30 mil", "R$ 120 a 360 mil por ano"], ["100", "R$ 30 a 100 mil", "R$ 360 mil a 1,2 milhão por ano"],
+      ["400", "R$ 100 a 400 mil", "R$ 1,2 a 4,8 milhões por ano"], ["1000", "R$ 400 mil a 1 milhão", "R$ 4,8 a 12 milhões por ano"], ["mais", "Mais de R$ 1 milhão", "mais de R$ 12 milhões por ano"], ["nd", "Prefiro não dizer"] ] },
+    { id: "exp", type: "many", title: "O que você já fez ou faz com IA e tecnologia?", help: "Não existe resposta certa.", opts: [
+      ["chat", "Uso ChatGPT, Claude ou Gemini no dia a dia"], ["auto", "Montei automação no n8n, Make ou Zapier"], ["agente", "Coloquei um agente de IA atendendo clientes"],
+      ["code", "Uso Claude Code, Cursor ou outra IA que programa"], ["dev", "Já escrevi código"], ["vps", "Tenho um servidor (VPS)"], ["nada", "Nada disso ainda"] ] },
+    { id: "meta", type: "many", title: "O que você quer fazer com IA nos próximos 6 meses?", help: "Marque quantas quiser.", opts: [
+      ["proprio", "Automatizar o meu próprio negócio"], ["vender", "Vender automação e agentes para clientes"], ["carreira", "Usar IA no trabalho e crescer na carreira"],
+      ["produto", "Criar um software ou produto meu"], ["trading", "Usar IA no meu trading"], ["descobrindo", "Ainda estou descobrindo"] ] }
+  ];
+  var qi = 0;
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function renderQ() {
+    var q = Q[qi], body = document.getElementById("svy-body"), next = document.getElementById("svy-next"), back = document.getElementById("svy-back");
+    document.getElementById("prog").style.width = Math.round(qi / (Q.length - 1) * 100) + "%";
+    back.style.visibility = qi === 0 ? "hidden" : "visible";
+    if (q.intro) {
+      body.innerHTML = '<p class="eyebrow">Antes da primeira aula</p><h2>Primeiro, conte um pouco <span class="it">sobre você.</span></h2>' +
+        '<p class="help" style="margin:0">Aqui dentro tem dono de loja, advogado, trader, gente de agência e quem está começando do zero. Com as suas respostas, o consultor de IA já sabe com quem está falando.</p>' +
+        '<div class="intro-list"><span>Leva de 1 a 3 minutos</span><span>Só o time da GL vê as respostas</span><span>Você pode atualizar quando quiser</span></div>' +
+        '<p class="why"><b>Por que é obrigatório?</b> Sem saber quem você é, não temos como te atender de um jeito diferente. Não existe resposta certa: responda pelo que é hoje.</p>';
+      next.textContent = "Montar meu perfil →"; next.disabled = false; return;
+    }
+    next.textContent = qi === Q.length - 1 ? "Concluir perfil →" : "Continuar →";
+    var h = '<p class="eyebrow">Pergunta ' + qi + ' de ' + (Q.length - 1) + '</p><h2>' + q.title + '</h2>' + (q.help ? '<p class="help">' + q.help + '</p>' : "");
+    var cur = state.answers[q.id];
+    if (q.type === "text") {
+      h += '<textarea class="in" id="q-text" rows="3" maxlength="160" placeholder="' + esc(q.ph) + '">' + esc(cur || "") + '</textarea><p class="count"><span id="q-count">' + (cur || "").length + '</span>/160</p>';
+    } else {
+      h += '<p class="kind">' + (q.type === "one" ? "◉ Escolha uma" : "☑ Marque quantas quiser") + '</p><div class="opts' + (q.two ? " two" : "") + '">';
+      q.opts.forEach(function (o) {
+        var checked = q.type === "one" ? cur === o[0] : (cur || []).indexOf(o[0]) > -1;
+        h += '<label class="opt" for="q-' + o[0] + '"><span><b>' + o[1] + '</b>' + (o[2] ? '<small>' + o[2] + '</small>' : "") + '</span><input id="q-' + o[0] + '" type="' + (q.type === "one" ? "radio" : "checkbox") + '" name="q" value="' + o[0] + '"' + (checked ? " checked" : "") + '></label>';
+      });
+      h += "</div>";
+    }
+    body.innerHTML = h;
+    var ta = document.getElementById("q-text");
+    if (ta) ta.addEventListener("input", function () { document.getElementById("q-count").textContent = ta.value.length; state.answers[q.id] = ta.value; check(); });
+    body.querySelectorAll("input[name=q]").forEach(function (inp) {
+      inp.addEventListener("change", function () {
+        if (q.type === "one") state.answers[q.id] = inp.value;
+        else state.answers[q.id] = Array.prototype.slice.call(body.querySelectorAll("input[name=q]:checked")).map(function (x) { return x.value; });
+        check();
+      });
+    });
+    check();
+  }
+  function check() {
+    var q = Q[qi], v = state.answers[q.id];
+    document.getElementById("svy-next").disabled = q.type === "text" ? !(v && v.trim().length > 2) : (q.type === "many" ? !(v && v.length) : !v);
+  }
+  document.getElementById("svy-next").addEventListener("click", function () {
+    if (qi < Q.length - 1) { qi++; renderQ(); } else go("parceiro");
+  });
+  document.getElementById("svy-back").addEventListener("click", function () { if (qi > 0) { qi--; renderQ(); } });
+
+  // 9 dashboard
+  function renderDash() {
+    var name = state.name || "Aluno GL", first = name.split(" ")[0];
+    document.getElementById("d-name").textContent = name;
+    document.getElementById("d-ini").textContent = name.split(" ").slice(0, 2).map(function (p) { return p[0] || ""; }).join("").toUpperCase();
+    var now = new Date(), hr = now.getHours();
+    document.getElementById("d-date").textContent = now.toLocaleDateString("pt-BR", { weekday: "long", day: "numeric", month: "long" });
+    var greet = hr < 12 ? "Bom dia" : hr < 18 ? "Boa tarde" : "Boa noite";
+    document.getElementById("d-hello").innerHTML = greet + ', <span class="it">' + esc(first) + "</span>";
+    var meta = state.answers.meta || [], a = state.answers.atividade;
+    var t = "Comece pela trilha Empresa com IA", items = ["Aula 1: Seja bem-vindo", "Monte o seu primeiro agente de WhatsApp", "Entre no grupo do próximo encontro ao vivo"];
+    if (meta.indexOf("vender") > -1 || a === "agencia") { t = "Comece pela trilha Vender soluções de IA"; items = ["Como diagnosticar um processo do cliente", "Preço por valor: quanto cobrar por um agente", "Modelos de contrato prontos"]; }
+    else if (meta.indexOf("trading") > -1 || a === "trader") { t = "Comece por IA aplicada ao trading"; items = ["Agente de diário de operações", "Alertas e rotina de pré-mercado com IA", "Conheça o GL Model e o GL Risk Auto"]; }
+    else if (meta.indexOf("produto") > -1) { t = "Comece pela trilha Do processo à automação"; items = ["Do zero ao seu sistema no ar", "Banco de dados, servidor e domínio para leigos", "Publique a sua primeira página"]; }
+    document.getElementById("d-reco-t").textContent = t;
+    document.getElementById("d-reco").innerHTML = items.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+  }
+
+  go("checkout");
+})();
+</script>
+</body>
+</html>
