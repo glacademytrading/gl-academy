@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "exemplo_dataset.schema.json",
+  "title": "Exemplo de dataset (formato interno, uma linha JSONL)",
+  "description": "O conteúdo da última mensagem 'assistant' deve ser um laudo JSON válido.",
+  "type": "object",
+  "required": ["id", "messages", "meta"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^DS-[0-9a-f]{12}$"},
+    "messages": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["role", "content"],
+        "additionalProperties": false,
+        "properties": {
+          "role": {"enum": ["system", "user", "assistant"]},
+          "content": {"type": "string"}
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["regras", "fontes", "tipo", "dificuldade", "resultado", "split", "gerado_por", "revisado"],
+      "additionalProperties": false,
+      "properties": {
+        "regras": {"type": "array", "items": {"type": "string", "pattern": "^R-\\d{4}$"}},
+        "perguntas": {"type": "array", "items": {"type": "string", "pattern": "^P-\\d{4}$"}},
+        "erros": {"type": "array", "items": {"type": "string", "pattern": "^E-\\d{4}$"}},
+        "fontes": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^FONTE-\\d{4}$"}},
+        "tipo": {"enum": ["positivo", "negativo", "caso_limite", "adversarial", "inconclusivo", "multiplas_violacoes"]},
+        "dificuldade": {"enum": ["facil", "media", "dificil", "adversarial"]},
+        "resultado": {"enum": ["aprovado", "aprovado_com_ressalvas", "reprovado", "inconclusivo"]},
+        "split": {"enum": ["treino", "validacao", "teste"]},
+        "gerado_por": {"type": "string", "description": "sintetico:<lote> | real:<FONTE-xxxx> | manual"},
+        "lote": {"type": "string"},
+        "grupo": {"type": "string", "description": "Cenário-semente comum a variações; todas as variações de um grupo ficam no mesmo split."},
+        "revisado": {"type": "boolean"},
+        "versao_base": {"type": "string", "description": "Commit da base de conhecimento usada para gerar."}
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Vídeo e áudio brutos não vão para o git (limite de 100 MB do GitHub).
+# Ficam registrados em fontes.jsonl (sha256) e a transcrição com tempos vai para 01_extraido/.
+auditoria/conhecimento/00_inbox/**/*.mp4
+auditoria/conhecimento/00_inbox/**/*.mov
+auditoria/conhecimento/00_inbox/**/*.mkv
+auditoria/conhecimento/00_inbox/**/*.webm
+auditoria/conhecimento/00_inbox/**/*.mp3
+auditoria/conhecimento/00_inbox/**/*.m4a
+auditoria/conhecimento/00_inbox/**/*.wav

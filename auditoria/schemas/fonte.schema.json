@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fonte.schema.json",
+  "title": "Linha do manifesto de fontes (fontes.jsonl)",
+  "type": "object",
+  "required": ["id", "titulo", "tipo", "arquivo", "sha256", "recebido_em", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^FONTE-\\d{4}$"},
+    "titulo": {"type": "string"},
+    "tipo": {"enum": ["aula_transcricao", "aula_video", "pdf", "slides", "documento", "planilha", "imagem", "instrucao_usuario", "exemplo_real", "outro"]},
+    "arquivo": {"type": "string", "description": "Caminho relativo a auditoria/conhecimento/00_inbox, ou 'chat' para instrução enviada por mensagem."},
+    "sha256": {"type": "string"},
+    "modulo": {"type": "string", "description": "Módulo/aula do curso, se houver."},
+    "ordem": {"type": "integer", "description": "Posição na sequência do curso."},
+    "recebido_em": {"type": "string", "format": "date"},
+    "status": {"enum": ["recebido", "extraido", "consolidado"]},
+    "extracao": {"type": "string", "description": "Caminho relativo à raiz do repositório, ex.: auditoria/conhecimento/01_extraido/FONTE-0001.md"},
+    "observacoes": {"type": "string"}
+  }
+}

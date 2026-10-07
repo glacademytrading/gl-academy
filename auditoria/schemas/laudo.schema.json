@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "laudo.schema.json",
+  "title": "Laudo de auditoria",
+  "description": "Saída única da auditora. Usado como laudo emitido (certificação), gabarito (benchmark) e alvo de treino (dataset).",
+  "type": "object",
+  "required": ["objeto", "perguntas", "achados", "lacunas", "veredito", "confianca"],
+  "additionalProperties": false,
+  "properties": {
+    "objeto": {
+      "type": "object",
+      "required": ["tipo", "resumo"],
+      "additionalProperties": false,
+      "properties": {
+        "tipo": {"type": "string", "description": "Tipo de objeto auditado (definido pelo curso)."},
+        "resumo": {"type": "string"},
+        "contexto": {"type": "string"}
+      }
+    },
+    "perguntas": {
+      "type": "array",
+      "description": "Ciclo de perguntas respondido, na ordem.",
+      "items": {
+        "type": "object",
+        "required": ["id", "resposta", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^P-\\d{4}$"},
+          "resposta": {"type": "string"},
+          "status": {"enum": ["respondida", "sem_evidencia", "nao_aplicavel"]}
+        }
+      }
+    },
+    "achados": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["regra", "conformidade", "evidencia"],
+        "additionalProperties": false,
+        "properties": {
+          "regra": {"type": "string", "pattern": "^R-\\d{4}$"},
+          "conformidade": {"enum": ["conforme", "nao_conforme", "parcial", "indeterminado"]},
+          "severidade": {"enum": ["critica", "alta", "media", "baixa"]},
+          "evidencia": {"type": "string", "description": "O que no objeto sustenta o achado."},
+          "fundamento": {"type": "string", "description": "FONTE-xxxx @ loc que sustenta a regra."}
+        }
+      }
+    },
+    "lacunas": {"type": "array", "items": {"type": "string"}},
+    "veredito": {
+      "type": "object",
+      "required": ["resultado", "justificativa"],
+      "additionalProperties": false,
+      "properties": {
+        "resultado": {"enum": ["aprovado", "aprovado_com_ressalvas", "reprovado", "inconclusivo"]},
+        "nivel": {"type": "string", "description": "Nível de certificação, se o curso definir níveis."},
+        "pontuacao": {"type": "number"},
+        "justificativa": {"type": "string"}
+      }
+    },
+    "confianca": {"type": "number", "minimum": 0, "maximum": 1}
+  }
+}

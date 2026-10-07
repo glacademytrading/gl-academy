@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "certificacao.schema.json",
+  "title": "Registro de certificação",
+  "type": "object",
+  "required": ["id", "data", "objeto_id", "rubrica_versao", "versao_base", "criterios", "laudo", "decisao"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^CERT-\\d{4}-\\d{4}$"},
+    "data": {"type": "string", "format": "date"},
+    "objeto_id": {"type": "string", "description": "Identificador do que foi certificado (sem dados pessoais além do necessário)."},
+    "rubrica_versao": {"type": "string"},
+    "versao_base": {"type": "string", "description": "Commit da base de conhecimento usada."},
+    "criterios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nota", "peso"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string"},
+          "nota": {"type": "number"},
+          "peso": {"type": "number"},
+          "evidencia": {"type": "string"}
+        }
+      }
+    },
+    "laudo": {"$ref": "laudo.schema.json"},
+    "decisao": {
+      "type": "object",
+      "required": ["resultado"],
+      "additionalProperties": false,
+      "properties": {
+        "resultado": {"enum": ["certificado", "certificado_com_ressalvas", "nao_certificado", "pendente_revisao_humana"]},
+        "nivel": {"type": "string"},
+        "validade_ate": {"type": "string", "format": "date"},
+        "revisor_humano": {"type": "string"}
+      }
+    }
+  }
+}

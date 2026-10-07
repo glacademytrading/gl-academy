@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "caso_benchmark.schema.json",
+  "title": "Caso de benchmark",
+  "type": "object",
+  "required": ["id", "entrada", "gabarito", "dificuldade", "categoria", "fontes", "revisado"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^BM-\\d{4}$"},
+    "entrada": {"type": "string", "description": "Exatamente o que o modelo auditor recebe."},
+    "gabarito": {
+      "type": "object",
+      "required": ["resultado", "achados_esperados"],
+      "additionalProperties": false,
+      "properties": {
+        "resultado": {"enum": ["aprovado", "aprovado_com_ressalvas", "reprovado", "inconclusivo"]},
+        "resultados_aceitaveis": {"type": "array", "items": {"enum": ["aprovado", "aprovado_com_ressalvas", "reprovado", "inconclusivo"]}, "description": "Em casos-limite, outros resultados que também valem crédito parcial."},
+        "achados_esperados": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["regra", "conformidade"],
+            "additionalProperties": false,
+            "properties": {
+              "regra": {"type": "string", "pattern": "^R-\\d{4}$"},
+              "conformidade": {"enum": ["conforme", "nao_conforme", "parcial", "indeterminado"]},
+              "obrigatorio": {"type": "boolean", "default": true}
+            }
+          }
+        },
+        "achados_proibidos": {"type": "array", "items": {"type": "string", "pattern": "^R-\\d{4}$"}, "description": "Regras que NÃO podem ser apontadas como violadas (armadilha de falso positivo)."},
+        "lacunas_esperadas": {"type": "array", "items": {"type": "string"}},
+        "perguntas_criticas": {"type": "array", "items": {"type": "string", "pattern": "^P-\\d{4}$"}, "description": "Perguntas que o modelo precisa ter respondido."}
+      }
+    },
+    "dificuldade": {"enum": ["facil", "media", "dificil", "adversarial"]},
+    "categoria": {"enum": ["conforme", "violacao_unica", "violacoes_multiplas", "caso_limite", "falso_positivo_armadilha", "evidencia_insuficiente", "excecao_do_curso", "contexto_irrelevante"]},
+    "fontes": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^FONTE-\\d{4}$"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "revisado": {"type": "boolean", "description": "Revisado por humano. Apenas casos revisados entram no score oficial."},
+    "notas": {"type": "string"}
+  }
+}

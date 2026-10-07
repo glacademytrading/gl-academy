@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 auditoria/ferramentas/validar.py:*)",
+      "Bash(python3 auditoria/ferramentas/cobertura.py:*)",
+      "Bash(python3 auditoria/ferramentas/proximo_id.py:*)",
+      "Bash(python3 auditoria/ferramentas/registrar_fonte.py:*)",
+      "Bash(python3 auditoria/ferramentas/pontuar.py:*)",
+      "Bash(python3 auditoria/ferramentas/exportar_dataset.py:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {"type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR\"/auditoria/ferramentas/hook_inicio_sessao.py", "timeout": 20}
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {"type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR\"/auditoria/ferramentas/hook_lembrete_perguntas.py", "timeout": 10}
+        ]
+      }
+    ]
+  }
+}
