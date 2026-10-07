@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>GL Club IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: post-live sales page, same visual system as the GL masterclass page; light cream, heavy sans + gold serif italic, white cards, centered heads, dark accents for offer. Single light look by choice. */
+:root {
+  --bg: #f6f2ea;
+  --card: #fffdf9;
+  --ink: #1d1a14;
+  --ink-2: #4a443a;
+  --muted: #8a857a;
+  --line: #e2dacb;
+  --gold: #c9a227;
+  --gold-deep: #8f7026;
+  --gold-ink: #7a5a12;
+  --gold-soft: #f3d77a;
+  --ok: #0f8a5f;
+  --ok-dot: #22c55e;
+  --warn: #b3261e;
+  --warn-bg: #f8e3df;
+  --dark: #1d1a14;
+  --shadow: 0 1px 2px rgba(29,26,20,.05), 0 18px 40px -22px rgba(29,26,20,.22);
+  --f-sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --f-serif: "Fraunces", "Playfair Display", Georgia, serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 20px; }
+.narrow { max-width: 680px; margin: 0 auto; }
+h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -.035em; line-height: 1.04; text-wrap: balance; }
+h2 { font-size: clamp(2rem, 4.6vw, 3.3rem); }
+h3 { font-size: 1.12rem; letter-spacing: -.015em; line-height: 1.25; font-weight: 700; }
+p { margin: 0; }
+.it { font-family: var(--f-serif); font-style: italic; font-weight: 500; letter-spacing: -.02em; color: var(--gold-ink); }
+.eyebrow { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-deep); }
+.pill { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: .66rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-ink); background: #f3ead2; border: 1px solid #e0cf9e; border-radius: 999px; padding: 6px 14px; }
+.pill.light { background: var(--card); color: var(--ink-2); border-color: var(--line); }
+.gdot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok-dot); display: inline-block; flex: none; }
+.lead { color: var(--ink-2); font-size: 1.06rem; max-width: 60ch; }
+.lead strong, .card-text strong { color: var(--ink); }
+section { padding-block: clamp(64px, 8vw, 110px); }
+.sec-head { display: grid; gap: 16px; justify-items: center; text-align: center; margin: 0 auto 48px; max-width: 900px; }
+.sec-head .lead { margin-inline: auto; }
+.fill { background: rgba(201,162,39,.16); outline: 1px dashed var(--gold-deep); outline-offset: 1px; border-radius: 4px; padding: 0 4px; }
+.draft { background: var(--gold-soft); color: var(--ink); font-size: .8rem; text-align: center; padding: 7px 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+
+/* Buttons */
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; font: inherit; font-weight: 700; font-size: 1rem; color: var(--ink); text-decoration: none; cursor: pointer; border: 0; border-radius: 14px; padding: 16px 22px; background: linear-gradient(100deg, #f0c95e 0%, #f8e3a0 35%, #f0c95e 60%, #ecc457 100%); background-size: 200% 100%; box-shadow: 0 12px 24px -12px rgba(201,162,39,.7); transition: background-position .6s, transform .15s; }
+.btn:hover { background-position: 100% 0; transform: translateY(-1px); }
+.btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; font-size: .84rem; font-weight: 600; }
+.checks span { display: inline-flex; align-items: center; gap: 7px; }
+.checks span::before { content: "✓"; width: 18px; height: 18px; border-radius: 50%; background: #f3ead2; color: var(--gold-ink); font-size: .66rem; display: grid; place-items: center; }
+
+/* Top bar */
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--dark); color: #e9e2d2; }
+.topbar .wrap { display: flex; justify-content: center; align-items: center; gap: 8px 22px; flex-wrap: wrap; padding-block: 10px; font-family: var(--f-mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+.cd { color: var(--gold-soft); font-variant-numeric: tabular-nums; letter-spacing: .04em; font-size: .84rem; }
+.cd small { color: #9a958a; font-size: .64rem; margin: 0 6px 0 1px; }
+
+/* Hero */
+.hero { padding-block: clamp(40px, 6vw, 80px) clamp(64px, 8vw, 100px); }
+.logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; font-weight: 700; }
+.logo-row img { width: 44px; height: 44px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.hero-copy { display: grid; gap: 24px; justify-items: start; min-width: 0; }
+.hero h1 { font-size: clamp(2.5rem, 5.6vw, 4.4rem); }
+.offer-mini { padding: 22px; display: grid; gap: 16px; width: 100%; max-width: 440px; text-align: center; }
+.offer-mini .eyebrow { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--gold-ink); }
+.offer-mini .note { border-top: 1px solid var(--line); padding-top: 12px; font-size: .8rem; color: var(--muted); }
+.hero-media { position: relative; padding-bottom: 60px; min-width: 0; }
+.media-ph { aspect-ratio: 16/9; max-width: 100%; border-radius: 22px; overflow: hidden; position: relative; background: radial-gradient(circle at 50% 70%, #3a2f1c 0%, #15120d 70%); display: grid; place-items: center; color: #cfc4a8; text-align: center; font-size: .82rem; box-shadow: 0 30px 60px -30px rgba(29,26,20,.6); }
+.media-ph::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(243,215,122,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(243,215,122,.07) 1px, transparent 1px); background-size: 28px 28px; }
+.media-ph > div { position: relative; display: grid; gap: 8px; justify-items: center; padding: 20px; }
+.media-ph img { width: 72px; }
+.built { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: min(90%, 330px); padding: 14px 20px; text-align: center; display: grid; gap: 3px; }
+.built span { font-size: .78rem; color: var(--ink-2); line-height: 1.4; }
+
+/* Letter */
+.letter { padding: clamp(24px, 4vw, 40px); display: grid; gap: 18px; color: var(--ink-2); font-size: 1.02rem; }
+.letter blockquote { margin: 6px 0; padding-left: 18px; border-left: 2px solid var(--gold); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.15; color: var(--ink); }
+.sign { display: flex; align-items: center; gap: 14px; padding-top: 8px; font-family: var(--f-mono); font-size: .82rem; color: var(--ink); }
+.sign::before { content: ""; width: 40px; height: 1px; background: var(--gold); }
+.sign small { font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+/* Broken model */
+.xlist { display: grid; gap: 12px; }
+.xitem { display: flex; gap: 14px; align-items: start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; font-size: .96rem; color: var(--ink-2); }
+.xitem::before { content: "×"; width: 22px; height: 22px; border-radius: 50%; background: var(--warn-bg); color: var(--warn); display: grid; place-items: center; font-size: .8rem; flex: none; margin-top: 1px; }
+.xitem b { color: var(--ink); }
+.punch { text-align: center; margin-top: 44px; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.2; }
+
+/* Video frame */
+.frame { max-width: 940px; margin: 0 auto; background: var(--dark); border-radius: 18px; overflow: hidden; box-shadow: 0 40px 80px -40px rgba(29,26,20,.7); }
+.frame-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; font-family: var(--f-mono); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: #9a958a; }
+.frame-bar .dots { display: flex; gap: 6px; align-items: center; }
+.frame-bar .dots i { width: 8px; height: 8px; border-radius: 50%; background: #3a352c; }
+.frame-bar .run { color: var(--ok-dot); display: flex; gap: 6px; align-items: center; }
+.screen { aspect-ratio: 16/9; max-width: 100%; display: grid; place-items: center; text-align: center; background: radial-gradient(circle at 50% 45%, #2b2416 0%, #0e0c09 70%); color: #f3ead2; padding: 24px; }
+.screen h3 { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -.04em; color: #fff; }
+.screen .it { color: var(--gold-soft); display: block; }
+.screen p { color: #9a958a; font-size: .86rem; margin-top: 12px; }
+.play { width: 64px; height: 64px; border-radius: 50%; border: 1px solid rgba(243,215,122,.5); display: grid; place-items: center; margin: 0 auto 18px; color: var(--gold-soft); }
+.frame-foot { text-align: center; padding: 10px; font-family: var(--f-mono); font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: #7d776b; border-top: 1px solid #2c271f; }
+.after-frame { text-align: center; margin-top: 30px; font-size: 1.1rem; color: var(--ink-2); }
+
+/* Layers */
+.layer-head { display: grid; gap: 14px; margin-bottom: 36px; max-width: 760px; }
+.layer-tag { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-ink); display: flex; align-items: center; gap: 12px; }
+.layer-tag b { background: var(--dark); color: var(--gold-soft); border-radius: 8px; padding: 4px 9px; font-weight: 600; letter-spacing: .1em; }
+.flagship { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 0; overflow: hidden; }
+.flagship .intro { background: var(--dark); color: #e9e2d2; padding: clamp(24px, 3.5vw, 40px); display: grid; gap: 14px; align-content: start; }
+.flagship .intro h3 { color: #fff; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.flagship .intro .it { color: var(--gold-soft); }
+.flagship .intro p { color: #c9bfa8; font-size: .95rem; }
+.team { list-style: none; margin: 0; padding: clamp(18px, 3vw, 30px); display: grid; gap: 4px; }
+.team li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: .93rem; color: var(--ink-2); }
+.team li:last-child { border-bottom: 0; }
+.team .av { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(180deg, #f8df8f, #d9a93a); display: grid; place-items: center; font-weight: 800; font-size: .8rem; color: var(--dark); }
+.team li.special .av { background: var(--dark); color: var(--gold-soft); }
+.team b { color: var(--ink); }
+.sys-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.sys { padding: 24px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.sys .eyebrow { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: .6rem; }
+.sys p { color: var(--ink-2); font-size: .92rem; }
+.pt-card { margin-top: 16px; padding: clamp(22px, 3vw, 32px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.prompt-demo { background: var(--dark); color: #e9e2d2; border-radius: 14px; padding: 16px 18px; font-family: var(--f-mono); font-size: .82rem; display: grid; gap: 10px; }
+.prompt-demo .you { color: var(--gold-soft); }
+.prompt-demo .ok { color: var(--ok-dot); }
+.roadmap { margin-top: 16px; padding: 24px; display: grid; gap: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: .82rem; font-weight: 600; border: 1px dashed #d7bf7c; border-radius: 999px; padding: 6px 13px; background: #fbf6ea; }
+.roadmap p { color: var(--ink-2); font-size: .92rem; }
+
+.tracks { display: grid; gap: 12px; }
+.track { display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 18px 22px; }
+.track .num { font-family: var(--f-mono); font-size: .8rem; color: var(--gold-ink); width: 42px; height: 42px; border-radius: 50%; border: 1px solid #e0cf9e; display: grid; place-items: center; background: #fbf6ea; }
+.track p { color: var(--ink-2); font-size: .92rem; }
+.track .meta { font-family: var(--f-mono); font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-align: right; }
+
+.upd { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.upd .card { padding: 24px; display: grid; gap: 8px; }
+.upd p { color: var(--ink-2); font-size: .92rem; }
+.quote { text-align: center; margin: 48px auto 0; max-width: 760px; font-family: var(--f-serif); font-style: italic; font-size: clamp(1.5rem, 3.4vw, 2.3rem); line-height: 1.2; color: var(--ink); letter-spacing: -.02em; }
+.quote span { color: var(--gold-ink); }
+
+.recap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; overflow: hidden; }
+.recap div { padding: 26px; display: grid; gap: 6px; border-right: 1px solid var(--line); }
+.recap div:last-child { border-right: 0; }
+.recap b { font-family: var(--f-mono); font-size: .74rem; color: var(--gold-ink); }
+.recap strong { font-size: 1.2rem; letter-spacing: -.02em; }
+.recap span { color: var(--ink-2); font-size: .92rem; }
+.recap-line { text-align: center; margin-top: 28px; font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 800; letter-spacing: -.03em; }
+
+/* Support */
+.support { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.support .card { padding: 24px; display: grid; gap: 8px; align-content: start; }
+.support .card p { color: var(--ink-2); font-size: .92rem; }
+.support .live-tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--warn); }
+.support .live-tag::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--warn); }
+.center-cta { display: grid; justify-items: center; gap: 10px; margin-top: 36px; text-align: center; }
+.center-cta small { color: var(--muted); font-size: .8rem; }
+
+/* Proof */
+.prints { columns: 3 260px; column-gap: 16px; }
+.print { break-inside: avoid; margin-bottom: 16px; padding: 18px; display: grid; gap: 10px; }
+.print .tag { justify-self: start; font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ok); background: #e8f5ee; border-radius: 999px; padding: 3px 9px; }
+.print .shot { border-radius: 12px; background: repeating-linear-gradient(135deg, #f2ecdf 0 12px, #ebe3d2 12px 24px); display: grid; place-items: center; font-family: var(--f-mono); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.print h3 { font-size: 1rem; }
+.print small { color: var(--muted); font-size: .76rem; }
+.disclaimer { margin-top: 16px; font-size: .78rem; color: var(--muted); text-align: center; }
+
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.num { padding: 28px; display: grid; gap: 8px; }
+.num b { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+.num span { color: var(--ink-2); font-size: .92rem; }
+
+.host { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; margin-top: 72px; }
+.photo { aspect-ratio: 4/5; max-width: 100%; border-radius: 22px; border: 1px dashed #cdb67a; background: radial-gradient(circle at 50% 38%, #fff 0%, #efe6d2 55%, #e4d8bd 100%); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: .82rem; }
+.photo img { width: 96px; opacity: .85; }
+.host-copy { display: grid; gap: 18px; justify-items: start; }
+.creds { display: flex; flex-wrap: wrap; gap: 10px; }
+.cred { font-size: .82rem; font-weight: 600; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+
+/* Value stack */
+.stack { max-width: 720px; margin: 0 auto; padding: clamp(20px, 3vw, 30px); }
+.stack table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+.stack th { font-family: var(--f-mono); font-size: .6rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); text-align: right; padding: 0 0 12px; border-bottom: 1px solid var(--line); }
+.stack th:first-child { text-align: left; }
+.stack td { padding: 13px 0; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+.stack td.v { text-align: right; font-family: var(--f-mono); font-weight: 600; color: var(--ink); white-space: nowrap; padding-left: 14px; font-variant-numeric: tabular-nums; }
+.stack td.s { text-align: right; font-family: var(--f-mono); color: var(--gold-ink); white-space: nowrap; padding-left: 14px; font-variant-numeric: tabular-nums; }
+.stack td .plus { color: var(--gold); font-weight: 700; margin-right: 6px; }
+.stack tr.total td { border-bottom: 0; padding-top: 18px; font-weight: 700; color: var(--ink); }
+.stack tr.total td.s { font-size: 1.5rem; font-weight: 800; color: var(--muted); text-decoration: line-through; text-decoration-color: var(--warn); }
+.stack-wrap { overflow-x: auto; }
+.mid-line { text-align: center; margin: 32px auto; font-size: 1.15rem; color: var(--ink-2); max-width: 560px; }
+.mid-line strong { color: var(--ink); }
+
+.offer { max-width: 720px; margin: 0 auto; overflow: hidden; }
+.offer-top { background: var(--dark); color: #e9e2d2; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 14px 20px; font-family: var(--f-mono); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; }
+.offer-top .l { display: flex; align-items: center; gap: 10px; }
+.offer-top .l img { width: 22px; height: 22px; }
+.offer-top .r { color: var(--gold-soft); display: flex; align-items: center; gap: 7px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px dashed var(--line); }
+.facts div { padding: 16px 20px; border-right: 1px solid var(--line); display: grid; gap: 2px; }
+.facts div:last-child { border-right: 0; }
+.facts small { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.facts b { font-size: .98rem; }
+.facts span { font-size: .78rem; color: var(--muted); }
+.price-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: center; padding: 24px; }
+.price-row .old { font-size: clamp(2.6rem, 6vw, 3.4rem); font-weight: 800; letter-spacing: -.05em; color: #6d675b; text-decoration: line-through; text-decoration-color: var(--warn); line-height: 1; margin: 6px 0 10px; }
+.price-row p { font-size: .86rem; color: var(--ink-2); }
+.price-row .go { display: grid; gap: 10px; text-align: center; }
+.price-row .go small { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.cost-line { text-align: center; max-width: 620px; margin: 28px auto 0; font-size: .92rem; color: var(--ink-2); }
+
+.guarantee { max-width: 760px; margin: 0 auto; padding: clamp(26px, 4vw, 40px); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; }
+.seal { width: 120px; height: 120px; border-radius: 50%; border: 2px dashed var(--gold); display: grid; place-items: center; text-align: center; background: #fbf6ea; }
+.seal b { display: block; font-size: 2.2rem; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.seal small { font-family: var(--f-mono); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); }
+.guarantee h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; }
+.guarantee p { color: var(--ink-2); }
+
+.faq { display: grid; gap: 12px; max-width: 820px; margin: 0 auto; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+details[open] { box-shadow: var(--shadow); }
+summary { cursor: pointer; padding: 20px 22px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--f-mono); color: var(--gold-ink); font-size: 1.1rem; line-height: 1.4; }
+details[open] summary::after { content: "−"; }
+summary:focus-visible { outline: 2px solid var(--gold); border-radius: 16px; }
+details p { padding: 0 22px 20px; color: var(--ink-2); }
+
+.final { position: relative; overflow: hidden; border-top: 3px solid var(--dark); }
+.rings { position: absolute; inset: 0; pointer-events: none; display: grid; place-items: center; }
+.rings i { position: absolute; border: 1px dashed #dccfae; border-radius: 50%; }
+.final .wrap { position: relative; display: grid; justify-items: center; gap: 22px; text-align: center; }
+.paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 820px; text-align: left; margin-top: 10px; }
+.paths .card { padding: 22px; color: var(--ink-2); }
+.paths .card.bad { background: rgba(255,253,249,.5); box-shadow: none; }
+.paths .card.good { border-color: #dccb98; }
+.paths b { display: block; font-family: var(--f-mono); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 8px; color: var(--muted); }
+.paths .good b { color: var(--gold-ink); }
+.final .decide { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; letter-spacing: -.03em; }
+footer { background: var(--dark); color: #b8ad95; font-size: .8rem; padding-block: 26px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+footer a { color: #e9e2d2; }
+.wa { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.wa .bubble { background: var(--dark); color: #e9e2d2; border-radius: 12px; padding: 8px 12px; font-size: .74rem; line-height: 1.3; box-shadow: var(--shadow); }
+.wa .bubble b { color: var(--gold-soft); display: block; }
+.wa .circle { width: 54px; height: 54px; border-radius: 50%; background: #1fae5b; display: grid; place-items: center; color: #fff; box-shadow: 0 10px 24px -8px rgba(31,174,91,.7); }
+.wa:focus-visible .circle { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+@media (max-width: 1020px) {
+  .hero-grid, .flagship, .pt-card, .host { grid-template-columns: 1fr; }
+  .sys-grid, .upd, .support { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .sys-grid, .upd, .support, .nums, .recap, .paths, .facts, .price-row, .guarantee { grid-template-columns: 1fr; }
+  .recap div, .facts div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .track { grid-template-columns: 44px minmax(0, 1fr); }
+  .track .meta { grid-column: 2; text-align: left; }
+  .guarantee { justify-items: center; text-align: center; }
+  .wa .bubble { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="draft">Esboço GL · página pós-live. Os trechos com <span class="fill">borda tracejada</span> precisam de informações reais (preços, conteúdo, números, depoimentos).</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Condição exclusiva para quem assistiu à live</span>
+    <span>Encerra em <span class="cd"><span id="cd-d">00</span><small>d</small><span id="cd-h">00</span><small>h</small><span id="cd-m">00</span><small>m</small><span id="cd-s">00</span><small>s</small></span></span>
+  </div>
+</div>
+
+<main id="topo">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="logo-row"><img src="../logo-gl.png" alt="">GL Academy</div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="pill light"><i class="gdot"></i><span class="fill">GL Club IA</span> · condição de lançamento</span>
+          <h1>Pare de comprar curso de IA. <span class="it">Comece a operar com ela.</span></h1>
+          <p class="lead">Entre uma vez no GL Club IA e coloque <strong>seu negócio inteiro rodando com IA</strong>. Sistemas prontos para usar, o método para aplicar no seu negócio e atualização contínua enquanto o mercado muda. Tudo em uma única assinatura.</p>
+          <div class="card offer-mini">
+            <p class="eyebrow"><i class="gdot"></i>Condição especial de lançamento</p>
+            <a class="btn" href="#oferta">Quero entrar no GL Club →</a>
+            <div class="checks"><span>7 dias de garantia</span><span>Sem programar</span><span>Acesso no dia 1</span></div>
+            <p class="note">Feito para quem nunca escreveu uma linha de código.</p>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="media-ph"><div><img src="../logo-gl.png" alt=""><span>Foto do Giovane na central de agentes</span><span style="opacity:.7">(geramos com IA a partir da sua foto)</span></div></div>
+          <div class="card built"><p class="eyebrow">Quem construiu</p><b>Giovane Lázaro</b><span>Fundador da GL Academy · <span class="fill">[credencial · nº de alunos]</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTER -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><span class="pill">A conversa direta</span><h2>Eu não quero te vender <span class="it">mais um curso.</span></h2></div>
+      <div class="narrow card letter">
+        <p>Vou te falar uma coisa que pouca gente que vende curso de IA tem coragem de falar.</p>
+        <p>O mercado virou uma esteira. Sai uma ferramenta nova, sai um curso novo sobre ela, e você precisa decidir de novo se compra. Três meses depois muda tudo, e lá vem o próximo.</p>
+        <blockquote>Lançamento atrás de lançamento. <span class="it">Pix atrás de Pix.</span></blockquote>
+        <p><strong>Esse modelo é bom para quem vende e péssimo para quem constrói.</strong> Quem constrói precisa de um lugar onde tudo já está pronto e continua funcionando quando a IA muda. A IA muda todo mês. Curso gravado fica parado no tempo. Template parado quebra.</p>
+        <p>O GL Club IA é a minha resposta para isso. Ele foi feito para quem quer parar de recomprar e começar a construir: <strong>quem já estuda com a GL e quem está chegando agora.</strong></p>
+        <p class="sign">Giovane Lázaro <small>Fundador da GL Academy</small></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BROKEN MODEL -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="pill">O modelo quebrado</span>
+        <h2>Você não precisa de mais um curso de IA. <span class="it">No fundo, você já sabe.</span></h2>
+        <p class="lead">Você comprou um curso prometendo que agora ia dominar IA. Assistiu três aulas, a rotina apertou e o curso ficou parado na plataforma. Não foi falta de vontade. <strong>O modelo é que não funciona:</strong></p>
+      </div>
+      <div class="narrow xlist">
+        <div class="xitem"><span><b>O curso é genérico.</b> Ensina IA no abstrato e não conecta com o seu negócio, seus clientes e sua rotina.</span></div>
+        <div class="xitem"><span><b>O curso exige um tempo que você não tem.</b> Quem toca uma empresa não tem 40 horas para assistir aula antes do primeiro resultado.</span></div>
+        <div class="xitem"><span><b>O curso envelhece em semanas.</b> A ferramenta ensinada já mudou de versão, ou nem existe mais.</span></div>
+        <div class="xitem"><span><b>E o curso te deixa sozinho.</b> Você trava numa configuração, a IA entra em looping, quebra o que estava pronto, e não tem a quem perguntar.</span></div>
+      </div>
+      <p class="punch">O problema nunca foi você. <span class="it">É que curso não constrói operação.</span></p>
+    </div>
+  </section>
+
+  <!-- TURN + VIDEO -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="pill">A virada</span>
+        <h2>O Club não ensina só IA. <span class="it">Ele coloca a IA para trabalhar no seu negócio.</span></h2>
+        <p class="lead">Veja a operação por dentro: do anúncio ao atendimento do cliente, em um painel só. Você só aprova ou recusa.</p>
+      </div>
+      <div class="frame">
+        <div class="frame-bar"><span class="dots"><i></i><i></i><i></i>&nbsp; GL Agents · por dentro</span><span class="run"><i class="gdot"></i>Rodando</span></div>
+        <div class="screen"><div>
+          <div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <h3>Sua empresa com IA, <span class="it">trabalhando por você.</span></h3>
+          <p class="fill" style="display:inline-block">[Vídeo de demonstração da GL: gravar a tela do painel de agentes, cerca de 2 min]</p>
+        </div></div>
+        <div class="frame-foot">Demonstração com dados fictícios</div>
+      </div>
+      <p class="after-frame">Isso só funciona porque o Club é montado em <strong>três camadas.</strong></p>
+    </div>
+  </section>
+
+  <!-- LAYER 1 -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="layer-head">
+        <p class="layer-tag"><b>Camada 01</b> Sistemas</p>
+        <h2>Você não começa <span class="it">do zero.</span></h2>
+        <p class="lead">Você começa com sistemas prontos e funcionando, que se adaptam ao seu negócio.</p>
+      </div>
+
+      <div class="card flagship">
+        <div class="intro">
+          <p class="eyebrow" style="color:var(--gold-soft)">O carro-chefe</p>
+          <h3>GL Agents: <span class="it">seu time de agentes.</span></h3>
+          <p>Cada agente tem nome, função e o jeito da sua empresa. Você pede uma vez e o time distribui as tarefas. A própria GL Academy opera assim.</p>
+          <p class="fill" style="font-size:.8rem">[Confirmar nomes e funções dos agentes que vamos entregar]</p>
+        </div>
+        <ul class="team">
+          <li><span class="av">AT</span><span><b>Atlas, o conselheiro:</b> você pede por voz ou texto e ele distribui para o time.</span></li>
+          <li><span class="av">CL</span><span><b>Clara, copywriter:</b> anúncio, página e e-mail no tom da sua marca.</span></li>
+          <li><span class="av">DV</span><span><b>Davi, designer:</b> criativos que param a rolagem, com a sua identidade.</span></li>
+          <li><span class="av">BR</span><span><b>Bruno, tráfego:</b> monta e sobe campanhas no Meta e no Google depois do seu sinal verde.</span></li>
+          <li><span class="av">LA</span><span><b>Lara, atendimento:</b> responde no WhatsApp e agenda a qualquer hora.</span></li>
+          <li><span class="av">OT</span><span><b>Otto, jurídico:</b> contratos de prestação de serviço com as suas regras.</span></li>
+          <li class="special"><span class="av">◆</span><span><b>Memória da empresa:</b> os agentes respondem como quem trabalha com você há anos.</span></li>
+          <li class="special"><span class="av">✓</span><span><b>Você aprova:</b> o que é sensível fica separado num painel. Você só aprova ou recusa.</span></li>
+        </ul>
+      </div>
+
+      <div class="sys-grid">
+        <div class="card sys"><p class="eyebrow"><i class="gdot"></i>CRM completo</p><h3>O funil inteiro em um sistema seu.</h3><p>Do lead ao fechamento, com histórico por cliente, follow-up e entrada por WhatsApp, site e redes.</p></div>
+        <div class="card sys"><p class="eyebrow"><i class="gdot"></i>Agente de WhatsApp</p><h3>Atendimento que não fecha às 18h.</h3><p>Atende e agenda 24 horas por dia com as informações certas do seu negócio.</p></div>
+        <div class="card sys"><p class="eyebrow"><i class="gdot"></i>Prospecção</p><h3>A máquina de encontrar clientes.</h3><p>Monta a lista do seu nicho, aborda com roteiro pronto e envia o lead para o CRM com contexto.</p></div>
+      </div>
+
+      <div class="card pt-card">
+        <div style="display:grid;gap:10px">
+          <p class="eyebrow">Para quem nunca programou</p>
+          <h3 style="font-size:1.5rem;font-weight:800;letter-spacing:-.03em">Tudo se personaliza <span class="it">escrevendo em português.</span></h3>
+          <p class="lead" style="font-size:.96rem">Você descreve o que precisa e o sistema constrói. Sem código, sem gambiarra e sem depender de programador.</p>
+        </div>
+        <div class="prompt-demo">
+          <span class="you">› quero um relatório semanal de vendas no meu WhatsApp, toda segunda às 8h</span>
+          <span>construindo relatório · conectando CRM · agendando envio</span>
+          <span class="ok">✓ pronto. primeiro envio: segunda, 08:00</span>
+        </div>
+      </div>
+
+      <div class="card roadmap">
+        <p class="eyebrow">O que vem por aí · a comunidade vota, a GL constrói</p>
+        <div class="chips"><span class="chip">Disparador de WhatsApp</span><span class="chip">Disparador de e-mail</span><span class="chip">Dashboard de métricas</span><span class="chip">Área de membros</span><span class="chip">Automações de Instagram</span><span class="chip">Dashboard financeiro</span></div>
+        <p>Nenhum tem data, e não vamos inventar uma. A comunidade escolhe qual vem primeiro, a GL entrega pronto e ele entra na sua assinatura sem custo extra.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYER 2 -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="layer-head">
+        <p class="layer-tag"><b>Camada 02</b> Método</p>
+        <h2>O método para aplicar <span class="it">no seu negócio.</span></h2>
+        <p class="lead">Os sistemas vêm prontos, então você não precisa terminar curso nenhum para ver o primeiro resultado. Quem tem tempo constrói do zero. Quem tem negócio usa pronto e aprende aplicando.</p>
+      </div>
+      <div class="tracks">
+        <div class="card track"><span class="num">01</span><div><h3>Empresa com IA</h3><p>Como estruturar a operação inteira com IA: processos, agentes internos e o primeiro passo no dia 1.</p></div><span class="meta">A trilha de entrada</span></div>
+        <div class="card track"><span class="num">02</span><div><h3>Do processo à automação</h3><p>O método da live: identificar o que automatizar, decidir onde entra a IA e conectar agentes, dados e sistemas.</p></div><span class="meta fill">[0 módulos · 0 aulas]</span></div>
+        <div class="card track"><span class="num">03</span><div><h3>CRM com agentes</h3><p>Instalar, configurar e operar o CRM com agentes, sem depender de ninguém.</p></div><span class="meta fill">[0 aulas]</span></div>
+        <div class="card track"><span class="num">04</span><div><h3>Time de agentes</h3><p>Do primeiro uso de IA até uma equipe de agentes com regras, que executa e presta contas.</p></div><span class="meta fill">[0 módulos]</span></div>
+        <div class="card track"><span class="num">05</span><div><h3>Vender soluções de IA</h3><p>Captação, diagnóstico, preço por valor, objeções, fechamento e pós-venda para vender IA como serviço.</p></div><span class="meta">A trilha comercial</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYER 3 -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="layer-head">
+        <p class="layer-tag"><b>Camada 03</b> Atualização</p>
+        <h2>A IA muda mais rápido <span class="it">do que qualquer curso acompanha.</span></h2>
+        <p class="lead">Por isso todo curso de IA que você comprou morreu na plataforma. No Club, você não fica para trás:</p>
+      </div>
+      <div class="upd">
+        <div class="card"><h3>Templates sempre atualizados.</h3><p>Quando o modelo muda, o sistema muda junto. Você não refaz nada.</p></div>
+        <div class="card"><h3>Conteúdo novo a cada mudança relevante.</h3><p>Saiu ferramenta nova, sai aula nova dentro do Club.</p></div>
+        <div class="card"><h3>Todo lançamento já é seu.</h3><p>Novos cursos e sistemas entram na assinatura enquanto você for membro.</p></div>
+      </div>
+      <p class="quote">"Curso avulso vence como iogurte. <span>O Club se atualiza com o mercado."</span></p>
+      <div class="card recap" style="margin-top:48px">
+        <div><b>01</b><strong>Sistemas</strong><span>te dão a operação</span></div>
+        <div><b>02</b><strong>Método</strong><span>te ensina a aplicar no seu negócio</span></div>
+        <div><b>03</b><strong>Atualização</strong><span>garante que nada fique obsoleto</span></div>
+      </div>
+      <p class="recap-line">O Club não é mais um curso. <span class="it">São os três de uma vez.</span></p>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="pill">Acompanhamento</span>
+        <h2>"Será que estou <span class="it">no caminho certo?"</span></h2>
+        <p class="lead">Se você já se fez essa pergunta, estudando sem direção ou travado numa configuração, sabe que o que falta não é conteúdo. É alguém do seu lado.</p>
+      </div>
+      <div class="support">
+        <div class="card"><span class="live-tag">Ao vivo</span><h3>Encontro a cada <span class="fill">15 dias</span>.</h3><p>Você traz o que travou, seja técnico, comercial ou estratégico, e resolve na hora.</p></div>
+        <div class="card"><p class="eyebrow">Gravado</p><h3>Não pôde ir? Assista depois.</h3><p>O acervo vira uma biblioteca de soluções reais.</p></div>
+        <div class="card"><p class="eyebrow">Comunidade</p><h3>Empresários aplicando junto.</h3><p>Donos de negócio fazendo o mesmo que você e abrindo portas uns para os outros.</p></div>
+      </div>
+      <div class="center-cta"><a class="btn" href="#oferta">Quero as três camadas →</a><small>Acesso liberado no dia 1 · garantia de 7 dias</small></div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><span class="pill">Direto dos grupos</span><h2>O que os alunos <span class="it">estão falando.</span></h2><p class="lead">Substitua cada cartão por um print real dos grupos da GL, com data e autorização do aluno.</p></div>
+      <div class="prints">
+        <div class="card print"><span class="tag">Resultado</span><h3 class="fill">[Título do relato]</h3><div class="shot" style="aspect-ratio:3/4">print do WhatsApp</div><small>[Nome, profissão] · [grupo · mês]</small></div>
+        <div class="card print"><span class="tag">Elogio</span><h3 class="fill">[Título do relato]</h3><div class="shot" style="aspect-ratio:4/3">print do WhatsApp</div><small>[Nome, profissão] · [grupo · mês]</small></div>
+        <div class="card print"><span class="tag">Primeiro agente</span><h3 class="fill">[Título do relato]</h3><div class="shot" style="aspect-ratio:1/1">print do WhatsApp</div><small>[Nome, profissão] · [grupo · mês]</small></div>
+        <div class="card print"><span class="tag">Resultado</span><h3 class="fill">[Título do relato]</h3><div class="shot" style="aspect-ratio:4/3">print do WhatsApp</div><small>[Nome, profissão] · [grupo · mês]</small></div>
+        <div class="card print"><span class="tag">Economia</span><h3 class="fill">[Título do relato]</h3><div class="shot" style="aspect-ratio:3/4">print do WhatsApp</div><small>[Nome, profissão] · [grupo · mês]</small></div>
+        <div class="card print"><span class="tag">Elogio</span><h3 class="fill">[Título do relato]</h3><div class="shot" style="aspect-ratio:1/1">print do WhatsApp</div><small>[Nome, profissão] · [grupo · mês]</small></div>
+      </div>
+      <p class="disclaimer">Relatos individuais de alunos. O resultado de cada negócio depende de como e onde a IA é aplicada.</p>
+    </div>
+  </section>
+
+  <!-- NUMBERS + HOST -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><h2>A GL Academy <span class="it">em números.</span></h2></div>
+      <div class="nums">
+        <div class="card num"><b class="fill">+0.000</b><span>alunos aplicando no próprio negócio</span></div>
+        <div class="card num"><b class="fill">+00</b><span>anos de mercado</span></div>
+        <div class="card num"><b class="fill">+000</b><span>processos automatizados com IA</span></div>
+      </div>
+      <div class="host">
+        <div class="photo"><div><img src="../logo-gl.png" alt=""><br>Foto do Giovane</div></div>
+        <div class="host-copy">
+          <span class="pill">Quem construiu isso</span>
+          <h2><span class="fill">[Frase de autoridade do Giovane]</span></h2>
+          <div class="creds"><span class="cred">Fundador da GL Academy</span><span class="cred fill">[Credencial 2]</span><span class="cred fill">[+0.000 alunos]</span></div>
+          <p class="lead"><span class="fill">[Trajetória: formação, experiência, o que construiu. Só fatos comprováveis.]</span></p>
+          <p class="lead">Os sistemas do Club são os mesmos que a GL Academy usa na própria operação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE STACK + OFFER -->
+  <section id="oferta" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="pill">A conta</span>
+        <h2>Você já sabe quanto custa <span class="it">cada peça lá fora.</span></h2>
+        <p class="lead">Porque você já comprou curso antes. Só o time de agentes vale <strong class="fill">R$ 0.000</strong>. Agora some o resto, item por item.</p>
+      </div>
+      <div class="card stack"><div class="stack-wrap">
+        <table>
+          <thead><tr><th>Dentro do Club</th><th>Avulso</th><th>Somando</th></tr></thead>
+          <tbody>
+            <tr><td>GL Agents, o time de agentes</td><td class="v fill">R$ 0.000</td><td class="s">R$ 0.000</td></tr>
+            <tr><td><span class="plus">+</span>CRM completo e a trilha CRM com agentes</td><td class="v fill">R$ 0.000</td><td class="s">R$ 0.000</td></tr>
+            <tr><td><span class="plus">+</span>Sistema de prospecção</td><td class="v fill">R$ 0.000</td><td class="s">R$ 0.000</td></tr>
+            <tr><td><span class="plus">+</span>Todas as trilhas, atuais e futuras</td><td class="v fill">R$ 0.000</td><td class="s">R$ 0.000</td></tr>
+            <tr><td><span class="plus">+</span>Encontros ao vivo o ano todo</td><td class="v fill">R$ 0.000</td><td class="s">R$ 0.000</td></tr>
+            <tr><td><span class="plus">+</span>Agente de WhatsApp, templates e atualização contínua</td><td class="v">Incluso</td><td class="s">R$ 0.000+</td></tr>
+            <tr class="total"><td>Comprando separado</td><td></td><td class="s fill">R$ 00.000+</td></tr>
+          </tbody>
+        </table>
+      </div></div>
+      <p class="mid-line">O preço normal do Club inteiro é o do time de agentes sozinho: <strong class="fill">R$ 0.000</strong>. Para quem assistiu à live, <span class="it">é menos ainda.</span></p>
+
+      <div class="card offer">
+        <div class="offer-top"><span class="l"><img src="../logo-gl.png" alt="">GL Club IA · assinatura anual</span><span class="r"><i class="gdot"></i>Condição da live</span></div>
+        <div class="facts">
+          <div><small>Acesso</small><b>Liberado no dia 1</b><span>tudo de uma vez</span></div>
+          <div><small>Pagamento</small><b>No cartão</b><span>parcelado ou à vista</span></div>
+          <div><small>Garantia</small><b>7 dias</b><span>devolução integral</span></div>
+        </div>
+        <div class="price-row">
+          <div><small class="eyebrow" style="color:var(--muted)">Preço cheio</small><p class="old fill">R$ 0.000</p><p>Para quem assistiu à live, a condição é especial: <strong class="fill">[12x de R$ 000]</strong> ou <strong class="fill">[R$ 0.000 à vista]</strong>.</p></div>
+          <div class="go"><a class="btn" href="#">Entrar no GL Club →</a><small class="fill">[Link do checkout]</small></div>
+        </div>
+      </div>
+      <p class="cost-line">E o custo real de ficar de fora não é esse. É o próximo curso que você vai comprar, o template que quebra na semana em que você mais precisa, o mês montando <strong>o que os membros já recebem pronto.</strong></p>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="card guarantee">
+        <div class="seal"><div><b>7</b><small>dias</small></div></div>
+        <div><h3>O risco é <span class="it">todo meu.</span></h3><p>Entre no Club, acesse os sistemas e participe do primeiro encontro ao vivo. Se em 7 dias você sentir que não é para você, devolvo cada centavo, sem perguntas.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><span class="pill">Perguntas frequentes</span><h2>O que você está <span class="it">pensando agora.</span></h2></div>
+      <div class="faq">
+        <details><summary>Eu nunca programei. Vou conseguir usar?</summary><p>Vai. Os sistemas vêm prontos e se personalizam escrevendo em português. Se travar, o encontro ao vivo existe exatamente para isso.</p></details>
+        <details><summary>Não tenho tempo para mais um curso.</summary><p>Ótimo, porque o Club não é um curso. Você começa pelo sistema pronto, e não pela aula 1. Os encontros ao vivo ficam gravados para você assistir quando puder.</p></details>
+        <details><summary>Funciona para o meu tipo de negócio?</summary><p>Os agentes usam as informações da sua empresa e respondem como alguém da equipe, e não como um robô genérico. Cada sistema se adapta à sua realidade, do consultório à indústria.</p></details>
+        <details><summary>Já comprei cursos de IA que não me levaram a lugar nenhum. Por que este seria diferente?</summary><p>Porque aqui o curso é a menor parte. Você recebe a operação pronta, o método aplicado ao seu negócio e atualização contínua, coisa que nenhum curso gravado consegue oferecer.</p></details>
+        <details><summary>Posso usar para vender soluções de IA para outras empresas?</summary><p>Sim. A trilha comercial ensina a diagnosticar, precificar e vender automações e agentes como serviço, usando os mesmos sistemas do Club.</p></details>
+        <details><summary>E quando a IA mudar de novo?</summary><p>É para isso que o Club existe. Quando o modelo muda, os templates mudam junto e sai conteúdo novo, sem você pagar de novo.</p></details>
+        <details><summary>Como funciona a assinatura?</summary><p>É anual, com acesso a tudo desde o primeiro dia. O preço cheio é <span class="fill">R$ 0.000</span>, e quem assistiu à live tem uma condição especial. Nos primeiros 7 dias, a garantia devolve o valor integral.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final">
+    <div class="rings" aria-hidden="true"><i style="width:420px;height:420px"></i><i style="width:680px;height:680px"></i><i style="width:940px;height:940px"></i><i style="width:1200px;height:1200px"></i></div>
+    <div class="wrap">
+      <span class="pill">Daqui a 12 meses</span>
+      <h2>Você vai estar em <span class="it">um de dois lugares.</span></h2>
+      <div class="paths">
+        <div class="card bad"><b>Onde você está hoje</b>Fazendo à mão o que a IA já faz, comprando o próximo curso que vai parar na plataforma e vendo o concorrente ficar mais rápido.</div>
+        <div class="card good"><b>Dentro do Club</b>Com o seu negócio rodando com IA, o seu tempo de volta e um grupo de pessoas construindo ao seu lado.</div>
+      </div>
+      <p class="decide">A diferença entre os dois <span class="it">cabe em uma decisão.</span></p>
+      <a class="btn" href="#oferta">Entrar no GL Club agora →</a>
+      <p style="font-size:.82rem;color:var(--muted)">Condição da live · garantia de 7 dias</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>GL Club IA: a operação, o método e a atualização no mesmo lugar. © 2026 GL Academy</span><span><a href="#faq">Perguntas</a> · <a href="#oferta">Preço</a> · Privacidade</span></div>
+</footer>
+
+<a class="wa" href="#" aria-label="Falar com a GL no WhatsApp"><span class="bubble"><b>Ficou em dúvida?</b>Fale com a gente no WhatsApp</span><span class="circle"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span></a>
+
+<script>
+(function () {
+  // Offer deadline: placeholder, set the real end of the live condition
+  var END = new Date("2026-10-23T23:59:00-03:00").getTime();
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function tick() {
+    var t = Math.max(0, END - Date.now());
+    document.getElementById("cd-d").textContent = pad(Math.floor(t / 864e5));
+    document.getElementById("cd-h").textContent = pad(Math.floor(t / 36e5) % 24);
+    document.getElementById("cd-m").textContent = pad(Math.floor(t / 6e4) % 60);
+    document.getElementById("cd-s").textContent = pad(Math.floor(t / 1e3) % 60);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
