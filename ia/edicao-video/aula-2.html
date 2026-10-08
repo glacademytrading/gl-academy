@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aula 2 · O estúdio GL no seu computador | GL Hub Academy</title>
+<link rel="icon" href="brand/gl-crest-96.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body data-lesson="Aula 02" data-title="O estúdio GL no seu computador" data-prev="aula-1.html" data-next="aula-3.html">
+
+<main class="deck">
+
+  <!-- 01 · CAPA -->
+  <section class="slide" data-title="Capa">
+    <div class="slide-inner split">
+      <div>
+        <div class="kicker reveal">Aula 02 · Setup</div>
+        <h1 class="h-xl reveal">O estúdio GL no seu computador, <em>e o Claude instala sozinho</em></h1>
+        <p class="lead reveal">Três coisas são suas. O resto o Claude instala em cinco prompts, pedindo a sua permissão antes de cada instalação.</p>
+        <div class="cover-meta reveal">
+          <span class="pill">● 5 prompts prontos</span>
+          <span class="pill pill--dark">Uns 10 min na primeira vez</span>
+          <span class="pill pill--dark">Nenhum comando digitado</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="row-card" style="display:inline-flex;transform:rotate(-3deg);margin:0 0 -14px -10px;position:relative;z-index:2">
+          <div class="zipf">ZIP</div>
+          <div><div class="t">editar-video-gl.zip</div><div class="d" style="font-family:var(--mono)">a skill desta aula</div></div>
+        </div>
+        <div class="panel auto">
+          <div class="panel-head"><span class="cl-mark">✻</span><b>Montando o estúdio GL</b><span>aba Code</span></div>
+          <div class="p-row"><span class="ok-dot"></span>A skill editar-video-gl<span class="st">instalada</span></div>
+          <div class="p-row"><span class="ok-dot"></span>FFmpeg<span class="st">a tesoura</span></div>
+          <div class="p-row"><span class="ok-dot"></span>Python e Node<span class="st">os motores</span></div>
+          <div class="p-row"><span class="ok-dot"></span>HyperFrames<span class="st">o render</span></div>
+          <div class="p-row"><span class="ok-dot"></span>Playwright<span class="st">grava a tela</span></div>
+          <div class="p-row"><span class="ok-dot"></span>Chave da ElevenLabs<span class="st">no .env</span></div>
+          <div class="p-row"><span class="ok-dot"></span>Kit de marca GL<span class="st">MARCA.md</span></div>
+          <div class="p-done">● Tudo certo pra <em>editar.</em></div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Fala:</b> Nessa aula você monta o estúdio GL no seu computador, e eu vou te mostrar que é bem menos coisa do que parece. São três coisas suas e cinco prompts prontos. Quem instala, roda e confere tudo é o Claude. Na primeira vez leva uns dez minutos, e quase tudo é download.</aside>
+  </section>
+
+  <!-- 02 · TRÊS COISAS SUAS -->
+  <section class="slide" data-title="3 coisas suas, o resto o Claude instala">
+    <div class="slide-inner">
+      <div class="kicker reveal">O que é seu e o que é dele</div>
+      <h2 class="h-lg reveal">Três coisas são suas, <em>o resto é com o Claude</em></h2>
+      <div class="mt-m reveal" style="display:grid;grid-template-columns:0.9fr auto 1.1fr;gap:20px;align-items:stretch">
+        <div class="card">
+          <div class="timer-label" style="margin-bottom:18px">Você providencia</div>
+          <div class="stack">
+            <div class="row-card"><div class="ico-box neutral"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.6"/><path d="M2 19h20"/></svg></div><div><div class="t">Um computador</div><div class="d">Mac com chip Apple ou Windows</div></div></div>
+            <div class="row-card"><div class="ico-box neutral"><span class="cl-mark" style="font-size:24px">✻</span></div><div><div class="t">O app do Claude</div><div class="d">Plano Pro ou Max, na aba Code</div></div></div>
+            <div class="row-card"><div class="ico-box neutral"><svg class="ico" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16.5 6.5l3 3M14 9l2 2"/></svg></div><div><div class="t">A chave da ElevenLabs</div><div class="d">É ela que transcreve a sua fala</div></div></div>
+          </div>
+        </div>
+        <div class="plus-sign" data-step="1">+</div>
+        <div class="card card--glow" data-step="1">
+          <div class="timer-label gold" style="margin-bottom:18px">O Claude instala sozinho</div>
+          <div class="grid-3" style="gap:12px">
+            <div class="tile"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg></div><div class="t">FFmpeg</div><div class="d">corta e junta o vídeo</div></div>
+            <div class="tile"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2.5l8.2 4.75v9.5L12 21.5l-8.2-4.75v-9.5z"/><path d="M12 8v8"/></svg></div><div class="t">Node</div><div class="d">roda o HyperFrames</div></div>
+            <div class="tile"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M9 4H7.5A2.5 2.5 0 0 0 5 6.5V10l-2 2 2 2v3.5A2.5 2.5 0 0 0 7.5 20H9M15 4h1.5A2.5 2.5 0 0 1 19 6.5V10l2 2-2 2v3.5a2.5 2.5 0 0 1-2.5 2.5H15"/></svg></div><div class="t">Python</div><div class="d">roda os scripts da skill</div></div>
+            <div class="tile"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></div><div class="t">HyperFrames</div><div class="d">transforma a edição em MP4</div></div>
+            <div class="tile"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10.5" r="2.4"/></svg></div><div class="t">Playwright</div><div class="d">grava a tela de sites e plataformas</div></div>
+            <div class="tile"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5V5.5M8.5 7.5h7M8.5 11h7"/></svg></div><div class="t">A skill GL</div><div class="d">o manual de edição</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Clique 1:</b> aparece o bloco dourado com o que o Claude instala.<br><b>Fala:</b> Do seu lado são só três coisas: um computador, o app do Claude com plano pago e uma chave da ElevenLabs, que é quem transcreve a sua fala. Todo o resto, FFmpeg, Node, Python, HyperFrames, o gravador de tela e a skill de edição da GL, o Claude instala sozinho e te pede permissão antes de cada um.</aside>
+  </section>
+
+  <!-- 03 · CHECKLIST -->
+  <section class="slide" data-title="O que você precisa ter">
+    <div class="slide-inner">
+      <div class="head-row">
+        <div>
+          <div class="kicker reveal">Checklist · clique pra marcar</div>
+          <h2 class="h-lg reveal">O que você precisa <em>ter em mãos</em></h2>
+        </div>
+        <div class="score reveal"><span class="timer-label" style="margin-right:6px">Obrigatórios</span><b>0</b><span class="of">/ 5</span></div>
+      </div>
+      <div class="grid-2 mt-m reveal" style="gap:12px 20px">
+        <div class="check toggle req"><span class="cx"></span><span class="tx"><b>Mac com chip Apple ou Windows</b><small>Do M1 em diante é o caminho mais rápido, mas Windows também funciona</small></span><span class="tag req">Obrigatório</span></div>
+        <div class="check toggle"><span class="cx"></span><span class="tx"><b>Kit de marca da GL</b><small>Logo, cores e fontes numa pasta: todo vídeo sai com a sua identidade</small></span><span class="tag rec">Recomendado</span></div>
+        <div class="check toggle req"><span class="cx"></span><span class="tx"><b>Uns 20 GB livres no disco</b><small>Pras ferramentas e pros arquivos que cada edição gera</small></span><span class="tag req">Obrigatório</span></div>
+        <div class="check toggle"><span class="cx"></span><span class="tx"><b>Chave da OpenAI</b><small>Só se você quiser imagens geradas por IA no vídeo</small></span><span class="tag">Opcional</span></div>
+        <div class="check toggle req"><span class="cx"></span><span class="tx"><b>App do Claude com plano pago</b><small>Pro ou Max, instalado no computador, usando a aba Code</small></span><span class="tag req">Obrigatório</span></div>
+        <div class="check toggle"><span class="cx"></span><span class="tx"><b>Música livre de direitos</b><small>Pra trilha: o Claude mixa com a sua voz, mas não escuta</small></span><span class="tag">Opcional</span></div>
+        <div class="check toggle req"><span class="cx"></span><span class="tx"><b>A skill editar-video-gl</b><small>O zip desta aula, com os modelos de edição da GL dentro</small></span><span class="tag req">Obrigatório</span></div>
+        <div class="check toggle req"><span class="cx"></span><span class="tx"><b>Chave da ElevenLabs</b><small>Transcrição paga por tempo de áudio; o plano mais barato já cobre vários vídeos</small></span><span class="tag req">Obrigatório</span></div>
+      </div>
+    </div>
+    <aside class="notes"><b>Clique em cada item pra marcar.</b> O placar conta os 5 obrigatórios.<br><b>Fala:</b> Esse é o checklist completo. Obrigatório são cinco itens: o computador, uns 20 GB livres, o app do Claude com plano pago, a skill que vem no zip dessa aula e a chave da ElevenLabs. O kit de marca eu recomendo muito, porque é ele que faz todo vídeo sair com a cara da sua marca. A chave da OpenAI e a música são opcionais.</aside>
+  </section>
+
+  <!-- 04 · O QUE CADA PEÇA FAZ -->
+  <section class="slide" data-title="O que cada peça faz">
+    <div class="slide-inner">
+      <div class="kicker reveal">Em linguagem de gente</div>
+      <h2 class="h-lg reveal">Pensa numa <em>produtora de vídeo</em></h2>
+      <div class="studio mt-m">
+        <div class="col">
+          <div class="piece" data-step="1"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5V5.5M8.5 7.5h7M8.5 11h7"/></svg></div><div><div class="tool">A skill GL</div><div class="role">o <em>manual</em> de edição</div><p>Os passos e os modelos que o Claude segue pra editar do jeito GL.</p></div></div>
+          <div class="piece" data-step="2"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M4 10v4M8 6.5v11M12 3.5v17M16 7.5v9M20 10.5v3"/></svg></div><div><div class="tool">ElevenLabs</div><div class="role">os <em>ouvidos</em></div><p>Transcreve a sua fala com o tempo exato de cada palavra.</p></div></div>
+        </div>
+        <div class="hub-node reveal"><span class="cl-mark">✻</span><span class="lbl">Claude Code</span><span class="nm">o <em>editor</em></span></div>
+        <div class="col">
+          <div class="piece" data-step="3"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg></div><div><div class="tool">FFmpeg</div><div class="role">a <em>tesoura</em></div><p>Corta, junta e recorta o vídeo nos pontos que o Claude escolheu.</p></div></div>
+          <div class="piece" data-step="4"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg></div><div><div class="tool">HyperFrames</div><div class="role">a <em>ilha de render</em></div><p>Transforma a edição em MP4, de graça, no seu computador.</p></div></div>
+        </div>
+        <div class="bottom">
+          <div class="piece" data-step="5"><div class="ico-box" style="padding:6px"><img src="brand/gl-crest-96.png" alt="" style="width:100%;height:100%"></div><div><div class="tool">Kit de marca GL</div><div class="role">o <em>figurino</em> da marca</div><p>Cores, fontes, logo e regras que entram em todo vídeo, sem você pedir de novo.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>5 cliques, uma peça por vez.</b><br><b>Fala:</b> Pensa numa produtora. O Claude Code é o editor, e a skill da GL é o manual de edição que ele segue. A ElevenLabs são os ouvidos, que transcrevem cada palavra com o tempo exato. O FFmpeg é a tesoura, o HyperFrames é a ilha de render que transforma tudo em MP4 de graça, e o kit de marca é o figurino: as cores, a fonte e o logo que entram em todo vídeo.</aside>
+  </section>
+
+  <!-- 05 · PASSO 1 · INSTALAR A SKILL -->
+  <section class="slide" data-title="Passo 1 · Instalar a skill" data-steps="3">
+    <div class="slide-inner">
+      <div class="kicker reveal">Passo 1 de 5 · Instalar a skill</div>
+      <h2 class="h-lg reveal">Arrasta o zip e <em>cola o prompt</em></h2>
+      <div class="split split--even mt-m" style="align-items:start">
+        <div class="cw reveal">
+          <div class="cw-bar"><i></i><i></i><i></i><div class="cw-tabs"><span>Chat</span><span class="on">Code</span></div><span class="cw-folder">▣ Estúdio GL</span></div>
+          <div class="cw-conv">
+            <div class="cw-hello"><div><span class="cl-mark">✻</span>O que vamos editar hoje?</div></div>
+            <div class="cw-bubble"><div class="attach"><div class="zipf">ZIP</div><div>editar-video-gl.zip<small>Arquivo zip</small></div></div><div>Anexei o arquivo editar-video-gl.zip. Instala essa skill pra mim: descompacta em ~/.claude/skills/editar-video-gl/ …</div></div>
+            <div class="cw-resp">
+              <div class="lf"><span class="tick">✓</span>Descompactado em <code>~/.claude/skills/editar-video-gl/</code></div>
+              <div class="lf"><span class="tick">✓</span>O <code>SKILL.md</code> está lá dentro</div>
+              <p><b>Skill instalada.</b> Abre uma nova sessão pra ela carregar.</p>
+            </div>
+          </div>
+          <div class="cw-base">
+            <div class="cw-comp">
+              <div class="attach in-comp"><div class="zipf">ZIP</div><div>editar-video-gl.zip<small>Arquivo zip</small></div></div>
+              <span class="ph">Descreva uma tarefa ou faça uma pergunta</span>
+              <span class="typed">Anexei o arquivo editar-video-gl.zip. Instala essa skill pra mim: descompacta em ~/.claude/skills/editar-video-gl/ …</span>
+              <span class="send">↑</span>
+            </div>
+            <div class="cw-foot"><span>+</span><span>Pedir permissão</span><span>Claude</span></div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="prompt">
+            <div class="prompt-label">● Prompt 1 · instalar a skill</div>
+            <pre>Anexei o arquivo editar-video-gl.zip. Instala essa skill pra mim: descompacta em ~/.claude/skills/editar-video-gl/ (o SKILL.md tem que ficar direto dentro dessa pasta, sem uma pasta repetida no meio), confere se ele está lá e me avisa se eu preciso abrir uma conversa nova pra skill carregar.</pre>
+          </div>
+          <ol class="mini-steps mt-m">
+            <li>Abre o app do Claude na aba&nbsp;<b>Code</b></li>
+            <li>Escolhe uma pasta: a do seu estúdio de vídeos</li>
+            <li>Arrasta o&nbsp;<b>editar-video-gl.zip</b>&nbsp;pra conversa</li>
+            <li>Cola o prompt 1 e envia</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Clique 1:</b> o zip entra na caixa de mensagem. <b>Clique 2:</b> o prompt aparece digitado. <b>Clique 3:</b> mensagem enviada e o Claude responde que instalou.<br><b>Fala:</b> Primeiro a skill, que é o manual de edição da GL. Abre o app do Claude na aba Code, escolhe a pasta do seu estúdio, arrasta o zip dessa aula pra conversa e cola o prompt 1. O Claude descompacta no lugar certo, confere se o arquivo principal está lá e te avisa se precisa abrir uma conversa nova pra skill carregar.</aside>
+  </section>
+
+  <!-- 06 · PASSO 2 · PREPARAR O COMPUTADOR -->
+  <section class="slide" data-title="Passo 2 · Preparar o computador" data-step-class="2:go" data-steps="2">
+    <div class="slide-inner">
+      <div class="kicker reveal">Passo 2 de 5 · Preparar o computador</div>
+      <h2 class="h-lg reveal">Você clica em Permitir, <em>ele instala</em></h2>
+      <div class="split split--even mt-m" style="align-items:start">
+        <div class="reveal">
+          <div class="prompt">
+            <div class="prompt-label">● Prompt 2 · preparar o computador</div>
+            <pre>Usa a skill editar-video-gl e prepara o meu computador pra editar vídeo. Roda o checar_ambiente.py da skill e instala o que estiver faltando, me pedindo permissão antes de cada instalação. Se alguma instalação pedir a senha do computador, usa o instalador oficial com janela pra eu só clicar. Depois roda o hyperframes skills e o hyperframes doctor, instala o gravador de tela (Playwright) e no fim me mostra uma lista do que está pronto e do que falta.</pre>
+          </div>
+          <div class="stack mt-m">
+            <div class="row-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg></div><div class="d" style="font-size:16px;margin:0">Na primeira vez leva <b style="color:var(--text)">uns 10 minutos</b>, quase tudo é download</div></div>
+            <div class="row-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div><div class="d" style="font-size:16px;margin:0">O Claude pede permissão e você <b style="color:var(--text)">só clica em Permitir</b></div></div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="panel">
+            <div class="panel-head"><span class="cl-mark">✻</span><b>Conferindo o seu computador</b><span>checar_ambiente.py</span></div>
+            <div class="p-row"><span class="ok-dot"></span><span>Python 3.10+<small>scripts da skill</small></span><span class="st flag-st"><span class="off">FALTA</span><span class="on">PRONTO</span></span></div>
+            <div class="p-row"><span class="ok-dot"></span><span>FFmpeg<small>a tesoura</small></span><span class="st flag-st"><span class="off">FALTA</span><span class="on">PRONTO</span></span></div>
+            <div class="p-row"><span class="ok-dot"></span><span>Node 22+<small>roda o HyperFrames</small></span><span class="st flag-st"><span class="off">FALTA</span><span class="on">PRONTO</span></span></div>
+            <div class="p-row"><span class="ok-dot"></span><span>HyperFrames<small>o render</small></span><span class="st flag-st"><span class="off">FALTA</span><span class="on">PRONTO</span></span></div>
+            <div class="p-row"><span class="ok-dot"></span><span>Skills do HyperFrames<small>mixagem e efeitos</small></span><span class="st flag-st"><span class="off">FALTA</span><span class="on">PRONTO</span></span></div>
+            <div class="p-row"><span class="ok-dot"></span><span>Playwright<small>grava a tela</small></span><span class="st flag-st"><span class="off">FALTA</span><span class="on">PRONTO</span></span></div>
+            <div class="p-done">Tudo certo pra <em>editar.</em></div>
+          </div>
+          <div class="perm float-over" data-step="1" data-leave="2">
+            <div class="q"><span class="cl-mark">✻</span>O Claude quer rodar este comando</div>
+            <code>npx -y hyperframes@latest skills</code>
+            <div class="bts"><span>Negar</span><span class="yes" data-advance>Permitir</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Clique 1:</b> aparece o pedido de permissão (dá pra clicar em Permitir). <b>Clique 2:</b> a lista vai ficando verde, item por item.<br><b>Fala:</b> Agora o Claude prepara o seu computador. Você cola o prompt 2 e ele confere o que já tem, instala o que falta e, antes de cada instalação, te pede permissão: você só clica em Permitir. Na primeira vez leva uns dez minutos, quase tudo é download, e no fim ele te mostra a lista do que está pronto.</aside>
+  </section>
+
+  <!-- 07 · PASSO 3 · CRIAR A CHAVE -->
+  <section class="slide" data-title="Passo 3 · Criar a chave da ElevenLabs" data-steps="4">
+    <div class="slide-inner">
+      <div class="kicker reveal">Passo 3 de 5 · A chave da ElevenLabs</div>
+      <h2 class="h-lg reveal">A chave que dá <em>ouvidos</em> pro Claude</h2>
+      <div class="grid-3 lit-cards mt-m reveal">
+        <div class="card">
+          <span class="card-num">01 · Crie a conta</span>
+          <div class="mini-ui"><div class="url"><i></i><i></i><i></i><span>elevenlabs.io</span></div><div class="body"><span class="btn-w">Sign up</span><span class="muted" style="font-family:var(--mono)">e escolha um plano</span></div></div>
+          <p>Entre em elevenlabs.io e crie a sua conta. A transcrição é paga por tempo de áudio.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">02 · Crie a chave</span>
+          <div class="mini-ui"><div class="url"><i></i><i></i><i></i><span>Developers › API Keys</span></div><div class="body"><span class="muted" style="font-family:var(--mono)"><b style="color:var(--text)">Create Key</b> · permissões</span><span class="toggle"><i></i>Speech to Text</span></div></div>
+          <p>Em Developers, API Keys, crie uma chave com a permissão de Speech to Text ligada.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">03 · Copie</span>
+          <div class="mini-ui"><div class="url"><i></i><i></i><i></i><span>API Keys</span></div><div class="body"><div class="keyrow"><code>sk_••••••••••</code><span>Copiar</span></div><span class="muted small">guarde pro próximo passo</span></div></div>
+          <p>Copie a chave. Ela vai direto pra um arquivo no seu computador.</p>
+        </div>
+      </div>
+      <div class="alert mt-m" data-step="4">
+        <div class="ico-box"><svg class="ico" viewBox="0 0 24 24" style="stroke-width:2"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.2v.3"/></svg></div>
+        <div><div class="h-md">Nunca cole a chave no chat</div><p>Quem tem a sua chave gasta o seu saldo da ElevenLabs. Ela fica num arquivo que só o seu computador lê.</p></div>
+      </div>
+    </div>
+    <aside class="notes"><b>Cliques 1 a 3:</b> cada card acende. <b>Clique 4:</b> o alerta vermelho.<br><b>Fala:</b> A ElevenLabs são os ouvidos do Claude, e pra ele usar você precisa de uma chave. Cria a conta em elevenlabs.io, vai em Developers, API Keys, cria uma chave com a permissão de Speech to Text e copia. E presta atenção nisso, que é a mesma regra que a gente ensina na GL pra senha de corretora: nunca cola essa chave no chat. Quem tem a chave gasta o seu saldo.</aside>
+  </section>
+
+  <!-- 08 · PASSO 3 · O ARQUIVO .ENV -->
+  <section class="slide" data-title="Passo 3 · A chave no arquivo .env" data-steps="2">
+    <div class="slide-inner">
+      <div class="kicker reveal">Passo 3 de 5 · Guardar a chave</div>
+      <h2 class="h-lg reveal">A chave vai num arquivo, <em>nunca no chat</em></h2>
+      <div class="split split--even mt-m" style="align-items:start">
+        <div class="reveal">
+          <div class="prompt">
+            <div class="prompt-label">● Prompt 3 · chave da ElevenLabs</div>
+            <pre>Cria um arquivo chamado .env na pasta [PASTA DO MEU ESTÚDIO DE VÍDEOS] com esta linha: ELEVENLABS_API_KEY= e abre esse arquivo no editor de texto do meu computador pra eu colar a minha chave da ElevenLabs depois do sinal de igual e salvar. Não me peça a chave aqui no chat. Quando eu disser que salvei, confere se a chave está no arquivo sem mostrar ela na tela.</pre>
+          </div>
+          <div class="warn-line mt-m"><svg class="ico" viewBox="0 0 24 24" style="width:22px;height:22px;stroke-width:2"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.2v.3"/></svg>A chave nunca passa pela conversa com o Claude</div>
+        </div>
+        <div class="reveal">
+          <div class="editor">
+            <div class="editor-bar"><i></i><i></i><i></i><span class="nm">.env<small>editado</small></span><span class="saved">✓ Salvo</span></div>
+            <div class="editor-doc"><span class="k">ELEVENLABS_API_KEY=</span><span class="v">sk_••••••••••••••••</span><span class="caret"></span></div>
+          </div>
+          <ol class="mini-steps mt-m">
+            <li>O Claude cria o&nbsp;<b>.env</b>&nbsp;e abre ele no editor de texto</li>
+            <li>Você cola a chave&nbsp;<b>depois do =</b>&nbsp;e salva</li>
+            <li>Avisa que salvou e ele confere&nbsp;<b>sem mostrar a chave</b></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Clique 1:</b> a chave é colada no arquivo. <b>Clique 2:</b> arquivo salvo.<br><b>Fala:</b> Pra chave não passar pelo chat, quem cria o arquivo é o Claude. Você troca a pasta no prompt 3 pela pasta do seu estúdio, ele cria um arquivo chamado ponto env e abre no editor de texto do seu computador. Você cola a chave depois do sinal de igual, salva e avisa. Aí ele confere se está tudo certo sem mostrar a chave na tela.</aside>
+  </section>
+
+  <!-- 09 · PASSO 4 · IDENTIDADE GL -->
+  <section class="slide" data-title="Passo 4 · O kit de marca" data-steps="3">
+    <div class="slide-inner">
+      <div class="kicker reveal">Passo 4 de 5 · A identidade da sua marca</div>
+      <h2 class="h-lg reveal">Todo vídeo sai com a <em>sua cara</em></h2>
+      <div class="grid-3 lit-cards mt-m reveal">
+        <div class="card">
+          <span class="card-num">01 · Junte a marca</span>
+          <div class="mini-ui"><div class="url"><i></i><i></i><i></i><span>Estúdio GL</span></div><div class="body"><div class="folder-tree"><b>marca/</b>
+├── logo.png
+├── logo-branco.png
+├── fontes/
+└── trilhas/</div></div></div>
+          <p>Uma pasta <b>marca</b> com logo, fontes e as trilhas que você pode usar.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">02 · O Claude escreve o MARCA.md</span>
+          <div class="mini-ui"><div class="url"><i></i><i></i><i></i><span>MARCA.md</span></div><div class="body" style="font-family:var(--mono);font-size:13px;line-height:1.7"><span><span class="gold">fundo</span> #0A0907 · <span class="gold">destaque</span> #D4AF37</span><span><span class="gold">títulos</span> Instrument Serif</span><span><span class="gold">legenda</span> Inter Black, palavra-chave dourada</span><span><span class="gold">CTA</span> "Comenta GL"</span></div></div>
+          <p>Cores, fontes, legenda, CTA padrão e as regras que valem em todo vídeo.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">03 · Confira a prévia</span>
+          <div class="mini-ui" style="aspect-ratio:16/8;display:grid;place-items:end start;padding:14px;background:radial-gradient(ellipse at 70% 30%,rgba(212,175,55,.25),transparent 60%),#0d0b08">
+            <div style="border-left:3px solid var(--gold);padding:6px 12px;background:rgba(10,9,7,.85)"><b style="display:block;font-size:15px"><span class="todo">Seu nome</span></b><span style="font:500 11px var(--mono);color:var(--gold);letter-spacing:.12em">GL ACADEMY</span></div>
+          </div>
+          <p>O Claude gera um card de exemplo pra você aprovar a identidade.</p>
+        </div>
+      </div>
+      <div class="prompt mt-m reveal">
+        <div class="prompt-label">● Prompt 4 · kit de marca</div>
+        <pre>Lê a pasta marca/ do meu estúdio e cria um arquivo MARCA.md com a identidade que vai em todo vídeo: cores (fundo #0A0907, destaque dourado #D4AF37), fonte de título, fonte e estilo da legenda com a palavra-chave em dourado, posição do logo, CTA padrão e as regras de conteúdo (nunca prometer lucro ou ganho garantido; em vídeo de mercado, sempre lembrar que investimento envolve risco). Configura a skill editar-video-gl pra ler o MARCA.md antes de cada edição e me mostra um card de nome de exemplo.</pre>
+      </div>
+    </div>
+    <aside class="notes"><b>3 cliques, um card por vez.</b><br><b>Fala:</b> Esse passo é o que separa vídeo de amador de vídeo de marca. Você junta numa pasta o seu logo, as fontes e as trilhas. O Claude lê essa pasta e escreve um arquivo chamado MARCA.md com as cores, a fonte, o estilo da legenda, o CTA padrão e as regras de conteúdo. Na GL a regra número um é nunca prometer lucro. A partir daí, todo vídeo sai com a mesma identidade, sem você pedir de novo.</aside>
+  </section>
+
+  <!-- 10 · PASSO FINAL · CONFERIR -->
+  <section class="slide" data-title="Passo final · Conferir se está tudo pronto" data-step-class="1:go" data-steps="1">
+    <div class="slide-inner">
+      <div class="kicker reveal">Passo 5 de 5 · Conferir</div>
+      <h2 class="h-lg reveal">Um prompt pra <em>conferir tudo</em></h2>
+      <div class="split split--even mt-m" style="align-items:start">
+        <div class="reveal">
+          <div class="prompt">
+            <div class="prompt-label">● Prompt 5 · conferir se está tudo pronto</div>
+            <pre>Usa a skill editar-video-gl e confere se está tudo pronto pra eu editar o meu primeiro vídeo. Roda o checar_ambiente.py na pasta [PASTA DO MEU ESTÚDIO DE VÍDEOS], confere se o MARCA.md está sendo lido e me responde com uma lista do que está pronto e do que falta, dizendo o que eu faço em cada item que falta.</pre>
+          </div>
+          <div class="card card--glow mt-m"><div class="h-md">Tudo certo pra <em>editar.</em></div><p class="mt-s">Faltou algum item? O Claude te diz o que fazer em cada um e você manda o prompt 5 de novo.</p></div>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-head"><span class="cl-mark">✻</span><b>Estúdio GL</b><span>checagem final</span></div>
+          <div class="p-row"><span class="ok-dot"></span>Skill editar-video-gl instalada</div>
+          <div class="p-row"><span class="ok-dot"></span>FFmpeg, Node e Python</div>
+          <div class="p-row"><span class="ok-dot"></span>HyperFrames e as skills dele</div>
+          <div class="p-row"><span class="ok-dot"></span>Gravador de tela (Playwright)</div>
+          <div class="p-row"><span class="ok-dot"></span>Chave da ElevenLabs no .env</div>
+          <div class="p-row"><span class="ok-dot"></span>MARCA.md lido pela skill</div>
+          <div class="p-done">● Pronto pro <em>primeiro vídeo.</em></div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Clique 1:</b> a lista vai ficando verde.<br><b>Fala:</b> Pra fechar, o prompt 5 confere tudo de uma vez: ele roda a checagem na pasta do seu estúdio, confere se o kit de marca está sendo lido e te responde com a lista. Se aparecer alguma coisa faltando, ele mesmo te diz o que fazer. Quando estiver tudo marcado, você está pronto pra editar.</aside>
+  </section>
+
+  <!-- 11 · COMO GRAVAR -->
+  <section class="slide" data-title="Como gravar pra edição sair boa">
+    <div class="slide-inner">
+      <div class="kicker reveal">Antes de apertar o REC</div>
+      <h2 class="h-lg reveal">Seis regras pra edição <em>sair boa</em></h2>
+      <div class="mt-m reveal" style="display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:start">
+        <div class="phone" style="width:100%">
+          <figure class="photo-slot" data-photo="fotos/aula2-bruto-vertical.jpg" data-label="Foto sua gravando (vertical)"></figure>
+          <div class="rec-guide"><span>espaço</span></div>
+        </div>
+        <div class="grid-2" style="gap:14px">
+          <div class="card rule-card"><div class="ico-box"><b>4K</b></div><div><div class="t4">Grave em 4K se puder</div><p>O celular serve. Com 4K o close fica nítido e o mesmo bruto rende a versão vertical.</p></div></div>
+          <div class="card rule-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="15" rx="1.8"/><rect x="13" y="12" width="9" height="6" rx="1.4"/></svg></div><div><div class="t4">Vertical pra Reels, horizontal pra YouTube</div><p>Grave já no formato de onde o vídeo vai ser postado.</p></div></div>
+          <div class="card rule-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="13" r="4"/><path d="M5 22c1-3.5 3.7-5 7-5s6 1.5 7 5M12 7V2M9.5 4.5L12 2l2.5 2.5"/></svg></div><div><div class="t4">Espaço acima da cabeça</div><p>É ele que deixa o Claude fechar o close sem cortar o seu cabelo.</p></div></div>
+          <div class="card rule-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></svg></div><div><div class="t4">Errou? Repete a frase inteira</div><p>Pare e comece a frase de novo: o Claude fica com a última tentativa boa.</p></div></div>
+          <div class="card rule-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg></div><div><div class="t4">Fale ativos e nomes com clareza</div><p>WIN, WDO, GL Model, nomes de ferramentas: liste no prompt pra legenda sair certa.</p></div></div>
+          <div class="card rule-card"><div class="ico-box"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><div><div class="t4">Luz de frente, fundo mais escuro</div><p>Rosto bem iluminado e o fundo um pouco mais escuro fazem você se destacar.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <aside class="notes"><b>Fala:</b> A edição só fica boa se a gravação ajudar, então guarda essas seis regras. Grava em 4K se der, celular serve. Vertical pra Reels, horizontal pra YouTube, e deixa espaço acima da cabeça pro Claude poder fechar o close. Errou, para e repete a frase inteira. Fala os ativos e os nomes com clareza, WIN, WDO, GL Model, e lista esses nomes no prompt. E grava com luz de frente e o fundo mais escuro.</aside>
+  </section>
+
+  <!-- 12 · MATERIAIS -->
+  <section class="slide" data-title="Materiais desta aula">
+    <div class="slide-inner">
+      <div class="kicker reveal">Pra baixar</div>
+      <h2 class="h-lg reveal">Materiais <em>desta aula</em></h2>
+      <div class="files mt-m reveal">
+        <a class="file zip" href="materiais/editar-video-gl.zip" download><span class="fi">ZIP</span><div><div class="nm">editar-video-gl.zip</div><div class="ds">A skill, com os 9 modelos de Reels e os 2 de YouTube</div></div></a>
+        <a class="file" href="materiais/aula-2/4-kit-de-marca.md" download><span class="fi">MD</span><div><div class="nm">4-kit-de-marca.md</div><div class="ds">O prompt que cria o MARCA.md</div></div></a>
+        <a class="file" href="materiais/aula-2/1-instalar-a-skill.md" download><span class="fi">MD</span><div><div class="nm">1-instalar-a-skill.md</div><div class="ds">O prompt pra instalar a skill pelo zip</div></div></a>
+        <a class="file" href="materiais/aula-2/5-conferir-se-esta-tudo-pronto.md" download><span class="fi">MD</span><div><div class="nm">5-conferir-se-esta-tudo-pronto.md</div><div class="ds">O prompt que confere tudo de uma vez</div></div></a>
+        <a class="file" href="materiais/aula-2/2-preparar-o-computador.md" download><span class="fi">MD</span><div><div class="nm">2-preparar-o-computador.md</div><div class="ds">O prompt que instala as ferramentas</div></div></a>
+        <a class="file" href="materiais/aula-2/como-gravar.md" download><span class="fi">MD</span><div><div class="nm">como-gravar.md</div><div class="ds">As 6 regras pra gravar o seu bruto</div></div></a>
+        <a class="file" href="materiais/aula-2/3-chave-da-elevenlabs.md" download><span class="fi">MD</span><div><div class="nm">3-chave-da-elevenlabs.md</div><div class="ds">Como criar a chave e guardar no .env</div></div></a>
+      </div>
+      <div class="order mt-m reveal">
+        <span>Usa na ordem:</span>
+        <span class="s">1 skill</span>›<span class="s">2 computador</span>›<span class="s">3 chave</span>›<span class="s">4 marca</span>›<span class="s">5 conferir</span>
+      </div>
+    </div>
+    <aside class="notes"><b>Fala:</b> Tudo isso está nos materiais dessa aula: o zip da skill da GL, com os 9 modelos de Reels e os 2 de YouTube, os cinco prompts numerados e o guia de como gravar. Usa na ordem dos números.</aside>
+  </section>
+
+  <!-- 13 · FIM -->
+  <section class="slide" data-title="Próxima aula">
+    <div class="slide-inner center" style="text-align:center">
+      <div class="kicker reveal">Próxima aula</div>
+      <h2 class="h-xl reveal center" style="max-width:1100px">Os 9 modelos GL de edição <em>pra Reels</em></h2>
+      <p class="lead reveal center">Os formatos que a gente publica, pra que serve cada um e como escolher o certo pro seu vídeo.</p>
+      <div class="posters mt-l reveal">
+        <figure class="photo-slot" data-photo="fotos/modelo-1.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-2.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-3.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-4.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-5.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-6.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-7.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-8.jpg"></figure>
+        <figure class="photo-slot" data-photo="fotos/modelo-9.jpg"></figure>
+      </div>
+    </div>
+    <aside class="notes"><b>Fala:</b> Com o estúdio pronto, na próxima aula eu te mostro os 9 modelos de edição que a gente usa nos Reels da GL, pra que serve cada um e como escolher o certo pro seu vídeo. Te vejo lá.</aside>
+  </section>
+
+</main>
+
+<script src="deck.js"></script>
+</body>
+</html>
