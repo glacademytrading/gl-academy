@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude no GL Hub · Documentação</title>
+    <meta name="description" content="Conecte o Claude à GL Academy e ele vira seu mentor: busca nas aulas com o minuto certo, base de conhecimento e plano de estudo.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --card: #151515;
+            --border: #262626;
+            --gold: #93763C;
+            --gold-light: #d4af37;
+            --gold-soft: rgba(212, 175, 55, 0.08);
+            --text: #f5f5f5;
+            --muted: #a3a3a3;
+            --faint: #6b6b6b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+        a { color: var(--gold-light); }
+        main { max-width: 760px; margin: 0 auto; padding: 56px 16px 80px; display: flex; flex-direction: column; gap: 44px; }
+        .eyebrow { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); }
+        header .titulo { display: flex; gap: 16px; align-items: flex-start; margin-top: 14px; }
+        .icone { flex-shrink: 0; width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid var(--gold); color: var(--gold-light); }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 6vw, 38px); line-height: 1.15; }
+        h1 + p { color: var(--muted); margin-top: 8px; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 14px; }
+        section > p, li { color: var(--muted); font-size: 15px; }
+        section > p + p { margin-top: 12px; }
+        .card { border: 1px solid var(--border); background: var(--card); border-radius: 16px; padding: 20px; }
+        nav.indice ul { list-style: none; display: grid; gap: 6px; margin-top: 10px; }
+        nav.indice a { color: var(--muted); text-decoration: none; font-size: 14px; }
+        nav.indice a:hover { color: var(--gold-light); }
+        .destaque { border: 1px solid var(--gold); background: var(--gold-soft); border-radius: 16px; padding: 20px; margin-top: 16px; }
+        .destaque strong { display: block; font-size: 14px; margin-bottom: 6px; }
+        .destaque p { color: var(--muted); font-size: 14px; }
+        ol.passos { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; counter-reset: passo; }
+        ol.passos li { display: flex; gap: 16px; counter-increment: passo; }
+        ol.passos li::before { content: counter(passo); flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid var(--gold); color: var(--gold-light); font-size: 12px; font-weight: 600; }
+        ol.passos li > div { flex: 1; min-width: 0; }
+        section > ol + p { margin-top: 16px; }
+        ol.passos b { display: block; color: var(--text); font-weight: 500; }
+        ol.passos span { font-size: 14px; }
+        ul.lista { list-style: none; display: grid; gap: 10px; }
+        ul.lista li { display: flex; gap: 12px; }
+        ul.lista li::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 10px; }
+        .codigo { display: flex; align-items: center; gap: 8px; margin: 12px 0; border: 1px solid var(--border); background: #0a0a0a; border-radius: 12px; padding: 12px 14px; }
+        .codigo code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; color: var(--gold-light); }
+        .codigo button { flex-shrink: 0; background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer; }
+        .codigo button:hover { border-color: var(--gold); color: var(--text); }
+        footer.ajuda { display: flex; gap: 12px; font-size: 14px; color: var(--muted); }
+        footer img { display: block; margin: 0 auto; width: 120px; opacity: 0.8; }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <p class="eyebrow">Executar</p>
+        <div class="titulo">
+            <div class="icone" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m7 11 2-2-2-2"/><path d="M11 13h4"/><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+            </div>
+            <div>
+                <h1>Claude no GL Hub</h1>
+                <p>Conecte o Claude à GL Academy e ele vira seu mentor: busca nas aulas com o minuto certo, base de conhecimento da escola e plano de estudo sob medida.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="indice card" aria-label="Nesta página">
+        <p class="eyebrow">Nesta página</p>
+        <ul>
+            <li><a href="#o-que-e">O que é</a></li>
+            <li><a href="#conectar-claude-ai">Conectar no claude.ai</a></li>
+            <li><a href="#conectar-claude-code">Conectar no Claude Code</a></li>
+            <li><a href="#o-que-pedir">O que pedir</a></li>
+            <li><a href="#seguranca">Segurança e controle</a></li>
+        </ul>
+    </nav>
+
+    <section id="o-que-e">
+        <h2>O que é</h2>
+        <p>O GL Hub é o conector oficial da GL Academy para o Claude (claude.ai, app de celular, desktop e Claude Code). Conectou, o seu Claude passa a enxergar a escola inteira: ele busca dentro das transcrições das aulas e responde apontando o minuto exato, manda o link do vídeo já no ponto certo, conhece os cursos e produtos da GL (GL Model, GL Risk Auto, Gamepad Trader Pro, Sala de Análise e Mentorias) e monta seu plano de estudo.</p>
+        <div class="destaque">
+            <strong>Pergunte como se fosse pro seu mentor</strong>
+            <p>Em vez de caçar em qual aula estava aquele assunto, pergunte: como eu defino meu stop? O Claude acha a aula, responde com o que ela ensina e te manda direto pro minuto certo do vídeo.</p>
+        </div>
+    </section>
+
+    <section id="conectar-claude-ai">
+        <h2>Conectar no claude.ai</h2>
+        <ol class="passos">
+            <li><div><b>Abra as configurações de conectores</b><span>No claude.ai (ou no app desktop), clique no seu perfil, depois Settings, depois Connectors.</span></div></li>
+            <li><div><b>Adicione o conector</b><span>Clique em Add custom connector, dê o nome GL Hub Academy e cole o seu link de membro (ele está na sua área do aluno):</span>
+                <div class="codigo"><code>https://mcp.glacademytrading.com/mcp?chave=SUA_CHAVE</code><button type="button" data-copiar>Copiar</button></div>
+            </div></li>
+            <li><div><b>Comece a perguntar</b><span>Pronto, o GL Hub Academy aparece na lista de conectores. Abra uma conversa nova e pergunte qualquer coisa sobre as aulas.</span></div></li>
+        </ol>
+        <p>Conectores custom estão disponíveis nos planos pagos do Claude (Pro, Max, Team ou Enterprise). Sem a chave de membro, o conector funciona só com o conteúdo aberto da GL.</p>
+    </section>
+
+    <section id="conectar-claude-code">
+        <h2>Conectar no Claude Code</h2>
+        <p>No terminal, um comando só:</p>
+        <div class="codigo"><code>claude mcp add --transport http gl-hub https://mcp.glacademytrading.com/mcp --header "Authorization: Bearer SUA_CHAVE"</code><button type="button" data-copiar>Copiar</button></div>
+        <p>No Claude Code a busca, as transcrições e a base de conhecimento funcionam completas, o que casa perfeito com pedir pro Claude montar um resumo de estudo ou um checklist de operação a partir das aulas.</p>
+    </section>
+
+    <section id="o-que-pedir">
+        <h2>O que pedir</h2>
+        <ul class="lista">
+            <li>Tenho uma dúvida sobre gestão de risco, o que as aulas ensinam? Me manda o minuto.</li>
+            <li>Monta meu plano de estudo da semana: opero há 6 meses e meu maior problema é o emocional.</li>
+            <li>O que é o GL Model e por onde eu começo?</li>
+            <li>Resume a aula de ontem em um checklist que eu possa usar antes de operar.</li>
+            <li>Não entendi o que é drawdown. Explica simples e me mostra onde isso aparece nas aulas.</li>
+        </ul>
+    </section>
+
+    <section id="seguranca">
+        <h2>Segurança e controle</h2>
+        <ul class="lista">
+            <li>O link de membro é pessoal: não compartilhe. Se vazar, peça uma chave nova ao suporte e a antiga para de funcionar na hora.</li>
+            <li>O Claude só lê o conteúdo da escola. Ele não acessa sua corretora e nunca vai pedir senha ou dado bancário.</li>
+            <li>Conteúdo educacional: o Claude explica o método da GL, mas não diz o que comprar ou vender. A decisão e o risco de cada operação são seus.</li>
+            <li>Pra desconectar, remova o conector nas configurações do Claude.</li>
+        </ul>
+    </section>
+
+    <footer class="ajuda card">
+        <p>Não achou o que precisava aqui? <a href="https://wa.me/5511974080711">Fale com a equipe no WhatsApp</a>.</p>
+    </footer>
+
+    <footer><img src="../../logo-gl.png" alt="GL Academy"></footer>
+</main>
+<script>
+    document.querySelectorAll('[data-copiar]').forEach((botao) => {
+        botao.addEventListener('click', async () => {
+            const texto = botao.previousElementSibling.textContent;
+            try {
+                await navigator.clipboard.writeText(texto);
+                botao.textContent = 'Copiado';
+            } catch {
+                botao.textContent = 'Selecione e copie';
+            }
+            setTimeout(() => (botao.textContent = 'Copiar'), 2000);
+        });
+    });
+</script>
+</body>
+</html>

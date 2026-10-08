@@ -1,0 +1,27 @@
+{
+  "cursos": [
+    {
+      "id": "exemplo",
+      "titulo": "[EXEMPLO] Curso de demonstração",
+      "descricao": "Curso de exemplo para testar o GL Hub. Substitua pelos cursos reais da GL Academy.",
+      "exclusivo": false,
+      "modulos": [
+        {
+          "id": "exemplo-m1",
+          "titulo": "Módulo 1 · Fundamentos",
+          "aulas": [
+            {
+              "id": "exemplo-gestao-de-risco",
+              "titulo": "[EXEMPLO] Gestão de risco na prática",
+              "resumo": "Aula de exemplo mostrando como o GL Hub aponta o minuto exato de cada assunto.",
+              "duracao": "3:10",
+              "video_url": "https://www.youtube.com/watch?v=EXEMPLO",
+              "transcricao": "exemplo-gestao-de-risco.vtt",
+              "tags": ["risco", "stop", "iniciante"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
