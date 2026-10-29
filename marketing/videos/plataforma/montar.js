@@ -36,7 +36,7 @@ function base(f, W, H, file) {
       fil.push(`[${i}:v]fps=${FPS},scale=${W}:${H}:force_original_aspect_ratio=increase,` +
         `crop=${W}:${H}:(in_w-${W})*${fx}:(in_h-${H})*${fy},` + fim2);
     } else {
-      const py = s.py == null ? (W < H ? 0.3 : 0.5) : s.py;   // altura do plano no quadro (0 em cima, 1 embaixo)
+      const py = s.py == null ? (H / W > 1.5 ? 0.3 : H > W ? 0.15 : H === W ? 0.1 : 0.5) : s.py;   // altura do plano no quadro (0 em cima, 1 embaixo)
       const z = s.z || (W < H ? 1.45 : 1.15);                  // o plano entra um pouco mais largo que o quadro
       fil.push(`[${i}:v]fps=${FPS},split[a${i}][b${i}]`,
         `[a${i}]scale=${Math.round(W / 4)}:${Math.round(H / 4)}:force_original_aspect_ratio=increase,crop=${Math.round(W / 4)}:${Math.round(H / 4)},` +

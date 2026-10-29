@@ -9,7 +9,7 @@ const GAMMA = '<div class="sub nota-g">GL Gamma: assinatura à parte</div>';
 
 // posições por formato: tudo na parte de baixo, para não cobrir as telas (o produto); o título fica acima dos módulos
 const POS = {
-  V: { head: 430, bottom: 230, align: 'c' }, F: { head: 380, bottom: 170, align: 'c' }, Q: { head: 330, bottom: 140, align: 'c' },
+  V: { head: 430, bottom: 230, align: 'c' }, F: { head: 260, bottom: 120, align: 'c' }, Q: { head: 230, bottom: 110, align: 'c' },
   L: { head: 140, bottom: 140, align: 'l', style: 'right:auto;width:1250px' }, W: { head: 140, bottom: 140, align: 'l', style: 'right:auto;width:1400px' }
 };
 const T = fmt => ({
@@ -135,7 +135,7 @@ module.exports = [
     { c: 'c110', ate: 4 }, { c: 'c216', ate: 8, ss: 1, x: 0.5 }, { c: 'c105', ss: 1, x: 0.5 }
   ], [
     F.head(0.3, 3.8, 'Uma plataforma completa de <em>order flow</em>', 'Novo · GL Black'),
-    F.mod(4.2, 7.8, 'Análise Gráfica + Order Flow e Execução'),
+    F.mod(4.2, 7.8, 'Order Flow e Execução', 'Fluxo e execução no mesmo gráfico.'),
     F.mod(8.2, 11.6, 'GL Risk Auto', 'O risco do plano na tela.')
   ], { t0: 11.8, tag: 'Conheça na call.', disc: DISC }),
 
