@@ -1,0 +1,218 @@
+<title>Campanha GL Black</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Mesma identidade da Biblioteca e da Campanha GL Risk Auto: preto e ouro, com tema claro de apoio.
+   Ordem: o que postar e as regras; os filmes por formato; imagens; fotos de estúdio; planos para editar; site e créditos. */
+:root {
+  color-scheme: dark;
+  --bg: #0b0a08; --surface: #15130f; --surface-2: #1f1c15; --line: #322d22;
+  --fg: #f1ece1; --muted: #a69d8b; --gold: #d8ae55; --gold-2: #f6d991; --gold-ink: #1a1408; --hoje: rgba(216,174,85,.12);
+  --font-display: "Montserrat", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --hoje: rgba(140,106,34,.12); } }
+:root[data-theme="light"] {
+  color-scheme: light; --bg: #f6f2e9; --surface: #fffdf8; --surface-2: #efe8d8; --line: #dcd2bc;
+  --fg: #1d1a14; --muted: #6a6250; --gold: #8c6a22; --gold-2: #6f5318; --gold-ink: #fffaf0; --hoje: rgba(140,106,34,.12); }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.page { max-width: 1240px; margin: 0 auto; padding-inline: max(16px, 4vw); padding-block: 48px 80px; display: flex; flex-direction: column; gap: 56px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; font-family: var(--font-display); }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.05; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 800; }
+p { margin: 0; }
+a { color: var(--gold); }
+.eyebrow { font-family: var(--font-data); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.lede { max-width: 66ch; font-size: 1.08rem; }
+.muted { color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 20px; }
+.head { display: flex; flex-direction: column; gap: 8px; }
+.head p { color: var(--muted); max-width: 72ch; }
+.hero { display: flex; flex-direction: column; gap: 18px; }
+.hero video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; border: 1px solid var(--line); background: #000; }
+.nota { font-size: .8rem; color: var(--muted); }
+.stats, .toc, .acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.stat { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; background: var(--surface); }
+.stat b { font-family: var(--font-data); color: var(--gold); }
+.toc a { text-decoration: none; font-size: .88rem; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; color: var(--fg); }
+.toc a:hover, .toc a:focus-visible { border-color: var(--gold); }
+.btn { font: 600 .9rem/1.2 var(--font-body); color: var(--fg); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; cursor: pointer; }
+.btn:hover { border-color: var(--gold); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible, video:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn.ouro { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+.btn.mini { padding: 6px 10px; font-size: .8rem; }
+.btn[disabled] { opacity: .45; cursor: default; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.regras { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.regras .panel p { color: var(--muted); font-size: .92rem; }
+.tipo { font-family: var(--font-data); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--gold); }
+.tabela { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .92rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-data); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 600; background: var(--surface); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-family: var(--font-data); white-space: nowrap; font-variant-numeric: tabular-nums; }
+tr.hoje td { background: var(--hoje); }
+tr.hoje td.num::after { content: " · hoje"; color: var(--gold); }
+tr.prox td.num::after { content: " · próximo"; color: var(--gold); }
+.grade { display: grid; gap: 16px; }
+.grade.v { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.grade.l { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+.grade.f { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.card video { width: 100%; max-width: 100%; display: block; background: #000; }
+.card.v video { aspect-ratio: 9 / 16; } .card.l video { aspect-ratio: 16 / 9; } .card.f video { aspect-ratio: 4 / 5; } .card.q video { aspect-ratio: 1; } .card.w video { aspect-ratio: 64 / 27; }
+.card .info { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+details { border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; background: var(--surface-2); }
+summary { cursor: pointer; font-weight: 600; font-size: .85rem; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: .85rem; line-height: 1.5; margin: 8px 0 0; }
+.img, .plano { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.img img, .plano video { width: 100%; max-width: 100%; display: block; background: #000; object-fit: cover; }
+.img.f img { aspect-ratio: 4 / 5; } .img.v img { aspect-ratio: 9 / 16; } .img.l img { aspect-ratio: 16 / 9; } .img.foto img { aspect-ratio: 16 / 10; }
+.plano video { aspect-ratio: 16 / 9; object-fit: contain; }
+figcaption { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 10px; font-size: .78rem; color: var(--muted); }
+figcaption span { min-width: 0; overflow-wrap: anywhere; }
+.faixa { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(180px, 220px); gap: 12px; overflow-x: auto; padding-bottom: 6px; }
+.grade.fotos { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.grade.planos { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.aviso { font-size: .85rem; color: var(--muted); max-width: 80ch; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: .9rem; max-width: calc(100% - 32px); }
+</style>
+
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">GL Academy · lançamento · outubro de 2026</p>
+    <h1>Campanha GL Black</h1>
+    <p class="lede">Tudo pronto para lançar o GL Black Order Flow System: filmes para Reels, YouTube, feed e site, carrossel, stories, thumbnails, um banco de fotos de estúdio e os planos para editar. As telas são os prints reais da plataforma; o ambiente é ilustrativo, criado com IA.</p>
+    <div class="stats">{{STATS}}</div>
+    <video controls preload="metadata" playsinline poster="capas/bo10-filme-lancamento.jpg" aria-label="Filme de lançamento"><source src="filmes/bo10-filme-lancamento.mp4" type="video/mp4"></video>
+    <p class="nota">{{NOTA}}</p>
+    <nav class="toc" aria-label="Seções"><a href="#calendario">Calendário</a><a href="#regras">Regras</a><a href="#verticais">Reels</a><a href="#horizontais">YouTube e site</a><a href="#feed">Feed</a><a href="#imagens">Imagens</a><a href="#fotos">Fotos</a><a href="#planos">Planos</a><a href="#site">Site</a></nav>
+  </header>
+
+  <section id="calendario">
+    <div class="head"><p class="eyebrow">O que postar</p><h2>Calendário de 30/10 a 14/11</h2><p>A linha de hoje fica marcada. Cada peça leva ao vídeo ou à imagem com a legenda pronta.</p></div>
+    <div class="tabela"><table><thead><tr><th>Dia</th><th>Canal</th><th>Peça</th><th>Objetivo</th></tr></thead><tbody>{{CAL}}</tbody></table></div>
+  </section>
+
+  <section id="regras">
+    <div class="head"><p class="eyebrow">Antes de postar</p><h2>Regras da campanha</h2></div>
+    <div class="regras">
+      <div class="panel"><h3>Rótulo de IA</h3><p>Ative "Rótulo de IA" no Instagram e "Conteúdo alterado ou sintético" no YouTube em todas as peças com estúdio. O rodapé de cada peça já diz isso.</p></div>
+      <div class="panel"><h3>GL Gamma</h3><p>Onde o GL Gamma aparece, "GL Gamma: assinatura à parte" fica na tela e na legenda. As legendas daqui já vêm com o aviso.</p></div>
+      <div class="panel"><h3>Sem promessa</h3><p>Nada de ganho, renda ou aprovação em mesa. A pergunta sobre mesa responde com: aprovação depende de você e das regras de cada mesa.</p></div>
+      <div class="panel"><h3>Um destino só</h3><p>Todo CTA leva à call 1x1 gratuita. A duração da call não aparece em nenhuma peça.</p></div>
+    </div>
+  </section>
+
+  <section id="verticais">
+    <div class="head"><p class="eyebrow">9:16</p><h2>Reels e Shorts</h2><p>Os planos em 16:9 entram inteiros, sobre o próprio vídeo desfocado, para a tela da plataforma continuar legível.</p></div>
+    <div class="grade v">{{V}}</div>
+  </section>
+
+  <section id="horizontais">
+    <div class="head"><p class="eyebrow">16:9</p><h2>YouTube, anúncios e site</h2></div>
+    <div class="grade l">{{L}}</div>
+  </section>
+
+  <section id="feed">
+    <div class="head"><p class="eyebrow">4:5 e 1:1</p><h2>Feed</h2></div>
+    <div class="grade f">{{F}}</div>
+  </section>
+
+  <section id="imagens">
+    <div class="head"><p class="eyebrow">Imagens</p><h2>Carrossel, stories e thumbnails</h2><p>O carrossel tem capa, os 7 módulos e o CTA. A legenda dele: "O que tem dentro do GL Black Order Flow System, módulo por módulo. Salve para ver depois e mande para quem opera fluxo. GL Gamma: assinatura à parte." mais o aviso de risco.</p></div>
+    <div class="acoes"><button type="button" class="btn ouro" data-zipg="carrossel" data-nome="GL Black - carrossel.zip">Baixar o carrossel (ZIP)</button><button type="button" class="btn" data-zipg="stories" data-nome="GL Black - stories.zip">Baixar os stories (ZIP)</button><button type="button" class="btn" data-zipg="thumbs" data-nome="GL Black - thumbnails.zip">Baixar as thumbnails (ZIP)</button></div>
+    <div class="faixa">{{CAR}}</div>
+    <div class="faixa">{{ST}}</div>
+    <div class="grade l">{{TH}}</div>
+  </section>
+
+  <section id="fotos">
+    <div class="head"><p class="eyebrow">Banco de imagens</p><h2>Fotos de estúdio com as telas reais</h2><p>Para o site, posts, apresentação e mídia kit. Ao usar fora daqui, mantenha a frase "Ambiente ilustrativo criado com IA · telas reais da plataforma GL" por perto.</p></div>
+    <div class="acoes"><button type="button" class="btn ouro" data-zipg="fotos" data-nome="GL Black - fotos de estúdio.zip">Baixar todas as fotos (ZIP)</button></div>
+    <div class="grade fotos">{{FOTOS}}</div>
+  </section>
+
+  <section id="planos">
+    <div class="head"><p class="eyebrow">Para editar</p><h2>Planos de estúdio já compostos</h2><p>10 segundos cada, em 720p para a página, sem texto. Servem para montar novos Reels, cortes de live e anúncios. As versões em 1080p ficam com o Claude e saem quando você pedir.</p></div>
+    <div class="grade planos">{{PLANOS}}</div>
+  </section>
+
+  <section id="site">
+    <div class="head"><p class="eyebrow">Site</p><h2>Onde cada peça entra no site</h2></div>
+    <div class="regras">
+      <div class="panel"><h3>Topo</h3><p>bo11-site-hero em loop, sem som, com a capa do primeiro quadro. Abaixo, em letra pequena: "Ambiente ilustrativo criado com IA · telas reais da plataforma GL".</p></div>
+      <div class="panel"><h3>Seção da plataforma</h3><p>bo10-filme-lancamento com controles e uma grade de 7 cards, um por módulo, com as imagens do carrossel.</p></div>
+      <div class="panel"><h3>Training Lab</h3><p>bo13-training-lab e as fotos de mentor e aluno e da turma.</p></div>
+      <div class="panel"><h3>GL Gamma</h3><p>bo21-feed-gamma e a foto do amanhecer com o Sigma Board, com "assinatura à parte" visível.</p></div>
+    </div>
+  </section>
+
+  <footer class="aviso"><p>{{AVISO}} GL Gamma: assinatura à parte.</p></footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+var D = {{DADOS}};
+(function () {
+  function toast(t) { var el = document.getElementById('toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(function () { el.hidden = true; }, 3200); }
+
+  // calendário: marca hoje, ou o próximo dia com peças
+  var d = new Date(), hoje = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  var linhas = [].slice.call(document.querySelectorAll('tr[data-data]'));
+  var deHoje = linhas.filter(function (r) { return r.dataset.data === hoje; });
+  if (deHoje.length) deHoje.forEach(function (r) { r.classList.add('hoje'); });
+  else { var prox = linhas.filter(function (r) { return r.dataset.data > hoje; })[0]; if (prox) linhas.filter(function (r) { return r.dataset.data === prox.dataset.data; }).forEach(function (r) { r.classList.add('prox'); }); }
+
+  // copiar legenda
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var alvo = document.getElementById(b.dataset.copy); if (!alvo) return;
+    var txt = alvo.textContent, label = b.dataset.label, feito = b.dataset.done;
+    var ok = function () { b.textContent = feito; setTimeout(function () { b.textContent = label; }, 1600); };
+    var falha = function () { var det = alvo.closest('details'); if (det) det.open = true; var r = document.createRange(); r.selectNodeContents(alvo); var s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Texto selecionado: copie com Ctrl+C.'); };
+    try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, falha); else falha(); } catch (err) { falha(); }
+  });
+
+  // downloads pela capacidade do Claude; fora dele, link comum
+  var dlCap = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+  async function salvar(nome, blob) {
+    var dl = await dlCap;
+    if (dl) {
+      try { await dl.save({ filename: nome, data: blob }); return true; }
+      catch (err) { var c = err && err.code; if (c === 'declined') return false; toast(c === 'too_large' ? 'Arquivo grande demais para este aparelho.' : c === 'rate_limited' ? 'Já tem um download esperando confirmação.' : 'Não deu para baixar. Tente de novo.'); return false; }
+    }
+    var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = nome; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 120000); return true;
+  }
+  async function buscar(p) { var r = await fetch(p); if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); }
+  var jszip;
+  function carregarZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    if (!jszip) jszip = new Promise(function (ok, no) { var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = function () { ok(window.JSZip); }; s.onerror = function () { jszip = null; no(new Error('zip')); }; document.head.appendChild(s); });
+    return jszip;
+  }
+  var ocupado = false;
+  async function acao(btn, fn) {
+    if (ocupado) { toast('Espere o download atual terminar.'); return; }
+    ocupado = true; var rot = btn.textContent; btn.disabled = true;
+    try { await fn(function (t) { btn.textContent = t; }); } catch (err) { toast('Não deu para baixar. Tente de novo.'); }
+    finally { ocupado = false; btn.disabled = false; btn.textContent = rot; }
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-dl], [data-zipg]'); if (!b) return;
+    if (b.dataset.dl) { var nome = b.dataset.nome || b.dataset.dl.split('/').pop(); return acao(b, async function (st) { st('Preparando…'); if (await salvar(nome, await buscar(b.dataset.dl))) toast('Download enviado: ' + nome); }); }
+    var g = D.grupos[b.dataset.zipg]; if (!g) return;
+    return acao(b, async function (st) {
+      st('Carregando…'); var JSZip = await carregarZip(), zip = new JSZip(), feitos = 0;
+      for (var i = 0; i < g.length; i++) { zip.file(g[i].split('/').pop(), await buscar(g[i])); feitos++; st('Juntando ' + feitos + ' de ' + g.length + '…'); }
+      st('Montando o ZIP…'); var out = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
+      if (await salvar(b.dataset.nome, out)) toast('ZIP pronto: ' + g.length + ' arquivos.');
+    });
+  });
+})();
+</script>

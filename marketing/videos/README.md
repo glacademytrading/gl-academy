@@ -134,3 +134,18 @@ python3 leitura_mercado.py                # página em leitura/index.html, víde
 ## Rótulos internos dos prints
 
 Alguns prints mostram o nome de versão do indicador ("INTERNA 1.1.1" no print 3, "Interna Teste" nos prints 7, 14 e 15) ou a linha de cabeçalho com os nomes, as versões e a licença dos indicadores (prints 35, 36 e 38). O `stage.html` esconde esses rótulos em qualquer peça que use esses prints (`INTERNOS`), então nenhuma caixa ou enquadramento deve apontar para eles. Print novo com rótulo interno: acrescente o retângulo em `INTERNOS`.
+
+## Plataforma GL Black: estúdio da Higgsfield com as telas reais (`plataforma/`)
+
+Os vídeos de estúdio vêm da Higgsfield com as telas **totalmente pretas**. As telas reais da plataforma entram aqui, quadro a quadro: a IA nunca desenha gráfico nem número.
+
+| Arquivo | O que faz |
+| --- | --- |
+| `limpar.js` | Cobre valor em dólar e nome da conta nos prints antes de qualquer uso (`node limpar.js <prints> <saída>`) |
+| `compor.py` | Põe o print limpo na tela preta, em perspectiva. Cantos aproximados de cada cena em `cenas.json`, refinados por retas nos lados da região preta; o que passa na frente (cabeça, mão) continua por cima. `python3 compor.py img01 video.mp4 saida.mp4 35.png` ou `--foto` para imagem. Em cena com cabelo escuro na frente da tela, use `"delta"` baixo em `cenas.json` |
+| `lote.txt` + `lote.sh` | Lista dos vídeos compostos (saída, vídeo, cena, prints) e o lote em paralelo: `bash lote.sh <hf> <limpos> <comp> 3` |
+| `filmes.js` + `montar.js` + `camada.html` | Roteiros dos filmes da campanha, montagem com fusões (16:9 num 9:16 entra inteiro sobre o próprio vídeo desfocado) e a camada de texto renderizada no Chromium: `COMP=<comp> OUT=<saída> node montar.js [id]` |
+| `imagens.js` | Carrossel 4:5, stories e thumbnails sobre as fotos de estúdio: `FOTOS=<fotos> OUT=<saída> node imagens.js` |
+| `kit_glblack.py` + `kit_glblack.html` | Página Campanha GL Black (filmes, imagens, fotos, planos, calendário e legendas): `python3 kit_glblack.py <trabalho> <página>` |
+
+Os prints, os vídeos da Higgsfield e os arquivos gerados **não ficam no git**; o plano da campanha está em `../execucao/campanha-gl-black.md`.

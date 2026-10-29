@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../fonts/local.css">
+<style>
+/* Camada de texto dos filmes da plataforma: fica por cima dos vídeos de estúdio já com as telas reais. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: transparent; overflow: hidden; }
+#st { position: relative; overflow: hidden; font-family: "Inter", sans-serif; color: #fff; }
+#st.bg { background: #050505 center / cover no-repeat; }
+.vt, .vb { position: absolute; left: 0; right: 0; pointer-events: none; }
+.vt { top: 0; background: linear-gradient(180deg, rgba(5,5,5,.78), rgba(5,5,5,0)); }
+.vb { bottom: 0; background: linear-gradient(0deg, rgba(5,5,5,.86), rgba(5,5,5,0)); }
+.it { position: absolute; left: 0; right: 0; padding: 0 var(--gx); opacity: 0; }
+.it.l { text-align: left; } .it.c { text-align: center; }
+.kick { display: inline-block; font: 800 calc(var(--u) * 1.5)/1 "Montserrat", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: .55em .8em; border-radius: .35em; }
+.head { font: 900 calc(var(--u) * 3.5)/1.06 "Montserrat", sans-serif; letter-spacing: -.01em; text-shadow: 0 4px 34px rgba(0,0,0,.85); text-wrap: balance; }
+.head em, .sub em, .mod em { font-style: normal; color: #f6d991; }
+/* .nota-g: aviso do GL Gamma, sempre legível */
+.sub.nota-g { font-size: calc(var(--u) * 1.15); color: rgba(255,255,255,.72); }
+.sub { font: 600 calc(var(--u) * 1.9)/1.3 "Inter", sans-serif; color: rgba(255,255,255,.9); text-shadow: 0 2px 20px rgba(0,0,0,.9); text-wrap: balance; }
+.mod { white-space: nowrap; display: inline-flex; align-items: center; gap: .6em; font: 800 calc(var(--u) * 2.1)/1 "Montserrat", sans-serif; letter-spacing: .04em; color: #fff; background: rgba(8,7,5,.72); border: 1px solid rgba(216,174,85,.55); border-radius: .5em; padding: .55em .8em; backdrop-filter: blur(6px); box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+.mod i { width: .5em; height: .5em; border-radius: 50%; background: #f6d991; box-shadow: 0 0 14px #f6d991; display: inline-block; }
+.mod b { font-weight: 600; font-family: "Inter", sans-serif; color: rgba(255,255,255,.7); font-size: .72em; letter-spacing: .02em; }
+.word { font: 900 calc(var(--u) * 5.6)/1 "Montserrat", sans-serif; background: linear-gradient(180deg, #fff3cf 0%, #f6d991 40%, #b8893a 100%); -webkit-background-clip: text; color: transparent; filter: drop-shadow(0 6px 30px rgba(216,174,85,.25)); }
+.tagl { font: 700 calc(var(--u) * 1.4)/1 "Montserrat", sans-serif; letter-spacing: .42em; color: #d8ae55; padding-left: .42em; }
+.it > * + * { margin-top: calc(var(--u) * 1.1); }
+#wm { position: absolute; display: flex; align-items: center; gap: .5em; font: 800 calc(var(--u) * 1)/1 "Montserrat", sans-serif; letter-spacing: .2em; color: #d8ae55; opacity: .92; }
+#wm img { width: calc(var(--u) * 2.6); height: calc(var(--u) * 2.6); }
+#nota { position: absolute; left: var(--gx); right: var(--gx); text-align: center; font: 500 calc(var(--u) * .95)/1.35 "Inter", sans-serif; color: rgba(255,255,255,.62); letter-spacing: .02em; text-shadow: 0 1px 8px rgba(0,0,0,.9); }
+#end { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 42%, #1c160b 0%, #050505 62%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: calc(var(--u) * 1.3); padding: 0 var(--gx); opacity: 0; }
+#end img { width: calc(var(--u) * 13); height: calc(var(--u) * 13); }
+#end .brand { font: 900 calc(var(--u) * 4.2)/1 "Montserrat", sans-serif; letter-spacing: .06em; background: linear-gradient(180deg, #f6d991, #b8893a); -webkit-background-clip: text; color: transparent; }
+#end .tagl { margin-top: calc(var(--u) * -.4); }
+#end .tag { font: 700 calc(var(--u) * 2)/1.25 "Montserrat", sans-serif; color: #fff; max-width: 30em; text-wrap: balance; }
+#end .cta { font: 800 calc(var(--u) * 1.65)/1 "Montserrat", sans-serif; color: #0b0906; background: linear-gradient(90deg, #d8ae55, #f6d991); padding: .7em 1em; border-radius: .4em; box-shadow: 0 0 50px rgba(216,174,85,.35); }
+#end .lk { font: 600 calc(var(--u) * 1.25)/1 "Inter", sans-serif; color: #d8ae55; letter-spacing: .1em; }
+#end .disc { font: 500 calc(var(--u) * 1)/1.45 "Inter", sans-serif; color: rgba(255,255,255,.6); max-width: 46em; margin-top: calc(var(--u) * .8); }
+</style></head>
+<body><div id="st"></div>
+<script>
+let S, IT = [];
+const ease = x => x < 0 ? 0 : x > 1 ? 1 : 1 - Math.pow(1 - x, 3);
+function init(spec) {
+  S = spec;
+  const st = document.getElementById('st'), W = spec.w, H = spec.h;
+  const u = Math.min(W, H) / 40;                         // unidade de tipo: 27 px em 1080
+  st.style.cssText = `width:${W}px;height:${H}px;--u:${u}px;--gx:${Math.round(u * 2.6)}px`;
+  if (spec.bg) { st.classList.add('bg'); st.style.backgroundImage = `url(${spec.bg})`; if (spec.bgpos) st.style.backgroundPosition = spec.bgpos; }
+  let h = '';
+  if (spec.vt !== false) h += `<div class="vt" style="height:${Math.round(H * (spec.vt || .26))}px"></div>`;
+  if (spec.vb !== false) h += `<div class="vb" style="height:${Math.round(H * (spec.vb || .42))}px"></div>`;
+  (spec.items || []).forEach((x, i) => {
+    const pos = x.bottom != null ? `bottom:${x.bottom}px` : `top:${x.top}px`;
+    h += `<div class="it ${x.align || 'c'}" id="i${i}" style="${pos};${x.style || ''}">${x.html}</div>`;
+  });
+  if (spec.wm !== false) h += `<div id="wm" style="left:${Math.round(u * 2.2)}px;top:${Math.round(u * 2.2)}px"><img src="../emblem.png"><span>GL ACADEMY</span></div>`;
+  if (spec.nota) h += `<div id="nota" style="bottom:${Math.round(u * 1.4)}px">${spec.nota}</div>`;
+  if (spec.end) {
+    const e = spec.end;
+    h += `<div id="end"><img src="../emblem.png"><div class="brand">${e.brand || 'GL BLACK'}</div><div class="tagl">${e.line || 'ORDER FLOW SYSTEM'}</div>` +
+      `<div class="tag">${e.tag}</div><div class="cta">${e.cta || 'Agende sua call 1x1 gratuita'}</div>` +
+      (e.lk === '' ? '' : `<div class="lk">${e.lk || 'LINK NA BIO'}</div>`) + `<div class="disc">${e.disc}</div></div>`;
+  }
+  st.innerHTML = h;
+  IT = (spec.items || []).map((x, i) => ({ ...x, el: document.getElementById('i' + i) }));
+}
+async function render(t) {
+  for (const x of IT) {
+    const a = ease((t - x.t0) / .45) * (x.t1 == null ? 1 : 1 - ease((t - x.t1 + .35) / .35));
+    x.el.style.opacity = a.toFixed(3);
+    x.el.style.transform = `translateY(${((1 - ease((t - x.t0) / .6)) * 26).toFixed(1)}px)`;
+  }
+  const e = document.getElementById('end');
+  const ea = S.end ? ease((t - S.end.t0) / .6) : 0;
+  if (e) e.style.opacity = ea.toFixed(3);
+  for (const id of ['wm', 'nota']) { const el = document.getElementById(id); if (el) el.style.opacity = (1 - ea) * (id === 'wm' ? .92 : 1); }
+}
+</script></body></html>
